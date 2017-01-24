@@ -48,9 +48,6 @@ button {
     border-radius: 0;
 }
 
-.navbar-brand {
-    font-size: 140%;
-}
 
 .navbar-inverse .navbar-toggle {
     border: 0;
@@ -133,9 +130,6 @@ table.dataTable tbody td {
 p, body, span, h1, h2, h3, h4, h5, h6 {
     color: #3D72A4;
 }
-
-
-
 
 /*----------  nav bar  ----------*/
 
