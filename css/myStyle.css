@@ -130,6 +130,11 @@ p, body, span, h1, h2, h3, h4, h5, h6 {
     color: #3D72A4;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  color: #6BA0CF;
+}
+
+
 
 /*----------  nav bar  ----------*/
 
@@ -152,6 +157,17 @@ p, body, span, h1, h2, h3, h4, h5, h6 {
 .navbar-inverse .navbar-nav>li>a {
     color: white;
 }
+
+/*=============================
+=            Utils            =
+=============================*/
+.no-margin {
+    margin : 0;
+}
+
+
+
+
 
 .detailsImage {
     border: 1px solid black;
