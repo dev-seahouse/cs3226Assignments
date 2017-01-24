@@ -19,6 +19,10 @@ h1, h2, h3, h4, h5,h6 {
     color: #3D72A4;
 }
 
+button{
+  border-radius: 0;
+}
+
 /*==================================
 =            Modules            =
 ==================================*/
@@ -31,6 +35,21 @@ h1, h2, h3, h4, h5,h6 {
 .navbar-inverse {
     background-color: #34465d;
 }
+
+.navbar-inverse .navbar-brand{
+  color:white;
+}
+
+.navbar-inverse .navbar-toggle {
+  background:  #3D72A4;
+  border:0;
+  border-radius: 0;
+}
+
+.navbar-inverse .navbar-toggle:hover,.navbar-inverse .navbar-toggle:focus,.navbar-inverse .navbar-toggle:visited{
+  background:#1D72a4;
+}
+
 
 .detailsImage {
     border: 1px solid black;
