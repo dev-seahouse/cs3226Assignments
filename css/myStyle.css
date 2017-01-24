@@ -1,59 +1,134 @@
 /*=====================================
 =            Global Styles            =
 =====================================*/
+
 html {
     font-family: font-family: 'Alegreya Sans', sans-serif;
-    font-size:14px;
+    font-size: 62.5%;
     line-height: 1.2;
     box-sizing: border-box;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%
 }
 
-a, body,span, label,button, input{
+body, ul, li, ol, p, a {
+    font-size: 14px;
+    font-size: 1.4rem;
+}
+
+a, body, span, label, button, input {
     font-family: 'Alegreya Sans', sans-serif;
 }
 
-h1, h2, h3, h4, h5,h6 {
+h1, h2, h3, h4, h5, h6 {
     font-family: 'Open Sans', sans-serif;
 }
 
-button{
-  border-radius: 0;
+h1 {
+    font-size: 2.4em;
+}
+
+button {
+    border-radius: 0;
 }
 
 
 /*==================================
 =            Modules            =
 ==================================*/
+
+
 /*----------  nav bar  ----------*/
-.navbar{
+
+.navbar {
     border-radius: 0;
 }
 
+.navbar-brand {
+    font-size: 140%;
+}
+
 .navbar-inverse .navbar-toggle {
-  border:0;
-  border-radius: 0;
+    border: 0;
+    border-radius: 0;
 }
 
 .navbar-inverse .navbar-nav>li>a:hover {
-  color:#ddd;
-  -webkit-transition: color .1;
-  -o-transition: color .1;
-  transition: color .1;
+    color: #ddd;
+    -webkit-transition: color .1;
+    -o-transition: color .1;
+    transition: color .1;
 }
+
+
+/*----------- rank table ---------*/
+
+.table {
+    width: 100%;
+    overflow: hidden;
+}
+
+#ranktable {
+    width: 100%;
+}
+
+#ranktable td {
+    vertical-align: bottom;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.highlightCellWithX {
+    background-color: coral;
+}
+
+.gold {
+    background-color: gold;
+}
+
+.silver {
+    background-color: silver;
+}
+
+.bronze {
+    background-color: #cd7f32;
+}
+
+.last {
+    background-color: pink;
+}
+
+.empty {
+    background-color: pink;
+}
+
+.highlighted {
+    background-color: orange;
+}
+
+table.dataTable tbody td {
+    vertical-align: bottom;
+}
+
 
 /*==============================
 =            Themes            =
 ==============================*/
+
+
 /*---------- globals ------------*/
-p, body, span,h1, h2, h3, h4, h5,h6 {
+
+p, body, span, h1, h2, h3, h4, h5, h6 {
     color: #3D72A4;
 }
 
+
 /*----------  nav bar  ----------*/
-.navbar-inverse .navbar-brand{
-  color:white;
+
+.navbar-inverse .navbar-brand {
+    color: white;
 }
 
 .navbar-inverse {
@@ -61,18 +136,16 @@ p, body, span,h1, h2, h3, h4, h5,h6 {
 }
 
 .navbar-inverse .navbar-toggle {
-  background:  #3D72A4;
+    background: #3D72A4;
 }
 
-.navbar-inverse .navbar-toggle:hover,.navbar-inverse .navbar-toggle:focus,.navbar-inverse .navbar-toggle:visited{
-  background:#1D72a4;
+.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:visited {
+    background: #1D72a4;
 }
 
-.navbar-inverse .navbar-nav>li>a{
-  color:white;
+.navbar-inverse .navbar-nav>li>a {
+    color: white;
 }
-
-
 
 .detailsImage {
     border: 1px solid black;
@@ -80,64 +153,24 @@ p, body, span,h1, h2, h3, h4, h5,h6 {
     display: block;
     margin: auto;
 }
-.table {
-    width: 100%;
-    overflow: hidden;
-}
-#ranktable {
-    width: 100%;
-}
 
-#ranktable td{
-  vertical-align: bottom;
-}
-
-.bold {
-    font-weight: bold;
-}
-.highlightCellWithX {
-    background-color: coral;
-}
-
-
-.gold {
-    background-color: gold;
-}
-.silver {
-    background-color: silver;
-}
-.bronze {
-    background-color: #cd7f32;
-}
-.last {
-    background-color: pink;
-}
-.empty {
-    background-color: pink;
-}
-.highlighted {
-    background-color: orange;
-}
-table.dataTable tbody td {
-    vertical-align: bottom;
-}
 #brandImage {
     width: 30px;
     margin-top: -6px;
 }
 
-.navbar-brand {
-    font-size: 140%;
-}
 .rank-flag-img {
     width: 20px;
 }
+
 .rank-person-img {
     width: 15px;
 }
+
 .rank-kattis-img {
     width: 20px;
 }
+
 hr {
     border-top: 1px solid silver;
 }
