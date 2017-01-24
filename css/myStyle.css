@@ -11,6 +11,11 @@
 #ranktable {
     width: 100%;
 }
+
+#ranktable td{
+  vertical-align: bottom;
+}
+
 .bold {
     font-weight: bold;
 }
