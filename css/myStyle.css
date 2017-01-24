@@ -16,8 +16,8 @@ body {
 }
 
 body, ul, li, ol, p, a {
-    font-size: 16px;
-    font-size: 1.6rem;
+    font-size: 14px;
+    font-size: 1.4rem;
 }
 
 a, body, span, label, button, input {
@@ -177,8 +177,6 @@ h1, h2, h3, h4, h5, h6 {
 .text-container *, .text-container * > *{
   line-height: 1.6;
 }
-
-
 
 
 /* unsorted */
