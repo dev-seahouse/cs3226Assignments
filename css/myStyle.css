@@ -10,22 +10,33 @@ html {
     -webkit-text-size-adjust: 100%
 }
 
-p, body, span {
-    color: #3D72A4;
+a, body,span, label,button, input{
+    font-family: 'Alegreya Sans', sans-serif;
 }
 
 h1, h2, h3, h4, h5,h6 {
     font-family: 'Open Sans', sans-serif;
-    color: #3D72A4;
 }
+
 
 button{
   border-radius: 0;
 }
 
+
 /*==================================
 =            Modules            =
 ==================================*/
+
+
+/*==============================
+=            Themes            =
+==============================*/
+p, body, span,h1, h2, h3, h4, h5,h6 {
+    color: #3D72A4;
+}
+
+
 
 /*----------  nav bar  ----------*/
 .navbar{
@@ -48,6 +59,17 @@ button{
 
 .navbar-inverse .navbar-toggle:hover,.navbar-inverse .navbar-toggle:focus,.navbar-inverse .navbar-toggle:visited{
   background:#1D72a4;
+}
+
+.navbar-inverse .navbar-nav>li>a{
+  color:white;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+  color:#ddd;
+  -webkit-transition: color .1;
+  -o-transition: color .1;
+  transition: color .1;
 }
 
 
