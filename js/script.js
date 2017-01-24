@@ -68,7 +68,6 @@ function highlightRows() {
   });
 }
 
-
 function scaleRowHeights(rows) {
   const totalNumOfDataRows = rows.length,
         baseRowHeight = rows[0].offsetHeight;
