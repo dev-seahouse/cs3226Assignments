@@ -2,12 +2,21 @@
 =            Global Styles            =
 =====================================*/
 html {
-    font-family: 'Lato', sans-serif;
+    font-family: font-family: 'Alegreya Sans', sans-serif;
     font-size:14px;
     line-height: 1.2;
     box-sizing: border-box;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%
+}
+
+p, body, span {
+    color: #3D72A4;
+}
+
+h1, h2, h3, h4, h5,h6 {
+    font-family: 'Open Sans', sans-serif;
+    color: #3D72A4;
 }
 
 /*==================================
@@ -48,10 +57,7 @@ html {
     background-color: coral;
 }
 
-h1, h2 {
-    text-align: center;
-    color: #3D72A4;
-}
+
 .gold {
     background-color: gold;
 }
