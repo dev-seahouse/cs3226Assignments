@@ -18,7 +18,7 @@ class StudentController extends Controller {
     return view('help');
   }
   
-  // show help view
+  // show login view
   public function login() { 
     return view('login');
   }
