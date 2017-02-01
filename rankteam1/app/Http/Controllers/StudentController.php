@@ -13,4 +13,4 @@ class StudentController extends Controller {
     return view('detail')->with('id'); 
   } 
 }
-?> // this ending line is optional
+?>
