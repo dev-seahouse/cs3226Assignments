@@ -1,0 +1,196 @@
+/*=====================================
+=            Global Styles            =
+=====================================*/
+
+html {
+    font-family: font-family: 'Alegreya Sans', sans-serif;
+    font-size: 62.5%;
+    line-height: 1.2;
+    box-sizing: border-box;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%
+}
+
+body {
+  background-color: #fff;
+}
+
+body, ul, li, ol, p, a {
+    font-size: 14px;
+    font-size: 1.4rem;
+}
+
+a, body, span, label, button, input {
+    font-family: 'Alegreya Sans', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+    font-size: 2.4em;
+}
+
+button {
+    border-radius: 0;
+}
+
+
+/*==================================
+=            Modules            =
+==================================*/
+
+
+/*----------  nav bar  ----------*/
+
+.navbar {
+    border-radius: 0;
+}
+
+
+.navbar-inverse .navbar-toggle {
+    border: 0;
+    border-radius: 0;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+    color: #ddd;
+    -webkit-transition: color .1;
+    -o-transition: color .1;
+    transition: color .1;
+}
+
+#brandImage {
+    width: 3rem;
+    margin-top: -6px;
+    margin-right:1.5rem;
+}
+
+
+/*----------- rank table ---------*/
+
+.table {
+    width: 100%;
+    overflow: hidden;
+}
+
+#ranktable {
+    width: 100%;
+}
+
+#ranktable td {
+    vertical-align: bottom;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.highlightCellWithX {
+    background-color: coral;
+}
+
+.gold {
+    background-color: gold;
+}
+
+.silver {
+    background-color: silver;
+}
+
+.bronze {
+    background-color: #cd7f32;
+}
+
+.last {
+    background-color: pink;
+}
+
+.empty {
+    background-color: pink;
+}
+
+.highlighted {
+    background-color: orange;
+}
+
+table.dataTable tbody td {
+    vertical-align: bottom;
+}
+
+
+/*==============================
+=            Themes            =
+==============================*/
+
+
+/*---------- globals ------------*/
+
+p, body, span, h1, h2, h3, h4, h5, h6 {
+    color: #3D72A4;
+}
+
+/*----------  nav bar  ----------*/
+
+.navbar-inverse .navbar-brand {
+    color: white;
+}
+
+.navbar-inverse {
+    background-color: #34465d;
+}
+
+.navbar-inverse .navbar-toggle {
+    background: #3D72A4;
+}
+
+.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:visited {
+    background: #1D72a4;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: white;
+}
+
+/*=============================
+=            Utils            =
+=============================*/
+.no-margin {
+    margin : 0;
+}
+
+.text-container {
+  margin:auto;
+  max-width: 820px;
+}
+
+.text-container *, .text-container * > *{
+  line-height: 1.6;
+}
+
+
+/* unsorted */
+
+.detailsImage {
+    border: 1px solid black;
+    width: 100px;
+    display: block;
+    margin: auto;
+}
+
+.rank-flag-img {
+    width: 20px;
+}
+
+.rank-person-img {
+    width: 15px;
+}
+
+.rank-kattis-img {
+    width: 20px;
+}
+
+hr {
+    border-top: 1px solid silver;
+}
