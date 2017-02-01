@@ -11,6 +11,11 @@ class StudentController extends Controller {
   // show detail view
   public function detail($id) { 
     return view('detail')->with('id'); 
-  } 
+  }
+  
+  // show help view
+  function() { 
+    return view('help');
+  }
 }
 ?>

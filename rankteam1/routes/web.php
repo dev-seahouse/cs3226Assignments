@@ -13,4 +13,4 @@
 
 Route::get('/', 'StudentController@index');
 Route::get('student/{id}', 'StudentController@detail');
-Route::get('help', function() { return view('help'); }); // direct controller
+Route::get('help', 'StudentController@help');
