@@ -31,8 +31,8 @@
             <td class="hidden-xs">
               <img src="img/female-icon.png" class="rank-person-img">
               <img src="img/kattis.png" class="rank-kattis-img">
-              <a href="{{route('student', ['id' => 'alice'])}}">Alice [R]</a></td>
-            <td class="visible-xs"><a href="student1.html">alice</a></td>
+              <a href="{{route('student', ['id' => 1])}}">Alice [R]</a></td>
+            <td class="visible-xs"><a href="{{route('student', ['id' => 1])}}">alice</a></td>
             <td class="hidden-xs hidden-sm">4</td>
             <td class="hidden-xs hidden-sm">0</td>
             <td>4</td>
@@ -49,9 +49,9 @@
             <td class="hidden-xs">
               <img src="img/male-icon.png" class="rank-person-img">
               <img src="img/kattis.png" class="rank-kattis-img">
-              <a href="student2.html">Bob [R]</a>
+              <a href="{{route('student', ['id' => 2])}}">Bob [R]</a>
             </td>
-            <td class="visible-xs"><a href="student1.html">bob</a></td>
+            <td class="visible-xs"><a href="{{route('student', ['id' => 2])}}">bob</a></td>
             <td class="hidden-xs hidden-sm">3.5</td>
             <td class="hidden-xs hidden-sm">0</td>
             <td>3.5</td>
@@ -68,9 +68,9 @@
             <td class="hidden-xs">
               <img src="img/male-icon.png" class="rank-person-img">
               <img src="img/kattis.png" class="rank-kattis-img">
-              <a href="student3.html">Charles [R]</a>
+              <a href="{{route('student', ['id' => 3])}}">Charles [R]</a>
             </td>
-            <td class="visible-xs"><a href="student1.html">charles</a></td>
+            <td class="visible-xs"><a href="{{route('student', ['id' => 3])}}">charles</a></td>
             <td class="hidden-xs hidden-sm">4</td>
             <td class="hidden-xs hidden-sm">0</td>
             <td>4</td>
