@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="css/ourStyle.css" />
   </head>
   <body>
+    @include('navbar')
     @yield('main') <!-- Blade command: include section from child file -->
     @include('footer') <!-- Blade command: include other blade file -->
     
