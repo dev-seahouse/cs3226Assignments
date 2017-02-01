@@ -17,5 +17,11 @@ class StudentController extends Controller {
   public function help() { 
     return view('help');
   }
+  
+  // show help view
+  public function login() { 
+    return view('login');
+  }
+  
 }
 ?>

@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="help"><span><img src="img/omega-lightblue.png" id="brandImage"></span> CS3233 Ranklist 2017</a>
+      <a class="navbar-brand" href="{{route('index')}}"><span><img src="img/omega-lightblue.png" id="brandImage"></span> CS3233 Ranklist 2017</a>
     </div>
 
     <div class="collapse navbar-collapse" id="navbar-collapse">
@@ -16,10 +16,10 @@
         <!--this is to create more space between brand and list-->
       </p>
       <ul class="nav navbar-nav">
-        <li><a href="help.html">Help</a></li>
+        <li><a href="{{route('help')}}">Help</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="login.html">Sign In</a></li>
+        <li><a href="{{route('login')}}">Sign In</a></li>
         <li class="dropdown">
         </li>
       </ul>

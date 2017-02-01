@@ -31,7 +31,7 @@
             <td class="hidden-xs">
               <img src="img/female-icon.png" class="rank-person-img">
               <img src="img/kattis.png" class="rank-kattis-img">
-              <a href="student1.html">Alice [R]</a></td>
+              <a href="{{route('student', ['id' => 'alice'])}}">Alice [R]</a></td>
             <td class="visible-xs"><a href="student1.html">alice</a></td>
             <td class="hidden-xs hidden-sm">4</td>
             <td class="hidden-xs hidden-sm">0</td>
