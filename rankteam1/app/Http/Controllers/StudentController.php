@@ -14,7 +14,7 @@ class StudentController extends Controller {
   }
   
   // show help view
-  function() { 
+  public function help() { 
     return view('help');
   }
 }
