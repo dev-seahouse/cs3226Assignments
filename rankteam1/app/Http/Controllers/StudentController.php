@@ -17,7 +17,7 @@ class StudentController extends Controller {
   
   // show detail view
   public function detail($id) { 
-    return view('detail')->with('student', json_encode($this->getStudent($id)));
+    return view('detail')->with('student', json_encode($this->getStudent($id)))->with('top_student', json_encode(session('students')[0]));
   }
   
   // show help view
@@ -46,13 +46,44 @@ class StudentController extends Controller {
     for ($i = 1; $i <= 50; $i++) {
       $flag = array("CHN", "IDN", "SGP", "VNM", "MYS");
       $gender = array("M", "F");
-      $MC = rand(1,10);
-      $TC = rand(1,10);
+      
+      $MC_COMPONENTS = array(
+        rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4),
+        rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4)
+      );
+      
+      $TC_COMPONENTS = array(
+        rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4),
+        rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4)
+      );
+      
+      $HW_COMPONENTS = array(
+        rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4),
+        rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4)
+      );
+      
+      $BS_COMPONENTS = array(
+        rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4),
+        rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4)
+      );
+      
+      $KS_COMPONENTS = array(
+        rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4),
+        rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4)
+      );
+      
+      $AC_COMPONENTS = array(
+        rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4),
+        rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4)
+      );
+      
+      $MC = array_sum($MC_COMPONENTS);
+      $TC = array_sum($TC_COMPONENTS);
       $SPE = $MC + $TC;
-      $HW = rand(1,10);
-      $BS = rand(1,10);
-      $KS = rand(1,10);
-      $AC = rand(1,10);
+      $HW = array_sum($HW_COMPONENTS);
+      $BS = array_sum($BS_COMPONENTS);
+      $KS = array_sum($KS_COMPONENTS);
+      $AC = array_sum($AC_COMPONENTS);
       $DIL = $HW + $BS + $KS + $AC;
       $SUM = $SPE + $DIL;
       
@@ -63,12 +94,18 @@ class StudentController extends Controller {
         "NAME" => "Student ".$i,
         "NICK" => "Nick ".$i,
         "MC" => $MC,
+        "MC_COMPONENTS" => $MC_COMPONENTS,
         "TC" => $TC,
+        "TC_COMPONENTS" => $TC_COMPONENTS,
         "SPE" => $SPE,
         "HW" => $HW,
+        "HW_COMPONENTS" => $HW_COMPONENTS,
         "BS" => $BS,
+        "BS_COMPONENTS" => $BS_COMPONENTS,
         "KS" => $KS,
+        "KS_COMPONENTS" => $KS_COMPONENTS,
         "AC" => $AC,
+        "AC_COMPONENTS" => $AC_COMPONENTS,
         "DIL" => $DIL,
         "SUM" => $SUM
       ));
