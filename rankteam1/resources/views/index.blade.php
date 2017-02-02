@@ -25,134 +25,34 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td class="hidden-xs"><img src="img/SGP.png" class="rank-flag-img"> SGP</td>
-            <td class="hidden-xs">
-              <img src="img/female-icon.png" class="rank-person-img">
-              <img src="img/kattis.png" class="rank-kattis-img">
-              <a href="{{route('student', ['id' => 1])}}">Alice [R]</a></td>
-            <td class="visible-xs"><a href="{{route('student', ['id' => 1])}}">alice</a></td>
-            <td class="hidden-xs hidden-sm">4</td>
-            <td class="hidden-xs hidden-sm">0</td>
-            <td>4</td>
-            <td class="hidden-xs hidden-sm">1</td>
-            <td class="hidden-xs hidden-sm">1</td>
-            <td class="hidden-xs hidden-sm">1</td>
-            <td class="hidden-xs hidden-sm">4</td>
-            <td>7</td>
-            <td class='js-rankTotl'>11</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td class="hidden-xs"><img src="img/SGP.png" class="rank-flag-img"> SGP</td>
-            <td class="hidden-xs">
-              <img src="img/male-icon.png" class="rank-person-img">
-              <img src="img/kattis.png" class="rank-kattis-img">
-              <a href="{{route('student', ['id' => 2])}}">Bob [R]</a>
-            </td>
-            <td class="visible-xs"><a href="{{route('student', ['id' => 2])}}">bob</a></td>
-            <td class="hidden-xs hidden-sm">3.5</td>
-            <td class="hidden-xs hidden-sm">0</td>
-            <td>3.5</td>
-            <td class="hidden-xs hidden-sm">1.5</td>
-            <td class="hidden-xs hidden-sm">1</td>
-            <td class="hidden-xs hidden-sm">2</td>
-            <td class="hidden-xs hidden-sm">2</td>
-            <td>6.5</td>
-            <td class='js-rankTotl'>10</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td class="hidden-xs"><img src="img/SGP.png" class="rank-flag-img"> SGP</td>
-            <td class="hidden-xs">
-              <img src="img/male-icon.png" class="rank-person-img">
-              <img src="img/kattis.png" class="rank-kattis-img">
-              <a href="{{route('student', ['id' => 3])}}">Charles [R]</a>
-            </td>
-            <td class="visible-xs"><a href="{{route('student', ['id' => 3])}}">charles</a></td>
-            <td class="hidden-xs hidden-sm">4</td>
-            <td class="hidden-xs hidden-sm">0</td>
-            <td>4</td>
-            <td class="hidden-xs hidden-sm">1</td>
-            <td class="hidden-xs hidden-sm">1</td>
-            <td class="hidden-xs hidden-sm">1</td>
-            <td class="hidden-xs hidden-sm">3</td>
-            <td>6</td>
-            <td class='js-rankTotl'>10</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td class="hidden-xs"><img src="img/VNM.png" class="rank-flag-img"> VNM</td>
-            <td class="hidden-xs">
-              <img src="img/male-icon.png" class="rank-person-img">
-              <img src="img/kattis.png" class="rank-kattis-img"> David
-            </td>
-            <td class="visible-xs">david</td>
-            <td class="hidden-xs hidden-sm">1</td>
-            <td class="hidden-xs hidden-sm">0</td>
-            <td>1</td>
-            <td class="hidden-xs hidden-sm">1.5</td>
-            <td class="hidden-xs hidden-sm">1</td>
-            <td class="hidden-xs hidden-sm">2</td>
-            <td class="hidden-xs hidden-sm">4</td>
-            <td>8.5</td>
-            <td class='js-rankTotl'>9.5</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td class="hidden-xs"><img src="img/MYS.png" class="rank-flag-img"> MYS</td>
-            <td class="hidden-xs">
-              <img src="img/female-icon.png" class="rank-person-img">
-              <img src="img/kattis.png" class="rank-kattis-img"> Eve
-            </td>
-            <td class="visible-xs">eve</td>
-            <td class="hidden-xs hidden-sm">1</td>
-            <td class="hidden-xs hidden-sm">0</td>
-            <td>1</td>
-            <td class="hidden-xs hidden-sm">1.5</td>
-            <td class="hidden-xs hidden-sm">1</td>
-            <td class="hidden-xs hidden-sm">2</td>
-            <td class="hidden-xs hidden-sm">3</td>
-            <td>7.5</td>
-            <td class='js-rankTotl'>8.5</td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td class="hidden-xs"><img src="img/VNM.png" class="rank-flag-img"> VNM</td>
-            <td class="hidden-xs">
-              <img src="img/male-icon.png" class="rank-person-img" />
-              <img src="img/kattis.png" class="rank-kattis-img" /> Flan
-            </td>
-            <td class="visible-xs">flan</td>
-            <td class="hidden-xs hidden-sm">1</td>
-            <td class="hidden-xs hidden-sm">0</td>
-            <td>1</td>
-            <td class="hidden-xs hidden-sm">1.5</td>
-            <td class="hidden-xs hidden-sm">0</td>
-            <td class="hidden-xs hidden-sm">2</td>
-            <td class="hidden-xs hidden-sm">3</td>
-            <td>6.5</td>
-            <td class='js-rankTotl'>7.5</td>
-          </tr>
-          <tr>
-            <td>7</td>
-            <td class="hidden-xs"><img src="img/SGP.png" class="rank-flag-img"> SGP</td>
-            <td class="hidden-xs">
-              <img src="img/male-icon.png" class="rank-person-img">
-              <img src="img/kattis.png" class="rank-kattis-img"> George
-            </td>
-            <td class="visible-xs">george</td>
-            <td class="hidden-xs hidden-sm">0</td>
-            <td class="hidden-xs hidden-sm">0</td>
-            <td>0</td>
-            <td class="hidden-xs hidden-sm">1.5</td>
-            <td class="hidden-xs hidden-sm">1</td>
-            <td class="hidden-xs hidden-sm">2</td>
-            <td class="hidden-xs hidden-sm">3</td>
-            <td>7.5</td>
-            <td class='js-rankTotl'>7.5</td>
-          </tr>
+          <?php $i = 1; ?>
+          @foreach(json_decode($students, true) as $student)
+            <tr>
+              <td><?php echo $i;?></td>
+              <td class="hidden-xs"><img src="{{ URL::asset('img/'.$student['FLAG'].'.png') }}" class="rank-flag-img"> {{ $student['FLAG'] }}</td>
+              <td class="hidden-xs">
+                <img src=
+                @if ($student['GENDER'] == "M")
+                  "{{ URL::asset('img/male-icon.png') }}"
+                @else
+                  "{{ URL::asset('img/female-icon.png') }}"
+                @endif
+                class="rank-person-img">
+                <img src="img/kattis.png" class="rank-kattis-img">
+                <a href="{{route('student', ['id' => $student['ID']])}}">{{ $student['NAME'] }}</a></td>
+              <td class="visible-xs"><a href="{{route('student', ['id' => $student['ID']])}}">alice</a></td>
+              <td class="hidden-xs hidden-sm">{{ $student['MC'] }}</td>
+              <td class="hidden-xs hidden-sm">{{ $student['TC'] }}</td>
+              <td>{{ $student['SPE'] }}</td>
+              <td class="hidden-xs hidden-sm">{{ $student['HW'] }}</td>
+              <td class="hidden-xs hidden-sm">{{ $student['BS'] }}</td>
+              <td class="hidden-xs hidden-sm">{{ $student['KS'] }}</td>
+              <td class="hidden-xs hidden-sm">{{ $student['AC'] }}</td>
+              <td>{{ $student['DIL'] }}</td>
+              <td class='js-rankTotl'>{{ $student['SUM'] }}</td>
+            </tr>
+            <?php $i++; ?>
+          @endforeach
         </tbody>
       </table>
 
