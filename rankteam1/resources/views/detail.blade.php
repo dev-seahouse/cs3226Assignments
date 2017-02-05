@@ -12,7 +12,7 @@
     <h2>STUDENT DETAILS</h2>
 
     <div class="row">
-        <div class="col-xs-12 col-sm-9">
+        <div class="col-xs-12 col-sm-6">
             <h4><b><?php echo $detail->NAME; ?></b> in CS3233 S2 AY 2016/2017</h4>
 
             <p>Kattis account:</p>
@@ -22,6 +22,9 @@
                 <b>DIL</b>(igence) component: <b><?php echo $detail->HW." + ".$detail->BS." + ".$detail->KS." + ".$detail->AC." = ".($detail->DIL); ?></b><br>
                 <b>Sum = SPE + DIL = <?php echo $detail->SPE." + ".$detail->DIL." = ".($detail->SUM); ?></b>
             </p>
+        </div>
+        <div class="col-sm-3 hidden-xs">
+            <canvas id="radarChart" width="300" height="300"></canvas>
         </div>
 
         <div class="col-sm-1 hidden-xs">
