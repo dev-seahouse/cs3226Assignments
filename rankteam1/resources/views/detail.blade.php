@@ -4,9 +4,9 @@
     $detail = json_decode($student);
     $top = json_decode($top_student);
 
-    var_dump($detail);
-    echo "<br>";
-    var_dump($top);
+    //var_dump($detail);
+    //echo "<br>";
+    //var_dump($top);
   ?>
   <div class="container-fluid">
     <h2>STUDENT DETAILS</h2>
@@ -23,16 +23,21 @@
                 <b>Sum = SPE + DIL = <?php echo $detail->SPE." + ".$detail->DIL." = ".($detail->SUM); ?></b>
             </p>
         </div>
-        <div class="col-sm-3 hidden-xs">
-            <canvas id="radarChart" width="300" height="300"></canvas>
+
+        <div class="col-sm-3 pull-right">
+            <div class="col-sm-6 hidden-xs hidden-sm" >
+                <img class="detailsImage" src=<?php echo '"/img/'.$detail->FLAG.'.png"'; ?>>
+            </div>
+            <div class="col-sm-6 hidden-xs">
+                <img class="detailsImage" src=<?php $img = ($detail->GENDER == "M") ? '"/img/male-icon.png"' : '"/img/female-icon.png"'; echo $img; ?>>
+            </div>
         </div>
 
-        <div class="col-sm-1 hidden-xs">
-            <img class="detailsImage" src=<?php echo '"/img/'.$detail->FLAG.'.png"'; ?>>
+        <div class="hidden-xs col-sm-3 col-md3 pull-right" style="max-width: 300px;">
+            <canvas id="studentRadarChart" class='radarChart' width="150" height="150" style="display: block; height: 165px; width: 165px;"></canvas>
         </div>
-        <div class="col-sm-2 hidden-xs">
-            <img class="detailsImage" src=<?php $img = ($detail->GENDER == "M") ? '"/img/male-icon.png"' : '"/img/female-icon.png"'; echo $img; ?>>
-        </div>
+
+
     </div>
 
     <hr>

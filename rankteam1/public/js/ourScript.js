@@ -4,6 +4,7 @@ $(function () {
   highlightRows()
   scaleRowHeights($('#ranktable').find('tbody > tr'))
   highlightHighestValue()
+  drawRadarChart($('#studentRadarChart'))
 })
 
 function setupDataTable () {
@@ -69,8 +70,9 @@ function highlightRows () {
 }
 
 function scaleRowHeights (rows) {
-  const totalNumOfDataRows = rows.length,
-    baseRowHeight = rows[0].offsetHeight
+  if (!rows.length) return
+  const totalNumOfDataRows = rows.length
+  const baseRowHeight = rows[0].offsetHeight
 
   setRowHeights()
   restoreDefaultRowHeightsIfTheadClicked()
@@ -88,7 +90,7 @@ function scaleRowHeights (rows) {
   }
 
   function calculateRowHeightBasedOnRankScoreDiff (currRow) {
-    const delta = 45
+    const delta = 40
     let $currTotlRankScoreCol = $(currRow).find('.js-rankTotl'),
       currTotlRankScore = $currTotlRankScoreCol.text(),
       $nextTotlRankScoreCol = $(currRow).next('tr').find('.js-rankTotl'),
@@ -133,3 +135,88 @@ function highlightHighestValue () {
     })
   }
 }
+
+function drawRadarChart ($selector) {
+  if (!$selector.length) return
+  getStudentData().then(function (data) {
+    return formartChartData(data)
+  }).done(function (formattedData) {
+    makeRadarChart($selector, formattedData)
+  }).fail(function (data) {
+  })
+}
+
+function formartChartData (data) {
+  let keys = ['AC', 'BS', 'HW', 'MC', 'TC', 'MC']
+  let formattedCurrStudentData = []
+  let formattedTopStudentData = []
+  let currentStudentData = data['currentStudent']
+  let topStudentData = data['topStudent']
+  keys.forEach(function (key) {
+    formattedCurrStudentData.push(currentStudentData[key])
+    formattedTopStudentData.push(topStudentData[key])
+  })
+
+  return {
+    keys: keys,
+    currentStudent: formattedCurrStudentData,
+    topStudent: formattedTopStudentData
+  }
+}
+
+function getStudentData () {
+  let apitUrl = '/api' + window.location.pathname
+  return makeAjaxCall(apitUrl, 'GET')
+}
+
+function makeAjaxCall (url, methodType, callback) {
+  return $.ajax({
+    url: url,
+    method: methodType,
+    dataType: 'json'
+  })
+}
+
+function makeRadarChart ($selector, dataset) {
+  data = {
+    labels: dataset['keys'],
+    datasets: [
+      {
+        label: 'You',
+        backgroundColor: 'rgba(179,181,198,0.2)',
+        borderColor: 'rgba(179,181,198,1)',
+        pointBackgroundColor: 'rgba(179,181,198,1)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(179,181,198,1)',
+        data: dataset['currentStudent']
+      },
+      {
+        label: 'The champion',
+        backgroundColor: 'rgba(255,99,132,0.2)',
+        borderColor: 'rgba(255,99,132,1)',
+        pointBackgroundColor: 'rgba(255,99,132,1)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(255,99,132,1)',
+        data: dataset['topStudent']
+      }
+    ]
+  }
+
+  new Chart($selector, {
+    type: 'radar',
+    data: data,
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      scale: {
+        ticks: {
+          beginAtZero: true,
+          stepSize: 5
+        }
+      }
+    }
+  })
+}
+
