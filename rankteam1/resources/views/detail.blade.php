@@ -3,7 +3,7 @@
   <?php
     $detail = json_decode($student);
     $top = json_decode($top_student);
-    
+
     var_dump($detail);
     echo "<br>";
     var_dump($top);
@@ -31,9 +31,9 @@
             <img class="detailsImage" src=<?php $img = ($detail->GENDER == "M") ? '"/img/male-icon.png"' : '"/img/female-icon.png"'; echo $img; ?>>
         </div>
     </div>
-    
+
     <hr>
-    
+
     <div class="row">
         <div class="col-xs-12">
             <table id="statstable" class="table table-striped">
