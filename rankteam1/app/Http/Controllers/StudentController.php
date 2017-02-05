@@ -41,41 +41,17 @@ class StudentController extends Controller {
   }
   
   private function generateStudents() {
+    $faker = \Faker\Factory::create();
+    
     $students = array();
     
     for ($i = 1; $i <= 50; $i++) {
-      $flag = array("CHN", "IDN", "SGP", "VNM", "MYS");
-      $gender = array("M", "F");
-      
-      $MC_COMPONENTS = array(
-        rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4),
-        rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4)
-      );
-      
-      $TC_COMPONENTS = array(
-        rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4),
-        rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4)
-      );
-      
-      $HW_COMPONENTS = array(
-        rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4),
-        rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4)
-      );
-      
-      $BS_COMPONENTS = array(
-        rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4),
-        rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4)
-      );
-      
-      $KS_COMPONENTS = array(
-        rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4),
-        rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4)
-      );
-      
-      $AC_COMPONENTS = array(
-        rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4),
-        rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4), rand(0,4)
-      );
+      $MC_COMPONENTS = $this->generateComponent();
+      $TC_COMPONENTS = $this->generateComponent();
+      $HW_COMPONENTS = $this->generateComponent();
+      $BS_COMPONENTS = $this->generateComponent();
+      $KS_COMPONENTS = $this->generateComponent();
+      $AC_COMPONENTS = $this->generateComponent();
       
       $MC = array_sum($MC_COMPONENTS);
       $TC = array_sum($TC_COMPONENTS);
@@ -89,10 +65,10 @@ class StudentController extends Controller {
       
       array_push($students , array(
         "ID" => $i,
-        "FLAG" => $flag[array_rand($flag)],
-        "GENDER" => $gender[array_rand($gender)],
-        "NAME" => "Student ".$i,
-        "NICK" => "Nick ".$i,
+        "FLAG" => $faker->randomElement($array = array("CHN", "IDN", "SGP", "VNM", "MYS")),
+        "GENDER" => $faker->randomElement($array = array("M", "F")),
+        "NAME" => $faker->name,
+        "NICK" => $faker->userName,
         "MC" => $MC,
         "MC_COMPONENTS" => $MC_COMPONENTS,
         "TC" => $TC,
@@ -116,6 +92,17 @@ class StudentController extends Controller {
     });
     
     return $students;
+  }
+  
+  private function generateComponent() {
+    $faker = \Faker\Factory::create();
+    $data = array();
+    
+    for ($i = 0; $i < 12; $i++) {
+      array_push($data, $faker->randomElement($array = array (rand(0,4),'x')));
+    }
+    
+    return $data;
   }
 }
 ?>

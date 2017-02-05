@@ -39,8 +39,8 @@
                 @endif
                 class="rank-person-img">
                 <img src="img/kattis.png" class="rank-kattis-img">
-                <a href="{{route('student', ['id' => $student['ID']])}}">{{ $student['NAME'] }}</a></td>
-              <td class="visible-xs"><a href="{{route('student', ['id' => $student['ID']])}}">alice</a></td>
+                <a href="{{ route('student', ['id' => $student['ID']]) }}">{{ $student['NAME'] }}</a></td>
+              <td class="visible-xs"><a href="{{ route('student', ['id' => $student['ID']]) }}">{{ $student['NICK'] }}</a></td>
               <td class="hidden-xs hidden-sm">{{ $student['MC'] }}</td>
               <td class="hidden-xs hidden-sm">{{ $student['TC'] }}</td>
               <td>{{ $student['SPE'] }}</td>
