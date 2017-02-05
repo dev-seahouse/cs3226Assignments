@@ -5,7 +5,7 @@
     $top = json_decode($top_student);
     
     var_dump($detail);
-    echo <br>;
+    echo "<br>";
     var_dump($top);
   ?>
   <div class="container-fluid">
