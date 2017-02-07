@@ -3,6 +3,11 @@
 /bootstrap/compiled.php
 /vendor
 /node_modules
+/node_modules
+/public/storage
+/storage/*.key
+/vendor
+/.idea
 Homestead.yaml
 Homestead.json
 .env.local.php
