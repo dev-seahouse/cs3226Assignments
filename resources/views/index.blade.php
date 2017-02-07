@@ -2,7 +2,7 @@
 @section('main') <!-- define a section called main -->
 <div class="container-fluid">
 
-  <h1 class='text-center no-margin'>Rankings</h1>
+  <h1 class="text-center no-margin">Rankings</h1>
 
   <div class="row">
     <div class="col-xs-12">

@@ -2,11 +2,6 @@
 @section('main') <!-- also a section called main but different content -->
   <?php
     $detail = json_decode($student);
-    $top = json_decode($top_student);
-
-    //var_dump($detail);
-    //echo "<br>";
-    //var_dump($top);
   ?>
   <div class="container-fluid">
     <h2>STUDENT DETAILS</h2>

@@ -17,7 +17,13 @@ class StudentController extends Controller {
 
   // show detail view
   public function detail($id) {
-    return view('detail')->with('student', json_encode($this->getStudent($id)))->with('top_student', json_encode(session('students')[0]));
+    $student = $this->getStudent($id);
+    
+    if ($student == -1) {
+      return view('error')->with('message', "The selected student does not exist!");
+    } else {
+      return view('detail')->with('student', json_encode($student));
+    }
   }
 
   // show help view
@@ -44,7 +50,7 @@ class StudentController extends Controller {
       }
     }
 
-    return "Not found";
+    return -1;
   }
 
   private function generateStudents() {
