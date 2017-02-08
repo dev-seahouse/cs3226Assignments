@@ -15,6 +15,12 @@
     "vue": "^2.0.1"
   },
   "standard": {
-    "globals": [ "$", "_" ]
+    "globals": [
+      "$",
+      "_"
+    ]
+  },
+  "dependencies": {
+    "flag-icon-css": "^2.8.0"
   }
 }

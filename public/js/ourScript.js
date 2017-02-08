@@ -143,6 +143,7 @@ function drawRadarChart ($selector) {
   }).done(function (formattedData) {
     makeRadarChart($selector, formattedData)
   }).fail(function (data) {
+    console.log('Error drawing radarchar')
   })
 }
 
