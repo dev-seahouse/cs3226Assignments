@@ -25,7 +25,7 @@ function highlightTableCellsMarkedX () {
   // highlight cells with 'x' in student details page
   $('#statstable').find('td').each(function () {
     var value = $(this).text()
-    if (value == 'x') {
+    if (value == 'x' || value == 'x.y') {
       $(this).addClass('highlightCellWithX')
     }
   })

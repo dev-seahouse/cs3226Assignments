@@ -24,6 +24,10 @@ a, body, span, label, button, input {
     font-family: 'Alegreya Sans', sans-serif;
 }
 
+label {
+    margin-top: 1em;
+}
+
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Open Sans', sans-serif;
 }

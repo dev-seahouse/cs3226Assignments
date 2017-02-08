@@ -10,7 +10,7 @@
         <div class="col-xs-12 col-sm-6">
             <h4><b><?php echo $detail->NAME; ?></b> in CS3233 S2 AY 2016/2017</h4>
 
-            <p>Kattis account:</p>
+            <p>Kattis account: <?php echo $detail->KATTIS; ?></p>
 
             <p>
                 <b>SPE</b>(ed) component: <b><?php echo $detail->MC." + ".$detail->TC." = ".($detail->SPE); ?></b><br>

@@ -1,18 +1,25 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class StudentController extends Controller {
-
+  
+  function __construct() { 
+    $this->filePath = '../database/students.txt';
+  } 
+  
   // show index view
   public function index() {
-    session()->flush();
-
-    if (session('students') == null) {
-      session()->put('students', $this->generateStudents());
-    }
-
-    return view('index')->with('students', json_encode(session('students')));
+    // $this->generateStudents());
+    
+    $students = $this->getStudentsFromDatabase();
+    
+    usort($students, function ($a, $b) {
+      return $a["SUM"] < $b["SUM"];
+    });
+    
+    return view('index')->with('students', json_encode($students));
   }
 
   // show detail view
@@ -24,6 +31,162 @@ class StudentController extends Controller {
     } else {
       return view('detail')->with('student', json_encode($student));
     }
+  }
+  
+  // show create view
+  public function create() {
+    return view('create');
+  }
+  
+  public function createStudent(Request $request) {
+    /*
+    - The full name, nick name, and Kattis field should not be blank.
+    - They must also have at least 5 characters and at most 30 characters. 
+    - The Flag/Nationality Drop-Down List has to be selected. 
+    - Display appropriate error messages if the data is not 
+      validated properly upon submission (clicking the 'Create' button). 
+    - The screenshot below is a simple way of displaying all error messages 
+      at the top of the form. It is more user friendly to highlight fields 
+      with error(s) and display an error message near its relevant field 
+      and you are encouraged to do so.
+    */
+    $validator = Validator::make($request->all(), [
+      'name' => 'required|min:5|max:30',
+    ]);
+    
+    if ($validator->fails()) {
+      return back()
+             ->withErrors($validator)
+             ->withInput();
+    }
+    
+    $nick = $request->input('nick');
+    $name = $request->input('name');
+    $gender = $request->input('gender');
+    $kattis = $request->input('kattis');
+    $nationality = $request->input('nationality');
+
+    $students = $this->getStudentsFromDatabase();
+    usort($students, function ($a, $b) {
+      return $a["ID"] > $b["ID"];
+    });
+    
+    array_push($students , array(
+        "ID" => end($students)['ID'] + 1,
+        "FLAG" => $nationality,
+        "GENDER" => $gender,
+        "NAME" => $name,
+        "NICK" => $nick,
+        "KATTIS" => $kattis,
+        "MC" => 0,
+        "MC_COMPONENTS" => array(0,0,0,0,0,0,0,0,0,0,0,0),
+        "TC" => 0,
+        "TC_COMPONENTS" => array(0,0,0,0,0,0,0,0,0,0,0,0),
+        "SPE" => 0,
+        "HW" => 0,
+        "HW_COMPONENTS" => array(0,0,0,0,0,0,0,0,0,0,0,0),
+        "BS" => 0,
+        "BS_COMPONENTS" => array(0,0,0,0,0,0,0,0,0,0,0,0),
+        "KS" => 0,
+        "KS_COMPONENTS" => array(0,0,0,0,0,0,0,0,0,0,0,0),
+        "AC" => 0,
+        "AC_COMPONENTS" => array(0,0,0,0,0,0,0,0,0,0,0,0),
+        "DIL" => 0,
+        "SUM" => 0
+      ));
+    
+    $this->saveStudentsToDatabase($students);
+    
+    return redirect()->route('index');
+  }
+  
+  // show edit view
+  public function edit($id) {
+    $student = $this->getStudent($id);
+    
+    if ($student == -1) {
+      return view('error')->with('message', "The selected student does not exist!");
+    } else {
+      return view('edit')->with('student', json_encode($student));
+    }
+  }
+  
+  public function editStudent(Request $request) {
+    /*
+    - The full name, nick name, and Kattis field should not be blank.
+    - They must also have at least 5 characters and at most 30 characters. 
+    - The Flag/Nationality Drop-Down List has to be selected. 
+    - Display appropriate error messages if the data is not 
+      validated properly upon submission (clicking the 'Create' button). 
+    - The screenshot below is a simple way of displaying all error messages 
+      at the top of the form. It is more user friendly to highlight fields 
+      with error(s) and display an error message near its relevant field 
+      and you are encouraged to do so.
+    */
+    $validator = Validator::make($request->all(), [
+      'name' => 'required|min:5|max:30',
+    ]);
+    
+    if ($validator->fails()) {
+      return back()
+             ->withErrors($validator)
+             ->withInput();
+    }
+    
+    $id = $request->input('id');
+    $nick = $request->input('nick');
+    $name = $request->input('name');
+    $kattis = $request->input('kattis');
+    $mc_components = explode(',', $request->input('mc_components'));
+    $tc_components = explode(',', $request->input('tc_components'));
+    $hw_components = explode(',', $request->input('hw_components'));
+    $bs_components = explode(',', $request->input('bs_components'));
+    $ks_components = explode(',', $request->input('ks_components'));
+    $ac_components = explode(',', $request->input('ac_components'));
+    
+    $spe = array_sum($mc_components) + array_sum($tc_components);
+    $dil = array_sum($hw_components) + array_sum($bs_components) + array_sum($ks_components) + array_sum($ac_components);
+    
+    $students = $this->getStudentsFromDatabase();
+      
+    foreach ($students as &$student) { //update by reference
+      if ($student['ID'] == $id) {
+        $student['NAME'] = $name;
+        $student['NICK'] = $nick;
+        $student['KATTIS'] = $kattis;
+        $student['MC'] = array_sum($mc_components);
+        $student['MC_COMPONENTS'] = $mc_components;
+        $student['TC'] = array_sum($tc_components);
+        $student['TC_COMPONENTS'] = $tc_components;
+        $student['SPE'] = $spe;
+        $student['HW'] = array_sum($hw_components);
+        $student['HW_COMPONENTS'] = $hw_components;
+        $student['BS'] = array_sum($bs_components);
+        $student['BS_COMPONENTS'] = $bs_components;
+        $student['KS'] = array_sum($ks_components);
+        $student['KS_COMPONENTS'] = $ks_components;
+        $student['AC'] = array_sum($ac_components);
+        $student['AC_COMPONENTS'] = $ac_components;
+        $student['DIL'] = $dil;
+        $student['SUM'] = $spe + $dil;
+      }
+    }
+    
+    $this->saveStudentsToDatabase($students);
+    
+    return redirect()->route('index');
+  }
+  
+  public function deleteStudent($id) {
+    $students = $this->getStudentsFromDatabase();
+    for ($i = 0; $i < count($students); $i++) {
+      if ($students[$i]['ID'] == $id) {
+        array_splice($students, $i, 1);
+      }
+    }
+    $this->saveStudentsToDatabase($students);
+    
+    return redirect()->route('index');
   }
 
   // show help view
@@ -38,27 +201,46 @@ class StudentController extends Controller {
 
   public function getStudentData($id){
     $currentStudent = $this->getStudent($id);
-    $top_student = session('students')[0];
-    $data = array("currentStudent" => $currentStudent, "topStudent" => $top_student);
+    $topStudent = $this->getTopStudent();
+    $data = array("currentStudent" => $currentStudent, "topStudent" => $topStudent);
+    
     return response()->json($data);
   }
 
   private function getStudent($id) {
-    for($i = 0; $i < count(session('students')); $i++) {
-      if (session('students')[$i]["ID"] == $id) {
-        return session('students')[$i];
+    $students = $this->getStudentsFromDatabase();
+    for ($i = 0; $i < count($students); $i++) {
+      if ($students[$i]['ID'] == $id) {
+        return $students[$i];
       }
     }
-
-    return -1;
+    return -1; //error
   }
-
+  
+  private function getTopStudent() {
+    $students = $this->getStudentsFromDatabase();
+    return $students[0];
+  }
+  
+  private function saveStudentsToDatabase($students) {
+    $serializedData = serialize($students);
+    file_put_contents($this->filePath, $serializedData);
+  }
+  
+  private function getStudentsFromDatabase() {
+    $recoveredData = file_get_contents($this->filePath);
+    return unserialize($recoveredData);
+  }
+  
+  // Faker
   private function generateStudents() {
     $faker = \Faker\Factory::create();
 
     $students = array();
 
     for ($i = 1; $i <= 50; $i++) {
+      $nick = $faker->userName;
+      
       $MC_COMPONENTS = $this->generateComponent();
       $TC_COMPONENTS = $this->generateComponent();
       $HW_COMPONENTS = $this->generateComponent();
@@ -81,7 +263,8 @@ class StudentController extends Controller {
         "FLAG" => $faker->randomElement($array = array("CHN", "IDN", "SGP", "VNM", "MYS")),
         "GENDER" => $faker->randomElement($array = array("M", "F")),
         "NAME" => $faker->name,
-        "NICK" => $faker->userName,
+        "NICK" => $nick,
+        "KATTIS" => $nick,
         "MC" => $MC,
         "MC_COMPONENTS" => $MC_COMPONENTS,
         "TC" => $TC,
@@ -99,9 +282,9 @@ class StudentController extends Controller {
         "SUM" => $SUM
       ));
     }
-
+    
     usort($students, function ($a, $b) {
-      return $a["SUM"] < $b["SUM"];
+      return $a["ID"] > $b["ID"];
     });
 
     return $students;
