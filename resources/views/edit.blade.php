@@ -42,11 +42,5 @@
       {!! Form::submit('Update', ['class' => 'form-control btn btn-primary']) !!}
     </div>
     {!! Form::close() !!}
-    
-    {!! Form::open(['route' => ['delete', json_decode($student)->ID], 'method' => 'delete']) !!}
-    <div class="form-group">
-      {!! Form::submit('Delete', ['class' => 'form-control btn btn-danger']) !!}
-    </div>
-    {!! Form::close() !!}
   </div>
 @stop

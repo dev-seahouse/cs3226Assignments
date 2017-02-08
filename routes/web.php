@@ -22,7 +22,7 @@ Route::get('login', array('as' => 'login', 'uses' => 'StudentController@login'))
 Route::get('create', 'StudentController@create');
 Route::put('createStudent', 'StudentController@createStudent');
 // Edit
-Route::get('student/edit/{id}', 'StudentController@edit');
+Route::get('student/edit/{id}', array('as' => 'edit', 'uses' => 'StudentController@edit'));
 Route::post('editStudent', 'StudentController@editStudent');
 // Delete
 Route::delete('delete/{id}', array('as' => 'delete', 'uses' => 'StudentController@deleteStudent'));

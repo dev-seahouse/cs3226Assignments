@@ -8,11 +8,13 @@ html {
     line-height: 1.2;
     box-sizing: border-box;
     -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%
+    -webkit-text-size-adjust: 100%;
+    height: 100%;
 }
 
 body {
-  background-color: #fff;
+    background-color: #fff;
+    height: 100%;
 }
 
 body, ul, li, ol, p, a {
@@ -40,6 +42,9 @@ button {
     border-radius: 0;
 }
 
+hr {
+    border-top: 1px solid silver;
+}
 
 /*==================================
 =            Modules            =
@@ -176,12 +181,12 @@ p, body, span, h1, h2, h3, h4, h5, h6 {
 }
 
 .text-container {
-  margin:auto;
-  max-width: 820px;
+    margin:auto;
+    max-width: 820px;
 }
 
 .text-container *, .text-container * > *{
-  line-height: 1.6;
+    line-height: 1.6;
 }
 
 
@@ -206,6 +211,12 @@ p, body, span, h1, h2, h3, h4, h5, h6 {
     width: 20px;
 }
 
-hr {
-    border-top: 1px solid silver;
+.btn-fixed-width {
+    text-align: center;
+    width: 200px;
 }
+
+.delete-btn {
+    margin-top: 8em;
+}
+
