@@ -20,6 +20,10 @@ class CreateStudentsTable extends Migration
             $table->string('name');
             $table->string('nick');
             $table->string('kattis');
+
+
+
+
         });
     }
 

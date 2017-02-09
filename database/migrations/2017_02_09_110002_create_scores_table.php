@@ -16,16 +16,9 @@ class CreateScoresTable extends Migration
         Schema::create('scores', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('score');
-            $table->unsignedInteger('student_id');
-            $table->unsignedInteger('component_id');
             $table->unsignedInteger('score_index');
+            $table->unsignedInteger('component_id');
             $table->timestamps();
-
-            $table -> foreign('student_id')
-                   -> references('id')
-                   -> on('students')
-                   -> onUpdate('cascade')
-                   -> onDelete('cascade');
 
             $table -> foreign('component_id')
                     -> references('id')
