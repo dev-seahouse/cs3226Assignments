@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Component extends Model
+class Score extends Model
 {
-
+    //
 }

@@ -15,15 +15,14 @@ class CreateComponentsTable extends Migration
     {
         Schema::create('components', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('student_id');
-            $table->integer('type_id');
-            $table->integer('score_id');
+            $table->string('name'); //e.g MC,TC,HW,KS,AC,SPE
             $table->timestamps();
 
-            $table -> foreign('student_id')
-                   -> references('id')
-                   -> onUpdate('cascade')
-                   -> onUpdate('cascade');
+            // $table -> foreign('score_id')
+            //         -> references('id')->on('scores');
+            //         -> onUpdate('cascade')
+            //         -> onDelete('cascade');
+
         });
     }
 
@@ -34,7 +33,6 @@ class CreateComponentsTable extends Migration
      */
     public function down()
     {
-        $table->dropForeign('components_student_id_foreign');
         Schema::dropIfExists('components');
 
     }
