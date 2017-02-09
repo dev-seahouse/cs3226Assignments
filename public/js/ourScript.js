@@ -5,7 +5,26 @@ $(function () {
   scaleRowHeights($('#ranktable').find('tbody > tr'))
   highlightHighestValue()
   drawRadarChart($('#studentRadarChart'))
+  setActive()
 })
+
+function setActive() {
+  // set active for navbar-brand
+  var homePath = window.location.pathname;
+  if (homePath === "/") {
+    $('a.navbar-brand').addClass('navbar-brand-active');
+  } else {
+    $('a.navbar-brand').removeClass('navbar-brand-active');
+  }
+  
+  // set active for other links
+  var url = window.location;
+  $('ul.nav a[href="'+ url +'"]').parent().addClass('active');
+  $('ul.nav a').filter(function() {
+    return this.href == url;
+  }).parent().addClass('active');
+
+}
 
 function setupDataTable () {
   // add column sorting functionality to ranking table
@@ -92,9 +111,9 @@ function scaleRowHeights (rows) {
   function calculateRowHeightBasedOnRankScoreDiff (currRow) {
     const delta = 40
     let $currTotlRankScoreCol = $(currRow).find('.js-rankTotl'),
-      currTotlRankScore = $currTotlRankScoreCol.text(),
-      $nextTotlRankScoreCol = $(currRow).next('tr').find('.js-rankTotl'),
-      nextTotlRankScore = $nextTotlRankScoreCol.text()
+        currTotlRankScore = $currTotlRankScoreCol.text(),
+        $nextTotlRankScoreCol = $(currRow).next('tr').find('.js-rankTotl'),
+        nextTotlRankScore = $nextTotlRankScoreCol.text()
 
     return (currTotlRankScore - nextTotlRankScore) * delta + baseRowHeight
   }
@@ -144,7 +163,7 @@ function drawRadarChart ($selector) {
     makeRadarChart($selector, formattedData)
   }).fail(function (data) {
   })
-}
+    }
 
 function formartChartData (data) {
   let keys = ['AC', 'BS', 'HW', 'MC', 'TC', 'MC']
