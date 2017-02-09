@@ -16,7 +16,7 @@ class AddComponentsDefinitionsToComponentTable extends Migration
         Schema::table('components', function (Blueprint $table) {
             $score_component_types = ['MC','TC', 'HW', 'BS', 'KS', 'AC'];
             foreach($score_component_types as $c){
-                App\Component::firstOrCreate('name'=> $c);
+                App\Component::firstOrCreate(['name'=> $c]);
             }
         });
     }
