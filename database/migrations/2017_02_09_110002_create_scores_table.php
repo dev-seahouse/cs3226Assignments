@@ -42,6 +42,8 @@ class CreateScoresTable extends Migration
      */
     public function down()
     {
+        $table->dropForeign(['student_id']);
+        $table->dropForeign(['component_id'])
         Schema::dropIfExists('scores');
     }
 }
