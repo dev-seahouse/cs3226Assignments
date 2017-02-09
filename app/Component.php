@@ -4,8 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Student extends Model
+class Component extends Model
 {
-  public function student(){
-  }
+
 }
