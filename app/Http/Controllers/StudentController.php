@@ -127,7 +127,10 @@ class StudentController extends Controller {
       'name' => 'required|min:5|max:30|regex:/^[A-Za-z ]+$/',
       'mc_components' => ['regex:/^((([0-3]\.(0|5)|4\.0)|(x\.y)),){8}(([0-3]\.(0|5)|4\.0)|(x.y))$/'],
       'tc_components' => ['regex:/^(([0-9]|10)\.(0|5)|(xy\.z)),(([0-9]|1[0-3])\.(0|5)|(xy.z))$/'],
-      'hw_components' => ['regex:/^(([0-1]\.(0|5)|(x.y)),){9}([0-1]\.(0|5)|(x\.y))$/']
+      'hw_components' => ['regex:/^(([0-1]\.(0|5)|(x.y)),){9}([0-1]\.(0|5)|(x\.y))$/'],
+      'bs_components' => ['regex:/^((0|1|x),){8}((0|1|x))$/'],
+      'ks_components' => ['regex:/^((0|1|x),){11}((0|1|x))$/'],
+      'ac_components' => ['regex:/^((0|1|x),){2}(([0-3]|x),){2}((0|1|x),){3}((0|1|x))$/']
     ]);
     
     if ($validator->fails()) {
