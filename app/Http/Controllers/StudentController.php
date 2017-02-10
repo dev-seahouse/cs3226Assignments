@@ -124,7 +124,7 @@ class StudentController extends Controller {
       and you are encouraged to do so.
     */
     $validator = Validator::make($request->all(), [
-      'name' => 'required|min:5|max:30',
+      'name' => 'required|min:5|max:30|regex:/^[A-Za-z ]+$/',
     ]);
     
     if ($validator->fails()) {
