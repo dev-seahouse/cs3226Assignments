@@ -31,6 +31,14 @@ $uri = $_SERVER['REQUEST_URI'];
         // add detail mode to navbar if current uri is student details page
         if (strpos($uri, '/student/') !== false) {
           echo '<li class="active"><a>Detail Mode</a></li>';
+        }
+        // add edit mode to navbar if current uri is edit student page
+        if (strpos($uri, '/edit/') !== false) {
+          echo '<li class="active"><a>Edit Mode</a></li>';
+        }
+        // add create mode to navbar if current uri is create student page
+        if (strpos($uri, '/create') !== false) {
+          echo '<li class="active"><a>Create New Student Mode</a></li>';
         } ?>
         <li><a href="{{route('help')}}">Help</a></li>
       </ul>
