@@ -9,21 +9,12 @@ $(function () {
 })
 
 function setActive() {
-  // set active for navbar-brand
-  var homePath = window.location.pathname;
-  if (homePath === "/") {
-    $('a.navbar-brand').addClass('navbar-brand-active');
-  } else {
-    $('a.navbar-brand').removeClass('navbar-brand-active');
-  }
-  
   // set active for other links
   var url = window.location;
   $('ul.nav a[href="'+ url +'"]').parent().addClass('active');
   $('ul.nav a').filter(function() {
     return this.href == url;
   }).parent().addClass('active');
-
 }
 
 function setupDataTable () {
