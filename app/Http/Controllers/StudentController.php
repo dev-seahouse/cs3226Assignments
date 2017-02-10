@@ -125,6 +125,7 @@ class StudentController extends Controller {
     */
     $validator = Validator::make($request->all(), [
       'name' => 'required|min:5|max:30|regex:/^[A-Za-z ]+$/',
+      'mc_components' => ['regex:/^((([0-3][.]([0]|[5])|[4][.][0])|([x][.][y]))[,]){8}(([0-3][.]([0]|[5])|[4][.][0])|([x][.][y]))$/']
     ]);
     
     if ($validator->fails()) {
