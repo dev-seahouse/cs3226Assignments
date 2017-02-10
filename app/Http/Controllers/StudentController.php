@@ -123,15 +123,27 @@ class StudentController extends Controller {
       with error(s) and display an error message near its relevant field 
       and you are encouraged to do so.
     */
-    $validator = Validator::make($request->all(), [
+    $rules = array(
       'name' => 'required|min:5|max:30|regex:/^[A-Za-z ]+$/',
       'mc_components' => ['regex:/^((([0-3]\.(0|5)|4\.0)|(x\.y)),){8}(([0-3]\.(0|5)|4\.0)|(x.y))$/'],
-      'tc_components' => ['regex:/^(([0-9]|10)\.(0|5)|(xy\.z)),(([0-9]|1[0-3])\.(0|5)|(xy.z))$/'],
+      'tc_components' => ['regex:/^^([0-9]\.([0-9])|(xy\.z)|(10\.[0-5])),((([0-9]|1[0-2])\.([0-9])|(xy.z))|(13\.([0-5])))$$/'],
       'hw_components' => ['regex:/^(([0-1]\.(0|5)|(x.y)),){9}([0-1]\.(0|5)|(x\.y))$/'],
       'bs_components' => ['regex:/^((0|1|x),){8}((0|1|x))$/'],
       'ks_components' => ['regex:/^((0|1|x),){11}((0|1|x))$/'],
       'ac_components' => ['regex:/^((0|1|x),){2}(([0-3]|x),){2}((0|1|x),){3}((0|1|x))$/']
-    ]);
+    );
+    
+    $messages = array(
+      'name.regex' => 'Full name should only contain letters and space.',
+      'mc_components.regex' => 'Mini Contest scores should range from 0.0 to 4.0, with increments of 0.5, or set as "x.y".',
+      'tc_components.regex' => 'Team Contest scores should range from 0.0 to 10.5 for Midterm TC and 0.0 to 13.5 for Final TC, or set as      "xy.z".',
+      'hw_components.regex' => 'Homework scores should range from 0.0 to 1.5, with increments of 0.5, or set as "x.y".',
+      'bs_components.regex' => 'Problem Bs scores should be 0 or 1, or set as "x".',
+      'ks_components.regex' => 'Kattis Sets scores should be 0 or 1, or set as "x".',
+      'ac_components.regex' => 'Achievements scores should range from 0 to 3 for week 3 and 4, and 0 or 1 for other weeks, or set as "x".'
+    );
+    
+    $validator = Validator::make($request->all(), $rules, $messages);
     
     if ($validator->fails()) {
       return back()
