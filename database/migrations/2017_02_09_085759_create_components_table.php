@@ -13,14 +13,8 @@ class CreateComponentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('component_t', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name'); //e.g MC,TC,HW,KS,AC,SPE
-        });
-
         Schema::create('components', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name'); //e.g MC,TC,HW,KS,AC,SPE
             $table->unsignedInteger('student_id');
             $table->unsignedInteger('component_t_id');
 
@@ -32,7 +26,7 @@ class CreateComponentsTable extends Migration
 
             $table->foreign('component_t_id')
                 ->references('id')
-                ->on('students')
+                ->on('component_t')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
@@ -45,7 +39,6 @@ class CreateComponentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('components_t');
         Schema::dropIfExists('components');
     }
 }

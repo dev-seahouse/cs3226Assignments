@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
-  // get all the components belong to student
-
+  // get all components belonging to student
+  public function components(){
+    return $this->hasMany('components');
+  }
 }

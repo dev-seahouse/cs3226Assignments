@@ -18,7 +18,6 @@ class CreateScoresTable extends Migration
             $table->integer('score');
             $table->unsignedInteger('score_index');
             $table->unsignedInteger('component_id');
-            $table->timestamps();
 
             $table -> foreign('component_id')
                     -> references('id')

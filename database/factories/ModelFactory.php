@@ -34,6 +34,8 @@ $factory->define(App\Student::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\Component::class, function (Faker\Generator $faker) {
+    return [
 
-
-
+    ];
+});
