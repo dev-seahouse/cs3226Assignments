@@ -55,7 +55,22 @@ class StudentController extends Controller {
       return $a["SUM"] < $b["SUM"];
     });
     
-    return view('index')->with('students', json_encode($students));
+    //----------- Recode Lab 2 JS to PHP -----------------
+    $maxArray = array(0,0,0,0,0,0,0,0,0);
+    foreach($students as $student) {
+      $maxArray[0] = max($maxArray[0], $student['MC']);
+      $maxArray[1] = max($maxArray[1], $student['TC']);   
+      $maxArray[2] = max($maxArray[2], $student['SPE']);   
+      $maxArray[3] = max($maxArray[3], $student['HW']);   
+      $maxArray[4] = max($maxArray[4], $student['BS']);   
+      $maxArray[5] = max($maxArray[5], $student['KS']);   
+      $maxArray[6] = max($maxArray[6], $student['AC']);   
+      $maxArray[7] = max($maxArray[7], $student['DIL']);   
+      $maxArray[8] = max($maxArray[8], $student['SUM']);   
+    }
+
+    return view('index')->with('students', json_encode($students))
+                        ->with('maxArray', $maxArray);
   }
 
   // show detail view

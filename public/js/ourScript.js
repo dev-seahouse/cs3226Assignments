@@ -3,7 +3,7 @@ $(function () {
   highlightTableCellsMarkedX()
   highlightRows()
   scaleRowHeights($('#ranktable').find('tbody > tr'))
-  highlightHighestValue()
+  //highlightHighestValue()
   drawRadarChart($('#studentRadarChart'))
   setActive()
 })
@@ -125,6 +125,8 @@ function removeDuplicates (arr) {
   })
 }
 
+// TO BE REMOVED
+/*
 // highlight highest value in each column
 function highlightHighestValue () {
   for (var i = 5; i <= 13; i++) {
@@ -145,7 +147,7 @@ function highlightHighestValue () {
     })
   }
 }
-
+*/
 function drawRadarChart ($selector) {
   if (!$selector.length) return
   getStudentData().then(function (data) {

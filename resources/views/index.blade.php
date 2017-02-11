@@ -41,15 +41,15 @@
                 <img src="img/kattis.png" class="rank-kattis-img">
                 <a href="{{ route('student', ['id' => $student['ID']]) }}">{{ $student['NAME'] }}</a></td>
               <td class="visible-xs"><a href="{{ route('student', ['id' => $student['ID']]) }}">{{ $student['NICK'] }}</a></td>
-              <td class="hidden-xs hidden-sm">{{ $student['MC'] }}</td>
-              <td class="hidden-xs hidden-sm">{{ $student['TC'] }}</td>
-              <td>{{ $student['SPE'] }}</td>
-              <td class="hidden-xs hidden-sm">{{ $student['HW'] }}</td>
-              <td class="hidden-xs hidden-sm">{{ $student['BS'] }}</td>
-              <td class="hidden-xs hidden-sm">{{ $student['KS'] }}</td>
-              <td class="hidden-xs hidden-sm">{{ $student['AC'] }}</td>
-              <td>{{ $student['DIL'] }}</td>
-              <td class='js-rankTotl'>{{ $student['SUM'] }}</td>
+              <td class="hidden-xs hidden-sm<?php if ($maxArray[0] === $student['MC']) { echo ' highlighted'; }?>">{{ $student['MC'] }}</td>
+              <td class="hidden-xs hidden-sm<?php if ($maxArray[1] === $student['TC']) { echo ' highlighted'; }?>">{{ $student['TC'] }}</td>
+              <td<?php if ($maxArray[2] === $student['SPE']) { echo ' class="highlighted"'; }?>>{{ $student['SPE'] }}</td>
+              <td class="hidden-xs hidden-sm<?php if ($maxArray[3] == $student['HW']) { echo ' highlighted'; }?>">{{ $student['HW'] }}</td>
+              <td class="hidden-xs hidden-sm<?php if ($maxArray[4] == $student['BS']) { echo ' highlighted'; }?>">{{ $student['BS'] }}</td>
+              <td class="hidden-xs hidden-sm<?php if ($maxArray[5] == $student['KS']) { echo ' highlighted'; }?>">{{ $student['KS'] }}</td>
+              <td class="hidden-xs hidden-sm<?php if ($maxArray[6] == $student['AC']) { echo ' highlighted'; }?>">{{ $student['AC'] }}</td>
+              <td<?php if ($maxArray[7] === $student['DIL']) { echo ' class="highlighted"'; }?>>{{ $student['DIL'] }}</td>
+              <td class="js-rankTotl<?php if ($maxArray[8] == $student['SUM']) { echo ' highlighted'; }?>">{{ $student['SUM'] }}</td>
             </tr>
             <?php $i++; ?>
           @endforeach
