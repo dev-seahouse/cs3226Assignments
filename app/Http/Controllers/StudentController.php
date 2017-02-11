@@ -9,6 +9,7 @@ class StudentController extends Controller {
   function __construct() { 
     $this->filePath = '../database/students.txt';
     
+    //--------- Extra Challenge C: Use Regex/Better Validation -------------------------
     // validation rules and messages, put here first
     $this->rules = array(
       'name' => 'required|between:5,30|regex:/^[A-Za-z ]+$/',
@@ -42,6 +43,7 @@ class StudentController extends Controller {
       'ks_components.regex' => 'Kattis Sets scores should be 0 or 1, or set as "x".',
       'ac_components.regex' => 'Achievements scores should range from 0 to 3 for week 3 and 4, and 0 or 1 for other weeks, or set as "x".'
     );
+    //---------------- END Extra Challenge C --------------------------------------------------------
   } 
   
   // show index view
@@ -99,11 +101,14 @@ class StudentController extends Controller {
     $gender = $request->input('gender');
     $kattis = $request->input('kattis');
     $nationality = $request->input('nationality');
+    
+    //------ Extra Challenge B: Add Image --------------
     $propic = $request->input('propic');
     // keep original file name
     $propicName = $request->file('propic')->getClientOriginalName();
     // save image file to public folder
     $request->file('propic')->move(base_path() . '/public/img/student/', $propicName);
+    //------ END Extra Challenge B ---------------------------------------
 
     $students = $this->getStudentsFromDatabase();
     usort($students, function ($a, $b) {

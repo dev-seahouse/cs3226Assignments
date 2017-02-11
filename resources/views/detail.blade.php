@@ -23,9 +23,9 @@
             <div class="col-sm-6 hidden-xs">
                 <img class="detailsImage" src="
                 @if (json_decode($student)->GENDER == "M")
-                  {{ URL::asset('img/male-icon.png') }}
+                  {{ URL::asset('img/student/male-icon.png') }}
                 @else
-                  {{ URL::asset('img/female-icon.png') }}
+                  {{ URL::asset('img/student/female-icon.png') }}
                 @endif
                 ">
             </div>

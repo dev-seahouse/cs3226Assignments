@@ -33,9 +33,9 @@
               <td class="hidden-xs">
                 <img src=
                 @if ($student['GENDER'] == "M")
-                  "{{ URL::asset('img/male-icon.png') }}"
+                  "{{ URL::asset('img/student/male-icon.png') }}"
                 @else
-                  "{{ URL::asset('img/female-icon.png') }}"
+                  "{{ URL::asset('img/student/female-icon.png') }}"
                 @endif
                 class="rank-person-img">
                 <img src="img/kattis.png" class="rank-kattis-img">
