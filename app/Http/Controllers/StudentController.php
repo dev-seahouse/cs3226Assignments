@@ -7,6 +7,36 @@ class StudentController extends Controller {
   
   function __construct() { 
     $this->filePath = '../database/students.txt';
+    
+    // validation rules and messages, put here first
+    $this->rules = array(
+      'name' => 'required|between:5,30|regex:/^[A-Za-z ]+$/',
+      'nick' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
+      'kattis' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
+      'mc_components' => ['regex:/^((([0-3]\.(0|5)|4\.0)|(x\.y)),){8}(([0-3]\.(0|5)|4\.0)|(x.y))$/'],
+      'tc_components' => ['regex:/^^([0-9]\.([0-9])|(xy\.z)|(10\.[0-5])),((([0-9]|1[0-2])\.([0-9])|(xy.z))|(13\.([0-5])))$$/'],
+      'hw_components' => ['regex:/^(([0-1]\.(0|5)|(x.y)),){9}([0-1]\.(0|5)|(x\.y))$/'],
+      'bs_components' => ['regex:/^((0|1|x),){8}((0|1|x))$/'],
+      'ks_components' => ['regex:/^((0|1|x),){11}((0|1|x))$/'],
+      'ac_components' => ['regex:/^((0|1|x),){2}(([0-3]|x),){2}((0|1|x),){3}((0|1|x))$/']
+    );
+    $this->messages = array(
+      'name.regex' => 'Full name should only contain letters and space.',
+      'name.required' => 'Full name cannot be blank.',
+      'name.between' => 'Full name must be between :min - :max characters.',
+      'nick.regex' => 'Nick name should only contain alphanumeric characters and no space.',
+      'nick.required' => 'Nick name cannot be blank.',
+      'nick.between' => 'Nick name must be between :min - :max characters.',
+      'kattis.regex' => 'Kattis account should only contain alphanumeric characters and no space.',
+      'kattis.required' => 'Kattis account cannot be blank.',
+      'kattis.between' => 'Kattis account must be between :min - :max characters.',
+      'mc_components.regex' => 'Mini Contest scores should range from 0.0 to 4.0, with increments of 0.5, or set as "x.y".',
+      'tc_components.regex' => 'Team Contest scores should range from 0.0 to 10.5 for Midterm TC and 0.0 to 13.5 for Final TC, or set as      "xy.z".',
+      'hw_components.regex' => 'Homework scores should range from 0.0 to 1.5, with increments of 0.5, or set as "x.y".',
+      'bs_components.regex' => 'Problem Bs scores should be 0 or 1, or set as "x".',
+      'ks_components.regex' => 'Kattis Sets scores should be 0 or 1, or set as "x".',
+      'ac_components.regex' => 'Achievements scores should range from 0 to 3 for week 3 and 4, and 0 or 1 for other weeks, or set as "x".'
+    );
   } 
   
   // show index view
@@ -50,20 +80,8 @@ class StudentController extends Controller {
       with error(s) and display an error message near its relevant field 
       and you are encouraged to do so.
     */
-    $rules = array(
-      'name' => 'required|min:5|max:30|regex:/^[A-Za-z ]+$/',
-      'nick' => 'required|min:5|max:30|regex:/^[0-9A-Za-z]+$/',
-      'kattis' => 'required|min:5|max:30|regex:/^[0-9A-Za-z]+$/',
-      'nationality' => 'required'
-    );
     
-    $messages = array(
-      'name.regex' => 'Full name should only contain letters and space.',
-      'nick.regex' => 'Nick name should only contain alphanumeric characters and no space.',
-      'kattis.regex' => 'Kattis account should only contain alphanumeric characters and no space.',
-    );
-    
-    $validator = Validator::make($request->all(), $rules, $messages);
+    $validator = Validator::make($request->all(), $this->rules, $this->messages);
     
     if ($validator->fails()) {
       return back()
@@ -134,31 +152,8 @@ class StudentController extends Controller {
       with error(s) and display an error message near its relevant field 
       and you are encouraged to do so.
     */
-    $rules = array(
-      'name' => 'required|min:5|max:30|regex:/^[A-Za-z ]+$/',
-      'nick' => 'required|min:5|max:30|regex:/^[0-9A-Za-z]+$/',
-      'kattis' => 'required|min:5|max:30|regex:/^[0-9A-Za-z]+$/',
-      'mc_components' => ['regex:/^((([0-3]\.(0|5)|4\.0)|(x\.y)),){8}(([0-3]\.(0|5)|4\.0)|(x.y))$/'],
-      'tc_components' => ['regex:/^^([0-9]\.([0-9])|(xy\.z)|(10\.[0-5])),((([0-9]|1[0-2])\.([0-9])|(xy.z))|(13\.([0-5])))$$/'],
-      'hw_components' => ['regex:/^(([0-1]\.(0|5)|(x.y)),){9}([0-1]\.(0|5)|(x\.y))$/'],
-      'bs_components' => ['regex:/^((0|1|x),){8}((0|1|x))$/'],
-      'ks_components' => ['regex:/^((0|1|x),){11}((0|1|x))$/'],
-      'ac_components' => ['regex:/^((0|1|x),){2}(([0-3]|x),){2}((0|1|x),){3}((0|1|x))$/']
-    );
     
-    $messages = array(
-      'name.regex' => 'Full name should only contain letters and space.',
-      'nick.regex' => 'Nick name should only contain alphanumeric characters and no space.',
-      'kattis.regex' => 'Kattis account should only contain alphanumeric characters and no space.',
-      'mc_components.regex' => 'Mini Contest scores should range from 0.0 to 4.0, with increments of 0.5, or set as "x.y".',
-      'tc_components.regex' => 'Team Contest scores should range from 0.0 to 10.5 for Midterm TC and 0.0 to 13.5 for Final TC, or set as      "xy.z".',
-      'hw_components.regex' => 'Homework scores should range from 0.0 to 1.5, with increments of 0.5, or set as "x.y".',
-      'bs_components.regex' => 'Problem Bs scores should be 0 or 1, or set as "x".',
-      'ks_components.regex' => 'Kattis Sets scores should be 0 or 1, or set as "x".',
-      'ac_components.regex' => 'Achievements scores should range from 0 to 3 for week 3 and 4, and 0 or 1 for other weeks, or set as "x".'
-    );
-    
-    $validator = Validator::make($request->all(), $rules, $messages);
+    $validator = Validator::make($request->all(), $this->rules, $this->messages);
     
     if ($validator->fails()) {
       return back()
