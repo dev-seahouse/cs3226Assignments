@@ -1,9 +1,8 @@
 $(function () {
   setupDataTable()
   highlightTableCellsMarkedX()
-  highlightRows()
+  //highlightRows()
   scaleRowHeights($('#ranktable').find('tbody > tr'))
-  //highlightHighestValue()
   drawRadarChart($('#studentRadarChart'))
   setActive()
 })
@@ -125,29 +124,6 @@ function removeDuplicates (arr) {
   })
 }
 
-// TO BE REMOVED
-/*
-// highlight highest value in each column
-function highlightHighestValue () {
-  for (var i = 5; i <= 13; i++) {
-    var max = 0
-    // console.log('initial max:' + max);
-    var column = $('#ranktable td:nth-child(' + i + ')')
-    column.each(function () {
-      var value = $(this).text()
-      max = Math.max(value, max)
-      // console.log('value:' + value + ' max:' + max);
-    })
-    // console.log('col:' + i + ' max:' + max);
-    column.each(function () {
-      var value = $(this).text()
-      if (value == max) {
-        $(this).addClass('highlighted')
-      }
-    })
-  }
-}
-*/
 function drawRadarChart ($selector) {
   if (!$selector.length) return
   getStudentData().then(function (data) {

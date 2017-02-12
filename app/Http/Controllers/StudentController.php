@@ -21,6 +21,7 @@ class StudentController extends Controller {
     
     //----------- Recode Lab 2 JS to PHP -----------------
     $maxArray = array(0,0,0,0,0,0,0,0,0);
+    $sum = array();
     foreach($students as $student) {
       $maxArray[0] = max($maxArray[0], $student['MC']);
       $maxArray[1] = max($maxArray[1], $student['TC']);   
@@ -30,11 +31,23 @@ class StudentController extends Controller {
       $maxArray[5] = max($maxArray[5], $student['KS']);   
       $maxArray[6] = max($maxArray[6], $student['AC']);   
       $maxArray[7] = max($maxArray[7], $student['DIL']);   
-      $maxArray[8] = max($maxArray[8], $student['SUM']);   
+      $maxArray[8] = max($maxArray[8], $student['SUM']);
+      array_push($sum, $student['SUM']);
     }
+    
+    // this works on the precondition that there is at least 4 students and 4 different values of sum
+    $sum = array_unique($sum);
+    $first = $sum[0];
+    array_splice($sum, 0, 1);
+    $second = $sum[0];
+    array_splice($sum, 0, 1);
+    $third = $sum[0];
+    array_splice($sum, 0, 1);
+    $last = min($sum);
 
     return view('index')->with('students', json_encode($students))
-                        ->with('maxArray', $maxArray);
+                        ->with('maxArray', $maxArray)
+                        ->with('first', $first)->with('second', $second)->with('third', $third)->with('last',$last);
   }
 
   // show detail view
