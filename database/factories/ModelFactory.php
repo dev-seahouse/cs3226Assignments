@@ -104,7 +104,8 @@ $factory->state(App\Component::class, 'AC', function ($faker) {
 
 
 $factory->define(App\Score::class, function (Faker\Generator $faker) {
-
+    return [
+    ];
 });
 
 $factory->state(App\Score::class, 'MC', function ($faker) {
