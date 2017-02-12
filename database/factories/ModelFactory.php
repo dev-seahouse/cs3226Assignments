@@ -24,21 +24,30 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Student::class, function (Faker\Generator $faker) {
-   $gender = $faker->randomElement(array("male","female"));
-;    return [
+    $gender = $faker->randomElement(array("male", "female"));
+    ;return [
         'nationality' => $faker->randomElement(array("CHN", "IDN", "SGP", "VNM", "MYS")),
         'name'        => $faker->name($gender),
         'gender'      => getGenderCode($gender),
         'nick'        => $nick = ($faker->userName),
-        'kattis'       => $nick
+        'kattis'      => $nick,
     ];
 });
 
+/*=====================================
+=            Component factory          =
+=====================================*/
+
+
+$factory->define(App\Component::class, function (Faker\Generator $faker) {
+    return [
+    ];
+});
 
 $factory->state(App\Component::class, 'MC', function ($faker) {
     return [
         "component_t_id" => function () {
-            return App\ComponentType::where('name', 'MC')->id;
+            return App\ComponentType::where('name', 'MC')->first()->id;
         },
         //'score' => half_dec_rand(0 , 4)
     ];
@@ -48,7 +57,7 @@ $factory->state(App\Component::class, 'TC', function ($faker) {
     return [
         //'score' => half_dec_rand(0,1)
         "component_t_id" => function () {
-            return App\ComponentType::where('name', 'TC')->id;
+            return App\ComponentType::where('name', 'TC')->first()->id;
         },
     ];
 });
@@ -57,7 +66,7 @@ $factory->state(App\Component::class, 'BS', function ($faker) {
     return [
         //'score' => half_dec_rand(0,1)
         "component_t_id" => function () {
-            return App\ComponentType::where('name', 'BS')->id;
+            return App\ComponentType::where('name', 'BS')->first()->id;
         },
     ];
 });
@@ -66,7 +75,7 @@ $factory->state(App\Component::class, 'HW', function ($faker) {
     return [
         //'score' => half_dec_rand(0,1.5)
         "component_t_id" => function () {
-            return App\ComponentType::where('name', 'HW')->id;
+            return App\ComponentType::where('name', 'HW')->first()->id;
         },
     ];
 });
@@ -75,7 +84,7 @@ $factory->state(App\Component::class, 'KS', function ($faker) {
     return [
         //'score' => half_dec_rand(0,1)
         "component_t_id" => function () {
-            return App\ComponentType::where('name', 'KS')->id;
+            return App\ComponentType::where('name', 'KS')->first()->id;
         },
     ];
 });
@@ -84,18 +93,66 @@ $factory->state(App\Component::class, 'AC', function ($faker) {
     return [
         //'score' => half_dec_rand(0,4)
         "component_t_id" => function () {
-            return App\ComponentType::where('name', 'AC')->id;
+            return App\ComponentType::where('name', 'AC')->first()->id;
         },
     ];
 });
+
+/*=====================================
+=            Score factory            =
+=====================================*/
+
+
+$factory->define(App\Score::class, function (Faker\Generator $faker) {
+
+});
+
+$factory->state(App\Score::class, 'MC', function ($faker) {
+    return [
+        'score' => half_dec_rand(0, 4),
+    ];
+});
+
+$factory->state(App\Score::class, 'TC', function ($faker) {
+    return [
+        'score' => half_dec_rand(0, 1),
+    ];
+});
+$factory->state(App\Score::class, 'BS', function ($faker) {
+    return [
+        'score' => half_dec_rand(0, 1),
+    ];
+});
+$factory->state(App\Score::class, 'HW', function ($faker) {
+    return [
+        'score' => half_dec_rand(0, 1.5),
+    ];
+});
+$factory->state(App\Score::class, 'KS', function ($faker) {
+    return [
+        'score' => half_dec_rand(0, 1),
+    ];
+});
+$factory->state(App\Score::class, 'AC', function ($faker) {
+    return [
+        'score' => half_dec_rand(0, 4),
+    ];
+});
+
+/*===============================
+=            Helpers            =
+===============================*/
 
 function half_dec_rand($min, $max)
 {
     return mt_rand($min * 2, $max * 2) / 2;
 }
 
+function getGenderCode($gender)
+{
+    if ($gender != "male" && $gender != "female") {
+        throw new Exception("Unexpected gender");
+    }
 
-function getGenderCode($gender){
-    if ($gender!="male" && $gender!="female") throw new Exception("Unexpected gender");
     return $gender == "male" ? "M" : "F";
 }

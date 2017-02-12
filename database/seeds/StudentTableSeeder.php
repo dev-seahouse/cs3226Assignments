@@ -15,11 +15,8 @@ class StudentTableSeeder extends Seeder
             // for each component type, create one component for the student
             $componentTypes = App\ComponentType::all();
             $componentTypes->each(function($t) use ($s){
-                $component = new App\Component();
-                //$component->student_id = $s->id;
+                $component = factory(App\Component::class)->states($t->name)->make();
                 $s->components()->save($component);
-                $t->components()->save($component);
-                $component->save();
             });
         });
     }

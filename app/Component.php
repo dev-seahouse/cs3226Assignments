@@ -11,6 +11,10 @@ class Component extends Model
         return $this->belongsTo('App\ComponentType');
     }
 
+    public function scores(){
+      return $this->hasMany('App\Score');
+    }
+
     public function student()
     {
         return $this->belongsTo('App\Student');
