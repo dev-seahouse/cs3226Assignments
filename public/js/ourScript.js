@@ -1,11 +1,20 @@
 $(function () {
   setupDataTable()
   highlightTableCellsMarkedX()
-  highlightRows()
+  //highlightRows()
   scaleRowHeights($('#ranktable').find('tbody > tr'))
-  highlightHighestValue()
   drawRadarChart($('#studentRadarChart'))
+  setActive()
 })
+
+function setActive() {
+  // set active for other links
+  var url = window.location;
+  $('ul.nav a[href="'+ url +'"]').parent().addClass('active');
+  $('ul.nav a').filter(function() {
+    return this.href == url;
+  }).parent().addClass('active');
+}
 
 function setupDataTable () {
   // add column sorting functionality to ranking table
@@ -25,7 +34,7 @@ function highlightTableCellsMarkedX () {
   // highlight cells with 'x' in student details page
   $('#statstable').find('td').each(function () {
     var value = $(this).text()
-    if (value == 'x' || value == 'x.y') {
+    if (value == 'x' || value == 'x.y' || value == 'xy.z') {
       $(this).addClass('highlightCellWithX')
     }
   })
@@ -92,9 +101,9 @@ function scaleRowHeights (rows) {
   function calculateRowHeightBasedOnRankScoreDiff (currRow) {
     const delta = 40
     let $currTotlRankScoreCol = $(currRow).find('.js-rankTotl'),
-      currTotlRankScore = $currTotlRankScoreCol.text(),
-      $nextTotlRankScoreCol = $(currRow).next('tr').find('.js-rankTotl'),
-      nextTotlRankScore = $nextTotlRankScoreCol.text()
+        currTotlRankScore = $currTotlRankScoreCol.text(),
+        $nextTotlRankScoreCol = $(currRow).next('tr').find('.js-rankTotl'),
+        nextTotlRankScore = $nextTotlRankScoreCol.text()
 
     return (currTotlRankScore - nextTotlRankScore) * delta + baseRowHeight
   }
@@ -115,27 +124,6 @@ function removeDuplicates (arr) {
   })
 }
 
-// highlight highest value in each column
-function highlightHighestValue () {
-  for (var i = 5; i <= 13; i++) {
-    var max = 0
-    // console.log('initial max:' + max);
-    var column = $('#ranktable td:nth-child(' + i + ')')
-    column.each(function () {
-      var value = $(this).text()
-      max = Math.max(value, max)
-      // console.log('value:' + value + ' max:' + max);
-    })
-    // console.log('col:' + i + ' max:' + max);
-    column.each(function () {
-      var value = $(this).text()
-      if (value == max) {
-        $(this).addClass('highlighted')
-      }
-    })
-  }
-}
-
 function drawRadarChart ($selector) {
   if (!$selector.length) return
   getStudentData().then(function (data) {
@@ -144,7 +132,7 @@ function drawRadarChart ($selector) {
     makeRadarChart($selector, formattedData)
   }).fail(function (data) {
   })
-}
+    }
 
 function formartChartData (data) {
   let keys = ['AC', 'BS', 'HW', 'MC', 'TC', 'MC']
