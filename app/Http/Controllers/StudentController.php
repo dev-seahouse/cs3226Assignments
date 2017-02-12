@@ -14,7 +14,7 @@ class StudentController extends Controller {
       'name' => 'required|between:5,30|regex:/^[A-Za-z ]+$/',
       'nick' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
       'kattis' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
-      'propic' => 'required|mimes:png|size:50',
+      'propic' => 'required|mimes:png|max:100',
       'mc_components' => ['regex:/^((([0-3]\.(0|5)|4\.0)|(x\.y)),){8}(([0-3]\.(0|5)|4\.0)|(x.y))$/'],
       'tc_components' => ['regex:/^^([0-9]\.([0-9])|(xy\.z)|(10\.[0-5])),((([0-9]|1[0-2])\.([0-9])|(xy.z))|(13\.([0-5])))$$/'],
       'hw_components' => ['regex:/^(([0-1]\.(0|5)|(x.y)),){9}([0-1]\.(0|5)|(x\.y))$/'],
@@ -34,7 +34,7 @@ class StudentController extends Controller {
       'kattis.between' => 'Kattis account should be between :min - :max characters.',
       'propic.required' => 'Profile picture is required.',
       'propic.mimes' => 'Profile picture should be a PNG file.',
-      'propic.size' => 'Profile picture should be smaller than 50 KB.',
+      'propic.max' => 'Profile picture should be smaller than 100 KB.',
       'mc_components.regex' => 'Mini Contest scores should range from 0.0 to 4.0, with increments of 0.5, or set as "x.y".',
       'tc_components.regex' => 'Team Contest scores should range from 0.0 to 10.5 for Midterm TC and 0.0 to 13.5 for Final TC, or set as      "xy.z".',
       'hw_components.regex' => 'Homework scores should range from 0.0 to 1.5, with increments of 0.5, or set as "x.y".',
@@ -123,7 +123,7 @@ class StudentController extends Controller {
     //------ Extra Challenge B: Add Image --------------
     $propic = $request->input('propic');
     // filename set as student{id}.png
-    $propicName = 'student' . (end($students)['ID'] + 1) . $request->file('propic')->getClientOriginalExtension();
+    $propicName = 'student' . (end($students)['ID'] + 1) . '.' .$request->file('propic')->getClientOriginalExtension();
     // save image file to public folder
     $request->file('propic')->move(base_path() . '/public/img/student/', $propicName);
     //------ END Extra Challenge B ---------------------------------------

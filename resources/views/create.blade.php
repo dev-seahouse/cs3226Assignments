@@ -15,9 +15,6 @@ an error message near its relevant field and you are encouraged to do so. -->
     @include('invalidError', array('field'=>'name'))
     {!! Form::text('name', null, ['class' => 'form-control']) !!}
 
-    {!! Form::label('gender', 'Gender:', ['class' => 'control-label']) !!}
-    {!! Form::select('gender', array('M' => 'Male', 'F' => 'Female')) !!}
-    <br>
     {!! Form::label('kattis', 'Kattis account:', ['class' => 'control-label']) !!}
     @include('invalidError', array('field'=>'kattis'))
     {!! Form::text('kattis', null, ['class' => 'form-control']) !!}
