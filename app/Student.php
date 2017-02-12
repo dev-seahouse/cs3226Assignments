@@ -51,7 +51,7 @@ class Student extends Model
         return $this->components->where("component_t_id",
             ComponentType::where("name", $c_name)->first()->id);
     }
-
+/*
     public function toArray(){
       $arr = array(
           "ID" => $this->id,
@@ -76,6 +76,6 @@ class Student extends Model
           "SUM" => $this->get_sum()
         );
       return $arr;
-    }
+    }*/
 
 }
