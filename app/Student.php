@@ -52,4 +52,30 @@ class Student extends Model
             ComponentType::where("name", $c_name)->first()->id);
     }
 
+    public function toArray(){
+      $arr = array(
+          "ID" => $this->id,
+          "FLAG" => $this->nationality,
+          "PROPIC" => $this->propic(),
+          "NAME" => $this->name,
+          "KATTIS" => $this->kattis,
+          "MC" => $this->get_component_sum("MC"),
+          "MC_COMPONENTS" => $this->get_component_scores("MC")->get()->toArray(),
+          "TC" => $this->get_component_sum("TC"),
+          "TC_COMPONENTS" => $this->get_component_scores("TC")->get()->toArray(),
+          "SPE" => $this->get_spe(),
+          "HW" => $this->get_component_sum("HW"),
+          "HW_COMPONENTS" => $this->get_component_scores("HW")->get()->toArray(),
+          "BS" => $this->get_component_sum("BS"),
+          "BS_COMPONENTS" => $this->get_component_scores("BS")->get()->toArray(),
+          "KS" => $this->get_component_sum("KS"),
+          "KS_COMPONENTS" => $this->get_component_scores("KS")->get()->toArray(),
+          "AC" => $this->get_component_sum("AC"),
+          "AC_COMPONENTS" => $this->get_component_scores("AC")->get()->toArray(),
+          "DIL" => $this->get_dil(),
+          "SUM" => $this->get_sum()
+        );
+      return $arr;
+    }
+
 }

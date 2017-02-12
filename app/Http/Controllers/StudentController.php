@@ -2,18 +2,22 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Student;
 
 class StudentController extends Controller {
 
+
   function __construct() {
     $this->filePath = '../database/students.txt';
+    $this->student_collection = Student::all();
   }
 
   // show index view
   public function index() {
     // $this->generateStudents());
 
-    $students = $this->getStudentsFromDatabase();
+    $students = $this->toStudentArray($this->student_collection);
+    $this->toStudentArray($this->student_collection);
 
     usort($students, function ($a, $b) {
       return $a["SUM"] < $b["SUM"];
@@ -44,7 +48,6 @@ class StudentController extends Controller {
     $third = $sum[0];
     array_splice($sum, 0, 1);
     $last = min($sum);
-    dd($students);
 
     return view('index')->with('students', json_encode($students))
                         ->with('maxArray', $maxArray)
