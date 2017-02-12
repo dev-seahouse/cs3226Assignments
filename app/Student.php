@@ -8,6 +8,6 @@ class Student extends Model
 {
   // get all components belonging to student
   public function components(){
-    return $this->hasMany('components');
+    return $this->hasMany('App\Component', 'student_id');
   }
 }

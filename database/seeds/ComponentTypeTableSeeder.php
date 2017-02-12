@@ -13,7 +13,9 @@ class ComponentTypeTableSeeder extends Seeder
     {
         $score_component_types = ['MC', 'TC', 'HW', 'BS', 'KS', 'AC'];
         foreach ($score_component_types as $c) {
-            DB::table('component_t')->insert(['name' => $c]);
+            $comp_type = new App\ComponentType;
+            $comp_type->name = $c;
+            $comp_type->save();
         }
     }
 }
