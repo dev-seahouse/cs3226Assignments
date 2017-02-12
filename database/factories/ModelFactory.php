@@ -39,3 +39,47 @@ $factory->define(App\Component::class, function (Faker\Generator $faker) {
 
     ];
 });
+
+$factory->state(App\Component::class, 'MC', function ($faker) {
+    return [
+        'score' => half_dec_rand(0 , 4)
+    ];
+});
+
+$factory->state(App\Component::class, 'TC', function ($faker) {
+    return [
+        'score' => half_dec_rand(0,1)
+    ];
+});
+
+$factory->state(App\Component::class, 'BS', function ($faker) {
+    return [
+        'score' => half_dec_rand(0,1)
+    ];
+});
+
+
+$factory->state(App\Component::class, 'HW', function ($faker) {
+    return [
+        'score' => half_dec_rand(0,1.5)
+    ];
+});
+
+$factory->state(App\Component::class, 'KS', function ($faker) {
+    return [
+        'score' => half_dec_rand(0,1)
+    ];
+});
+
+$factory->state(App\Component::class, 'AC', function ($faker) {
+    return [
+        'score' => half_dec_rand(0,4)
+    ];
+});
+
+
+
+function half_dec_rand($min, $max)
+{
+    return mt_rand($min * 2, $max * 2) / 2;
+}
