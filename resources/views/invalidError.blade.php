@@ -1,4 +1,4 @@
-@if (($errors)->has($field)) 
+@if ($errors->has($field)) 
 <div class="alert alert-danger">
   <ul>
     @foreach ($errors->get($field) as $error)
