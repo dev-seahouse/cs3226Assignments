@@ -35,11 +35,8 @@ $uri = $_SERVER['REQUEST_URI'];
         else if (strpos($uri, '/student/') !== false) {
           echo '<li class="active"><a>Detail Mode</a></li>';
         }
-        // add create mode to navbar if current uri is create student page
-        else if (strpos($uri, '/create') !== false) {
-          echo '<li class="active"><a>Create New Student Mode</a></li>';
-        } ?>
-        
+        ?>
+        <li><a href="{{route('create')}}">Create New Student</a></li>
         <li><a href="{{route('help')}}">Help</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
