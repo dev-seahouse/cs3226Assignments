@@ -21,13 +21,7 @@
                 <img class="detailsImage" src="{{ URL::asset('img/'.json_decode($student)->FLAG.'.png') }}">
             </div>
             <div class="col-sm-6 hidden-xs">
-                <img class="detailsImage" src="
-                @if (json_decode($student)->GENDER == "M")
-                  {{ URL::asset('img/student/male-icon.png') }}
-                @else
-                  {{ URL::asset('img/student/female-icon.png') }}
-                @endif
-                ">
+                <img class="detailsImage" src="{{ URL::asset('img/student/'.json_decode($student)->PROPIC) }}">
             </div>
         </div>
 
