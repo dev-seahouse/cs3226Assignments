@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Student;
 
 class StudentController extends Controller {
 
@@ -17,28 +18,82 @@ class StudentController extends Controller {
 
     usort($students, function ($a, $b) {
       return $a["SUM"] < $b["SUM"];
-    });
-<<<<<<< HEAD
+    });$factory->define(App\Component::class, function (Faker\Generator $faker) {
+    return [
+    ];
+});
 
-    return view('index')->with('students', json_encode($students));
-=======
-    
+$factory->state(App\Component::class, 'MC', function ($faker) {
+    return [
+        "component_t_id" => function () {
+            return App\ComponentType::where('name', 'MC')->first()->id;
+        },
+        //'score' => half_dec_rand(0 , 4)
+    ];
+});
+
+$factory->state(App\Component::class, 'TC', function ($faker) {
+    return [
+        //'score' => half_dec_rand(0,1)
+        "component_t_id" => function () {
+            return App\ComponentType::where('name', 'TC')->first()->id;
+        },
+    ];
+});
+
+$factory->state(App\Component::class, 'BS', function ($faker) {
+    return [
+        //'score' => half_dec_rand(0,1)
+        "component_t_id" => function () {
+            return App\ComponentType::where('name', 'BS')->first()->id;
+        },
+    ];
+});
+
+$factory->state(App\Component::class, 'HW', function ($faker) {
+    return [
+        //'score' => half_dec_rand(0,1.5)
+        "component_t_id" => function () {
+            return App\ComponentType::where('name', 'HW')->first()->id;
+        },
+    ];
+});
+
+$factory->state(App\Component::class, 'KS', function ($faker) {
+    return [
+        //'score' => half_dec_rand(0,1)
+        "component_t_id" => function () {
+            return App\ComponentType::where('name', 'KS')->first()->id;
+        },
+    ];
+});
+
+$factory->state(App\Component::class, 'AC', function ($faker) {
+    return [
+        //'score' => half_dec_rand(0,4)
+        "component_t_id" => function () {
+            return App\ComponentType::where('name', 'AC')->first()->id;
+        },
+    ];
+});
+
+
     //----------- Recode Lab 2 JS to PHP -----------------
     $maxArray = array(0,0,0,0,0,0,0,0,0);
     $sum = array();
     foreach($students as $student) {
       $maxArray[0] = max($maxArray[0], $student['MC']);
-      $maxArray[1] = max($maxArray[1], $student['TC']);   
-      $maxArray[2] = max($maxArray[2], $student['SPE']);   
-      $maxArray[3] = max($maxArray[3], $student['HW']);   
-      $maxArray[4] = max($maxArray[4], $student['BS']);   
-      $maxArray[5] = max($maxArray[5], $student['KS']);   
-      $maxArray[6] = max($maxArray[6], $student['AC']);   
-      $maxArray[7] = max($maxArray[7], $student['DIL']);   
+      $maxArray[1] = max($maxArray[1], $student['TC']);
+      $maxArray[2] = max($maxArray[2], $student['SPE']);
+      $maxArray[3] = max($maxArray[3], $student['HW']);
+      $maxArray[4] = max($maxArray[4], $student['BS']);
+      $maxArray[5] = max($maxArray[5], $student['KS']);
+      $maxArray[6] = max($maxArray[6], $student['AC']);
+      $maxArray[7] = max($maxArray[7], $student['DIL']);
       $maxArray[8] = max($maxArray[8], $student['SUM']);
       array_push($sum, $student['SUM']);
     }
-    
+
     // this works on the precondition that there is at least 4 students and 4 different values of sum
     $sum = array_unique($sum);
     $first = $sum[0];
@@ -52,7 +107,6 @@ class StudentController extends Controller {
     return view('index')->with('students', json_encode($students))
                         ->with('maxArray', $maxArray)
                         ->with('first', $first)->with('second', $second)->with('third', $third)->with('last',$last);
->>>>>>> 71556578db83f39aa644b23579e9cff9c1b76e87
   }
 
   // show detail view
@@ -83,13 +137,7 @@ class StudentController extends Controller {
       with error(s) and display an error message near its relevant field
       and you are encouraged to do so.
     */
-<<<<<<< HEAD
-    $validator = Validator::make($request->all(), [
-      'name' => 'required|min:5|max:30',
-    ]);
 
-=======
-    
     //--------- Extra Challenge C: Use Regex/Better Validation -------------------------
     // validation rules and messages, put here first
     $rules = array(
@@ -113,10 +161,9 @@ class StudentController extends Controller {
       'propic.max' => 'Profile picture should be smaller than 100 KB.',
     );
     //---------------- END Extra Challenge C --------------------------------------------------------
-    
+
     $validator = Validator::make($request->all(), $rules, $messages);
-    
->>>>>>> 71556578db83f39aa644b23579e9cff9c1b76e87
+
     if ($validator->fails()) {
       return back()
              ->withErrors($validator)
@@ -132,10 +179,7 @@ class StudentController extends Controller {
     usort($students, function ($a, $b) {
       return $a["ID"] > $b["ID"];
     });
-<<<<<<< HEAD
 
-=======
-    
     //------ Extra Challenge B: Add Image --------------
     $propic = $request->input('propic');
     // filename set as student{id}.png
@@ -143,8 +187,7 @@ class StudentController extends Controller {
     // save image file to public folder
     $request->file('propic')->move(base_path() . '/public/img/student/', $propicName);
     //------ END Extra Challenge B ---------------------------------------
-    
->>>>>>> 71556578db83f39aa644b23579e9cff9c1b76e87
+
     array_push($students , array(
         "ID" => end($students)['ID'] + 1,
         "FLAG" => $nationality,
@@ -197,13 +240,7 @@ class StudentController extends Controller {
       with error(s) and display an error message near its relevant field
       and you are encouraged to do so.
     */
-<<<<<<< HEAD
-    $validator = Validator::make($request->all(), [
-      'name' => 'required|min:5|max:30',
-    ]);
 
-=======
-    
     //--------- Extra Challenge C: Use Regex/Better Validation -------------------------
     // validation rules and messages, put here first
     $rules = array(
@@ -235,10 +272,9 @@ class StudentController extends Controller {
       'ac_components.regex' => 'Achievements scores should range from 0 to 3 for week 3 and 4, and 0 or 1 for other weeks, or set as "x".'
     );
     //---------------- END Extra Challenge C --------------------------------------------------------
-    
+
     $validator = Validator::make($request->all(), $rules, $messages);
-    
->>>>>>> 71556578db83f39aa644b23579e9cff9c1b76e87
+
     if ($validator->fails()) {
       return back()
              ->withErrors($validator)

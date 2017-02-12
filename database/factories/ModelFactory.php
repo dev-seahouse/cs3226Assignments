@@ -25,7 +25,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Student::class, function (Faker\Generator $faker) {
     $gender = $faker->randomElement(array("male", "female"));
-    ;return [
+    return [
         'nationality' => $faker->randomElement(array("CHN", "IDN", "SGP", "VNM", "MYS")),
         'name'        => $faker->name($gender),
         'gender'      => getGenderCode($gender),

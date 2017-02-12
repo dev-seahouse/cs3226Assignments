@@ -4,37 +4,37 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class StudentController extends Controller {
-  
-  function __construct() { 
+
+  function __construct() {
     $this->filePath = '../database/students.txt';
-  } 
-  
+  }
+
   // show index view
   public function index() {
     // $this->generateStudents());
-    
+
     $students = $this->getStudentsFromDatabase();
-    
+
     usort($students, function ($a, $b) {
       return $a["SUM"] < $b["SUM"];
     });
-    
+
     //----------- Recode Lab 2 JS to PHP -----------------
     $maxArray = array(0,0,0,0,0,0,0,0,0);
     $sum = array();
     foreach($students as $student) {
       $maxArray[0] = max($maxArray[0], $student['MC']);
-      $maxArray[1] = max($maxArray[1], $student['TC']);   
-      $maxArray[2] = max($maxArray[2], $student['SPE']);   
-      $maxArray[3] = max($maxArray[3], $student['HW']);   
-      $maxArray[4] = max($maxArray[4], $student['BS']);   
-      $maxArray[5] = max($maxArray[5], $student['KS']);   
-      $maxArray[6] = max($maxArray[6], $student['AC']);   
-      $maxArray[7] = max($maxArray[7], $student['DIL']);   
+      $maxArray[1] = max($maxArray[1], $student['TC']);
+      $maxArray[2] = max($maxArray[2], $student['SPE']);
+      $maxArray[3] = max($maxArray[3], $student['HW']);
+      $maxArray[4] = max($maxArray[4], $student['BS']);
+      $maxArray[5] = max($maxArray[5], $student['KS']);
+      $maxArray[6] = max($maxArray[6], $student['AC']);
+      $maxArray[7] = max($maxArray[7], $student['DIL']);
       $maxArray[8] = max($maxArray[8], $student['SUM']);
       array_push($sum, $student['SUM']);
     }
-    
+
     // this works on the precondition that there is at least 4 students and 4 different values of sum
     $sum = array_unique($sum);
     $first = $sum[0];
@@ -44,6 +44,7 @@ class StudentController extends Controller {
     $third = $sum[0];
     array_splice($sum, 0, 1);
     $last = min($sum);
+    dd($students);
 
     return view('index')->with('students', json_encode($students))
                         ->with('maxArray', $maxArray)
@@ -53,32 +54,32 @@ class StudentController extends Controller {
   // show detail view
   public function detail($id) {
     $student = $this->getStudent($id);
-    
+
     if ($student == -1) {
       return view('error')->with('message', "The selected student does not exist!");
     } else {
       return view('detail')->with('student', json_encode($student));
     }
   }
-  
+
   // show create view
   public function create() {
     return view('create');
   }
-  
+
   public function createStudent(Request $request) {
     /*
     - The full name, nick name, and Kattis field should not be blank.
-    - They must also have at least 5 characters and at most 30 characters. 
-    - The Flag/Nationality Drop-Down List has to be selected. 
-    - Display appropriate error messages if the data is not 
-      validated properly upon submission (clicking the 'Create' button). 
-    - The screenshot below is a simple way of displaying all error messages 
-      at the top of the form. It is more user friendly to highlight fields 
-      with error(s) and display an error message near its relevant field 
+    - They must also have at least 5 characters and at most 30 characters.
+    - The Flag/Nationality Drop-Down List has to be selected.
+    - Display appropriate error messages if the data is not
+      validated properly upon submission (clicking the 'Create' button).
+    - The screenshot below is a simple way of displaying all error messages
+      at the top of the form. It is more user friendly to highlight fields
+      with error(s) and display an error message near its relevant field
       and you are encouraged to do so.
     */
-    
+
     //--------- Extra Challenge C: Use Regex/Better Validation -------------------------
     // validation rules and messages, put here first
     $rules = array(
@@ -102,15 +103,15 @@ class StudentController extends Controller {
       'propic.max' => 'Profile picture should be smaller than 100 KB.',
     );
     //---------------- END Extra Challenge C --------------------------------------------------------
-    
+
     $validator = Validator::make($request->all(), $rules, $messages);
-    
+
     if ($validator->fails()) {
       return back()
              ->withErrors($validator)
              ->withInput();
     }
-    
+
     $nick = $request->input('nick');
     $name = $request->input('name');
     $kattis = $request->input('kattis');
@@ -120,7 +121,7 @@ class StudentController extends Controller {
     usort($students, function ($a, $b) {
       return $a["ID"] > $b["ID"];
     });
-    
+
     //------ Extra Challenge B: Add Image --------------
     $propic = $request->input('propic');
     // filename set as student{id}.png
@@ -128,7 +129,7 @@ class StudentController extends Controller {
     // save image file to public folder
     $request->file('propic')->move(base_path() . '/public/img/student/', $propicName);
     //------ END Extra Challenge B ---------------------------------------
-    
+
     array_push($students , array(
         "ID" => end($students)['ID'] + 1,
         "FLAG" => $nationality,
@@ -152,36 +153,36 @@ class StudentController extends Controller {
         "DIL" => 0,
         "SUM" => 0
       ));
-    
+
     $this->saveStudentsToDatabase($students);
-    
+
     return redirect()->route('index');
   }
-  
+
   // show edit view
   public function edit($id) {
     $student = $this->getStudent($id);
-    
+
     if ($student == -1) {
       return view('error')->with('message', "The selected student does not exist!");
     } else {
       return view('edit')->with('student', json_encode($student));
     }
   }
-  
+
   public function editStudent(Request $request) {
     /*
     - The full name, nick name, and Kattis field should not be blank.
-    - They must also have at least 5 characters and at most 30 characters. 
-    - The Flag/Nationality Drop-Down List has to be selected. 
-    - Display appropriate error messages if the data is not 
-      validated properly upon submission (clicking the 'Create' button). 
-    - The screenshot below is a simple way of displaying all error messages 
-      at the top of the form. It is more user friendly to highlight fields 
-      with error(s) and display an error message near its relevant field 
+    - They must also have at least 5 characters and at most 30 characters.
+    - The Flag/Nationality Drop-Down List has to be selected.
+    - Display appropriate error messages if the data is not
+      validated properly upon submission (clicking the 'Create' button).
+    - The screenshot below is a simple way of displaying all error messages
+      at the top of the form. It is more user friendly to highlight fields
+      with error(s) and display an error message near its relevant field
       and you are encouraged to do so.
     */
-    
+
     //--------- Extra Challenge C: Use Regex/Better Validation -------------------------
     // validation rules and messages, put here first
     $rules = array(
@@ -213,15 +214,15 @@ class StudentController extends Controller {
       'ac_components.regex' => 'Achievements scores should range from 0 to 3 for week 3 and 4, and 0 or 1 for other weeks, or set as "x".'
     );
     //---------------- END Extra Challenge C --------------------------------------------------------
-    
+
     $validator = Validator::make($request->all(), $rules, $messages);
-    
+
     if ($validator->fails()) {
       return back()
              ->withErrors($validator)
              ->withInput();
     }
-    
+
     $id = $request->input('id');
     $nick = $request->input('nick');
     $name = $request->input('name');
@@ -232,12 +233,12 @@ class StudentController extends Controller {
     $bs_components = explode(',', $request->input('bs_components'));
     $ks_components = explode(',', $request->input('ks_components'));
     $ac_components = explode(',', $request->input('ac_components'));
-    
+
     $spe = array_sum($mc_components) + array_sum($tc_components);
     $dil = array_sum($hw_components) + array_sum($bs_components) + array_sum($ks_components) + array_sum($ac_components);
-    
+
     $students = $this->getStudentsFromDatabase();
-      
+
     foreach ($students as &$student) { //update by reference
       if ($student['ID'] == $id) {
         $student['NAME'] = $name;
@@ -260,12 +261,12 @@ class StudentController extends Controller {
         $student['SUM'] = $spe + $dil;
       }
     }
-    
+
     $this->saveStudentsToDatabase($students);
-    
+
     return redirect()->route('index');
   }
-  
+
   public function deleteStudent($id) {
     $students = $this->getStudentsFromDatabase();
     for ($i = 0; $i < count($students); $i++) {
@@ -274,7 +275,7 @@ class StudentController extends Controller {
       }
     }
     $this->saveStudentsToDatabase($students);
-    
+
     return redirect()->route('index');
   }
 
@@ -292,7 +293,7 @@ class StudentController extends Controller {
     $currentStudent = $this->getStudent($id);
     $topStudent = $this->getTopStudent();
     $data = array("currentStudent" => $currentStudent, "topStudent" => $topStudent);
-    
+
     return response()->json($data);
   }
 
@@ -305,22 +306,22 @@ class StudentController extends Controller {
     }
     return -1; //error
   }
-  
+
   private function getTopStudent() {
     $students = $this->getStudentsFromDatabase();
     return $students[0];
   }
-  
+
   private function saveStudentsToDatabase($students) {
     $serializedData = serialize($students);
     file_put_contents($this->filePath, $serializedData);
   }
-  
+
   private function getStudentsFromDatabase() {
     $recoveredData = file_get_contents($this->filePath);
     return unserialize($recoveredData);
   }
-  
+
   // Faker
   private function generateStudents() {
     $faker = \Faker\Factory::create();
@@ -329,7 +330,7 @@ class StudentController extends Controller {
 
     for ($i = 1; $i <= 50; $i++) {
       $nick = $faker->userName;
-      
+
       $MC_COMPONENTS = $this->generateComponent();
       $TC_COMPONENTS = $this->generateComponent();
       $HW_COMPONENTS = $this->generateComponent();
@@ -371,7 +372,7 @@ class StudentController extends Controller {
         "SUM" => $SUM
       ));
     }
-    
+
     usort($students, function ($a, $b) {
       return $a["ID"] > $b["ID"];
     });

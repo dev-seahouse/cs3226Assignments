@@ -11,6 +11,10 @@ class Component extends Model
         return $this->belongsTo('App\ComponentType');
     }
 
+    public function component_name(){
+        return $this->component_type()->name;
+    }
+
     public function scores(){
       return $this->hasMany('App\Score');
     }
