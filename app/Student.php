@@ -6,10 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
-    public function __construct()
-    {
-        $this->components = $this->components();
-    }
+
+
+
     // get all components belonging to student
     public function components()
     {

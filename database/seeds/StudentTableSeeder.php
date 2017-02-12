@@ -11,7 +11,7 @@ class StudentTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Student::class, 50)->create()->each(function ($s) {
+        factory(App\Student::class, 30)->create()->each(function ($s) {
             // for each component type, create one component for the student
             $componentTypes = App\ComponentType::all();
             $componentTypes->each(function($t) use ($s){

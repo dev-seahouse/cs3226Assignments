@@ -17,6 +17,9 @@ class StudentController extends Controller {
     // $this->generateStudents());
 
     $students = $this->getStudentsFromDatabase();
+    $this->student_collection->sort(function($a, $b){
+      return $a->get_sum() < $b->get_sum();
+    });
 
     usort($students, function ($a, $b) {
       return $a["SUM"] < $b["SUM"];
@@ -392,10 +395,5 @@ class StudentController extends Controller {
 
     return $data;
   }
-
-  private function sort($student_collection){
-
-  }
-
 }
 ?>
