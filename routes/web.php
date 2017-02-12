@@ -17,7 +17,7 @@ Route::get('api/student/{id}', 'StudentController@getStudentData');
 
 // CRUD
 // Create
-Route::get('create', 'StudentController@create');
+Route::get('create', array('as' => 'create', 'uses' => 'StudentController@create'));
 Route::put('createStudent', 'StudentController@createStudent');
 // Edit
 Route::get('student/edit/{id}', array('as' => 'edit', 'uses' => 'StudentController@edit'));

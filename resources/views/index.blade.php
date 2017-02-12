@@ -28,28 +28,49 @@
           <?php $i = 1; ?>
           @foreach(json_decode($students, true) as $student)
             <tr>
-              <td><?php echo $i;?></td>
-              <td class="hidden-xs"><img src="{{ URL::asset('img/'.$student['FLAG'].'.png') }}" class="rank-flag-img"> {{ $student['FLAG'] }}</td>
-              <td class="hidden-xs">
-                <img src=
-                @if ($student['GENDER'] == "M")
-                  "{{ URL::asset('img/male-icon.png') }}"
-                @else
-                  "{{ URL::asset('img/female-icon.png') }}"
-                @endif
-                class="rank-person-img">
+              <td class="<?php echo printPosClass($student['SUM'], $first, $second, $third, $last);?>"><?php echo $i;?></td>
+              <td class="hidden-xs <?php echo printPosClass($student['SUM'], $first, $second, $third, $last);?>"><img src="{{ URL::asset('img/'.$student['FLAG'].'.png') }}" class="rank-flag-img"> {{ $student['FLAG'] }}</td>
+              <td class="hidden-xs <?php echo printPosClass($student['SUM'], $first, $second, $third, $last);?>">
+                <img src="{{ URL::asset('img/student/'.$student['PROPIC']) }}" class="rank-person-img">
                 <img src="img/kattis.png" class="rank-kattis-img">
                 <a href="{{ route('student', ['id' => $student['ID']]) }}">{{ $student['NAME'] }}</a></td>
-              <td class="visible-xs"><a href="{{ route('student', ['id' => $student['ID']]) }}">{{ $student['NICK'] }}</a></td>
-              <td class="hidden-xs hidden-sm">{{ $student['MC'] }}</td>
-              <td class="hidden-xs hidden-sm">{{ $student['TC'] }}</td>
-              <td>{{ $student['SPE'] }}</td>
-              <td class="hidden-xs hidden-sm">{{ $student['HW'] }}</td>
-              <td class="hidden-xs hidden-sm">{{ $student['BS'] }}</td>
-              <td class="hidden-xs hidden-sm">{{ $student['KS'] }}</td>
-              <td class="hidden-xs hidden-sm">{{ $student['AC'] }}</td>
-              <td>{{ $student['DIL'] }}</td>
-              <td class='js-rankTotl'>{{ $student['SUM'] }}</td>
+              <td class="visible-xs <?php echo printPosClass($student['SUM'], $first, $second, $third, $last);?>"><a href="{{ route('student', ['id' => $student['ID']]) }}">{{ $student['NICK'] }}</a></td>
+              <td class="hidden-xs hidden-sm<?php 
+                         echo printPosClass($student['SUM'], $first, $second, $third, $last);
+                         echo printHLClass($maxArray[0], $student['MC']);
+                         ?>">{{ $student['MC'] }}</td>
+              <td class="hidden-xs hidden-sm<?php 
+                         echo printPosClass($student['SUM'], $first, $second, $third, $last);
+                         echo printHLClass($maxArray[1], $student['TC']);
+                         ?>">{{ $student['TC'] }}</td>
+              <td class="<?php 
+                         echo printPosClass($student['SUM'], $first, $second, $third, $last);
+                         echo printHLClass($maxArray[2], $student['SPE']);
+                         ?>">{{ $student['SPE'] }}</td>
+              <td class="hidden-xs hidden-sm<?php 
+                         echo printPosClass($student['SUM'], $first, $second, $third, $last);
+                         echo printHLClass($maxArray[3], $student['HW']);
+                         ?>">{{ $student['HW'] }}</td>
+              <td class="hidden-xs hidden-sm<?php 
+                         echo printPosClass($student['SUM'], $first, $second, $third, $last);
+                         echo printHLClass($maxArray[4], $student['BS']);
+                         ?>">{{ $student['BS'] }}</td>
+              <td class="hidden-xs hidden-sm<?php 
+                         echo printPosClass($student['SUM'], $first, $second, $third, $last);
+                         echo printHLClass($maxArray[5], $student['KS']);
+                         ?>">{{ $student['KS'] }}</td>
+              <td class="hidden-xs hidden-sm<?php 
+                         echo printPosClass($student['SUM'], $first, $second, $third, $last);
+                         echo printHLClass($maxArray[6], $student['AC']);
+                         ?>">{{ $student['AC'] }}</td>
+              <td class="<?php 
+                         echo printPosClass($student['SUM'], $first, $second, $third, $last);
+                         echo printHLClass($maxArray[7], $student['DIL']);
+                         ?>">{{ $student['DIL'] }}</td>
+              <td class="js-rankTotl<?php 
+                         echo printPosClass($student['SUM'], $first, $second, $third, $last);
+                         echo printHLClass($maxArray[8], $student['SUM']);
+                         ?>">{{ $student['SUM'] }}</td>
             </tr>
             <?php $i++; ?>
           @endforeach
@@ -58,5 +79,28 @@
     </div>
   </div>
 </div>
+
+<?php
+  function printHLClass($max, $value) {
+    if ($max == $value) {
+       return ' highlighted';
+    }
+    return '';
+  }
+
+  function printPosClass($sum, $first, $second, $third, $last) {
+    if ($sum == $first) {
+      return ' gold';
+    } else if ($sum == $second) {
+      return ' silver';
+    } else if ($sum == $third) {
+      return ' bronze';
+    } else if ($sum == $last) {
+      return ' last';
+    }
+    
+    return '';
+  }
+?>
 
 @stop
