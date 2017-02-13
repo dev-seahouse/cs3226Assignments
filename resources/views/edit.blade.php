@@ -45,7 +45,7 @@ an error message near its relevant field and you are encouraged to do so. -->
     {!! Form::text('ac_components', implode(',', json_decode($student)->AC_COMPONENTS), ['class' => 'form-control']) !!}
 
     {!! Form::label('sum', 'Sum of scores:', ['class' => 'control-label']) !!}
-    {!! Form::text('sum', json_decode($student)->SUM, ['class' => 'form-control']) !!}
+    {!! Form::text('sum', json_decode($student)->SUM, ['class' => 'form-control', 'disabled' => 'disabled']) !!}
   </div>
   <div class="form-group">
     {!! Form::submit('Update', ['class' => 'form-control btn btn-primary']) !!}
