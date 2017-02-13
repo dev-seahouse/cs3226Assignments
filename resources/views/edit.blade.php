@@ -22,30 +22,30 @@ an error message near its relevant field and you are encouraged to do so. -->
 
     {!! Form::label('mc_components', 'Mini contest scores:', ['class' => 'control-label']) !!}
     @include('invalidError', array('field'=>'mc_components'))
-    {!! Form::text('mc_components', implode(',', json_decode($student)->MC_COMPONENTS), ['class' => 'form-control']) !!}
+    {!! Form::text('mc_components', implode(',', json_decode($student)->MC_COMPONENTS), ['class' => 'form-control autosum']) !!}
 
     {!! Form::label('tc_components', 'Team contest scores:', ['class' => 'control-label']) !!}
     @include('invalidError', array('field'=>'tc_components'))
-    {!! Form::text('tc_components', implode(',', json_decode($student)->TC_COMPONENTS), ['class' => 'form-control']) !!}
+    {!! Form::text('tc_components', implode(',', json_decode($student)->TC_COMPONENTS), ['class' => 'form-control autosum']) !!}
 
     {!! Form::label('hw_components', 'Homework scores:', ['class' => 'control-label']) !!}
     @include('invalidError', array('field'=>'hw_components'))
-    {!! Form::text('hw_components', implode(',', json_decode($student)->HW_COMPONENTS), ['class' => 'form-control']) !!}
+    {!! Form::text('hw_components', implode(',', json_decode($student)->HW_COMPONENTS), ['class' => 'form-control autosum']) !!}
 
     {!! Form::label('bs_components', 'Problem B scores:', ['class' => 'control-label']) !!}
     @include('invalidError', array('field'=>'ba_components'))
-    {!! Form::text('bs_components', implode(',', json_decode($student)->BS_COMPONENTS), ['class' => 'form-control']) !!}
+    {!! Form::text('bs_components', implode(',', json_decode($student)->BS_COMPONENTS), ['class' => 'form-control autosum']) !!}
 
     {!! Form::label('ks_components', 'Kattis set scores:', ['class' => 'control-label']) !!}
     @include('invalidError', array('field'=>'ks_components'))
-    {!! Form::text('ks_components', implode(',', json_decode($student)->KS_COMPONENTS), ['class' => 'form-control']) !!}
+    {!! Form::text('ks_components', implode(',', json_decode($student)->KS_COMPONENTS), ['class' => 'form-control autosum']) !!}
 
     {!! Form::label('ac_components', 'Achievement scores:', ['class' => 'control-label']) !!}
     @include('invalidError', array('field'=>'ac_components'))
-    {!! Form::text('ac_components', implode(',', json_decode($student)->AC_COMPONENTS), ['class' => 'form-control']) !!}
+    {!! Form::text('ac_components', implode(',', json_decode($student)->AC_COMPONENTS), ['class' => 'form-control autosum']) !!}
 
     {!! Form::label('sum', 'Sum of scores:', ['class' => 'control-label']) !!}
-    {!! Form::text('sum', json_decode($student)->SUM, ['class' => 'form-control', 'disabled' => 'disabled']) !!}
+    {!! Form::text('sum', json_decode($student)->SUM, ['id' => 'sum', 'class' => 'form-control', 'disabled' => 'disabled']) !!}
   </div>
   <div class="form-group">
     {!! Form::submit('Update', ['class' => 'form-control btn btn-primary']) !!}
