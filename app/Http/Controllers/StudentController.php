@@ -2,8 +2,6 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Student;
-use App\Comment;
 
 class StudentController extends Controller {
   
@@ -12,9 +10,14 @@ class StudentController extends Controller {
   } 
   
   public function testget() {
-    $students = Student::with('comment')->get();
+    // For each student, retrieve comments AND records
+    // return \App\Student::with('comment')->with('records')->get();
     
-    return $students;
+    // For each student, retrieve all achievements with description
+    // return \App\Record::with(['student','achievement'])->get();
+    
+    // For each achievement, get the records. Able to list which student has the highest points
+    // return \App\Achievement::with('records')->get();
   }
   
   // show index view
