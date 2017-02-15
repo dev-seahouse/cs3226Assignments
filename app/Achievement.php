@@ -4,12 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Student extends Model
+class Achievement extends Model
 {
-    public function comment() {
-      return $this->hasOne('App\Comment');
-    }
-    
     public function records() {
       return $this->hasMany('App\Record');
     }
