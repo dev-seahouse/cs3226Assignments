@@ -2,12 +2,20 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Student;
+use App\Comment;
 
 class StudentController extends Controller {
   
   function __construct() { 
     $this->filePath = '../database/students.txt';
   } 
+  
+  public function testget() {
+    $students = Student::with('comment')->get();
+    
+    return $students;
+  }
   
   // show index view
   public function index() {
@@ -45,7 +53,8 @@ class StudentController extends Controller {
     array_splice($sum, 0, 1);
     $last = min($sum);
 
-    return view('index')->with('students', json_encode($students))
+    return view('index')->with('studentsOld', json_encode($students))
+                        ->with('students', Student::with('comment')->get())
                         ->with('maxArray', $maxArray)
                         ->with('first', $first)->with('second', $second)->with('third', $third)->with('last',$last);
   }

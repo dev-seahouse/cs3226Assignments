@@ -26,3 +26,6 @@ Route::get('student/edit/{id}', array('as' => 'edit', 'uses' => 'StudentControll
 Route::post('editStudent', 'StudentController@editStudent');
 // Delete
 Route::delete('delete/{id}', array('as' => 'delete', 'uses' => 'StudentController@deleteStudent'));
+
+// Test
+Route::get('test', array('as' => 'test', 'uses' => 'StudentController@testget'));

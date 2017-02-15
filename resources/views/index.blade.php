@@ -1,7 +1,12 @@
 @extends('template') <!-- use template from previous slide -->
 @section('main') <!-- define a section called main -->
 <div class="container-fluid">
-
+  <?php 
+    //$data = json_decode($students);
+    //echo var_dump($data[0]);
+    //echo '<br>';
+    //echo var_dump($data[0]->comment->comment);
+  ?>
   <h1 class="text-center no-margin">Rankings</h1>
 
   <div class="row">
@@ -26,7 +31,7 @@
         </thead>
         <tbody>
           <?php $i = 1; ?>
-          @foreach(json_decode($students, true) as $student)
+          @foreach(json_decode($studentsOld, true) as $student)
             <tr>
               <td class="<?php echo printPosClass($student['SUM'], $first, $second, $third, $last);?>"><?php echo $i;?></td>
               <td class="hidden-xs <?php echo printPosClass($student['SUM'], $first, $second, $third, $last);?>"><img src="{{ URL::asset('img/'.$student['FLAG'].'.png') }}" class="rank-flag-img"> {{ $student['FLAG'] }}</td>
