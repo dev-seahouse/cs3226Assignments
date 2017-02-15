@@ -2,11 +2,21 @@
 @section('main') <!-- define a section called main -->
 <div class="container-fluid">
   <?php 
-    //$data = json_decode($students);
-    //echo var_dump($data[0]);
-    //echo '<br>';
-    //echo var_dump($data[0]->comment->comment);
+    $data = json_decode($students);
+    //echo var_dump($data[0]->scores);
+    
+    //try to retrieve summed data and display using blade format.
+    //if too hard then do the sum in php and echo the result into cells.
+    
+    //for profile_pic use /img/student/{nick}.png
+    //for flags use /img/flags/{nationality}.png
+    
+    //use /test route to test your query results
   ?>
+  @foreach(json_decode($students, true) as $student)
+  {{ $student['name'] }}<br>
+  @endforeach
+  
   <h1 class="text-center no-margin">Rankings</h1>
 
   <div class="row">

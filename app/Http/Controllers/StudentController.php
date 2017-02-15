@@ -23,23 +23,25 @@ class StudentController extends Controller {
     // return \App\Record::with(['student','achievement'])->get();
     
     // For each student, retrieve all scores
-    // return \App\Student::with('scores')->get();
+    /*return \App\Score::with('component')
+              ->join('components', 'components.id', '=', 'scores.component_id')
+              ->get();*/
+              
+    return \App\Student::with('scores')->get();
   }
   
   // show index view
   public function index() {
-    // $this->generateStudents());
+    $studentsOld = $this->getStudentsFromDatabase();
     
-    $students = $this->getStudentsFromDatabase();
-    
-    usort($students, function ($a, $b) {
+    usort($studentsOld, function ($a, $b) {
       return $a["SUM"] < $b["SUM"];
     });
     
     //----------- Recode Lab 2 JS to PHP -----------------
     $maxArray = array(0,0,0,0,0,0,0,0,0);
     $sum = array();
-    foreach($students as $student) {
+    foreach($studentsOld as $student) {
       $maxArray[0] = max($maxArray[0], $student['MC']);
       $maxArray[1] = max($maxArray[1], $student['TC']);   
       $maxArray[2] = max($maxArray[2], $student['SPE']);   
@@ -62,8 +64,8 @@ class StudentController extends Controller {
     array_splice($sum, 0, 1);
     $last = min($sum);
 
-    return view('index')->with('studentsOld', json_encode($students))
-                        ->with('students', Student::with('comment')->get())
+    return view('index')->with('studentsOld', json_encode($studentsOld))
+                        ->with('students', \App\Student::with('scores')->get())
                         ->with('maxArray', $maxArray)
                         ->with('first', $first)->with('second', $second)->with('third', $third)->with('last',$last);
   }
