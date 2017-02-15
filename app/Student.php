@@ -13,4 +13,8 @@ class Student extends Model
     public function records() {
       return $this->hasMany('App\Record');
     }
+    
+    public function scores() {
+      return $this->hasMany('App\Score');
+    }
 }

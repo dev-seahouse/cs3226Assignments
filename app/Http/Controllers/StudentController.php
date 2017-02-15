@@ -10,14 +10,20 @@ class StudentController extends Controller {
   } 
   
   public function testget() {
-    // For each student, retrieve comments AND records
-    // return \App\Student::with('comment')->with('records')->get();
+    // For each student, retrieve comments AND records AND scores
+    // return \App\Student::with('comment')->with('records')->with('scores')->get();
     
     // For each student, retrieve all achievements with description
     // return \App\Record::with(['student','achievement'])->get();
     
     // For each achievement, get the records. Able to list which student has the highest points
     // return \App\Achievement::with('records')->get();
+    
+    // For each student, retrieve all achievements with description
+    // return \App\Record::with(['student','achievement'])->get();
+    
+    // For each student, retrieve all scores
+    // return \App\Student::with('scores')->get();
   }
   
   // show index view
