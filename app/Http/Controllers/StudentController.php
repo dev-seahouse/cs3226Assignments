@@ -26,7 +26,7 @@ class StudentController extends Controller {
                 $student->getSum() // simply a 1-5 inside student model that calls getSum() method inside each component linked to this student
             </tr>
           @endforeach
-       *  then use javascript table sort to sort according to score sum
+       *  then use javascript table sort to sort according to score sum or use db order by to sort, whichever easier when come to that
        *  $student model also provide methods for us to easily access data from other places. e.g $student->getAchievements()
        *  $student->getComponentScores($componentName || $componentID) allow us to retrieve array of scores for that component
        *  This can be done alternative through component model vis static method Component::getScoresForComponent($component_id || $component_name);

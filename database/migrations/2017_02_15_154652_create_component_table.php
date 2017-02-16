@@ -16,6 +16,8 @@ class CreateComponentTable extends Migration
         Schema::create('components', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->float('component_sum');
+            $table->unsignedInteger('student_id');
             $table->timestamps();
         });
     }

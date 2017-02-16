@@ -22,3 +22,26 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+
+$factory->define(App\Student::class, function (Faker\Generator $faker) {
+    $gender = $faker->randomElement(array("male", "female"));
+    return [
+        'nationality' => $faker->randomElement(array("CHN", "IDN", "SGP", "VNM", "MYS")),
+        'name'        => $faker->name($gender),
+        'gender'      => getGenderCode($gender),
+        'nick'        => $nick = ($faker->userName),
+        'kattis'      => $nick,
+    ];
+});
+
+function getGenderCode($gender)
+{
+    if ($gender != "male" && $gender != "female") {
+        throw new Exception("Unexpected gender");
+    }
+
+    return $gender == "male" ? "M" : "F";
+}
+
+

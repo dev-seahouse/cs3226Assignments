@@ -18,9 +18,6 @@ class Student extends Model
       return $this->hasMany('App\Score');
     }
 
-    public static function getRecordAndScore(){
-
-    }
 
      // For each student, retrieve comments AND records AND scores
     // return \App\Student::with('comment')->with('records')->with('scores')->get();
