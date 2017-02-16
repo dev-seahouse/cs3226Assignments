@@ -1,3 +1,7 @@
+To access http://128.199.205.219/phpmyadmin/
+user:     developer
+password: developerP@ssw0rd1
+<hr>
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
