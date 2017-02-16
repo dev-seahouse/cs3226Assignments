@@ -48,7 +48,7 @@ class StudentController extends Controller {
               ->join('components', 'components.id', '=', 'scores.component_id')
               ->get();*/
 
-    return \App\Student::with('scores')->get();
+    return \App\Student::all();
   }
 
   // show index view
@@ -59,6 +59,7 @@ class StudentController extends Controller {
       return $a["SUM"] < $b["SUM"];
     });
 
+    /*
     //----------- Recode Lab 2 JS to PHP -----------------
     $maxArray = array(0,0,0,0,0,0,0,0,0);
     $sum = array();
@@ -84,13 +85,13 @@ class StudentController extends Controller {
     $third = $sum[0];
     array_splice($sum, 0, 1);
     $last = min($sum);
-
+    */
     return view('index')->with('studentsOld', json_encode($studentsOld))
-                        ->with('students', \App\Student::with('scores')->get())
-                        ->with('maxArray', $maxArray)
-                        ->with('first', $first)->with('second', $second)->with('third', $third)->with('last',$last);
+                        ->with('students', \App\Student::all());
+                        //->with('maxArray', $maxArray)
+                        //->with('first', $first)->with('second', $second)->with('third', $third)->with('last',$last);
   }
-
+  
   // show detail view
   public function detail($id) {
     $student = $this->getStudent($id);

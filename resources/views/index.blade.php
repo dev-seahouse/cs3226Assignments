@@ -2,7 +2,6 @@
 @section('main') <!-- define a section called main -->
 <div class="container-fluid">
   <?php 
-    $data = json_decode($students);
     //echo var_dump($data[0]->scores);
     
     //try to retrieve summed data and display using blade format.
@@ -13,9 +12,6 @@
     
     //use /test route to test your query results
   ?>
-  @foreach(json_decode($students, true) as $student)
-  {{ $student['name'] }}<br>
-  @endforeach
   
   <h1 class="text-center no-margin">Rankings</h1>
 
@@ -41,51 +37,43 @@
         </thead>
         <tbody>
           <?php $i = 1; ?>
-          @foreach(json_decode($studentsOld, true) as $student)
+          @foreach($students as $student)
+            <?php 
+              $compScores = $student->getCompScores();
+              $scores = array(
+                  'MC' => $compScores[0]->total,
+                  'TC' => $compScores[1]->total,
+                  'HW' => $compScores[2]->total,
+                  'BS' => $compScores[3]->total,
+                  'KS' => $compScores[4]->total,
+                  'AC' => $compScores[5]->total
+                );
+              $spe = $scores['MC'] + $scores['TC'];
+              $dil = $scores['HW'] + $scores['BS'] + $scores['KS'] + $scores['AC'];
+              $sum = $spe + $dil;
+            ?>
             <tr>
-              <td class="<?php echo printPosClass($student['SUM'], $first, $second, $third, $last);?>"><?php echo $i;?></td>
-              <td class="hidden-xs <?php echo printPosClass($student['SUM'], $first, $second, $third, $last);?>"><img src="{{ URL::asset('img/'.$student['FLAG'].'.png') }}" class="rank-flag-img"> {{ $student['FLAG'] }}</td>
-              <td class="hidden-xs <?php echo printPosClass($student['SUM'], $first, $second, $third, $last);?>">
-                <img src="{{ URL::asset('img/student/'.$student['PROPIC']) }}" class="rank-person-img">
+              <td class=""><?php echo $i;?></td>
+              <td class="hidden-xs">
+                <img src="{{ URL::asset('img/flags/'.$student['nationality'].'.png') }}" class="rank-flag-img"> {{ $student['nationality'] }}
+              </td>
+              <td class="hidden-xs">
+                <img src="{{ URL::asset('img/student/'.$student['nick'].'.png') }}" class="rank-person-img">
                 <img src="img/kattis.png" class="rank-kattis-img">
-                <a href="{{ route('student', ['id' => $student['ID']]) }}">{{ $student['NAME'] }}</a></td>
-              <td class="visible-xs <?php echo printPosClass($student['SUM'], $first, $second, $third, $last);?>"><a href="{{ route('student', ['id' => $student['ID']]) }}">{{ $student['NICK'] }}</a></td>
-              <td class="hidden-xs hidden-sm<?php 
-                         echo printPosClass($student['SUM'], $first, $second, $third, $last);
-                         echo printHLClass($maxArray[0], $student['MC']);
-                         ?>">{{ $student['MC'] }}</td>
-              <td class="hidden-xs hidden-sm<?php 
-                         echo printPosClass($student['SUM'], $first, $second, $third, $last);
-                         echo printHLClass($maxArray[1], $student['TC']);
-                         ?>">{{ $student['TC'] }}</td>
-              <td class="<?php 
-                         echo printPosClass($student['SUM'], $first, $second, $third, $last);
-                         echo printHLClass($maxArray[2], $student['SPE']);
-                         ?>">{{ $student['SPE'] }}</td>
-              <td class="hidden-xs hidden-sm<?php 
-                         echo printPosClass($student['SUM'], $first, $second, $third, $last);
-                         echo printHLClass($maxArray[3], $student['HW']);
-                         ?>">{{ $student['HW'] }}</td>
-              <td class="hidden-xs hidden-sm<?php 
-                         echo printPosClass($student['SUM'], $first, $second, $third, $last);
-                         echo printHLClass($maxArray[4], $student['BS']);
-                         ?>">{{ $student['BS'] }}</td>
-              <td class="hidden-xs hidden-sm<?php 
-                         echo printPosClass($student['SUM'], $first, $second, $third, $last);
-                         echo printHLClass($maxArray[5], $student['KS']);
-                         ?>">{{ $student['KS'] }}</td>
-              <td class="hidden-xs hidden-sm<?php 
-                         echo printPosClass($student['SUM'], $first, $second, $third, $last);
-                         echo printHLClass($maxArray[6], $student['AC']);
-                         ?>">{{ $student['AC'] }}</td>
-              <td class="<?php 
-                         echo printPosClass($student['SUM'], $first, $second, $third, $last);
-                         echo printHLClass($maxArray[7], $student['DIL']);
-                         ?>">{{ $student['DIL'] }}</td>
-              <td class="js-rankTotl<?php 
-                         echo printPosClass($student['SUM'], $first, $second, $third, $last);
-                         echo printHLClass($maxArray[8], $student['SUM']);
-                         ?>">{{ $student['SUM'] }}</td>
+                <a href="{{ route('student', ['id' => $student['id']]) }}">{{ $student['name'] }}</a>
+              </td>
+              <td class="visible-xs">
+                <a href="{{ route('student', ['id' => $student['id']]) }}">{{ $student['nick'] }}</a>
+              </td>
+              <td class="hidden-xs hidden-sm"><?php echo $scores['MC']; ?></td>
+              <td class="hidden-xs hidden-sm"><?php echo $scores['TC']; ?></td>
+              <td class=""><?php echo $spe; ?></td>
+              <td class="hidden-xs hidden-sm"><?php echo $scores['HW']; ?></td>
+              <td class="hidden-xs hidden-sm"><?php echo $scores['BS']; ?></td>
+              <td class="hidden-xs hidden-sm"><?php echo $scores['KS']; ?></td>
+              <td class="hidden-xs hidden-sm"><?php echo $scores['AC']; ?></td>
+              <td class=""><?php echo $dil; ?></td>
+              <td class="js-rankTotl"><?php echo $sum; ?></td>
             </tr>
             <?php $i++; ?>
           @endforeach
@@ -94,28 +82,5 @@
     </div>
   </div>
 </div>
-
-<?php
-  function printHLClass($max, $value) {
-    if ($max == $value) {
-       return ' highlighted';
-    }
-    return '';
-  }
-
-  function printPosClass($sum, $first, $second, $third, $last) {
-    if ($sum == $first) {
-      return ' gold';
-    } else if ($sum == $second) {
-      return ' silver';
-    } else if ($sum == $third) {
-      return ' bronze';
-    } else if ($sum == $last) {
-      return ' last';
-    }
-    
-    return '';
-  }
-?>
 
 @stop

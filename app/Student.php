@@ -21,6 +21,13 @@ class Student extends Model
     public static function getRecordAndScore(){
 
     }
+  
+    public function getCompScores() {
+      return \App\Score::where('student_id', $this->id)
+                  ->selectRaw('SUM(score) as total')
+                  ->groupBy('component_id')
+                  ->get();
+    }
 
      // For each student, retrieve comments AND records AND scores
     // return \App\Student::with('comment')->with('records')->with('scores')->get();
