@@ -43,7 +43,7 @@ return [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '128.199.205.219'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'ranklist'),
+            'database' => env('DB_DATABASE', 'rankteam1'),
             'username' => env('DB_USERNAME', 'developer'),
             'password' => env('DB_PASSWORD', 'developerP@ssw0rd1'),
             'charset' => 'utf8mb4',

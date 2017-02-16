@@ -13,6 +13,8 @@ class CreateRecordTable extends Migration
      */
     public function up()
     {
+        // note that record means student_achievements, represents pivot table
+        // for many to many relationship between student and achievements
         Schema::create('records', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('student_id');

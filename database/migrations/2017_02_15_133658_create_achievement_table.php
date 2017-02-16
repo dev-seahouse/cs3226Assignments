@@ -13,10 +13,11 @@ class CreateAchievementTable extends Migration
      */
     public function up()
     {
+        // an achievement resembles a badge
         Schema::create('achievements', function (Blueprint $table) {
             $table->increments('id');
             $table->text('title');
-            $table->integer('max_points');
+            $table->integer('max_points'); // maximum possible point for the achievement
             $table->text('description');
             $table->timestamps();
         });

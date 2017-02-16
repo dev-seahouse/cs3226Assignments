@@ -13,10 +13,12 @@ class CreateComponentTable extends Migration
      */
     public function up()
     {
+        // each student have 6 components
+        // note that AC component is in fact populated from records table.
         Schema::create('components', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->float('component_sum');
+            $table->float('component_sum')->nullable();
             $table->unsignedInteger('student_id');
             $table->timestamps();
         });

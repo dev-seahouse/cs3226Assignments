@@ -10,6 +10,10 @@ class Student extends Model
       return $this->hasOne('App\Comment');
     }
 
+    public function components(){
+        return $this->hasMany('App\Component');
+    }
+
     public function records() {
       return $this->hasMany('App\Record');
     }
