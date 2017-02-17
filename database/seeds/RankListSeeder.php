@@ -15,6 +15,7 @@ class RankListSeeder extends Seeder
         $this->call(AchievementSeeder::class);
         $component_types = array('MC', 'TC', 'HW', 'BS', 'KS', 'AC');
         // precondition: create achievements
+
         factory(App\Student::class, 50)->create()->each(function (App\Student $s) use ($component_types) {
             //1.create 6 components with student_id = $s->id
             foreach ($component_types as $component_type) {
@@ -35,16 +36,41 @@ class RankListSeeder extends Seeder
             //2.create 1 comment for student
             $comment_model = factory(App\Comment::class)->make();
             $s->comment()->save($comment_model); // save the comment belonging to the student
+
             //3.create random number of records between 0 - 5 with $student->id and $achievement->id
             // meaning each student will have 0 - 5 achievements
             // bug:not unique
            /* $records = factory(App\Record::class, mt_rand(0,5))->make();
             $s->records()->saveMany($records);*/
         });
+        $this->update_student_names();
         $this->call(RecordSeeder::class);
+        // update student names for image display
     }
+
     // only generate 2 scores if a score belong to MC , else generate 9 scores
     private function get_number_of_scores_to_generate_for_component($component_type){
         return $component_type == "MC" ? 2 : 9;
+    }
+
+    private function update_student_names(){
+        $names = array(
+          'Hitler', 'Kangaroo', 'Henry', 'Tom', 'Zeus', 'Lina', 'Pichu', 'Cloud', 'Tifa', 'Sephiroth',
+          'Lightning', 'Panda', 'Husky', 'Jerry', 'Dora', 'ET', 'Snoopy', 'Munchkin', 'Gangster', 'Bear',
+          'Elf', 'Fox', 'Goldfish', 'Koi', 'Squidward', 'Spongebob', 'Patrick', 'Alucard', 'Kazuya', 'Heihachi',
+          'Jack', 'Drake', 'Zoro', 'Nami', 'Ace', 'Robin', 'Shanks', 'Buggy', 'Chopper', 'Brook',
+          'Franky', 'Sanji', 'Naruto', 'Sasuke', 'Itachi', 'Boruto', 'Ninja', 'Leonardo', 'Yodas', 'Smarty'
+        );
+
+        $counter = 0;
+        $students = App\Student::all();
+        $students->each(function($student) use (&$counter, $names){
+            $name = $names[$counter++];
+            $student->name = $name;
+            $student->profile_pic = $name;
+            $student->nick = $name;
+            $student->kattis= $name;
+            $student->save();
+        });
     }
 }
