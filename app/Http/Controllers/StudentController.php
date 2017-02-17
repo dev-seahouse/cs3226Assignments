@@ -15,7 +15,7 @@ class StudentController extends Controller {
        * @foreach ($students as $student)
             <tr>
                 <td>$student->name</td>
-                <td>$student->propic</td>
+                <td>$student->profile_pic</td>
                 ......
                 @foreach ($student->components() as $component)
                     <td>$component->getComponentSum()<td> // each component model have getComponentSumMethod
@@ -48,7 +48,15 @@ class StudentController extends Controller {
               ->join('components', 'components.id', '=', 'scores.component_id')
               ->get();*/
 
-    return \App\Student::all();
+    //return \App\Student::all();
+    
+    $students = \App\Student::all();
+    
+    foreach ($students as $student) {
+      $student->total = $student->getCompScores();
+    }
+    
+    return $students;
   }
 
   // show index view
@@ -86,8 +94,21 @@ class StudentController extends Controller {
     array_splice($sum, 0, 1);
     $last = min($sum);
     */
+    
+    $students = \App\Student::all();
+    foreach ($students as $student) {
+      $student->total = $student->getCompScores();
+    }
+    
+    //Sort by sum
+    $sortArr = json_decode($students);
+    usort($sortArr, function ($a, $b) {
+      return $a->total->sum < $b->total->sum;
+    });
+    $students = json_encode($sortArr);
+    
     return view('index')->with('studentsOld', json_encode($studentsOld))
-                        ->with('students', \App\Student::all());
+                        ->with('students', $students);
                         //->with('maxArray', $maxArray)
                         //->with('first', $first)->with('second', $second)->with('third', $third)->with('last',$last);
   }

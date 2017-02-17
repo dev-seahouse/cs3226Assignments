@@ -37,8 +37,9 @@
         </thead>
         <tbody>
           <?php $i = 1; ?>
-          @foreach($students as $student)
+          @foreach(json_decode($students, true) as $student)
             <?php 
+              /* moved calculation into student api
               $compScores = $student->getCompScores();
               $scores = array(
                   'MC' => $compScores[0]->total,
@@ -50,7 +51,7 @@
                 );
               $spe = $scores['MC'] + $scores['TC'];
               $dil = $scores['HW'] + $scores['BS'] + $scores['KS'] + $scores['AC'];
-              $sum = $spe + $dil;
+              $sum = $spe + $dil;*/
             ?>
             <tr>
               <td class=""><?php echo $i;?></td>
@@ -65,15 +66,15 @@
               <td class="visible-xs">
                 <a href="{{ route('student', ['id' => $student['id']]) }}">{{ $student['nick'] }}</a>
               </td>
-              <td class="hidden-xs hidden-sm"><?php echo $scores['MC']; ?></td>
-              <td class="hidden-xs hidden-sm"><?php echo $scores['TC']; ?></td>
-              <td class=""><?php echo $spe; ?></td>
-              <td class="hidden-xs hidden-sm"><?php echo $scores['HW']; ?></td>
-              <td class="hidden-xs hidden-sm"><?php echo $scores['BS']; ?></td>
-              <td class="hidden-xs hidden-sm"><?php echo $scores['KS']; ?></td>
-              <td class="hidden-xs hidden-sm"><?php echo $scores['AC']; ?></td>
-              <td class=""><?php echo $dil; ?></td>
-              <td class="js-rankTotl"><?php echo $sum; ?></td>
+              <td class="hidden-xs hidden-sm">{{ $student['total']['mc'] }}</td>
+              <td class="hidden-xs hidden-sm">{{ $student['total']['tc'] }}</td>
+              <td class="">{{ $student['total']['spe'] }}</td>
+              <td class="hidden-xs hidden-sm">{{ $student['total']['hw'] }}</td>
+              <td class="hidden-xs hidden-sm">{{ $student['total']['bs'] }}</td>
+              <td class="hidden-xs hidden-sm">{{ $student['total']['ks'] }}</td>
+              <td class="hidden-xs hidden-sm">{{ $student['total']['ac'] }}</td>
+              <td class="">{{ $student['total']['dil'] }}</td>
+              <td class="js-rankTotl">{{ $student['total']['sum'] }}</td>
             </tr>
             <?php $i++; ?>
           @endforeach
