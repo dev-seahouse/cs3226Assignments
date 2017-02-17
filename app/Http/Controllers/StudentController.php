@@ -111,7 +111,7 @@ class StudentController extends Controller {
     if ($student == -1) {
       return view('error')->with('message', "The selected student does not exist!");
     } else {
-      return view('detail')->with('student', \App\Student::with('scores')->where('id','1')->first());
+      return view('detail')->with('student', \App\Student::with('scores')->where('id', $id)->first());
     }
   }
 
