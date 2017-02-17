@@ -16,77 +16,102 @@ class ScoreSeeder extends Seeder
         for ($i = 1; $i <= 50; $i++) {
           $components = $this->generateComponents();
           
+          $mc = 0;
           for ($j = 0; $j < count($components['MC']); $j++) {
             DB::table('scores')->insert(
               array( 
                 'student_id' => $i,
-                'component_id' => 1, 
-                'score_index' => $j, 
+                'component' => 'MC', 
+                'week' => $j + 1, 
                 'score' => $components['MC'][$j], 
                 'created_at' => date('Y-m-d H:m:s'),
                 'updated_at' => date('Y-m-d H:m:s')
               ));
+            if ($components['MC'][$j] != null) $mc += $components['MC'][$j];
           }
           
+          $tc = 0;
           for ($j = 0; $j < count($components['TC']); $j++) {
             DB::table('scores')->insert(
               array( 
                 'student_id' => $i,
-                'component_id' => 2, 
-                'score_index' => $j, 
+                'component' => 'TC', 
+                'week' => $j + 1, 
                 'score' => $components['TC'][$j], 
                 'created_at' => date('Y-m-d H:m:s'),
                 'updated_at' => date('Y-m-d H:m:s')
               ));
+            if ($components['TC'][$j] != null) $tc += $components['TC'][$j];
           }
           
+          $hw = 0;
           for ($j = 0; $j < count($components['HW']); $j++) {
             DB::table('scores')->insert(
               array( 
                 'student_id' => $i,
-                'component_id' => 3, 
-                'score_index' => $j, 
+                'component' => 'HW', 
+                'week' => $j + 1, 
                 'score' => $components['HW'][$j], 
                 'created_at' => date('Y-m-d H:m:s'),
                 'updated_at' => date('Y-m-d H:m:s')
               ));
+            if ($components['HW'][$j] != null) $hw += $components['HW'][$j];
           }
           
+          $bs = 0;
           for ($j = 0; $j < count($components['BS']); $j++) {
             DB::table('scores')->insert(
               array( 
                 'student_id' => $i,
-                'component_id' => 4, 
-                'score_index' => $j, 
+                'component' => 'BS', 
+                'week' => $j + 1, 
                 'score' => $components['BS'][$j], 
                 'created_at' => date('Y-m-d H:m:s'),
                 'updated_at' => date('Y-m-d H:m:s')
               ));
+            if ($components['BS'][$j] != null) $bs += $components['BS'][$j];
           }
           
+          $ks = 0;
           for ($j = 0; $j < count($components['KS']); $j++) {
             DB::table('scores')->insert(
               array( 
                 'student_id' => $i,
-                'component_id' => 5, 
-                'score_index' => $j, 
+                'component' => 'BS', 
+                'week' => $j + 1, 
                 'score' => $components['KS'][$j], 
                 'created_at' => date('Y-m-d H:m:s'),
                 'updated_at' => date('Y-m-d H:m:s')
               ));
+            if ($components['KS'][$j] != null) $ks += $components['KS'][$j];
           }
           
+          $ac = 0;
           for ($j = 0; $j < count($components['AC']); $j++) {
             DB::table('scores')->insert(
               array( 
                 'student_id' => $i,
-                'component_id' => 6, 
-                'score_index' => $j, 
+                'component' => 'AC', 
+                'week' => $j + 1, 
                 'score' => $components['AC'][$j], 
                 'created_at' => date('Y-m-d H:m:s'),
                 'updated_at' => date('Y-m-d H:m:s')
               ));
+            if ($components['AC'][$j] != null) $ac += $components['AC'][$j];
           }
+          
+          DB::table('components')->insert(
+            array( 
+              'student_id' => $i,
+              'mc' => $mc,
+              'tc' => $tc,
+              'hw' => $hw,
+              'bs' => $bs,
+              'ks' => $ks,
+              'ac' => $ac,
+              'created_at' => date('Y-m-d H:m:s'),
+              'updated_at' => date('Y-m-d H:m:s')
+            ));
         }
     }
     

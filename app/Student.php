@@ -14,12 +14,12 @@ class Student extends Model
       return $this->hasMany('App\Record');
     }
 
+    public function components() {
+      return $this->hasMany('App\Component');
+    }
+  
     public function scores() {
       return $this->hasMany('App\Score');
-    }
-
-    public static function getRecordAndScore(){
-
     }
   
     /*

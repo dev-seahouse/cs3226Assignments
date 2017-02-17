@@ -50,13 +50,15 @@ class StudentController extends Controller {
 
     //return \App\Student::all();
     
-    $students = \App\Student::all();
-    
-    foreach ($students as $student) {
-      $student->total = $student->getCompScores();
-    }
-    
-    return $students;
+//    $students = \App\Student::all();
+//    
+//    foreach ($students as $student) {
+//      $student->total = $student->getCompScores();
+//    }
+//    
+//    return $students;
+    return  \App\Student::with('scores')->where('id','1')->first();
+
   }
 
   // show index view
@@ -95,20 +97,9 @@ class StudentController extends Controller {
     $last = min($sum);
     */
     
-    $students = \App\Student::all();
-    foreach ($students as $student) {
-      $student->total = $student->getCompScores();
-    }
-    
-    //Sort by sum
-    $sortArr = json_decode($students);
-    usort($sortArr, function ($a, $b) {
-      return $a->total->sum < $b->total->sum;
-    });
-    $students = json_encode($sortArr);
     
     return view('index')->with('studentsOld', json_encode($studentsOld))
-                        ->with('students', $students);
+                        ->with('students', \App\Student::with('components')->get());
                         //->with('maxArray', $maxArray)
                         //->with('first', $first)->with('second', $second)->with('third', $third)->with('last',$last);
   }
@@ -120,7 +111,7 @@ class StudentController extends Controller {
     if ($student == -1) {
       return view('error')->with('message', "The selected student does not exist!");
     } else {
-      return view('detail')->with('student', json_encode($student));
+      return view('detail')->with('student', \App\Student::with('scores')->where('id','1')->first());
     }
   }
 

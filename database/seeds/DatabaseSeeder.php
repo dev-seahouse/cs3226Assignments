@@ -16,6 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AchievementSeeder::class);
         $this->call(RecordSeeder::class);
         $this->call(ScoreSeeder::class);
-        $this->call(ComponentSeeder::class);
+        //$this->call(ComponentSeeder::class);
     }
 }

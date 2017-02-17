@@ -31,6 +31,7 @@ class StudentSeeder extends Seeder
         DB::table('students')->insert(
           array( 
             'nationality' => $faker->randomElement($array = $countries),
+            'gender' => $faker->randomElement($array = array('Male', 'Female')),
             'profile_pic' => $uniqName, 
             'name' => $uniqName, 
             'nick' => $uniqName,

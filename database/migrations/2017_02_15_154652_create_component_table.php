@@ -15,7 +15,13 @@ class CreateComponentTable extends Migration
     {
         Schema::create('components', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->integer('student_id');
+            $table->string('mc');
+            $table->string('tc');
+            $table->string('hw');
+            $table->string('bs');
+            $table->string('ks');
+            $table->string('ac');
             $table->timestamps();
         });
     }

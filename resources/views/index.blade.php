@@ -37,7 +37,7 @@
         </thead>
         <tbody>
           <?php $i = 1; ?>
-          @foreach(json_decode($students, true) as $student)
+          @foreach($students as $student)
             <?php 
               /* moved calculation into student api
               $compScores = $student->getCompScores();
@@ -66,15 +66,15 @@
               <td class="visible-xs">
                 <a href="{{ route('student', ['id' => $student['id']]) }}">{{ $student['nick'] }}</a>
               </td>
-              <td class="hidden-xs hidden-sm">{{ $student['total']['mc'] }}</td>
-              <td class="hidden-xs hidden-sm">{{ $student['total']['tc'] }}</td>
-              <td class="">{{ $student['total']['spe'] }}</td>
-              <td class="hidden-xs hidden-sm">{{ $student['total']['hw'] }}</td>
-              <td class="hidden-xs hidden-sm">{{ $student['total']['bs'] }}</td>
-              <td class="hidden-xs hidden-sm">{{ $student['total']['ks'] }}</td>
-              <td class="hidden-xs hidden-sm">{{ $student['total']['ac'] }}</td>
-              <td class="">{{ $student['total']['dil'] }}</td>
-              <td class="js-rankTotl">{{ $student['total']['sum'] }}</td>
+              <td class="hidden-xs hidden-sm">{{ $student['components'][0]->mc }}</td>
+              <td class="hidden-xs hidden-sm">{{ $student['components'][0]->tc }}</td>
+              <td class="">{{ $student['components'][0]->mc + $student['components'][0]->tc }}</td>
+              <td class="hidden-xs hidden-sm">{{ $student['components'][0]->hw }}</td>
+              <td class="hidden-xs hidden-sm">{{ $student['components'][0]->bs }}</td>
+              <td class="hidden-xs hidden-sm">{{ $student['components'][0]->ks }}</td>
+              <td class="hidden-xs hidden-sm">{{ $student['components'][0]->ac }}</td>
+              <td class="">{{ $student['components'][0]->hw + $student['components'][0]->bs + $student['components'][0]->ks + $student['components'][0]->ac }}</td>
+              <td class="js-rankTotl">{{ $student['components'][0]->mc + $student['components'][0]->tc + $student['components'][0]->hw + $student['components'][0]->bs + $student['components'][0]->ks + $student['components'][0]->ac }}</td>
             </tr>
             <?php $i++; ?>
           @endforeach
