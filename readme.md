@@ -83,5 +83,5 @@ You should be able to access http://localhost/phpmyadmin without having to enter
 
 To access http://128.199.205.219/phpmyadmin/<br>
 <b>User:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;developer<br>
-<b>Password:</b>&nbsp;developerP@ssw0rd1<br>
+<b>Password:</b>&nbsp;&nbsp;developerP@ssw0rd1<br>
 
