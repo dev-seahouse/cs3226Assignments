@@ -77,7 +77,7 @@ $cfg['Servers'][$i]['host'] = '128.199.205.219';
 ```
 You should be able to access http://localhost/phpmyadmin without having to enter the credentials
 
-To access http://128.199.205.219/phpmyadmin/
-<b>User:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;developer
-<b>Password:</b>&nbsp;developerP@ssw0rd1
+To access http://128.199.205.219/phpmyadmin/<br>
+<b>User:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;developer<br>
+<b>Password:</b>&nbsp;developerP@ssw0rd1<br>
 
