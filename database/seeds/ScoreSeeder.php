@@ -96,7 +96,7 @@ class ScoreSeeder extends Seeder
       $mc = array();
       for ($i = 0; $i < 9; $i++) {
         array_push($mc, $faker->randomElement(
-          $array = array('0.0','0.5','1.0','1.5','2.0','2.5','3.0','3.5','4.0','x.y')
+          $array = array('0.0','0.5','1.0','1.5','2.0','2.5','3.0','3.5','4.0',null)
         ));
       }
       
@@ -106,45 +106,45 @@ class ScoreSeeder extends Seeder
           $array = array(
             '0.0','0.5','1.0','1.5','2.0','2.5','3.0','3.5','4.0','4.5',
             '5.0','5.5','6.0','6.5','7.0','7.5','8.0','8.5','9.0','9.5',
-            '10','xy.z')
+            '10',null)
         ));
       }
       
       $hw = array();
       for ($i = 0; $i < 9; $i++) {
         array_push($hw, $faker->randomElement(
-          $array = array('0.0','0.5','1.0','1.5','x.y')
+          $array = array('0.0','0.5','1.0','1.5',null)
         ));
       }
       
       $bs = array();
       for ($i = 0; $i < 9; $i++) {
         array_push($bs, $faker->randomElement(
-          $array = array('0','1','x')
+          $array = array('0','1',null)
         ));
       }
       
       $ks = array();
       for ($i = 0; $i < 9; $i++) {
         array_push($ks, $faker->randomElement(
-          $array = array('0','1','x')
+          $array = array('0','1',null)
         ));
       }
       
       $ac = array();
       for ($i = 0; $i < 2; $i++) {
         array_push($ac, $faker->randomElement(
-          $array = array('0','1','x')
+          $array = array('0','1',null)
         ));
       }
       for ($i = 0; $i < 2; $i++) {
         array_push($ac, $faker->randomElement(
-          $array = array('0','1','2','3','x')
+          $array = array('0','1','2','3',null)
         ));
       }
       for ($i = 0; $i < 5; $i++) {
         array_push($ac, $faker->randomElement(
-          $array = array('0','1','x')
+          $array = array('0','1',null)
         ));
       }
       

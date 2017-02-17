@@ -18,8 +18,7 @@ class CreateScoreTable extends Migration
             $table->integer('student_id');
             $table->integer('component_id');
             $table->integer('score_index');
-            $table->string('score');
-            $table->boolean('is_valid');
+            $table->float('score')->nullable();
             $table->timestamps();
         });
     }

@@ -36,18 +36,18 @@ class Student extends Model
       $scores = $this->scores;
       
       foreach ($scores as $scoreRow) {
-        if ($scoreRow->score_index == 0)
-          $mc += $scoreRow->score;
-        if ($scoreRow->score_index == 1)
-          $tc += $scoreRow->score;
-        if ($scoreRow->score_index == 2)
-          $hw += $scoreRow->score;
-        if ($scoreRow->score_index == 3)
-          $bs += $scoreRow->score;
-        if ($scoreRow->score_index == 4)
-          $ks += $scoreRow->score;
-        if ($scoreRow->score_index == 5)
-          $ac += $scoreRow->score;
+        if ($scoreRow->component_id == 1)
+          if ($scoreRow->score != null) $mc += $scoreRow->score;
+        if ($scoreRow->component_id == 2)
+          if ($scoreRow->score != null) $tc += $scoreRow->score;
+        if ($scoreRow->component_id == 3)
+          if ($scoreRow->score != null) $hw += $scoreRow->score;
+        if ($scoreRow->component_id == 4)
+          if ($scoreRow->score != null) $bs += $scoreRow->score;
+        if ($scoreRow->component_id == 5)
+          if ($scoreRow->score != null) $ks += $scoreRow->score;
+        if ($scoreRow->component_id == 6)
+          if ($scoreRow->score != null) $ac += $scoreRow->score;
       }
       
       $scoreArr = array(
