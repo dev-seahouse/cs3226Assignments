@@ -77,7 +77,7 @@ class ScoreSeeder extends Seeder
             DB::table('scores')->insert(
               array( 
                 'student_id' => $i,
-                'component' => 'BS', 
+                'component' => 'KS', 
                 'week' => $j + 1, 
                 'score' => $components['KS'][$j], 
                 'created_at' => date('Y-m-d H:m:s'),
