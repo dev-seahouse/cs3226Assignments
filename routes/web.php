@@ -11,11 +11,13 @@
 |
 */
 
+Auth::routes(); // includes routes for login, register, forget password
+
 Route::get('/', array('as' => 'index', 'uses' => 'StudentController@index'));
 Route::get('api/student/{id}', array('as' => 'student', 'uses' => 'StudentController@getStudentData'));
 Route::get('student/{id}', array('as' => 'student', 'uses' => 'StudentController@detail'));
 Route::get('help', array('as' => 'help', 'uses' => 'StudentController@help'));
-Route::get('login', array('as' => 'login', 'uses' => 'StudentController@login'));
+Route::get('login', array('as' => 'login', 'uses' => 'HomeController@index'));
 
 // CRUD
 // Create
@@ -29,3 +31,6 @@ Route::delete('delete/{id}', array('as' => 'delete', 'uses' => 'StudentControlle
 
 // Test
 Route::get('test', array('as' => 'test', 'uses' => 'StudentController@testget'));
+
+
+
