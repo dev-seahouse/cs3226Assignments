@@ -112,11 +112,13 @@ class StudentController extends Controller {
   // show detail view
   public function detail($id) {
     $student = $this->getStudent($id);
+    $scores_arr = $this->storeScoresIntoArray(\App\Student::with('scores')->where('id', $id)->first());
 
     if ($student == -1) {
       return view('error')->with('message', "The selected student does not exist!");
     } else {
-      return view('detail')->with('student', \App\Student::with('scores')->where('id', $id)->first());         
+      return view('detail')->with('student', \App\Student::where('id', $id)->first())
+                           ->with('scores_arr', $scores_arr);
     }
   }
   
