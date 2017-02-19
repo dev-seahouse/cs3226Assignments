@@ -285,6 +285,18 @@ class StudentController extends Controller {
     return redirect()->route('index');
   }
 
+
+  private function create_scores($component_name, $num_scores_in_component){
+        for ($i = 1; $i <= $num_scores_in_component; $i++) {
+        $score = new \App\Score;
+        $score->component = $component_name;
+        $score->week = $i;
+        $score->score = 0;
+        $score->student()->associate($student);
+        $score->save();
+      }
+  }
+
   // show edit view
   public function edit($id) {
     $student = $this->getStudent($id);
@@ -436,7 +448,7 @@ class StudentController extends Controller {
     return unserialize($recoveredData);
   }
 
-  // Faker
+  // Faker (old code, use new code for seeding)
   private function generateStudents() {
     $faker = \Faker\Factory::create();
 
