@@ -206,7 +206,6 @@ class StudentController extends Controller {
 
     \DB::transaction(function ($request) {
       //Create student
-      //
       global $request;
       $student = new \App\Student;
       $student->nationality = $request->input('nationality');
