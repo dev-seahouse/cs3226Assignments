@@ -204,8 +204,10 @@ class StudentController extends Controller {
     $request->file('profile_pic')->move(base_path() . '/public/img/student/', $profile_picName);
     //------ END Extra Challenge B ---------------------------------------
 
-    \DB::transaction(function ($request) use ($request) {
+    \DB::transaction(function ($request) {
       //Create student
+      //
+      global $request;
       $student = new \App\Student;
       $student->nationality = $request->input('nationality');
       $student->gender = 'Male'; //Change to read gender from input
