@@ -17,13 +17,11 @@
     @include('footer') <!-- Blade command: include other blade file -->
 
     <!--bootstrap must come before datatables in order to collapse navbar (conflicts)-->
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
     </script>-->
 
     <!--the 3 scripts below are dependecies for DataTables-->
     <!--src=https://datatables.net/examples/styling/bootstrap.html-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
   </body>
 </html>
