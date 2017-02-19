@@ -35,7 +35,10 @@ $uri = $_SERVER['REQUEST_URI'];
           echo '<li class="active"><a>Detail Mode</a></li>';
         }
         ?>
+		@if (Auth::guest())
+		 @else
         <li><a href="{{route('create')}}">Create New Student</a></li>
+		@endif
         <li><a href="{{route('help')}}">Help</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
