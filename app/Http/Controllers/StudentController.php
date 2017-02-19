@@ -379,14 +379,16 @@ class StudentController extends Controller {
     }
 
     $this->saveStudentsToDatabase($students);
-
+    
+    //REMOVE ALL OLD CODE THAT USES THE OLD DATABASE!
+    //Reminder: when you edit nick, delete {old->profile_pic} and create {new->profile_pic}
     return redirect()->route('index');
   }
 
   public function deleteStudent($id) {
     $student = \App\Student::where('id', $id)->firstOrFail();
+    \File::delete(base_path() . '/public/img/student/' . $student->profile_pic);
     $student->delete();
-    
     return redirect()->route('index');
   }
 
