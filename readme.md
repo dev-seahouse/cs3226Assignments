@@ -62,7 +62,6 @@ open command prompt and run the following commands:
 2. open command prompt and run the following commands:
 ```sh
 # npm install
-# npm run production
 ```
 
 #### Generate .env file
@@ -98,10 +97,19 @@ To access http://128.199.205.219/phpmyadmin/<br>
 
 ### Launch local development server
 If you are using windows, open command prompt and type the following command
+```sh
 # .\run
+```
 If you are using linux/Mac, open terminal and type the following command
+```sh
 # php artisan serve & npm run watch
+```
 
+### Compile front end assets manually (css and javascript)
+Open terminal and type the following command:
+```sh
+npm run production
+```
 
 
 
