@@ -19,22 +19,20 @@ Route::get('student/{id}', array('as' => 'student', 'uses' => 'StudentController
 Route::get('help', array('as' => 'help', 'uses' => 'StudentController@help'));
 Route::get('login', array('as' => 'login', 'uses' => 'HomeController@index'));
 
+//Routes in this group requires the user to be authenticated
 Route::group( ['middleware' => 'auth' ], function()
 {
-   
 
-// CRUD
-// Create
-Route::get('create', array('as' => 'create', 'uses' => 'StudentController@create'));
-Route::put('createStudent', 'StudentController@createStudent');
-// Edit
-Route::get('student/edit/{id}', array('as' => 'edit', 'uses' => 'StudentController@edit'));
-Route::post('editStudent', 'StudentController@editStudent');
-// Delete
-Route::delete('delete/{id}', array('as' => 'delete', 'uses' => 'StudentController@deleteStudent'));
-
-// Test
-Route::get('test', array('as' => 'test', 'uses' => 'StudentController@testget'));
-
+  // Create
+  Route::get('create', array('as' => 'create', 'uses' => 'StudentController@create'));
+  Route::put('createStudent', 'StudentController@createStudent');
+  // Edit
+  Route::get('student/edit/{id}', array('as' => 'edit', 'uses' => 'StudentController@edit'));
+  Route::post('editStudent', 'StudentController@editStudent');
+  // Delete
+  Route::delete('delete/{id}', array('as' => 'delete', 'uses' => 'StudentController@deleteStudent'));
+  
 });
 
+// Use this test route to view your object retrieved from the database. Testing purposes
+Route::get('test', array('as' => 'test', 'uses' => 'StudentController@testget'));
