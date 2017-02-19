@@ -330,14 +330,9 @@ class StudentController extends Controller {
   }
 
   public function deleteStudent($id) {
-    $students = $this->getStudentsFromDatabase();
-    for ($i = 0; $i < count($students); $i++) {
-      if ($students[$i]['ID'] == $id) {
-        array_splice($students, $i, 1);
-      }
-    }
-    $this->saveStudentsToDatabase($students);
-
+    $student = \App\Student::where('id', $id)->firstOrFail();
+    $student->delete();
+    
     return redirect()->route('index');
   }
 
