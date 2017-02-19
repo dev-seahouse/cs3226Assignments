@@ -61,7 +61,7 @@ open command prompt and run the following commands:
 In the root folder of the project C:\xampp\htdocs\rankteam1
 ```sh
 # php artisan config:clear
-# cp .env.example .env
+# copy .env.example .env
 # php artisan key:generate
 ```
 ### Use the server's database for the project
