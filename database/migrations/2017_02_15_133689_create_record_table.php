@@ -16,9 +16,9 @@ class CreateRecordTable extends Migration
         Schema::create('records', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('student_id')->unsigned();
-            $table->foreign('student_id')->references('id')->on('students');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->integer('achievement_id')->unsigned();
-            $table->foreign('achievement_id')->references('id')->on('achievements');
+            $table->foreign('achievement_id')->references('id')->on('achievements')->onDelete('cascade');
             $table->integer('points');
             $table->timestamps();
         });
@@ -31,8 +31,6 @@ class CreateRecordTable extends Migration
      */
     public function down()
     {
-        DB::statement(SET foreign_key_checks = 0);
         Schema::dropIfExists('records');
-        DB::statement(SET foreign_key_checks = 1);
     }
 }
