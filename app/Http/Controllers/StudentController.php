@@ -148,7 +148,7 @@ class StudentController extends Controller {
       'name' => 'required|between:5,30|regex:/^[A-Za-z ]+$/',
       'nick' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
       'kattis' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
-      'propic' => 'required|mimes:png|max:100',
+      'profile_pic' => 'required|mimes:png|max:1000',
     );
     $messages = array(
       'name.regex' => 'Full name should only contain letters and space.',
@@ -160,9 +160,9 @@ class StudentController extends Controller {
       'kattis.regex' => 'Kattis account should only contain alphanumeric characters and no space.',
       'kattis.required' => 'Kattis account cannot be blank.',
       'kattis.between' => 'Kattis account should be between :min - :max characters.',
-      'propic.required' => 'Profile picture is required.',
-      'propic.mimes' => 'Profile picture should be a PNG file.',
-      'propic.max' => 'Profile picture should be smaller than 100 KB.',
+      'profile_pic.required' => 'Profile picture is required.',
+      'profile_pic.mimes' => 'Profile picture should be a PNG file.',
+      'profile_pic.max' => 'Profile picture should be smaller than 1000 KB.',
     );
     //---------------- END Extra Challenge C --------------------------------------------------------
 
@@ -185,17 +185,18 @@ class StudentController extends Controller {
     });
 
     //------ Extra Challenge B: Add Image --------------
-    $propic = $request->input('propic');
+    $profile_pic = $request->input('profile_pic');
     // filename set as student{id}.png
-    $propicName = 'student' . (end($students)['ID'] + 1) . '.' .$request->file('propic')->getClientOriginalExtension();
+    $profile_picName =  $nick . '.' .$request->file('profile_pic')->getClientOriginalExtension();
     // save image file to public folder
-    $request->file('propic')->move(base_path() . '/public/img/student/', $propicName);
+    $request->file('profile_pic')->move(base_path() . '/public/img/student/', $profile_picName);
     //------ END Extra Challenge B ---------------------------------------
 
+	/*
     array_push($students , array(
         "ID" => end($students)['ID'] + 1,
         "FLAG" => $nationality,
-        "PROPIC" => $propicName,
+        "profile_pic" => $profile_picName,
         "NAME" => $name,
         "NICK" => $nick,
         "KATTIS" => $kattis,
@@ -217,6 +218,7 @@ class StudentController extends Controller {
       ));
 
     $this->saveStudentsToDatabase($students);
+	*/
 
     return redirect()->route('index');
   }

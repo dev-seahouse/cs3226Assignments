@@ -22,9 +22,9 @@ an error message near its relevant field and you are encouraged to do so. -->
     {!! Form::label('nationality', 'Nationality:', ['class' => 'control-label']) !!}
     {!! Form::select('nationality', array('SGP' => 'SGP - Singaporean', 'CHN' => 'CHN - Chinese', 'VNM' => 'VNM - Vietnamese', 'IDN' => 'IDN - Indonesian', 'OTH' => 'Other Nationality')) !!}
     <br>
-    {!! Form::label('propic', 'Profile picture:', ['class' => 'control-label']) !!}
-    @include('invalidError', array('field'=>'propic'))
-    {!! Form::file('propic', null, ['class' => 'form-control']) !!}
+    {!! Form::label('profile_pic', 'Profile picture:', ['class' => 'control-label']) !!}
+    @include('invalidError', array('field'=>'profile_pic'))
+    {!! Form::file('profile_pic', null, ['class' => 'form-control']) !!}
   </div>
   <div class="form-group">
     {!! Form::submit('Submit', ['class' => 'form-control btn btn-primary']) !!}
