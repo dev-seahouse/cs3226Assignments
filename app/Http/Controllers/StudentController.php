@@ -202,10 +202,10 @@ class StudentController extends Controller {
     $kattis = $request->input('kattis');
     $nationality = $request->input('nationality');
 
-    $students = $this->getStudentsFromDatabase();
-    usort($students, function ($a, $b) {
-      return $a["ID"] > $b["ID"];
-    });
+    //$students = $this->getStudentsFromDatabase();
+    //usort($students, function ($a, $b) {
+    //  return $a["ID"] > $b["ID"];
+    //});
 
     //------ Extra Challenge B: Add Image --------------
     $profile_pic = $request->input('profile_pic');
@@ -216,6 +216,16 @@ class StudentController extends Controller {
     //------ END Extra Challenge B ---------------------------------------
     
     //create student
+    /*
+    $student = new \App\Student;
+    $student->nationality = $nationality;
+    $student->gender = 'Male'; //Change to read gender from input
+    $student->profile_pic = $profile_picName;
+    $student->name = $name;
+    $student->nick = $nick;
+    $student->kattis = $kattis;
+    $student->save();
+    */
     
     return redirect()->route('index');
   }

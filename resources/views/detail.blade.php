@@ -33,7 +33,7 @@
                 <img class="detailsImage" src="{{ URL::asset('img/flags/'.$student['nationality'].'.png') }}">
             </div>
             <div class="col-sm-6 hidden-xs">
-                <img class="detailsImage" src="{{ URL::asset('img/student/'.$student['nick'].'.png') }}">
+                <img class="detailsImage" src="{{ URL::asset('img/student/'.$student['profile_pic']) }}">
             </div>
         </div>
 
