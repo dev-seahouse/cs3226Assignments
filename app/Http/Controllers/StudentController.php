@@ -57,7 +57,7 @@ class StudentController extends Controller {
 //    }
 //    
 //    return $students;
-    return \App\Student::with('scores')->where('id', 1)->first();
+    return \App\Student::with('scores')->where('id', 56)->first();
 
   }
 
@@ -111,13 +111,13 @@ class StudentController extends Controller {
   
   // show detail view
   public function detail($id) {
-    $student = $this->getStudent($id);
+    $student = \App\Student::where('id', $id)->first();
     $scores_arr = $this->storeScoresIntoArray(\App\Student::with('scores')->where('id', $id)->first());
 
-    if ($student == -1) {
+    if ($student == null) {
       return view('error')->with('message', "The selected student does not exist!");
     } else {
-      return view('detail')->with('student', \App\Student::where('id', $id)->first())
+      return view('detail')->with('student', $student)
                            ->with('scores_arr', $scores_arr);
     }
   }
@@ -226,9 +226,59 @@ class StudentController extends Controller {
       $component->save();
 
       //Create score
-      $score = new \App\Score;
-      $score->student()->associate($student);
-      $score->save();
+      for ($i = 1; $i <= 9; $i++) {
+        $score = new \App\Score;
+        $score->component = "MC";
+        $score->week = $i;
+        $score->score = 0;
+        $score->student()->associate($student);
+        $score->save();
+      }
+      
+      for ($i = 1; $i <= 2; $i++) {
+        $score = new \App\Score;
+        $score->component = "TC";
+        $score->week = $i;
+        $score->score = 0;
+        $score->student()->associate($student);
+        $score->save();
+      }
+      
+      for ($i = 1; $i <= 10; $i++) {
+        $score = new \App\Score;
+        $score->component = "HW";
+        $score->week = $i;
+        $score->score = 0;
+        $score->student()->associate($student);
+        $score->save();
+      }
+      
+      for ($i = 1; $i <= 9; $i++) {
+        $score = new \App\Score;
+        $score->component = "BS";
+        $score->week = $i;
+        $score->score = 0;
+        $score->student()->associate($student);
+        $score->save();
+      }
+      
+      for ($i = 1; $i <= 12; $i++) {
+        $score = new \App\Score;
+        $score->component = "KS";
+        $score->week = $i;
+        $score->score = 0;
+        $score->student()->associate($student);
+        $score->save();
+      }
+      
+      for ($i = 1; $i <= 8; $i++) {
+        $score = new \App\Score;
+        $score->component = "TC";
+        $score->week = $i;
+        $score->score = 0;
+        $score->student()->associate($student);
+        $score->save();
+      }
     });
     
     return redirect()->route('index');

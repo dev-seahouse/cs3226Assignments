@@ -17,12 +17,12 @@ class CreateComponentTable extends Migration
             $table->increments('id');
             $table->integer('student_id')->unsigned();
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
-            $table->float('mc')->default(0);
-            $table->float('tc')->default(0);
-            $table->float('hw')->default(0);
-            $table->float('bs')->default(0);
-            $table->float('ks')->default(0);
-            $table->float('ac')->default(0);
+            $table->float('mc')->default('0');
+            $table->float('tc')->default('0');
+            $table->float('hw')->default('0');
+            $table->float('bs')->default('0');
+            $table->float('ks')->default('0');
+            $table->float('ac')->default('0');
             $table->timestamps();
         });
     }
