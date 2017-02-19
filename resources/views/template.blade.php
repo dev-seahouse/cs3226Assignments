@@ -20,15 +20,10 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
     </script>-->
-    <script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js">
-    </script>
-    
 
     <!--the 3 scripts below are dependecies for DataTables-->
     <!--src=https://datatables.net/examples/styling/bootstrap.html-->
-    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-    <script src="{{ URL::asset('js/ourScript.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
   </body>
 </html>
