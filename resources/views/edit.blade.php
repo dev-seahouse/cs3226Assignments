@@ -50,7 +50,7 @@
     <div class="col-md-1">{!! Form::text('HW10', $scores_arr['HW'][9], ['step' => '0.5', 'min' => '0', 'max' => '1.5', 'class' => 'form-control','id'=> "HW10"]) !!}</div>
   </div><br>
   <div class="form-group">
-    {!! Form::label('Bs', 'Problem B scores:', ['class' => 'control-label']) !!}<br>
+    {!! Form::label('Bs', 'Problem Bs scores:', ['class' => 'control-label']) !!}<br>
     <div class="col-md-1">{!! Form::text('Bs1', $scores_arr['BS'][0], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs1"]) !!}</div>
     <div class="col-md-1">{!! Form::text('Bs2', $scores_arr['BS'][1], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs2"]) !!}</div>
     <div class="col-md-1">{!! Form::text('Bs3', $scores_arr['BS'][2], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs3"]) !!}</div>
