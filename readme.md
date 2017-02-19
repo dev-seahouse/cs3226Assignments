@@ -42,24 +42,27 @@ extension=php_openssl.dll
 extension=php_curl.dll
 extension=php_sockets.dll
 ```
+double check that there is only one uncommented line of "extension=php_openssl.dll"
+
 #### Install Composer
 1. Download and install Composer at https://getcomposer.org/download/
 2. When asked to select command-line PHP, browse to C:\xampp\php\php.exe
 
 #### Install Laravel
 In the root folder of the project C:\xampp\htdocs\rankteam1
+open command prompt and run the following commands:
 ```sh
-composer global require "laravel/installer"
-composer install
-composer require "laravelcollective/html":"^5.3.0"
+# composer global require "laravel/installer"
+# composer install
+# composer require "laravelcollective/html":"^5.3.0"
 ```
 
 #### Generate .env file
 In the root folder of the project C:\xampp\htdocs\rankteam1
 ```sh
-php artisan config:clear
-cp .env.example .env
-php artisan key:generate
+# php artisan config:clear
+# cp .env.example .env
+# php artisan key:generate
 ```
 ### Use the server's database for the project
 Modify the following settings in C:\xampp\htdocs\rankteam1\.env
