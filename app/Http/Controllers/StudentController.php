@@ -49,13 +49,13 @@ class StudentController extends Controller {
               ->get();*/
 
     //return \App\Student::all();
-    
+
 //    $students = \App\Student::all();
-//    
+//
 //    foreach ($students as $student) {
 //      $student->total = $student->getCompScores();
 //    }
-//    
+//
 //    return $students;
     return \App\Student::with('scores')->where('id', 56)->first();
 
@@ -96,19 +96,19 @@ class StudentController extends Controller {
     array_splice($sum, 0, 1);
     $last = min($sum);
     */
-    
+
     $students = \App\Student::with('components')
                   ->join('components', 'students.id', '=', 'components.student_id')
                   ->select(\DB::raw('students.*, mc + tc + hw + bs + ks + ac as total'))
                   ->orderBy('total', 'DESC')
                   ->get();
-    
+
     return view('index')->with('studentsOld', json_encode($studentsOld))
                         ->with('students', $students);
                         //->with('maxArray', $maxArray)
                         //->with('first', $first)->with('second', $second)->with('third', $third)->with('last',$last);
   }
-  
+
   // show detail view
   public function detail($id) {
     $student = \App\Student::where('id', $id)->first();
@@ -121,7 +121,7 @@ class StudentController extends Controller {
                            ->with('scores_arr', $scores_arr);
     }
   }
-  
+
   // process all the scores of 1 student and store in array
   private function storeScoresIntoArray($student) {
     $scores_arr = array(
@@ -203,7 +203,7 @@ class StudentController extends Controller {
     // save image file to public folder
     $request->file('profile_pic')->move(base_path() . '/public/img/student/', $profile_picName);
     //------ END Extra Challenge B ---------------------------------------
-    
+
     \DB::transaction(function ($request) use ($request) {
       //Create student
       $student = new \App\Student;
@@ -214,7 +214,7 @@ class StudentController extends Controller {
       $student->nick = $request->input('nick');
       $student->kattis = $request->input('kattis');
       $student->save();
-      
+
       //Create comment
       $comment = new \App\Comment;
       $comment->student()->associate($student);
@@ -234,7 +234,7 @@ class StudentController extends Controller {
         $score->student()->associate($student);
         $score->save();
       }
-      
+
       for ($i = 1; $i <= 2; $i++) {
         $score = new \App\Score;
         $score->component = "TC";
@@ -243,7 +243,7 @@ class StudentController extends Controller {
         $score->student()->associate($student);
         $score->save();
       }
-      
+
       for ($i = 1; $i <= 10; $i++) {
         $score = new \App\Score;
         $score->component = "HW";
@@ -252,7 +252,7 @@ class StudentController extends Controller {
         $score->student()->associate($student);
         $score->save();
       }
-      
+
       for ($i = 1; $i <= 9; $i++) {
         $score = new \App\Score;
         $score->component = "BS";
@@ -261,7 +261,7 @@ class StudentController extends Controller {
         $score->student()->associate($student);
         $score->save();
       }
-      
+
       for ($i = 1; $i <= 12; $i++) {
         $score = new \App\Score;
         $score->component = "KS";
@@ -270,7 +270,7 @@ class StudentController extends Controller {
         $score->student()->associate($student);
         $score->save();
       }
-      
+
       for ($i = 1; $i <= 8; $i++) {
         $score = new \App\Score;
         $score->component = "TC";
@@ -280,7 +280,7 @@ class StudentController extends Controller {
         $score->save();
       }
     });
-    
+
     return redirect()->route('index');
   }
 
@@ -379,7 +379,7 @@ class StudentController extends Controller {
     }
 
     $this->saveStudentsToDatabase($students);
-    
+
     //REMOVE ALL OLD CODE THAT USES THE OLD DATABASE!
     //Reminder: when you edit nick, delete {old->profile_pic} and create {new->profile_pic}
     return redirect()->route('index');
@@ -503,6 +503,6 @@ class StudentController extends Controller {
 
     return $data;
   }
-  
+
 }
 ?>
