@@ -19,6 +19,10 @@ Route::get('student/{id}', array('as' => 'student', 'uses' => 'StudentController
 Route::get('help', array('as' => 'help', 'uses' => 'StudentController@help'));
 Route::get('login', array('as' => 'login', 'uses' => 'HomeController@index'));
 
+Route::group( ['middleware' => 'auth' ], function()
+{
+   
+
 // CRUD
 // Create
 Route::get('create', array('as' => 'create', 'uses' => 'StudentController@create'));
@@ -32,5 +36,5 @@ Route::delete('delete/{id}', array('as' => 'delete', 'uses' => 'StudentControlle
 // Test
 Route::get('test', array('as' => 'test', 'uses' => 'StudentController@testget'));
 
-
+});
 
