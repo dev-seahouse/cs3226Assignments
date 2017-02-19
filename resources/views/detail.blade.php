@@ -116,6 +116,8 @@
         </div>
     </div>
     
+ @if (Auth::guest())
+		 @else
     <div class="row">
       <div class="col-xs-12">
         <a href="{{ route('edit', ['id' => $student['id']]) }}" class="btn btn-primary btn-fixed-width center-block">Edit</a>
@@ -127,5 +129,6 @@
         {!! Form::close() !!}
       </div>
     </div>
+	 @endif
   </div>
 @stop
