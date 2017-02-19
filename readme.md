@@ -57,6 +57,14 @@ open command prompt and run the following commands:
 # composer require "laravelcollective/html":"^5.3.0"
 ```
 
+### Install Node
+1. Download and install Nodejs at https://nodejs.org/en/
+2. open command prompt and run the following commands:
+```sh
+# npm install
+# npm run production
+```
+
 #### Generate .env file
 In the root folder of the project C:\xampp\htdocs\rankteam1
 ```sh
@@ -87,4 +95,13 @@ You should be able to access http://localhost/phpmyadmin without having to enter
 To access http://128.199.205.219/phpmyadmin/<br>
 <b>User:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;developer<br>
 <b>Password:</b>&nbsp;&nbsp;developerP@ssw0rd1<br>
+
+### Launch local development server
+If you are using windows, open command prompt and type the following command
+# .\run
+If you are using linux/Mac, open terminal and type the following command
+# php artisan serve & npm run watch
+
+
+
 
