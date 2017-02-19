@@ -19,7 +19,7 @@ class CreateRecordTable extends Migration
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->integer('achievement_id')->unsigned();
             $table->foreign('achievement_id')->references('id')->on('achievements')->onDelete('cascade');
-            $table->integer('points');
+            $table->integer('points')->default(0);
             $table->timestamps();
         });
     }

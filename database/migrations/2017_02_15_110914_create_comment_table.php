@@ -17,7 +17,7 @@ class CreateCommentTable extends Migration
             $table->increments('id');
             $table->integer('student_id')->unsigned()->unique();
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
-            $table->text('comment');
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }

@@ -197,35 +197,39 @@ class StudentController extends Controller {
              ->withInput();
     }
 
-    $nick = $request->input('nick');
-    $name = $request->input('name');
-    $kattis = $request->input('kattis');
-    $nationality = $request->input('nationality');
-
-    //$students = $this->getStudentsFromDatabase();
-    //usort($students, function ($a, $b) {
-    //  return $a["ID"] > $b["ID"];
-    //});
-
     //------ Extra Challenge B: Add Image --------------
-    $profile_pic = $request->input('profile_pic');
-    // filename set as student{id}.png
-    $profile_picName =  $nick . '.' .$request->file('profile_pic')->getClientOriginalExtension();
+    // filename set as {nick}.{ext}
+    $profile_picName =  $request->input('nick') . '.' . $request->file('profile_pic')->getClientOriginalExtension();
     // save image file to public folder
     $request->file('profile_pic')->move(base_path() . '/public/img/student/', $profile_picName);
     //------ END Extra Challenge B ---------------------------------------
     
-    //create student
-    /*
-    $student = new \App\Student;
-    $student->nationality = $nationality;
-    $student->gender = 'Male'; //Change to read gender from input
-    $student->profile_pic = $profile_picName;
-    $student->name = $name;
-    $student->nick = $nick;
-    $student->kattis = $kattis;
-    $student->save();
-    */
+    \DB::transaction(function ($request) use ($request) {
+      //Create student
+      $student = new \App\Student;
+      $student->nationality = $request->input('nationality');
+      $student->gender = 'Male'; //Change to read gender from input
+      $student->profile_pic = $request->input('nick') . '.' . $request->file('profile_pic')->getClientOriginalExtension();
+      $student->name = $request->input('name');
+      $student->nick = $request->input('nick');
+      $student->kattis = $request->input('kattis');
+      $student->save();
+      
+      //Create comment
+      $comment = new \App\Comment;
+      $comment->student()->associate($student);
+      $comment->save();
+
+      //Create components
+      $component = new \App\Component;
+      $component->student()->associate($student);
+      $component->save();
+
+      //Create score
+      $score = new \App\Score;
+      $score->student()->associate($student);
+      $score->save();
+    });
     
     return redirect()->route('index');
   }
