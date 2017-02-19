@@ -57,7 +57,11 @@ class StudentController extends Controller {
 //    }
 //    
 //    return $students;
-    return  \App\Student::with('scores')->where('id','1')->first();
+    return \App\Student::with('components')
+              ->join('components', 'students.id', '=', 'components.student_id')
+              ->select(\DB::raw('students.*, mc + tc + hw + bs + ks + ac as total'))
+              ->orderBy('total', 'DESC')
+              ->get();
 
   }
 
@@ -97,9 +101,14 @@ class StudentController extends Controller {
     $last = min($sum);
     */
     
+    $students = \App\Student::with('components')
+                  ->join('components', 'students.id', '=', 'components.student_id')
+                  ->select(\DB::raw('students.*, mc + tc + hw + bs + ks + ac as total'))
+                  ->orderBy('total', 'DESC')
+                  ->get();
     
     return view('index')->with('studentsOld', json_encode($studentsOld))
-                        ->with('students', \App\Student::with('components')->get());
+                        ->with('students', $students);
                         //->with('maxArray', $maxArray)
                         //->with('first', $first)->with('second', $second)->with('third', $third)->with('last',$last);
   }
