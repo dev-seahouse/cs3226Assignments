@@ -9,38 +9,6 @@
 
             <p>Kattis account: {{ $student['kattis'] }}</p>
             <?php
-              $scores_arr = array(
-                  'MC' => array(0,0,0,0,0,0,0,0,0),
-                  'TC' => array(0,0),
-                  'HW' => array(0,0,0,0,0,0,0,0,0,0),
-                  'BS' => array(0,0,0,0,0,0,0,0,0),
-                  'KS' => array(0,0,0,0,0,0,0,0,0,0,0,0),
-                  'AC' => array(0,0,0,0,0,0,0,0)
-                );
-          
-              foreach ($student->scores as $scores) {
-                $comp = $scores->component;
-                $index = $scores->week - 1;
-                $score = $scores->score;
-                
-                if ($score != NULL) {
-                  $scores_arr[$comp][$index] = $score;
-                } else {
-                  switch($comp) {
-                    case 'MC':
-                    case 'HW':
-                      $display = 'x.y';
-                      break;
-                    case 'TC':
-                      $display = 'x.yz';
-                      break;
-                    default:
-                      $display = 'x';
-                  }
-                  $scores_arr[$comp][$index] = $display;
-                }
-              }
-              
               $mc_sum = array_sum($scores_arr['MC']);
               $tc_sum = array_sum($scores_arr['TC']);
               $hw_sum = array_sum($scores_arr['HW']);
@@ -51,9 +19,7 @@
               $spe = $mc_sum + $tc_sum;
               $dil = $hw_sum + $bs_sum + $ks_sum + $ac_sum;
               $sum = $spe + $dil;
-              
             ?>
-          
             <p>
                 <b>SPE</b>(ed) component: <b>{{$mc_sum . ' + ' . $tc_sum . ' = ' . $spe}}</b><br>
                 <b>DIL</b>(igence) component: <b>{{$hw_sum . ' + ' . $bs_sum . ' + ' . $ks_sum . ' + ' . $ac_sum .' = ' . $dil}}</b><br>
