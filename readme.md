@@ -65,7 +65,7 @@ In the root folder of the project C:\xampp\htdocs\rankteam1
 # php artisan key:generate
 ```
 ### Use the server's database for the project
-Modify the following settings in C:\xampp\htdocs\rankteam1\.env
+Modify the following settings in C:\xampp\htdocs\rankteam1\\.env
 ```sh
 DB_CONNECTION=mysql
 DB_HOST=128.199.205.219
