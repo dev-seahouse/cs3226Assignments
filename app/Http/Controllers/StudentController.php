@@ -57,11 +57,7 @@ class StudentController extends Controller {
 //    }
 //    
 //    return $students;
-    return \App\Student::with('components')
-              ->join('components', 'students.id', '=', 'components.student_id')
-              ->select(\DB::raw('students.*, mc + tc + hw + bs + ks + ac as total'))
-              ->orderBy('total', 'DESC')
-              ->get();
+    return \App\Student::with('scores')->where('id', 1)->first();
 
   }
 
@@ -116,12 +112,50 @@ class StudentController extends Controller {
   // show detail view
   public function detail($id) {
     $student = $this->getStudent($id);
+    $scores_arr = $this->storeScoresIntoArray(\App\Student::with('scores')->where('id', $id)->first());
 
     if ($student == -1) {
       return view('error')->with('message', "The selected student does not exist!");
     } else {
-      return view('detail')->with('student', \App\Student::with('scores')->where('id', $id)->first());
+      return view('detail')->with('student', \App\Student::where('id', $id)->first())
+                           ->with('scores_arr', $scores_arr);
     }
+  }
+  
+  // process all the scores of 1 student and store in array
+  private function storeScoresIntoArray($student) {
+    $scores_arr = array(
+      'MC' => array(0,0,0,0,0,0,0,0,0),
+      'TC' => array(0,0),
+      'HW' => array(0,0,0,0,0,0,0,0,0,0),
+      'BS' => array(0,0,0,0,0,0,0,0,0),
+      'KS' => array(0,0,0,0,0,0,0,0,0,0,0,0),
+      'AC' => array(0,0,0,0,0,0,0,0)
+    );
+
+    foreach ($student->scores as $scores) {
+      $comp = $scores->component;
+      $index = $scores->week - 1;
+      $score = $scores->score;
+
+      if ($score != NULL) {
+        $scores_arr[$comp][$index] = (string) $score;
+      } else {
+        switch($comp) {
+          case 'MC':
+          case 'HW':
+            $display = 'x.y';
+            break;
+          case 'TC':
+            $display = 'x.yz';
+            break;
+          default:
+            $display = 'x';
+        }
+        $scores_arr[$comp][$index] = $display;
+      }
+    }
+    return $scores_arr;
   }
 
   // show create view
@@ -189,11 +223,13 @@ class StudentController extends Controller {
   // show edit view
   public function edit($id) {
     $student = $this->getStudent($id);
+    $scores_arr = $this->storeScoresIntoArray(\App\Student::with('scores')->where('id', $id)->first());
 
     if ($student == -1) {
       return view('error')->with('message', "The selected student does not exist!");
     } else {
-      return view('edit')->with('student', json_encode($student));
+      return view('edit')->with('student', \App\Student::where('id', $id)->first())
+                         ->with('scores_arr', $scores_arr);
     }
   }
 
@@ -401,5 +437,6 @@ class StudentController extends Controller {
 
     return $data;
   }
+  
 }
 ?>
