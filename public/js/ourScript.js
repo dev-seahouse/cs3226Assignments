@@ -1,6 +1,5 @@
 $(function () {
   setupDataTable();
-  highlightFormFieldsWithXYZ();
   highlightTableCellsMarkedX();
   scaleRowHeights($('#ranktable').find('tbody > tr'));
   drawRadarChart($('#studentRadarChart'));
@@ -54,16 +53,6 @@ function highlightTableCellsMarkedX () {
   // highlight cells with 'x' in student details page
   $('#statstable').find('td').each(function () {
     var value = $(this).text()
-    if (value == 'x' || value == 'x.y' || value == 'xy.z') {
-      $(this).addClass('highlightXYZ')
-    }
-  })
-}
-
-// highlight edit form fields with xyz
-function highlightFormFieldsWithXYZ() {
-  $('.form-control').each(function () {
-    var value = $(this).val()
     if (value == 'x' || value == 'x.y' || value == 'xy.z') {
       $(this).addClass('highlightXYZ')
     }

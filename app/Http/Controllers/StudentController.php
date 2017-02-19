@@ -488,5 +488,6 @@ class StudentController extends Controller {
 
     return $data;
   }
+  
 }
 ?>

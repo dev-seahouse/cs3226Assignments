@@ -2,6 +2,15 @@
 @section('main') <!-- also a section called main but different content -->
 <div class="container-fluid">
   <h2>EDIT STUDENT</h2>
+  @if (count($errors) > 0) {{-- just list down all errors found --}}
+  <div class="alert alert-danger">
+    <ul>
+      @foreach ($errors->all() as $error)
+      <li>{{ $error }}</li>
+      @endforeach
+    </ul>
+  </div>
+  @endif
   {!! Form::open(['url' => 'editStudent', 'method' => 'post']) !!}
   <div class="form-group"> {{-- Group related form components together --}}
     {!! Form::label('idlabel', 'ID:', ['class' => 'control-label']) !!}
@@ -9,11 +18,11 @@
   </div>
   <div class="form-group"> {{-- Group related form components together --}}
     {!! Form::label('nicknamelabel', 'Nick Name:', ['class' => 'control-label']) !!}
-    {!! Form::text('nickname', $student['nick'], ['class' => 'form-control']) !!}
+    {!! Form::text('nick', $student['nick'], ['class' => 'form-control']) !!}
   </div>
   <div class="form-group"> {{-- Group related form components together --}}
     {!! Form::label('fullnamelabel', 'Full Name:', ['class' => 'control-label']) !!}
-    {!! Form::text('fullname', $student['name'], ['class' => 'form-control']) !!}
+    {!! Form::text('name', $student['name'], ['class' => 'form-control']) !!}
   </div>
   <div class="form-group"> {{-- Group related form components together --}}
     {!! Form::label('kattislabel', 'Kattis account:', ['class' => 'control-label']) !!}
@@ -89,14 +98,14 @@
   </div><br>
   <div class="form-group">
     {!! Form::label('sum', 'Sum of scores (automatically computed):', ['class' => 'control-label']) !!}
-    {!! Form::number('sum', 0, ['readonly', 'class' => 'form-control',]) !!}
+    {!! Form::number('sum', 0, ['readonly', 'class' => 'form-control']) !!}
   </div>
   <div class="form-group">
     {!! Form::label('comments', 'Specific comments:', ['class' => 'control-label']) !!}
-    {!! Form::text('comments', null, ['class' => 'form-control','id'=>'sum']) !!}
+    {!! Form::text('comments', null, ['class' => 'form-control','id'=>'comments']) !!}
   </div>
   <div class="form-group"> {{-- Don't forget to create a submit button --}}
-    {!! Form::submit('Update', ['class' => 'form-control btn-primary']) !!}
+    {!! Form::submit('Update', ['class' => 'form-control btn btn-primary']) !!}
   </div>
   {!! Form::close() !!}
 </div>
