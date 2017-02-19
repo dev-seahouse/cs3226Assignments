@@ -15,7 +15,8 @@ class CreateCommentTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('student_id')->unique();
+            $table->integer('student_id')->unsigned()->unique();
+            $table->foreign('student_id')->references('id')->on('students');
             $table->text('comment');
             $table->timestamps();
         });
@@ -28,6 +29,8 @@ class CreateCommentTable extends Migration
      */
     public function down()
     {
+        DB::statement(SET foreign_key_checks = 0);
         Schema::dropIfExists('comments');
+        DB::statement(SET foreign_key_checks = 1);
     }
 }

@@ -15,7 +15,8 @@ class CreateScoreTable extends Migration
     {
         Schema::create('scores', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('student_id');
+            $table->integer('student_id')->unsigned();
+            $table->foreign('student_id')->references('id')->on('students');
             $table->string('component');
             $table->integer('week');
             $table->float('score')->nullable();
@@ -30,6 +31,8 @@ class CreateScoreTable extends Migration
      */
     public function down()
     {
+        DB::statement(SET foreign_key_checks = 0);
         Schema::dropIfExists('scores');
+        DB::statement(SET foreign_key_checks = 1);
     }
 }

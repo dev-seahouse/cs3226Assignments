@@ -15,7 +15,8 @@ class CreateComponentTable extends Migration
     {
         Schema::create('components', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('student_id');
+            $table->integer('student_id')->unsigned();
+            $table->foreign('student_id')->references('id')->on('students');
             $table->string('mc');
             $table->string('tc');
             $table->string('hw');
@@ -33,6 +34,8 @@ class CreateComponentTable extends Migration
      */
     public function down()
     {
+        DB::statement(SET foreign_key_checks = 0);
         Schema::dropIfExists('components');
+        DB::statement(SET foreign_key_checks = 1);
     }
 }

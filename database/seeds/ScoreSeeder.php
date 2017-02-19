@@ -167,7 +167,7 @@ class ScoreSeeder extends Seeder
           $array = array('0','1','2','3',null)
         ));
       }
-      for ($i = 0; $i < 5; $i++) {
+      for ($i = 0; $i < 4; $i++) {
         array_push($ac, $faker->randomElement(
           $array = array('0','1',null)
         ));

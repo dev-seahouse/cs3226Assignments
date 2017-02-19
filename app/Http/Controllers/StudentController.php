@@ -130,17 +130,6 @@ class StudentController extends Controller {
   }
 
   public function createStudent(Request $request) {
-    /*
-    - The full name, nick name, and Kattis field should not be blank.
-    - They must also have at least 5 characters and at most 30 characters.
-    - The Flag/Nationality Drop-Down List has to be selected.
-    - Display appropriate error messages if the data is not
-      validated properly upon submission (clicking the 'Create' button).
-    - The screenshot below is a simple way of displaying all error messages
-      at the top of the form. It is more user friendly to highlight fields
-      with error(s) and display an error message near its relevant field
-      and you are encouraged to do so.
-    */
 
     //--------- Extra Challenge C: Use Regex/Better Validation -------------------------
     // validation rules and messages, put here first
@@ -191,35 +180,9 @@ class StudentController extends Controller {
     // save image file to public folder
     $request->file('profile_pic')->move(base_path() . '/public/img/student/', $profile_picName);
     //------ END Extra Challenge B ---------------------------------------
-
-	/*
-    array_push($students , array(
-        "ID" => end($students)['ID'] + 1,
-        "FLAG" => $nationality,
-        "profile_pic" => $profile_picName,
-        "NAME" => $name,
-        "NICK" => $nick,
-        "KATTIS" => $kattis,
-        "MC" => 0,
-        "MC_COMPONENTS" => array('0.0','0.0','0.0','0.0','0.0','0.0','0.0','0.0','0.0'),
-        "TC" => 0,
-        "TC_COMPONENTS" => array('0.0','0.0'),
-        "SPE" => 0,
-        "HW" => 0,
-        "HW_COMPONENTS" => array('0.0','0.0','0.0','0.0','0.0','0.0','0.0','0.0','0.0','0.0'),
-        "BS" => 0,
-        "BS_COMPONENTS" => array(0,0,0,0,0,0,0,0,0),
-        "KS" => 0,
-        "KS_COMPONENTS" => array(0,0,0,0,0,0,0,0,0,0,0,0),
-        "AC" => 0,
-        "AC_COMPONENTS" => array(0,0,0,0,0,0,0,0),
-        "DIL" => 0,
-        "SUM" => 0
-      ));
-
-    $this->saveStudentsToDatabase($students);
-	*/
-
+    
+    //create student
+    
     return redirect()->route('index');
   }
 
@@ -235,17 +198,6 @@ class StudentController extends Controller {
   }
 
   public function editStudent(Request $request) {
-    /*
-    - The full name, nick name, and Kattis field should not be blank.
-    - They must also have at least 5 characters and at most 30 characters.
-    - The Flag/Nationality Drop-Down List has to be selected.
-    - Display appropriate error messages if the data is not
-      validated properly upon submission (clicking the 'Create' button).
-    - The screenshot below is a simple way of displaying all error messages
-      at the top of the form. It is more user friendly to highlight fields
-      with error(s) and display an error message near its relevant field
-      and you are encouraged to do so.
-    */
 
     //--------- Extra Challenge C: Use Regex/Better Validation -------------------------
     // validation rules and messages, put here first
