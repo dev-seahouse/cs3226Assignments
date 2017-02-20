@@ -88,7 +88,7 @@ To access http://128.199.205.219/phpmyadmin/<br>
 <b>User:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;developer<br>
 <b>Password:</b>&nbsp;&nbsp;developerP@ssw0rd1<br>
 
-#### Install NodeJS
+### Install NodeJS
 1. Download and install Nodejs at https://nodejs.org/en/
 2. open command prompt and run the following commands:
 ```sh
