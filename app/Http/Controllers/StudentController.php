@@ -49,15 +49,15 @@ class StudentController extends Controller {
               ->get();*/
 
     //return \App\Student::all();
-    
+
 //    $students = \App\Student::all();
-//    
+//
 //    foreach ($students as $student) {
 //      $student->total = $student->getCompScores();
 //    }
-//    
+//
 //    return $students;
-    return \App\Student::with('scores')->where('id', 1)->first();
+    return \App\Student::with('scores')->where('id', 56)->first();
 
   }
 
@@ -96,32 +96,32 @@ class StudentController extends Controller {
     array_splice($sum, 0, 1);
     $last = min($sum);
     */
-    
+
     $students = \App\Student::with('components')
                   ->join('components', 'students.id', '=', 'components.student_id')
                   ->select(\DB::raw('students.*, mc + tc + hw + bs + ks + ac as total'))
                   ->orderBy('total', 'DESC')
                   ->get();
-    
+
     return view('index')->with('studentsOld', json_encode($studentsOld))
                         ->with('students', $students);
                         //->with('maxArray', $maxArray)
                         //->with('first', $first)->with('second', $second)->with('third', $third)->with('last',$last);
   }
-  
+
   // show detail view
   public function detail($id) {
-    $student = $this->getStudent($id);
+    $student = \App\Student::where('id', $id)->first();
     $scores_arr = $this->storeScoresIntoArray(\App\Student::with('scores')->where('id', $id)->first());
 
-    if ($student == -1) {
+    if ($student == null) {
       return view('error')->with('message', "The selected student does not exist!");
     } else {
-      return view('detail')->with('student', \App\Student::where('id', $id)->first())
+      return view('detail')->with('student', $student)
                            ->with('scores_arr', $scores_arr);
     }
   }
-  
+
   // process all the scores of 1 student and store in array
   private function storeScoresIntoArray($student) {
     $scores_arr = array(
@@ -197,27 +197,57 @@ class StudentController extends Controller {
              ->withInput();
     }
 
-    $nick = $request->input('nick');
-    $name = $request->input('name');
-    $kattis = $request->input('kattis');
-    $nationality = $request->input('nationality');
-
-    $students = $this->getStudentsFromDatabase();
-    usort($students, function ($a, $b) {
-      return $a["ID"] > $b["ID"];
-    });
-
     //------ Extra Challenge B: Add Image --------------
-    $profile_pic = $request->input('profile_pic');
-    // filename set as student{id}.png
-    $profile_picName =  $nick . '.' .$request->file('profile_pic')->getClientOriginalExtension();
+    // filename set as {nick}.{ext}
+    $profile_picName =  $request->input('nick') . '.' . $request->file('profile_pic')->getClientOriginalExtension();
     // save image file to public folder
     $request->file('profile_pic')->move(base_path() . '/public/img/student/', $profile_picName);
     //------ END Extra Challenge B ---------------------------------------
-    
-    //create student
-    
+
+    \DB::transaction(function ($request) {
+      //Create student
+      global $request;
+      $student = new \App\Student;
+      $student->nationality = $request->input('nationality');
+      $student->gender = 'Male'; //Change to read gender from input
+      $student->profile_pic = $request->input('nick') . '.' . $request->file('profile_pic')->getClientOriginalExtension();
+      $student->name = $request->input('name');
+      $student->nick = $request->input('nick');
+      $student->kattis = $request->input('kattis');
+      $student->save();
+
+      //Create comment
+      $comment = new \App\Comment;
+      $comment->student()->associate($student);
+      $comment->save();
+
+      //Create components
+      $component = new \App\Component;
+      $component->student()->associate($student);
+      $component->save();
+
+      //Create scores
+      $this->create_scores("MC", 9, $student);
+      $this->create_scores("TC", 2, $student);
+      $this->create_scores("HW", 10, $student);
+      $this->create_scores("BS", 9, $student);
+      $this->create_scores("KS", 12, $student);
+      $this->create_scores("AC", 8, $student);
+    });
+
     return redirect()->route('index');
+  }
+
+
+  private function create_scores($component_name, $num_scores_in_component, $student){
+    for ($i = 1; $i <= $num_scores_in_component; $i++) {
+      $score = new \App\Score;
+      $score->component = $component_name;
+      $score->week = $i;
+      $score->score = 0;
+      $score->student()->associate($student);
+      $score->save();
+    }
   }
 
   // show edit view
@@ -316,13 +346,15 @@ class StudentController extends Controller {
 
     $this->saveStudentsToDatabase($students);
 
+    //REMOVE ALL OLD CODE THAT USES THE OLD DATABASE!
+    //Reminder: when you edit nick, delete {old->profile_pic} and create {new->profile_pic}
     return redirect()->route('index');
   }
 
   public function deleteStudent($id) {
     $student = \App\Student::where('id', $id)->firstOrFail();
+    \File::delete(base_path() . '/public/img/student/' . $student->profile_pic);
     $student->delete();
-    
     return redirect()->route('index');
   }
 
@@ -369,7 +401,7 @@ class StudentController extends Controller {
     return unserialize($recoveredData);
   }
 
-  // Faker
+  // Faker (old code, use new code for seeding)
   private function generateStudents() {
     $faker = \Faker\Factory::create();
 
@@ -437,6 +469,6 @@ class StudentController extends Controller {
 
     return $data;
   }
-  
+
 }
 ?>

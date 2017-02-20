@@ -32,7 +32,7 @@ class StudentSeeder extends Seeder
           array( 
             'nationality' => $faker->randomElement($array = $countries),
             'gender' => $faker->randomElement($array = array('Male', 'Female')),
-            'profile_pic' => $uniqName, 
+            'profile_pic' => $uniqName.'.png', 
             'name' => $uniqName, 
             'nick' => $uniqName,
             'kattis' => $uniqName,

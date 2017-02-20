@@ -16,13 +16,13 @@ class CreateComponentTable extends Migration
         Schema::create('components', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('student_id')->unsigned();
-            $table->foreign('student_id')->references('id')->on('students');
-            $table->string('mc');
-            $table->string('tc');
-            $table->string('hw');
-            $table->string('bs');
-            $table->string('ks');
-            $table->string('ac');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
+            $table->float('mc')->default('0');
+            $table->float('tc')->default('0');
+            $table->float('hw')->default('0');
+            $table->float('bs')->default('0');
+            $table->float('ks')->default('0');
+            $table->float('ac')->default('0');
             $table->timestamps();
         });
     }
@@ -34,8 +34,6 @@ class CreateComponentTable extends Migration
      */
     public function down()
     {
-        DB::statement(SET foreign_key_checks = 0);
         Schema::dropIfExists('components');
-        DB::statement(SET foreign_key_checks = 1);
     }
 }

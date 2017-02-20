@@ -1,0 +1,43 @@
+html {
+    font-family: 'Alegreya Sans', sans-serif;
+    font-size: 62.5%;
+    line-height: 1.2;
+    box-sizing: border-box;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    height: 100%;
+}
+
+body {
+    background-color: #fff;
+    height: 100%;
+}
+
+body, ul, li, ol, p, a {
+    font-size: 14px;
+    font-size: 1.4rem;
+}
+
+a, body, span, label, button, input {
+    font-family: 'Alegreya Sans', sans-serif;
+}
+
+label {
+    margin-top: 1em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+    font-size: 2.4em;
+}
+
+button {
+    border-radius: 0;
+}
+
+hr {
+    border-top: 1px solid silver;
+}

@@ -88,3 +88,28 @@ To access http://128.199.205.219/phpmyadmin/<br>
 <b>User:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;developer<br>
 <b>Password:</b>&nbsp;&nbsp;developerP@ssw0rd1<br>
 
+### Install NodeJS
+1. Download and install Nodejs at https://nodejs.org/en/
+2. open command prompt and run the following commands:
+```sh
+# npm install
+```
+
+### Launch local development server
+If you are using windows, open command prompt and type the following command
+```sh
+# .\run
+```
+If you are using linux/Mac, open terminal and type the following command
+```sh
+# php artisan serve & npm run watch
+```
+
+### Compile front end assets manually (css and javascript)
+Open terminal and type the following command:
+```sh
+npm run production
+```
+
+
+

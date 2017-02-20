@@ -9,12 +9,18 @@
   "devDependencies": {
     "axios": "^0.15.2",
     "bootstrap-sass": "^3.3.7",
+    "chart.js": "^2.5.0",
+    "datatables": "^1.10.13",
     "jquery": "^3.1.0",
-    "laravel-mix": "^0.5.0",
+    "laravel-mix": "^0.8.0",
     "lodash": "^4.16.2",
+    "sweetalert2": "^6.4.2",
     "vue": "^2.0.1"
   },
   "standard": {
-    "globals": [ "$", "_" ]
+    "globals": [
+      "$",
+      "_"
+    ]
   }
 }
