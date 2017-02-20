@@ -13,10 +13,7 @@
   @endif
   {!! Form::open(['url' => 'editStudent', 'method' => 'post']) !!}
   <div class="form-group"> {{-- Group related form components together --}}
-    {!! Form::label('idlabel', 'ID:', ['class' => 'control-label']) !!}
-    {!! Form::text('id', $student['id'], ['readonly', 'class' => 'form-control']) !!}
-  </div>
-  <div class="form-group"> {{-- Group related form components together --}}
+    {!! Form::hidden('id', $student['id']) !!}
     {!! Form::label('nicknamelabel', 'Nick Name:', ['class' => 'control-label']) !!}
     {!! Form::text('nick', $student['nick'], ['class' => 'form-control']) !!}
   </div>
