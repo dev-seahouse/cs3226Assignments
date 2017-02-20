@@ -268,3 +268,8 @@ function highlightHighestValue () {
     })
   }
 }
+
+$('.delete-btn').click(function (e) {
+  e.preventDefault()
+  swal('hi')
+})

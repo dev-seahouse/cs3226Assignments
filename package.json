@@ -21,5 +21,8 @@
       "$",
       "_"
     ]
+  },
+  "dependencies": {
+    "sweetalert2": "^6.4.2"
   }
 }

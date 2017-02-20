@@ -1,10 +1,155 @@
 
-// Fonts
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
-
-// Variables
 @import "variables";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import 'globals';
+@import 'theme';
 
-// Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap"
+/*==================================
+=            Modules            =
+==================================*/
+
+
+/*----------  nav bar  ----------*/
+
+.navbar {
+    border-radius: 0;
+    border:none;
+}
+
+
+.navbar-inverse .navbar-toggle {
+    border: 0;
+    border-radius: 0;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+    color: #ddd;
+    -webkit-transition: color .1;
+    -o-transition: color .1;
+    transition: color .1;
+}
+
+#brandImage {
+    width: 3rem;
+    margin-top: -6px;
+    margin-right:1.5rem;
+}
+
+
+/*----------- rank table ---------*/
+
+.table {
+    width: 100%;
+    overflow: hidden;
+}
+
+#ranktable {
+    width: 100%;
+}
+
+#ranktable td {
+    vertical-align: bottom;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.highlightXYZ {
+    background-color: coral;
+}
+
+.gold {
+    background-color: gold;
+}
+
+.silver {
+    background-color: silver;
+}
+
+.bronze {
+    background-color: #cd7f32;
+}
+
+.last {
+    background-color: pink;
+}
+
+.empty {
+    background-color: pink;
+}
+
+.highlighted {
+    background-color: orange;
+}
+
+table.dataTable tbody td {
+    vertical-align: bottom;
+}
+
+
+/*----------  chart ----------*/
+.radarChart{
+
+}
+
+@media screen and (max-width: 954px) {
+    #studentRadarChart {
+        display: none !important;
+    }
+}
+
+
+/*=============================
+=            Utils            =
+=============================*/
+.no-margin {
+    margin : 0;
+}
+
+.text-container {
+    margin:auto;
+    max-width: 820px;
+}
+
+.text-container *, .text-container * > *{
+    line-height: 1.6;
+}
+
+
+/* unsorted */
+
+.detailsImage {
+    border: 1px solid black;
+    width: 100px;
+    display: block;
+    margin: auto;
+}
+
+.rank-flag-img {
+    width: 20px;
+}
+
+.rank-person-img {
+    width: 15px;
+}
+
+.rank-kattis-img {
+    width: 20px;
+}
+
+.btn-fixed-width {
+    text-align: center;
+    width: 200px;
+}
+
+.delete-btn {
+    margin-top: 8em;
+}
+
+#errorImage{
+  width:100%;
+}
+
+
 

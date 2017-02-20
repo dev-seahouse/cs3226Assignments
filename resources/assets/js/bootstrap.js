@@ -10,7 +10,8 @@ window._ = require('lodash')
 window.$ = window.jQuery = require('jquery')
 require('datatables')
 require('bootstrap-sass')
-require('chart.js')
+window.Chart = require('chart.js')
+window.swal = require('sweetalert2')
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
  * using reactive data binding and reusable components. Vue's API is clean
