@@ -53,12 +53,14 @@ foreach ($fields as $field) {
           echo '<li>Kattis Sets scores should be 0 or 1</li>';
           break;
         case 'AC':
+          if ($errors->has('AC1') || $errors->has('AC2') || $errors->has('AC5') || $errors->has('AC6') || $errors->has('AC8')) {
+            echo '<li>Achievements 1, 2, 5, 6 and 8 scores should be 0 or 1</li>';
+          }
           if ($errors->has('AC3') || $errors->has('AC4')) {
             echo '<li>Achievements 3 and 4 scores should be between 0 to 3</li>';
-          } else if ($errors->has('AC7')) {
+          }
+          if ($errors->has('AC7')) {
             echo '<li>Achievement 7 scores should be between 0 to 6</li>';
-          } else {
-            echo '<li>Achievements 1, 2, 5, 6 and 8 scores should be 0 or 1</li>';
           }
           break;
         default:
