@@ -34,7 +34,21 @@
     margin-top: -6px;
     margin-right:1.5rem;
 }
+/*----------- panels ---------*/
+.panel-group .panel, .panel-heading {
+    border-radius: 0;
+    a{
+        color:#3D72A4;
+    }
+}
+.panel-default > .panel-heading {
+    border-top: 3px solid #FFB238;
+    background-color: #fff;
+}
 
+.collapsing {
+    transition: .1555s;
+}
 
 /*----------- rank table ---------*/
 
