@@ -63,40 +63,6 @@ class StudentController extends Controller {
 
   // show index view
   public function index() {
-    $studentsOld = $this->getStudentsFromDatabase();
-
-    usort($studentsOld, function ($a, $b) {
-      return $a["SUM"] < $b["SUM"];
-    });
-
-    /*
-    //----------- Recode Lab 2 JS to PHP -----------------
-    $maxArray = array(0,0,0,0,0,0,0,0,0);
-    $sum = array();
-    foreach($studentsOld as $student) {
-      $maxArray[0] = max($maxArray[0], $student['MC']);
-      $maxArray[1] = max($maxArray[1], $student['TC']);
-      $maxArray[2] = max($maxArray[2], $student['SPE']);
-      $maxArray[3] = max($maxArray[3], $student['HW']);
-      $maxArray[4] = max($maxArray[4], $student['BS']);
-      $maxArray[5] = max($maxArray[5], $student['KS']);
-      $maxArray[6] = max($maxArray[6], $student['AC']);
-      $maxArray[7] = max($maxArray[7], $student['DIL']);
-      $maxArray[8] = max($maxArray[8], $student['SUM']);
-      array_push($sum, $student['SUM']);
-    }
-
-    // this works on the precondition that there is at least 4 students and 4 different values of sum
-    $sum = array_unique($sum);
-    $first = $sum[0];
-    array_splice($sum, 0, 1);
-    $second = $sum[0];
-    array_splice($sum, 0, 1);
-    $third = $sum[0];
-    array_splice($sum, 0, 1);
-    $last = min($sum);
-    */
-
     $students = \App\Student::with('components')
                   ->join('components', 'students.id', '=', 'components.student_id')
                   ->select(\DB::raw('students.*, mc + tc + hw + bs + ks + ac as total'))
@@ -105,11 +71,8 @@ class StudentController extends Controller {
     $last_updated = \App\DatabaseUtil::get_last_updated();
     $friendly_last_updated = Carbon::createFromTimestamp(strtotime($last_updated))->diffForHumans();
 
-    return view('index')->with('studentsOld', json_encode($studentsOld))
-                        ->with('students', $students)
-                        ->with('last_updated',$friendly_last_updated);
-                        //->with('maxArray', $maxArray)
-                        //->with('first', $first)->with('second', $second)->with('third', $third)->with('last',$last);
+    return view('index')->with('students', $students)
+                        ->with('last_updated',$friendly_last_updated);;
   }
 
   // show detail view
@@ -267,46 +230,20 @@ class StudentController extends Controller {
   }
 
   public function editStudent(Request $request) {
-
-    //--------- Extra Challenge C: Use Regex/Better Validation -------------------------
-    // validation rules and messages, put here first
-    $rules = array(
-      'name' => 'required|between:5,30|regex:/^[A-Za-z ]+$/',
-      'nick' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
-      'kattis' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
-      'mc_components' => ['regex:/^((([0-3]\.(0|5)|4\.0)|(x\.y)),){8}(([0-3]\.(0|5)|4\.0)|(x.y))$/'],
-      'tc_components' => ['regex:/^^([0-9]\.([0-9])|(xy\.z)|(10\.[0-5])),((([0-9]|1[0-2])\.([0-9])|(xy.z))|(13\.([0-5])))$$/'],
-      'hw_components' => ['regex:/^(([0-1]\.(0|5)|(x.y)),){9}([0-1]\.(0|5)|(x\.y))$/'],
-      'bs_components' => ['regex:/^((0|1|x),){8}((0|1|x))$/'],
-      'ks_components' => ['regex:/^((0|1|x),){11}((0|1|x))$/'],
-      'ac_components' => ['regex:/^((0|1|x),){2}(([0-3]|x),){2}((0|1|x),){3}((0|1|x))$/']
-    );
-    $messages = array(
-      'name.regex' => 'Full name should only contain letters and space.',
-      'name.required' => 'Full name cannot be blank.',
-      'name.between' => 'Full name should be between :min - :max characters.',
-      'nick.regex' => 'Nick name should only contain alphanumeric characters and no space.',
-      'nick.required' => 'Nick name cannot be blank.',
-      'nick.between' => 'Nick name should be between :min - :max characters.',
-      'kattis.regex' => 'Kattis account should only contain alphanumeric characters and no space.',
-      'kattis.required' => 'Kattis account cannot be blank.',
-      'kattis.between' => 'Kattis account should be between :min - :max characters.',
-      'mc_components.regex' => 'Mini Contest scores should range from 0.0 to 4.0, with increments of 0.5, or set as "x.y".',
-      'tc_components.regex' => 'Team Contest scores should range from 0.0 to 10.5 for Midterm TC and 0.0 to 13.5 for Final TC, or set as      "xy.z".',
-      'hw_components.regex' => 'Homework scores should range from 0.0 to 1.5, with increments of 0.5, or set as "x.y".',
-      'bs_components.regex' => 'Problem Bs scores should be 0 or 1, or set as "x".',
-      'ks_components.regex' => 'Kattis Sets scores should be 0 or 1, or set as "x".',
-      'ac_components.regex' => 'Achievements scores should range from 0 to 3 for week 3 and 4, and 0 or 1 for other weeks, or set as "x".'
-    );
-    //---------------- END Extra Challenge C --------------------------------------------------------
-
-    $validator = Validator::make($request->all(), $rules, $messages);
+    // validate user input
+    $validator = Validator::make($request->all(), $this->getEditFormRules(), $this->getEditFormMessages());
 
     if ($validator->fails()) {
       return back()
              ->withErrors($validator)
              ->withInput();
     }
+    
+    // update database
+    // need to update student
+    // need to update component sums
+    // need to update scores
+    // if nick is edited, need to delete old profile pic to create new profile pic
 
     $id = $request->input('id');
     $nick = $request->input('nick');
@@ -321,33 +258,6 @@ class StudentController extends Controller {
 
     $spe = array_sum($mc_components) + array_sum($tc_components);
     $dil = array_sum($hw_components) + array_sum($bs_components) + array_sum($ks_components) + array_sum($ac_components);
-
-    $students = $this->getStudentsFromDatabase();
-
-    foreach ($students as &$student) { //update by reference
-      if ($student['ID'] == $id) {
-        $student['NAME'] = $name;
-        $student['NICK'] = $nick;
-        $student['KATTIS'] = $kattis;
-        $student['MC'] = array_sum($mc_components);
-        $student['MC_COMPONENTS'] = $mc_components;
-        $student['TC'] = array_sum($tc_components);
-        $student['TC_COMPONENTS'] = $tc_components;
-        $student['SPE'] = $spe;
-        $student['HW'] = array_sum($hw_components);
-        $student['HW_COMPONENTS'] = $hw_components;
-        $student['BS'] = array_sum($bs_components);
-        $student['BS_COMPONENTS'] = $bs_components;
-        $student['KS'] = array_sum($ks_components);
-        $student['KS_COMPONENTS'] = $ks_components;
-        $student['AC'] = array_sum($ac_components);
-        $student['AC_COMPONENTS'] = $ac_components;
-        $student['DIL'] = $dil;
-        $student['SUM'] = $spe + $dil;
-      }
-    }
-
-    $this->saveStudentsToDatabase($students);
 
     //REMOVE ALL OLD CODE THAT USES THE OLD DATABASE!
     //Reminder: when you edit nick, delete {old->profile_pic} and create {new->profile_pic}
@@ -471,6 +381,66 @@ class StudentController extends Controller {
     }
 
     return $data;
+  }
+  
+  private function getEditFormRules() {
+    $mcRule = 'regex:/^([0-3](\.(0|5))?)$|(4(\.0)?)$|(x\.y)$/';
+    $hwRule = 'regex:/^([0-1](\.(0|5))?)$|(x.y)$/';
+    $bsRule = 'regex:/^(0|1|x)$/';
+    $ksRule = 'regex:/^(0|1|x)$/';
+    $rules = array(
+      'name' => 'required|between:5,30|regex:/^[A-Za-z ]+$/',
+      'nick' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
+      'kattis' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
+      // MC rules
+      'MC1' => ['required', $mcRule], 'MC2' => ['required', $mcRule], 'MC3' => ['required', $mcRule], 
+      'MC4' => ['required', $mcRule], 'MC5' => ['required', $mcRule], 'MC6' => ['required', $mcRule],
+      'MC7' => ['required', $mcRule], 'MC8' => ['required', $mcRule], 'MC9' => ['required', $mcRule],
+      // TC rules
+      'TC1' => ['required', 'regex:/^(10(\.[0-5])?)$|^([0-9](\.([0-9]))?)$|(xy\.z)$/'],
+      'TC2' => ['required', 'regex:/^(1[0-3](\.[0-5])?)$|^([0-9](\.([0-9]))?)$|(xy\.z)$/'],
+      // HW rules
+      'HW1' => ['required', $hwRule], 'HW2' => ['required', $hwRule], 'HW3' => ['required', $hwRule], 
+      'HW4' => ['required', $hwRule], 'HW5' => ['required', $hwRule], 'HW6' => ['required', $hwRule],
+      'HW7' => ['required', $hwRule], 'HW8' => ['required', $hwRule], 'HW9' => ['required', $hwRule],
+      'HW10' => ['required', $hwRule],
+      // BS rules
+      'BS1' => ['required', $bsRule], 'BS2' => ['required', $bsRule], 'BS3' => ['required', $bsRule],
+      'BS4' => ['required', $bsRule], 'BS5' => ['required', $bsRule], 'BS6' => ['required', $bsRule],
+      'BS7' => ['required', $bsRule], 'BS8' => ['required', $bsRule], 'BS9' => ['required', $bsRule],
+      // KS rules
+      'KS1' => ['required', $ksRule], 'KS2' => ['required', $ksRule], 'KS3' => ['required', $ksRule],
+      'KS4' => ['required', $ksRule], 'KS5' => ['required', $ksRule], 'KS6' => ['required', $ksRule], 
+      'KS7' => ['required', $ksRule], 'KS8' => ['required', $ksRule], 'KS9' => ['required', $ksRule],
+      'KS10' => ['required', $ksRule], 'KS11' => ['required', $ksRule], 'KS12' => ['required', $ksRule],
+      // AC rules
+      'AC1' => ['required', 'regex:/^(0|1|x)$/'], 'AC2' => ['required', 'regex:/^(0|1|x)$/'],
+      'AC3' => ['required', 'regex:/^([0-3]|x)$/'], 'AC4' => ['required', 'regex:/^([0-3]|x)$/'],
+      'AC5' => ['required', 'regex:/^(0|1|x)$/'], 'AC6' => ['required', 'regex:/^(0|1|x)$/'],
+      'AC7' => ['required', 'regex:/^([0-6]|x)$/'], 'AC8' => ['required', 'regex:/^(0|1|x)$/'],
+    );
+    
+    return $rules;
+  }
+  
+  private function getEditFormMessages() {
+    $messages = array(
+      'name.regex' => 'Full name should only contain letters and space',
+      'name.required' => 'Full name cannot be blank',
+      'name.between' => 'Full name should be between :min - :max characters',
+      'nick.regex' => 'Nick name should only contain alphanumeric characters and no space',
+      'nick.required' => 'Nick name cannot be blank',
+      'nick.between' => 'Nick name should be between :min - :max characters',
+      'kattis.regex' => 'Kattis account should only contain alphanumeric characters and no space',
+      'kattis.required' => 'Kattis account cannot be blank',
+      'kattis.between' => 'Kattis account should be between :min - :max characters',
+      'TC1.required' => 'Midterm Team Contest score is required, or set as "xy.z"',
+      'TC1.regex' => 'Midterm Team Contest score should be between 0 to 10.5',
+      'TC2.required' => 'Final Team Contest score is required, or set as "xy.z"',
+      'TC2.regex' => 'Final Team Contest score should be between 0 to 13.5',
+    );
+    
+    return $messages;
   }
 
 }

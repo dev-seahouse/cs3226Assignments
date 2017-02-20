@@ -2,100 +2,108 @@
 @section('main') <!-- also a section called main but different content -->
 <div class="container-fluid">
   <h2>EDIT STUDENT</h2>
-  @if (count($errors) > 0) {{-- just list down all errors found --}}
-  <div class="alert alert-danger">
-    <ul>
-      @foreach ($errors->all() as $error)
-      <li>{{ $error }}</li>
-      @endforeach
-    </ul>
-  </div>
-  @endif
   {!! Form::open(['url' => 'editStudent', 'method' => 'post']) !!}
   <div class="form-group"> {{-- Group related form components together --}}
-    {!! Form::label('idlabel', 'ID:', ['class' => 'control-label']) !!}
-    {!! Form::text('id', $student['id'], ['readonly', 'class' => 'form-control']) !!}
-  </div>
-  <div class="form-group"> {{-- Group related form components together --}}
+    {!! Form::hidden('id', $student['id']) !!}
     {!! Form::label('nicknamelabel', 'Nick Name:', ['class' => 'control-label']) !!}
+    @include('invalidError', array('field'=>'nick'))
     {!! Form::text('nick', $student['nick'], ['class' => 'form-control']) !!}
   </div>
   <div class="form-group"> {{-- Group related form components together --}}
     {!! Form::label('fullnamelabel', 'Full Name:', ['class' => 'control-label']) !!}
+    @include('invalidError', array('field'=>'name'))
     {!! Form::text('name', $student['name'], ['class' => 'form-control']) !!}
   </div>
   <div class="form-group"> {{-- Group related form components together --}}
     {!! Form::label('kattislabel', 'Kattis account:', ['class' => 'control-label']) !!}
+    @include('invalidError', array('field'=>'kattis'))
     {!! Form::text('kattis', $student['kattis'], ['class' => 'form-control']) !!}
   </div>
   <div class="form-group">
     {!! Form::label('MC', 'Mini contest scores:', ['class' => 'control-label']) !!}<br>
-    <div class="col-md-1">{!! Form::text('MC1', $scores_arr['MC'][0], ['step' => '0.5', 'min' => '0', 'max' => '4', 'class' => 'form-control','id'=> "MC1"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('MC2', $scores_arr['MC'][1], ['step' => '0.5', 'min' => '0', 'max' => '4', 'class' => 'form-control','id'=> "MC2"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('MC3', $scores_arr['MC'][2], ['step' => '0.5', 'min' => '0', 'max' => '4', 'class' => 'form-control','id'=> "MC3"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('MC4', $scores_arr['MC'][3], ['step' => '0.5', 'min' => '0', 'max' => '4', 'class' => 'form-control','id'=> "MC4"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('MC5', $scores_arr['MC'][4], ['step' => '0.5', 'min' => '0', 'max' => '4', 'class' => 'form-control','id'=> "MC5"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('MC6', $scores_arr['MC'][5], ['step' => '0.5', 'min' => '0', 'max' => '4', 'class' => 'form-control','id'=> "MC6"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('MC7', $scores_arr['MC'][6], ['step' => '0.5', 'min' => '0', 'max' => '4', 'class' => 'form-control','id'=> "MC7"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('MC8', $scores_arr['MC'][7], ['step' => '0.5', 'min' => '0', 'max' => '4', 'class' => 'form-control','id'=> "MC8"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('MC9', $scores_arr['MC'][8], ['step' => '0.5', 'min' => '0', 'max' => '4', 'class' => 'form-control','id'=> "MC9"]) !!}</div>
-  </div><br>
+    @include('invalidErrorGroup', array('comp'=>'MC', 'fields'=>['MC1','MC2','MC3','MC4','MC5','MC6','MC7','MC8','MC9']))
+    <div class="col-md-1 {{ $errors->has('MC1') ? 'has-error' : '' }}">{!! Form::text('MC1', $scores_arr['MC'][0], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('MC2') ? 'has-error' : '' }}">{!! Form::text('MC2', $scores_arr['MC'][1], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('MC3') ? 'has-error' : '' }}">{!! Form::text('MC3', $scores_arr['MC'][2], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('MC4') ? 'has-error' : '' }}">{!! Form::text('MC4', $scores_arr['MC'][3], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('MC5') ? 'has-error' : '' }}">{!! Form::text('MC5', $scores_arr['MC'][4], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('MC6') ? 'has-error' : '' }}">{!! Form::text('MC6', $scores_arr['MC'][5], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('MC7') ? 'has-error' : '' }}">{!! Form::text('MC7', $scores_arr['MC'][6], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('MC8') ? 'has-error' : '' }}">{!! Form::text('MC8', $scores_arr['MC'][7], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('MC9') ? 'has-error' : '' }}">{!! Form::text('MC9', $scores_arr['MC'][8], ['class' => 'form-control']) !!}</div>
+  </div><br><br>
   <div class="form-group">
     {!! Form::label('TC', 'Team contest scores:', ['class' => 'control-label']) !!}<br>
-    <div class="col-md-1">{!! Form::text('TC1', $scores_arr['TC'][0], ['step' => '0.5', 'min' => '0', 'max' => '10.5', 'class' => 'form-control','id'=> "TC1"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('TC2', $scores_arr['TC'][1], ['step' => '0.5', 'min' => '0', 'max' => '13.5', 'class' => 'form-control','id'=> "TC2"]) !!}</div>
-  </div><br>
+    @if ($errors->has('TC1') || $errors->has('TC2'))
+    <div class="alert alert-danger">
+      <ul>
+        @if ($errors->has('TC1'))
+        <li>{{ $errors->get('TC1')[0] }}</li>
+        @endif
+        @if ($errors->has('TC2'))
+        <li>{{ $errors->get('TC2')[0] }}</li>
+        @endif  
+      </ul>
+    </div>
+    @endif
+    <div class="col-md-1 {{ $errors->has('TC1') ? 'has-error' : '' }}">{!! Form::text('TC1', $scores_arr['TC'][0], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('TC2') ? 'has-error' : '' }}">{!! Form::text('TC2', $scores_arr['TC'][1], ['class' => 'form-control']) !!}</div>
+  </div><br><br>
   <div class="form-group">
     {!! Form::label('HW', 'Homework scores:', ['class' => 'control-label']) !!}<br>
-    <div class="col-md-1">{!! Form::text('HW1', $scores_arr['HW'][0], ['step' => '0.5', 'min' => '0', 'max' => '1.5', 'class' => 'form-control','id'=> "HW1"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('HW2', $scores_arr['HW'][1], ['step' => '0.5', 'min' => '0', 'max' => '1.5', 'class' => 'form-control','id'=> "HW2"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('HW3', $scores_arr['HW'][2], ['step' => '0.5', 'min' => '0', 'max' => '1.5', 'class' => 'form-control','id'=> "HW3"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('HW4', $scores_arr['HW'][3], ['step' => '0.5', 'min' => '0', 'max' => '1.5', 'class' => 'form-control','id'=> "HW4"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('HW5', $scores_arr['HW'][4], ['step' => '0.5', 'min' => '0', 'max' => '1.5', 'class' => 'form-control','id'=> "HW5"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('HW6', $scores_arr['HW'][5], ['step' => '0.5', 'min' => '0', 'max' => '1.5', 'class' => 'form-control','id'=> "HW6"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('HW7', $scores_arr['HW'][6], ['step' => '0.5', 'min' => '0', 'max' => '1.5', 'class' => 'form-control','id'=> "HW7"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('HW8', $scores_arr['HW'][7], ['step' => '0.5', 'min' => '0', 'max' => '1.5', 'class' => 'form-control','id'=> "HW8"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('HW9', $scores_arr['HW'][8], ['step' => '0.5', 'min' => '0', 'max' => '1.5', 'class' => 'form-control','id'=> "HW9"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('HW10', $scores_arr['HW'][9], ['step' => '0.5', 'min' => '0', 'max' => '1.5', 'class' => 'form-control','id'=> "HW10"]) !!}</div>
-  </div><br>
+    @include('invalidErrorGroup', array('comp'=>'HW', 'fields'=>['HW1','HW2','HW3','HW4','HW5','HW6','HW7','HW8','HW9','HW10']))
+    <div class="col-md-1 {{ $errors->has('HW1') ? 'has-error' : '' }}">{!! Form::text('HW1', $scores_arr['HW'][0], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('HW2') ? 'has-error' : '' }}">{!! Form::text('HW2', $scores_arr['HW'][1], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('HW3') ? 'has-error' : '' }}">{!! Form::text('HW3', $scores_arr['HW'][2], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('HW4') ? 'has-error' : '' }}">{!! Form::text('HW4', $scores_arr['HW'][3], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('HW5') ? 'has-error' : '' }}">{!! Form::text('HW5', $scores_arr['HW'][4], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('HW6') ? 'has-error' : '' }}">{!! Form::text('HW6', $scores_arr['HW'][5], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('HW7') ? 'has-error' : '' }}">{!! Form::text('HW7', $scores_arr['HW'][6], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('HW8') ? 'has-error' : '' }}">{!! Form::text('HW8', $scores_arr['HW'][7], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('HW9') ? 'has-error' : '' }}">{!! Form::text('HW9', $scores_arr['HW'][8], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('HW10') ? 'has-error' : '' }}">{!! Form::text('HW10', $scores_arr['HW'][9], ['class' => 'form-control']) !!}</div>
+  </div><br><br>
   <div class="form-group">
-    {!! Form::label('Bs', 'Problem Bs scores:', ['class' => 'control-label']) !!}<br>
-    <div class="col-md-1">{!! Form::text('Bs1', $scores_arr['BS'][0], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs1"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('Bs2', $scores_arr['BS'][1], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs2"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('Bs3', $scores_arr['BS'][2], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs3"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('Bs4', $scores_arr['BS'][3], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs4"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('Bs5', $scores_arr['BS'][4], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs5"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('Bs6', $scores_arr['BS'][5], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs6"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('Bs7', $scores_arr['BS'][6], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs7"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('Bs8', $scores_arr['BS'][7], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs8"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('Bs9', $scores_arr['BS'][8], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs9"]) !!}</div>
-  </div><br>
+    {!! Form::label('BS', 'Problem Bs scores:', ['class' => 'control-label']) !!}<br>
+    @include('invalidErrorGroup', array('comp'=>'BS', 'fields'=>['BS1','BS2','BS3','BS4','BS5','BS6','BS7','BS8','BS9']))
+    <div class="col-md-1 {{ $errors->has('BS1') ? 'has-error' : '' }}">{!! Form::text('BS1', $scores_arr['BS'][0], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('BS2') ? 'has-error' : '' }}">{!! Form::text('BS2', $scores_arr['BS'][1], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('BS3') ? 'has-error' : '' }}">{!! Form::text('BS3', $scores_arr['BS'][2], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('BS4') ? 'has-error' : '' }}">{!! Form::text('BS4', $scores_arr['BS'][3], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('BS5') ? 'has-error' : '' }}">{!! Form::text('BS5', $scores_arr['BS'][4], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('BS6') ? 'has-error' : '' }}">{!! Form::text('BS6', $scores_arr['BS'][5], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('BS7') ? 'has-error' : '' }}">{!! Form::text('BS7', $scores_arr['BS'][6], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('BS8') ? 'has-error' : '' }}">{!! Form::text('BS8', $scores_arr['BS'][7], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('BS9') ? 'has-error' : '' }}">{!! Form::text('BS9', $scores_arr['BS'][8], ['class' => 'form-control']) !!}</div>
+  </div><br><br>
   <div class="form-group">
     {!! Form::label('KS', 'Kattis set scores:', ['class' => 'control-label']) !!}<br>
-    <div class="col-md-1">{!! Form::text('KS1', $scores_arr['KS'][0], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "KS1"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('KS2', $scores_arr['KS'][1], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "KS2"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('KS3', $scores_arr['KS'][2], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "KS3"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('KS4', $scores_arr['KS'][3], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "KS4"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('KS5', $scores_arr['KS'][4], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "KS5"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('KS6', $scores_arr['KS'][5], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "KS6"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('KS7', $scores_arr['KS'][6], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "KS7"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('KS8', $scores_arr['KS'][7], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "KS8"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('KS9', $scores_arr['KS'][8], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "KS9"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('KS10', $scores_arr['KS'][9], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "KS10"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('KS11', $scores_arr['KS'][10], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "KS11"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('KS12', $scores_arr['KS'][11], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "KS12"]) !!}</div>
+    @include('invalidErrorGroup', array('comp'=>'KS', 'fields'=>['KS1','KS2','KS3','KS4','KS5','KS6','KS7','KS8','KS9','KS10','KS11','KS12']))
+    <div class="col-md-1 {{ $errors->has('KS1') ? 'has-error' : '' }}">{!! Form::text('KS1', $scores_arr['KS'][0], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('KS2') ? 'has-error' : '' }}">{!! Form::text('KS2', $scores_arr['KS'][1], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('KS3') ? 'has-error' : '' }}">{!! Form::text('KS3', $scores_arr['KS'][2], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('KS4') ? 'has-error' : '' }}">{!! Form::text('KS4', $scores_arr['KS'][3], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('KS5') ? 'has-error' : '' }}">{!! Form::text('KS5', $scores_arr['KS'][4], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('KS6') ? 'has-error' : '' }}">{!! Form::text('KS6', $scores_arr['KS'][5], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('KS7') ? 'has-error' : '' }}">{!! Form::text('KS7', $scores_arr['KS'][6], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('KS8') ? 'has-error' : '' }}">{!! Form::text('KS8', $scores_arr['KS'][7], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('KS9') ? 'has-error' : '' }}">{!! Form::text('KS9', $scores_arr['KS'][8], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('KS10') ? 'has-error' : '' }}">{!! Form::text('KS10', $scores_arr['KS'][9], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('KS11') ? 'has-error' : '' }}">{!! Form::text('KS11', $scores_arr['KS'][10], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('KS12') ? 'has-error' : '' }}">{!! Form::text('KS12', $scores_arr['KS'][11], ['class' => 'form-control']) !!}</div>
   </div><br>
   <div class="form-group">
     {!! Form::label('AC', 'Achievement scores:', ['class' => 'control-label']) !!}<br>
-    <div class="col-md-1">{!! Form::text('AC1', $scores_arr['AC'][0], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "AC1"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('AC2', $scores_arr['AC'][1], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "AC2"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('AC3', $scores_arr['AC'][2], ['step' => '0.5', 'min' => '0', 'max' => '3', 'class' => 'form-control','id'=> "AC3"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('AC4', $scores_arr['AC'][3], ['step' => '0.5', 'min' => '0', 'max' => '3', 'class' => 'form-control','id'=> "AC4"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('AC5', $scores_arr['AC'][4], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "AC5"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('AC6', $scores_arr['AC'][5], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "AC6"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('AC7', $scores_arr['AC'][6], ['step' => '0.5', 'min' => '0', 'max' => '6', 'class' => 'form-control','id'=> "AC7"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('AC8', $scores_arr['AC'][7], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "AC8"]) !!}</div>
-  </div><br>
+    @include('invalidErrorGroup', array('comp'=>'AC', 'fields'=>['AC1','AC2','AC3','AC4','AC5','AC6','AC7','AC8']))
+    <div class="col-md-1 {{ $errors->has('AC1') ? 'has-error' : '' }}">{!! Form::text('AC1', $scores_arr['AC'][0], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('AC2') ? 'has-error' : '' }}">{!! Form::text('AC2', $scores_arr['AC'][1], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('AC3') ? 'has-error' : '' }}">{!! Form::text('AC3', $scores_arr['AC'][2], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('AC4') ? 'has-error' : '' }}">{!! Form::text('AC4', $scores_arr['AC'][3], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('AC5') ? 'has-error' : '' }}">{!! Form::text('AC5', $scores_arr['AC'][4], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('AC6') ? 'has-error' : '' }}">{!! Form::text('AC6', $scores_arr['AC'][5], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('AC7') ? 'has-error' : '' }}">{!! Form::text('AC7', $scores_arr['AC'][6], ['class' => 'form-control']) !!}</div>
+    <div class="col-md-1 {{ $errors->has('AC8') ? 'has-error' : '' }}">{!! Form::text('AC8', $scores_arr['AC'][7], ['class' => 'form-control']) !!}</div>
+  </div><br><br>
   <div class="form-group">
     {!! Form::label('sum', 'Sum of scores (automatically computed):', ['class' => 'control-label']) !!}
     {!! Form::number('sum', 0, ['readonly', 'class' => 'form-control']) !!}
