@@ -12,5 +12,4 @@ mix.browserSync('localhost:8000')
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-  .copy('node_modules/sweetalert2/dist/sweetalert2.css', 'resources/assets/vendor')
    .sass('resources/assets/sass/app.scss', 'public/css')

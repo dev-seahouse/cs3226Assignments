@@ -14,6 +14,7 @@
     "jquery": "^3.1.0",
     "laravel-mix": "^0.8.0",
     "lodash": "^4.16.2",
+    "sweetalert2": "^6.4.2",
     "vue": "^2.0.1"
   },
   "standard": {
@@ -21,8 +22,5 @@
       "$",
       "_"
     ]
-  },
-  "dependencies": {
-    "sweetalert2": "^6.4.2"
   }
 }
