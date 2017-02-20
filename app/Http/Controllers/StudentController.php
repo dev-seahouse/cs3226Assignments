@@ -392,21 +392,32 @@ class StudentController extends Controller {
       'name' => 'required|between:5,30|regex:/^[A-Za-z ]+$/',
       'nick' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
       'kattis' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
-      'MC1' => [$mcRule], 'MC2' => [$mcRule], 'MC3' => [$mcRule], 'MC4' => [$mcRule], 'MC5' => [$mcRule],
-      'MC6' => [$mcRule], 'MC7' => [$mcRule], 'MC8' => [$mcRule], 'MC9' => [$mcRule],
+      // MC rules
+      'MC1' => ['required', $mcRule], 'MC2' => ['required', $mcRule], 'MC3' => ['required', $mcRule], 
+      'MC4' => ['required', $mcRule], 'MC5' => ['required', $mcRule], 'MC6' => ['required', $mcRule],
+      'MC7' => ['required', $mcRule], 'MC8' => ['required', $mcRule], 'MC9' => ['required', $mcRule],
+      // TC rules
       'TC1' => ['required', 'regex:/^(10(\.[0-5])?)$|^([0-9](\.([0-9]))?)$|(xy\.z)$/'],
       'TC2' => ['required', 'regex:/^(1[0-3](\.[0-5])?)$|^([0-9](\.([0-9]))?)$|(xy\.z)$/'],
-      'HW1' => [$hwRule], 'HW2' => [$hwRule], 'HW3' => [$hwRule], 'HW4' => [$hwRule], 'HW5' => [$hwRule],
-      'HW6' => [$hwRule], 'HW7' => [$hwRule], 'HW8' => [$hwRule], 'HW9' => [$hwRule], 'HW10' => [$hwRule],
-      'BS1' => [$bsRule], 'BS2' => [$bsRule], 'BS3' => [$bsRule], 'BS4' => [$bsRule], 'BS5' => [$bsRule],
-      'BS6' => [$bsRule], 'BS7' => [$bsRule], 'BS8' => [$bsRule], 'BS9' => [$bsRule],
-      'KS1' => [$ksRule], 'KS2' => [$ksRule], 'KS3' => [$ksRule], 'KS4' => [$ksRule], 'KS5' => [$ksRule],
-      'KS6' => [$ksRule], 'KS7' => [$ksRule], 'KS8' => [$ksRule], 'KS9' => [$ksRule], 'KS10' => [$ksRule],
-      'KS11' => [$ksRule], 'KS12' => [$ksRule],
-      'AC1' => ['regex:/^(0|1|x)$/'], 'AC2' => ['regex:/^(0|1|x)$/'],
-      'AC3' => ['regex:/^([0-3]|x)$/'], 'AC4' => ['regex:/^([0-3]|x)$/'],
-      'AC5' => ['regex:/^(0|1|x)$/'], 'AC6' => ['regex:/^(0|1|x)$/'],
-      'AC7' => ['regex:/^([0-6]|x)$/'], 'AC8' => ['regex:/^(0|1|x)$/'],
+      // HW rules
+      'HW1' => ['required', $hwRule], 'HW2' => ['required', $hwRule], 'HW3' => ['required', $hwRule], 
+      'HW4' => ['required', $hwRule], 'HW5' => ['required', $hwRule], 'HW6' => ['required', $hwRule],
+      'HW7' => ['required', $hwRule], 'HW8' => ['required', $hwRule], 'HW9' => ['required', $hwRule],
+      'HW10' => ['required', $hwRule],
+      // BS rules
+      'BS1' => ['required', $bsRule], 'BS2' => ['required', $bsRule], 'BS3' => ['required', $bsRule],
+      'BS4' => ['required', $bsRule], 'BS5' => ['required', $bsRule], 'BS6' => ['required', $bsRule],
+      'BS7' => ['required', $bsRule], 'BS8' => ['required', $bsRule], 'BS9' => ['required', $bsRule],
+      // KS rules
+      'KS1' => ['required', $ksRule], 'KS2' => ['required', $ksRule], 'KS3' => ['required', $ksRule],
+      'KS4' => ['required', $ksRule], 'KS5' => ['required', $ksRule], 'KS6' => ['required', $ksRule], 
+      'KS7' => ['required', $ksRule], 'KS8' => ['required', $ksRule], 'KS9' => ['required', $ksRule],
+      'KS10' => ['required', $ksRule], 'KS11' => ['required', $ksRule], 'KS12' => ['required', $ksRule],
+      // AC rules
+      'AC1' => ['required', 'regex:/^(0|1|x)$/'], 'AC2' => ['required', 'regex:/^(0|1|x)$/'],
+      'AC3' => ['required', 'regex:/^([0-3]|x)$/'], 'AC4' => ['required', 'regex:/^([0-3]|x)$/'],
+      'AC5' => ['required', 'regex:/^(0|1|x)$/'], 'AC6' => ['required', 'regex:/^(0|1|x)$/'],
+      'AC7' => ['required', 'regex:/^([0-6]|x)$/'], 'AC8' => ['required', 'regex:/^(0|1|x)$/'],
     );
     
     return $rules;
@@ -414,25 +425,19 @@ class StudentController extends Controller {
   
   private function getEditFormMessages() {
     $messages = array(
-      'name.regex' => 'Full name should only contain letters and space.',
-      'name.required' => 'Full name cannot be blank.',
-      'name.between' => 'Full name should be between :min - :max characters.',
-      'nick.regex' => 'Nick name should only contain alphanumeric characters and no space.',
-      'nick.required' => 'Nick name cannot be blank.',
-      'nick.between' => 'Nick name should be between :min - :max characters.',
-      'kattis.regex' => 'Kattis account should only contain alphanumeric characters and no space.',
-      'kattis.required' => 'Kattis account cannot be blank.',
-      'kattis.between' => 'Kattis account should be between :min - :max characters.',
-      'TC1.required' => 'Midterm Team Contest score is required.',
-      'TC1.regex' => 'Midterm Team Contest score should be between 0 to 10.5, or set as "xy.z".',
-      'TC2.regex' => 'Final Team Contest score is required.',
-      'TC2.regex' => 'Final Team Contest score should be between 0 to 13.5, or set as "xy.z".',
-      'mc_components.regex' => 'Mini Contest scores should range from 0 to 4, with increments of 0.5, or set as "x.y".',
-      'tc_components.regex' => 'Team Contest scores should range from 0 to 10.5 for Midterm TC and 0 to 13.5 for Final TC, or set as "xy.z".',
-      'hw_components.regex' => 'Homework scores should range from 0 to 1.5, with increments of 0.5, or set as "x.y".',
-      'bs_components.regex' => 'Problem Bs scores should be 0 or 1, or set as "x".',
-      'ks_components.regex' => 'Kattis Sets scores should be 0 or 1, or set as "x".',
-      'ac_components.regex' => 'Achievements scores should range from 0 to 3 for AC3 and AC4, 0 to 6 for AC7 and 0 or 1 for other achievements, or set as "x".'
+      'name.regex' => 'Full name should only contain letters and space',
+      'name.required' => 'Full name cannot be blank',
+      'name.between' => 'Full name should be between :min - :max characters',
+      'nick.regex' => 'Nick name should only contain alphanumeric characters and no space',
+      'nick.required' => 'Nick name cannot be blank',
+      'nick.between' => 'Nick name should be between :min - :max characters',
+      'kattis.regex' => 'Kattis account should only contain alphanumeric characters and no space',
+      'kattis.required' => 'Kattis account cannot be blank',
+      'kattis.between' => 'Kattis account should be between :min - :max characters',
+      'TC1.required' => 'Midterm Team Contest score is required, or set as "xy.z"',
+      'TC1.regex' => 'Midterm Team Contest score should be between 0 to 10.5',
+      'TC2.required' => 'Final Team Contest score is required, or set as "xy.z"',
+      'TC2.regex' => 'Final Team Contest score should be between 0 to 13.5',
     );
     
     return $messages;
