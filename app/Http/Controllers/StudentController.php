@@ -381,20 +381,36 @@ class StudentController extends Controller {
   }
   
   private function getEditFormRules() {
+    $mcRule = 'regex:/^([0-3](\.(0|5))?)|(4(\.0)?)|(x\.y)$/';
+    $hwRule = 'regex:/^([0-1](\.(0|5))?)|(x.y)$/';
+    $bsRule = 'regex:/^(0|1|x)$/';
+    $ksRule = 'regex:/^(0|1|x)$/';
     $rules = array(
       'name' => 'required|between:5,30|regex:/^[A-Za-z ]+$/',
       'nick' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
       'kattis' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
-      'mc_components' => ['regex:/^((([0-3]\.(0|5)|4\.0)|(x\.y)),){8}(([0-3]\.(0|5)|4\.0)|(x.y))$/'],
-      'tc_components' => ['regex:/^^([0-9]\.([0-9])|(xy\.z)|(10\.[0-5])),((([0-9]|1[0-2])\.([0-9])|(xy.z))|(13\.([0-5])))$$/'],
-      'hw_components' => ['regex:/^(([0-1]\.(0|5)|(x.y)),){9}([0-1]\.(0|5)|(x\.y))$/'],
-      'bs_components' => ['regex:/^((0|1|x),){8}((0|1|x))$/'],
-      'ks_components' => ['regex:/^((0|1|x),){11}((0|1|x))$/'],
-      'ac_components' => ['regex:/^((0|1|x),){2}(([0-3]|x),){2}((0|1|x),){3}((0|1|x))$/']
+      'MC1' => [$mcRule], 'MC2' => [$mcRule], 'MC3' => [$mcRule], 'MC4' => [$mcRule], 'MC5' => [$mcRule],
+      'MC6' => [$mcRule], 'MC7' => [$mcRule], 'MC8' => [$mcRule], 'MC9' => [$mcRule],
+      'TC1' => ['regex:/^(10(\.[0-5])?)|([0-9](\.([0-9]))?)|(xy\.z)$/'],
+      'TC2' => ['regex:/^(1[0-3](\.[0-5])?)|([0-9](\.([0-9]))?)|(xy\.z)$/'],
+      'HW1' => [$hwRule], 'HW2' => [$hwRule], 'HW3' => [$hwRule], 'HW4' => [$hwRule], 'HW5' => [$hwRule],
+      'HW6' => [$hwRule], 'HW7' => [$hwRule], 'HW8' => [$hwRule], 'HW9' => [$hwRule], 'HW10' => [$hwRule],
+      'BS1' => [$bsRule], 'BS2' => [$bsRule], 'BS3' => [$bsRule], 'BS4' => [$bsRule], 'BS5' => [$bsRule],
+      'BS6' => [$bsRule], 'BS7' => [$bsRule], 'BS8' => [$bsRule], 'BS9' => [$bsRule],
+      'KS1' => [$ksRule], 'KS2' => [$ksRule], 'KS3' => [$ksRule], 'KS4' => [$ksRule], 'KS5' => [$ksRule],
+      'KS6' => [$ksRule], 'KS7' => [$ksRule], 'KS8' => [$ksRule], 'KS9' => [$ksRule], 'KS10' => [$ksRule],
+      'KS11' => [$ksRule], 'KS12' => [$ksRule],
+      'AC1' => ['regex:/^(0|1|x)$/'], 'AC2' => ['regex:/^(0|1|x)$/'],
+      'AC3' => ['regex:/^([0-3]|x)$/'], 'AC4' => ['regex:/^([0-3]|x)$/'],
+      'AC5' => ['regex:/^(0|1|x)$/'], 'AC6' => ['regex:/^(0|1|x)$/'],
+      'AC7' => ['regex:/^([0-6]|x)$/'], 'AC8' => ['regex:/^(0|1|x)$/'],
     );
+    
+    return $rules;
   }
   
   private function getEditFormMessages() {
+    $mcMsg = ':attribute score should range from 0 to 4, with increments of 0.5, or set as "x.y".';
     $messages = array(
       'name.regex' => 'Full name should only contain letters and space.',
       'name.required' => 'Full name cannot be blank.',
@@ -405,13 +421,16 @@ class StudentController extends Controller {
       'kattis.regex' => 'Kattis account should only contain alphanumeric characters and no space.',
       'kattis.required' => 'Kattis account cannot be blank.',
       'kattis.between' => 'Kattis account should be between :min - :max characters.',
-      'mc_components.regex' => 'Mini Contest scores should range from 0.0 to 4.0, with increments of 0.5, or set as "x.y".',
-      'tc_components.regex' => 'Team Contest scores should range from 0.0 to 10.5 for Midterm TC and 0.0 to 13.5 for Final TC, or set as      "xy.z".',
-      'hw_components.regex' => 'Homework scores should range from 0.0 to 1.5, with increments of 0.5, or set as "x.y".',
+      'mc1.regex' => $mcMsg,
+      'mc_components.regex' => 'Mini Contest scores should range from 0 to 4, with increments of 0.5, or set as "x.y".',
+      'tc_components.regex' => 'Team Contest scores should range from 0 to 10.5 for Midterm TC and 0 to 13.5 for Final TC, or set as "xy.z".',
+      'hw_components.regex' => 'Homework scores should range from 0 to 1.5, with increments of 0.5, or set as "x.y".',
       'bs_components.regex' => 'Problem Bs scores should be 0 or 1, or set as "x".',
       'ks_components.regex' => 'Kattis Sets scores should be 0 or 1, or set as "x".',
-      'ac_components.regex' => 'Achievements scores should range from 0 to 3 for week 3 and 4, and 0 or 1 for other weeks, or set as "x".'
+      'ac_components.regex' => 'Achievements scores should range from 0 to 3 for AC3 and AC4, 0 to 6 for AC7 and 0 or 1 for other achievements, or set as "x".'
     );
+    
+    return $messages;
   }
 
 }

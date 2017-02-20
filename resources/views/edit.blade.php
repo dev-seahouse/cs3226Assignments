@@ -15,14 +15,17 @@
   <div class="form-group"> {{-- Group related form components together --}}
     {!! Form::hidden('id', $student['id']) !!}
     {!! Form::label('nicknamelabel', 'Nick Name:', ['class' => 'control-label']) !!}
+    @include('invalidError', array('field'=>'nick'))
     {!! Form::text('nick', $student['nick'], ['class' => 'form-control']) !!}
   </div>
   <div class="form-group"> {{-- Group related form components together --}}
     {!! Form::label('fullnamelabel', 'Full Name:', ['class' => 'control-label']) !!}
+    @include('invalidError', array('field'=>'name'))
     {!! Form::text('name', $student['name'], ['class' => 'form-control']) !!}
   </div>
   <div class="form-group"> {{-- Group related form components together --}}
     {!! Form::label('kattislabel', 'Kattis account:', ['class' => 'control-label']) !!}
+    @include('invalidError', array('field'=>'kattis'))
     {!! Form::text('kattis', $student['kattis'], ['class' => 'form-control']) !!}
   </div>
   <div class="form-group">
@@ -57,15 +60,15 @@
   </div><br>
   <div class="form-group">
     {!! Form::label('Bs', 'Problem Bs scores:', ['class' => 'control-label']) !!}<br>
-    <div class="col-md-1">{!! Form::text('Bs1', $scores_arr['BS'][0], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs1"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('Bs2', $scores_arr['BS'][1], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs2"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('Bs3', $scores_arr['BS'][2], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs3"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('Bs4', $scores_arr['BS'][3], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs4"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('Bs5', $scores_arr['BS'][4], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs5"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('Bs6', $scores_arr['BS'][5], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs6"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('Bs7', $scores_arr['BS'][6], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs7"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('Bs8', $scores_arr['BS'][7], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs8"]) !!}</div>
-    <div class="col-md-1">{!! Form::text('Bs9', $scores_arr['BS'][8], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs9"]) !!}</div>
+    <div class="col-md-1">{!! Form::text('BS1', $scores_arr['BS'][0], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs1"]) !!}</div>
+    <div class="col-md-1">{!! Form::text('BS2', $scores_arr['BS'][1], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs2"]) !!}</div>
+    <div class="col-md-1">{!! Form::text('BS3', $scores_arr['BS'][2], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs3"]) !!}</div>
+    <div class="col-md-1">{!! Form::text('BS4', $scores_arr['BS'][3], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs4"]) !!}</div>
+    <div class="col-md-1">{!! Form::text('BS5', $scores_arr['BS'][4], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs5"]) !!}</div>
+    <div class="col-md-1">{!! Form::text('BS6', $scores_arr['BS'][5], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs6"]) !!}</div>
+    <div class="col-md-1">{!! Form::text('BS7', $scores_arr['BS'][6], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs7"]) !!}</div>
+    <div class="col-md-1">{!! Form::text('BS8', $scores_arr['BS'][7], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs8"]) !!}</div>
+    <div class="col-md-1">{!! Form::text('BS9', $scores_arr['BS'][8], ['step' => '0.5', 'min' => '0', 'max' => '1', 'class' => 'form-control','id'=> "Bs9"]) !!}</div>
   </div><br>
   <div class="form-group">
     {!! Form::label('KS', 'Kattis set scores:', ['class' => 'control-label']) !!}<br>
