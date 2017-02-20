@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use \Carbon\Carbon;
 class StudentController extends Controller {
 
   function __construct() {
@@ -102,9 +102,12 @@ class StudentController extends Controller {
                   ->select(\DB::raw('students.*, mc + tc + hw + bs + ks + ac as total'))
                   ->orderBy('total', 'DESC')
                   ->get();
+    $last_updated = \App\DatabaseUtil::get_last_updated();
+    $friendly_last_updated = Carbon::createFromTimestamp(strtotime($last_updated))->diffForHumans();
 
     return view('index')->with('studentsOld', json_encode($studentsOld))
-                        ->with('students', $students);
+                        ->with('students', $students)
+                        ->with('last_updated',$friendly_last_updated);
                         //->with('maxArray', $maxArray)
                         //->with('first', $first)->with('second', $second)->with('third', $third)->with('last',$last);
   }
