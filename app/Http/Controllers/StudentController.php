@@ -226,75 +226,28 @@ class StudentController extends Controller {
       $component->student()->associate($student);
       $component->save();
 
-      //Create score
-      for ($i = 1; $i <= 9; $i++) {
-        $score = new \App\Score;
-        $score->component = "MC";
-        $score->week = $i;
-        $score->score = 0;
-        $score->student()->associate($student);
-        $score->save();
-      }
-
-      for ($i = 1; $i <= 2; $i++) {
-        $score = new \App\Score;
-        $score->component = "TC";
-        $score->week = $i;
-        $score->score = 0;
-        $score->student()->associate($student);
-        $score->save();
-      }
-
-      for ($i = 1; $i <= 10; $i++) {
-        $score = new \App\Score;
-        $score->component = "HW";
-        $score->week = $i;
-        $score->score = 0;
-        $score->student()->associate($student);
-        $score->save();
-      }
-
-      for ($i = 1; $i <= 9; $i++) {
-        $score = new \App\Score;
-        $score->component = "BS";
-        $score->week = $i;
-        $score->score = 0;
-        $score->student()->associate($student);
-        $score->save();
-      }
-
-      for ($i = 1; $i <= 12; $i++) {
-        $score = new \App\Score;
-        $score->component = "KS";
-        $score->week = $i;
-        $score->score = 0;
-        $score->student()->associate($student);
-        $score->save();
-      }
-
-      for ($i = 1; $i <= 8; $i++) {
-        $score = new \App\Score;
-        $score->component = "TC";
-        $score->week = $i;
-        $score->score = 0;
-        $score->student()->associate($student);
-        $score->save();
-      }
+      //Create scores
+      $this->create_scores("MC", 9, $student);
+      $this->create_scores("TC", 2, $student);
+      $this->create_scores("HW", 10, $student);
+      $this->create_scores("BS", 9, $student);
+      $this->create_scores("KS", 12, $student);
+      $this->create_scores("AC", 8, $student);
     });
 
     return redirect()->route('index');
   }
 
 
-  private function create_scores($component_name, $num_scores_in_component){
-        for ($i = 1; $i <= $num_scores_in_component; $i++) {
-        $score = new \App\Score;
-        $score->component = $component_name;
-        $score->week = $i;
-        $score->score = 0;
-        $score->student()->associate($student);
-        $score->save();
-      }
+  private function create_scores($component_name, $num_scores_in_component, $student){
+    for ($i = 1; $i <= $num_scores_in_component; $i++) {
+      $score = new \App\Score;
+      $score->component = $component_name;
+      $score->week = $i;
+      $score->score = 0;
+      $score->student()->associate($student);
+      $score->save();
+    }
   }
 
   // show edit view
