@@ -71,7 +71,8 @@ class StudentController extends Controller {
     $last_updated = \App\DatabaseUtil::get_last_updated();
     $friendly_last_updated = Carbon::createFromTimestamp(strtotime($last_updated))->diffForHumans();
 
-    return view('index')->with('students', $students);
+    return view('index')->with('students', $students)
+                        ->with('last_updated',$friendly_last_updated);;
   }
 
   // show detail view
@@ -383,8 +384,8 @@ class StudentController extends Controller {
   }
   
   private function getEditFormRules() {
-    $mcRule = 'regex:/^([0-3](\.(0|5))?)|(4(\.0)?)|(x\.y)$/';
-    $hwRule = 'regex:/^([0-1](\.(0|5))?)|(x.y)$/';
+    $mcRule = 'regex:/^([0-3](\.(0|5))?)$|(4(\.0)?)$|(x\.y)$/';
+    $hwRule = 'regex:/^([0-1](\.(0|5))?)$|(x.y)$/';
     $bsRule = 'regex:/^(0|1|x)$/';
     $ksRule = 'regex:/^(0|1|x)$/';
     $rules = array(
@@ -393,8 +394,8 @@ class StudentController extends Controller {
       'kattis' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
       'MC1' => [$mcRule], 'MC2' => [$mcRule], 'MC3' => [$mcRule], 'MC4' => [$mcRule], 'MC5' => [$mcRule],
       'MC6' => [$mcRule], 'MC7' => [$mcRule], 'MC8' => [$mcRule], 'MC9' => [$mcRule],
-      'TC1' => ['regex:/^(10(\.[0-5])?)|([0-9](\.([0-9]))?)|(xy\.z)$/'],
-      'TC2' => ['regex:/^(1[0-3](\.[0-5])?)|([0-9](\.([0-9]))?)|(xy\.z)$/'],
+      'TC1' => ['required', 'regex:/^(10(\.[0-5])?)$|^([0-9](\.([0-9]))?)$|(xy\.z)$/'],
+      'TC2' => ['required', 'regex:/^(1[0-3](\.[0-5])?)$|^([0-9](\.([0-9]))?)$|(xy\.z)$/'],
       'HW1' => [$hwRule], 'HW2' => [$hwRule], 'HW3' => [$hwRule], 'HW4' => [$hwRule], 'HW5' => [$hwRule],
       'HW6' => [$hwRule], 'HW7' => [$hwRule], 'HW8' => [$hwRule], 'HW9' => [$hwRule], 'HW10' => [$hwRule],
       'BS1' => [$bsRule], 'BS2' => [$bsRule], 'BS3' => [$bsRule], 'BS4' => [$bsRule], 'BS5' => [$bsRule],
@@ -412,7 +413,6 @@ class StudentController extends Controller {
   }
   
   private function getEditFormMessages() {
-    $mcMsg = ':attribute score should range from 0 to 4, with increments of 0.5, or set as "x.y".';
     $messages = array(
       'name.regex' => 'Full name should only contain letters and space.',
       'name.required' => 'Full name cannot be blank.',
@@ -423,7 +423,10 @@ class StudentController extends Controller {
       'kattis.regex' => 'Kattis account should only contain alphanumeric characters and no space.',
       'kattis.required' => 'Kattis account cannot be blank.',
       'kattis.between' => 'Kattis account should be between :min - :max characters.',
-      'mc1.regex' => $mcMsg,
+      'TC1.required' => 'Midterm Team Contest score is required.',
+      'TC1.regex' => 'Midterm Team Contest score should be between 0 to 10.5, or set as "xy.z".',
+      'TC2.regex' => 'Final Team Contest score is required.',
+      'TC2.regex' => 'Final Team Contest score should be between 0 to 13.5, or set as "xy.z".',
       'mc_components.regex' => 'Mini Contest scores should range from 0 to 4, with increments of 0.5, or set as "x.y".',
       'tc_components.regex' => 'Team Contest scores should range from 0 to 10.5 for Midterm TC and 0 to 13.5 for Final TC, or set as "xy.z".',
       'hw_components.regex' => 'Homework scores should range from 0 to 1.5, with increments of 0.5, or set as "x.y".',
