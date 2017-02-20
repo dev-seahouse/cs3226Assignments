@@ -1,7 +1,7 @@
 @extends('template') <!-- use the SAME template -->
 @section('main') <!-- also a section called main but different content -->
 <div class="container-fluid text-container">
-  <h1 class="no-margin">Scoring Scheme</h1>
+  <h2>Scoring Scheme</h2>
   <div class="row">
     <div class="col-xs-12">
 
@@ -11,12 +11,12 @@
             <div class="panel panel-default">
               <div class="panel-heading" role="tab" id="headingOne">
                 <h4 class="panel-title">
-                  <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                     Overview
                   </a>
                 </h4>
               </div>
-              <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+              <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                 <div class="panel-body">
                  <p>The purpose of this ranklist app is twofold:</p>
                   <ol>
