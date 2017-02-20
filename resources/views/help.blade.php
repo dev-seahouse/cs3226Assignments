@@ -14,7 +14,7 @@
         </ol>
       </section>
 
-      <hr>
+      </hr>
 
       <section class="mc">
        <h3>MC = Weekly Mini Contest (36%)</h3>
@@ -34,7 +34,7 @@
 
       </section>
 
-     <hr>
+     </hr>
 
       <section class="tc">
         <h3>Two Team Contests (24%)</h3>
@@ -44,7 +44,7 @@
         </p>
       </section>
 
-      <hr>
+      </hr>
 
       <section class="hw">
         <h3>Weekly Homework (15%)</h3>
@@ -54,7 +54,7 @@
 
       </section>
 
-      <hr>
+      </hr>
 
       <section class="bs">
         <h3>Problem Bs (9%)</h3>
@@ -67,7 +67,7 @@
 
       </section>
 
-      <hr>
+      </hr>
 
       <section class="kattis">
         <h3>Kattis Set (12%)</h3>
@@ -98,7 +98,7 @@
 
       </section>
 
-      <hr>
+      </hr>
 
       <section class="ac">
         <h3>Achievement System of CS3233 (17%)</h3>
@@ -112,6 +112,7 @@
           <li>*** <b>Surprise us</b>: Managed to surprise the teaching staffs by giving a better/more elegant solution/pinpoint bug in lecture, etc anytime during the semester (max claim: 3 times/student).</li>
 
           <li>* <b>High determination</b>: Objective title for student who always diligently solve (AC) problem B of all 10 weekly contests, be it during contest time or as homework assignment. This achievement will be auto updated by this system at the end of the semester.</li>
+
           <li>* <b>Bookworm</b>: Subjective title for student who diligently study and review CP3.17 book by the end of Week12 (at least 10*1.5% - 0.5% = 14.5% score, i.e. at most one 1.0 with the rest 1.5). This achievement will be auto updated
                 by this system at the end of the semester.</li>
 
@@ -121,11 +122,10 @@
           <li>* <b>CodeForces Specialist</b>: Given to student who also join <a href="http://codeforces.com/" target="_blank">CodeForces</a> contests and attain rating of at least
                     <font color="Cyan">1400 (Cyan color)</font> <u>by the end of Week13</u> (this achievement will NOT be updated weekly as this will keep changing every week).</li>
 
-                    <!-- UVa apprentice: min(2%, 8*X/1885 * 2%): This is a comparison between what you manage to solve in UVa online judge (X) by the end of the semester (Thursday, 7 May 2015, 11.59AM/midday) compared to Steven's at the start of semester (1885 AC problems), multiplied by a scaling factor of 8 =)... or approximately 236 AC problems in one semester (it is possible for student to reach this number in 4 months of CS3233). This achievement will be auto updated by this system. -->
+          <!-- UVa apprentice: min(2%, 8*X/1885 * 2%): This is a comparison between what you manage to solve in UVa online judge (X) by the end of the semester (Thursday, 7 May 2015, 11.59AM/midday) compared to Steven's at the start of semester (1885 AC problems), multiplied by a scaling factor of 8 =)... or approximately 236 AC problems in one semester (it is possible for student to reach this number in 4 months of CS3233). This achievement will be auto updated by this system. -->
           </ol>
           <p>One star = 1%, most achievements are manual entry:<br></p>
       </section>
-
       </div> <!-- end col-xs-12 -->
     </div> <!-- end row -->
   </div> <!-- end text-container -->
