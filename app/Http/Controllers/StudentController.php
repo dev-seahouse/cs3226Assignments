@@ -57,7 +57,7 @@ class StudentController extends Controller {
 //    }
 //
 //    return $students;
-    return \App\Student::with('scores')->where('id', 56)->first();
+    return \App\Component::where('student_id', 25)->firstOrFail();
 
   }
 
@@ -244,28 +244,18 @@ class StudentController extends Controller {
              ->withInput();
     }
     
-    // update database
-    // need to update student
-    // need to update component sums
-    // need to update scores
-    // if nick is edited, need to delete old profile pic to create new profile pic
-    
     // retrieve all inputs from form request
     $id = $request->input('id');
     $nick = $request->input('nick');
     $name = $request->input('name');
     $kattis = $request->input('kattis');
-    $mc_scores = array(
-      '1' => $request->input('MC1'),
-      '2' => $request->input('MC2'),
-      '3' => $request->input('MC3'),
-      '4' => $request->input('MC4'),
-      '5' => $request->input('MC5'),
-      '6' => $request->input('MC6'),
-      '7' => $request->input('MC7'),
-      '8' => $request->input('MC8'),
-      '9' => $request->input('MC9'),
-    );
+    $mc_scores = $this->putFormValuesInArray('MC', 9, $request);
+    $tc_scores = $this->putFormValuesInArray('TC', 2, $request);
+    $hw_scores = $this->putFormValuesInArray('HW', 10, $request);
+    $bs_scores = $this->putFormValuesInArray('BS', 9, $request);
+    $ks_scores = $this->putFormValuesInArray('KS', 12, $request);
+    $ac_scores = $this->putFormValuesInArray('AC', 8, $request);
+    $comments = $request->input('comments');
     
     // update student
     $student = \App\Student::find($id);
@@ -278,12 +268,52 @@ class StudentController extends Controller {
     $student->name = $name;
     $student->kattis = $kattis;
     $student->save();
+    // update individual scores
+    $this->updateCompScoresOfStudent($id, 'MC', $mc_scores, 'x.y');
+    $this->updateCompScoresOfStudent($id, 'TC', $tc_scores, 'xy.z');
+    $this->updateCompScoresOfStudent($id, 'HW', $hw_scores, 'x.y');
+    $this->updateCompScoresOfStudent($id, 'BS', $bs_scores, 'x');
+    $this->updateCompScoresOfStudent($id, 'KS', $ks_scores, 'x');
+    $this->updateCompScoresOfStudent($id, 'AC', $ac_scores, 'x');
+    // update components sum
+    $components = \App\Component::where('student_id', $id)->firstOrFail();
+    $components->mc = array_sum($mc_scores);
+    $components->tc = array_sum($tc_scores);
+    $components->hw = array_sum($hw_scores);
+    $components->bs = array_sum($bs_scores);
+    $components->ks = array_sum($ks_scores);
+    $components->ac = array_sum($ac_scores);
+    $components->save();
+    // update comment
+    $comment = \App\Comment::where('student_id', $id)->firstOrFail();
+    $comment->comment = $comments;
+    $comment->save();
     
-    
-
-    //REMOVE ALL OLD CODE THAT USES THE OLD DATABASE!
-    //Reminder: when you edit nick, delete {old->profile_pic} and create {new->profile_pic}
     return redirect()->route('index');
+  }
+  
+  // Helper method for editStudent
+  private function updateCompScoresOfStudent($id, $comp, $compScores, $xyz) {
+    $scores = \App\Score::where('student_id', $id)->where('component', $comp)->orderBy('week')->get();
+    foreach($scores as $score) {
+      $newScore = $compScores[$score->week];
+      if ($newScore == $xyz) {
+        $newScore = NULL;
+      }
+      $singleScore = \App\Score::find($score->id);
+      $singleScore->score = $newScore;
+      $singleScore->save();
+    }
+  }
+  
+  // Helper method for editStudent
+  private function putFormValuesInArray($comp, $numOfComp, $request) {
+    $arr = array();
+    for($i=1; $i<=$numOfComp; $i++) {
+      $arr[$i] = $request->input($comp.$i);
+    }
+    
+    return $arr;
   }
 
   public function deleteStudent($id) {

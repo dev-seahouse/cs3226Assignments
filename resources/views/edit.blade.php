@@ -91,7 +91,7 @@
     <div class="col-md-1 {{ $errors->has('KS10') ? 'has-error' : '' }}">{!! Form::text('KS10', $scores_arr['KS'][9], ['class' => 'form-control autosum']) !!}</div>
     <div class="col-md-1 {{ $errors->has('KS11') ? 'has-error' : '' }}">{!! Form::text('KS11', $scores_arr['KS'][10], ['class' => 'form-control autosum']) !!}</div>
     <div class="col-md-1 {{ $errors->has('KS12') ? 'has-error' : '' }}">{!! Form::text('KS12', $scores_arr['KS'][11], ['class' => 'form-control autosum']) !!}</div>
-  </div><br>
+  </div><br><br>
   <div class="form-group">
     {!! Form::label('AC', 'Achievement scores:', ['class' => 'control-label']) !!}<br>
     @include('invalidErrorGroup', array('comp'=>'AC', 'fields'=>['AC1','AC2','AC3','AC4','AC5','AC6','AC7','AC8']))
