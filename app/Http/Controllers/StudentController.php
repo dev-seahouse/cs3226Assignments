@@ -249,20 +249,37 @@ class StudentController extends Controller {
     // need to update component sums
     // need to update scores
     // if nick is edited, need to delete old profile pic to create new profile pic
-
+    
+    // retrieve all inputs from form request
     $id = $request->input('id');
     $nick = $request->input('nick');
     $name = $request->input('name');
     $kattis = $request->input('kattis');
-    $mc_components = explode(',', $request->input('mc_components'));
-    $tc_components = explode(',', $request->input('tc_components'));
-    $hw_components = explode(',', $request->input('hw_components'));
-    $bs_components = explode(',', $request->input('bs_components'));
-    $ks_components = explode(',', $request->input('ks_components'));
-    $ac_components = explode(',', $request->input('ac_components'));
-
-    $spe = array_sum($mc_components) + array_sum($tc_components);
-    $dil = array_sum($hw_components) + array_sum($bs_components) + array_sum($ks_components) + array_sum($ac_components);
+    $mc_scores = array(
+      '1' => $request->input('MC1'),
+      '2' => $request->input('MC2'),
+      '3' => $request->input('MC3'),
+      '4' => $request->input('MC4'),
+      '5' => $request->input('MC5'),
+      '6' => $request->input('MC6'),
+      '7' => $request->input('MC7'),
+      '8' => $request->input('MC8'),
+      '9' => $request->input('MC9'),
+    );
+    
+    // update student
+    $student = \App\Student::find($id);
+    $student->nick = $nick;
+    // rename old profile pic
+    $oldProPic = $student->profile_pic;
+    $newProPic = $nick.'.png';
+    \File::move(base_path().'/public/img/student/'.$oldProPic, base_path().'/public/img/student/'.$newProPic);
+    $student->profile_pic = $newProPic;
+    $student->name = $name;
+    $student->kattis = $kattis;
+    $student->save();
+    
+    
 
     //REMOVE ALL OLD CODE THAT USES THE OLD DATABASE!
     //Reminder: when you edit nick, delete {old->profile_pic} and create {new->profile_pic}
