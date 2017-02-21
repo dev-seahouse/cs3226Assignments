@@ -10,27 +10,6 @@ class StudentController extends Controller {
   }
 
   public function testget() {
-    // goal : to be able to do this: e.g.
-      /*
-       * @foreach ($students as $student)
-            <tr>
-                <td>$student->name</td>
-                <td>$student->profile_pic</td>
-                ......
-                @foreach ($student->components() as $component)
-                    <td>$component->getComponentSum()<td> // each component model have getComponentSumMethod
-                ......
-                $student->getDil() // getDil simply retrieve the component_sum fields from the components linked to student.
-                $student->getSPE()
-                $student->getBLABLA()
-                $student->getSum() // simply a 1-5 inside student model that calls getSum() method inside each component linked to this student
-            </tr>
-          @endforeach
-       *  then use javascript table sort to sort according to score sum
-       *  $student model also provide methods for us to easily access data from other places. e.g $student->getAchievements()
-       *  $student->getComponentScores($componentName || $componentID) allow us to retrieve array of scores for that component
-       *  This can be done alternative through component model vis static method Component::getScoresForComponent($component_id || $component_name);
-       */
     // For each student, retrieve comments AND records AND scores
     // return \App\Student::with('comment')->with('records')->with('scores')->get();
 
@@ -49,16 +28,7 @@ class StudentController extends Controller {
               ->get();*/
 
     //return \App\Student::all();
-
-//    $students = \App\Student::all();
-//
-//    foreach ($students as $student) {
-//      $student->total = $student->getCompScores();
-//    }
-//
-//    return $students;
     return \App\Component::where('student_id', 25)->firstOrFail();
-
   }
 
   // show index view
@@ -113,7 +83,7 @@ class StudentController extends Controller {
             $display = 'x.y';
             break;
           case 'TC':
-            $display = 'x.yz';
+            $display = 'xy.z';
             break;
           default:
             $display = 'x';
@@ -218,13 +188,13 @@ class StudentController extends Controller {
 
   // show edit view
   public function edit($id) {
-    $student = $this->getStudent($id);
+    $student = \App\Student::where('id', $id)->first();
     $scores_arr = $this->storeScoresIntoArray(\App\Student::with('scores')->where('id', $id)->first());
     $sum = array_sum($scores_arr['MC']) + array_sum($scores_arr['TC']) + array_sum($scores_arr['HW'])
              + array_sum($scores_arr['BS']) + array_sum($scores_arr['KS'])  + array_sum($scores_arr['AC']);
     $comment = \App\Comment::where('student_id', $id)->first()->comment;
 
-    if ($student == -1) {
+    if ($student == null) {
       return view('error')->with('message', "The selected student does not exist!");
     } else {
       return view('edit')->with('student', \App\Student::where('id', $id)->first())
@@ -331,108 +301,6 @@ class StudentController extends Controller {
   // show login view
   public function login() {
     return view('login');
-  }
-
-  public function getStudentData($id){
-    $currentStudent = $this->getStudent($id);
-    $topStudent = $this->getTopStudent();
-    $data = array("currentStudent" => $currentStudent, "topStudent" => $topStudent);
-
-    return response()->json($data);
-  }
-
-  private function getStudent($id) {
-    $students = $this->getStudentsFromDatabase();
-    for ($i = 0; $i < count($students); $i++) {
-      if ($students[$i]['ID'] == $id) {
-        return $students[$i];
-      }
-    }
-    return -1; //error
-  }
-
-  private function getTopStudent() {
-    $students = $this->getStudentsFromDatabase();
-    return $students[0];
-  }
-
-  private function saveStudentsToDatabase($students) {
-    $serializedData = serialize($students);
-    file_put_contents($this->filePath, $serializedData);
-  }
-
-  private function getStudentsFromDatabase() {
-    $recoveredData = file_get_contents($this->filePath);
-    return unserialize($recoveredData);
-  }
-
-  // Faker (old code, use new code for seeding)
-  private function generateStudents() {
-    $faker = \Faker\Factory::create();
-
-    $students = array();
-
-    for ($i = 1; $i <= 50; $i++) {
-      $nick = $faker->userName;
-
-      $MC_COMPONENTS = $this->generateComponent();
-      $TC_COMPONENTS = $this->generateComponent();
-      $HW_COMPONENTS = $this->generateComponent();
-      $BS_COMPONENTS = $this->generateComponent();
-      $KS_COMPONENTS = $this->generateComponent();
-      $AC_COMPONENTS = $this->generateComponent();
-
-      $MC = array_sum($MC_COMPONENTS);
-      $TC = array_sum($TC_COMPONENTS);
-      $SPE = $MC + $TC;
-      $HW = array_sum($HW_COMPONENTS);
-      $BS = array_sum($BS_COMPONENTS);
-      $KS = array_sum($KS_COMPONENTS);
-      $AC = array_sum($AC_COMPONENTS);
-      $DIL = $HW + $BS + $KS + $AC;
-      $SUM = $SPE + $DIL;
-
-      array_push($students , array(
-        "ID" => $i,
-        "FLAG" => $faker->randomElement($array = array("CHN", "IDN", "SGP", "VNM", "MYS")),
-        "GENDER" => $faker->randomElement($array = array("M", "F")),
-        "NAME" => $faker->name,
-        "NICK" => $nick,
-        "KATTIS" => $nick,
-        "MC" => $MC,
-        "MC_COMPONENTS" => $MC_COMPONENTS,
-        "TC" => $TC,
-        "TC_COMPONENTS" => $TC_COMPONENTS,
-        "SPE" => $SPE,
-        "HW" => $HW,
-        "HW_COMPONENTS" => $HW_COMPONENTS,
-        "BS" => $BS,
-        "BS_COMPONENTS" => $BS_COMPONENTS,
-        "KS" => $KS,
-        "KS_COMPONENTS" => $KS_COMPONENTS,
-        "AC" => $AC,
-        "AC_COMPONENTS" => $AC_COMPONENTS,
-        "DIL" => $DIL,
-        "SUM" => $SUM
-      ));
-    }
-
-    usort($students, function ($a, $b) {
-      return $a["ID"] > $b["ID"];
-    });
-
-    return $students;
-  }
-
-  private function generateComponent() {
-    $faker = \Faker\Factory::create();
-    $data = array();
-
-    for ($i = 0; $i < 12; $i++) {
-      array_push($data, $faker->randomElement($array = array (rand(0,4),'x')));
-    }
-
-    return $data;
   }
   
   private function getEditFormRules() {
