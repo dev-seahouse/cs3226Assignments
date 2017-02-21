@@ -7,17 +7,17 @@
     {!! Form::hidden('id', $student['id']) !!}
     {!! Form::label('nicknamelabel', 'Nick Name:', ['class' => 'control-label']) !!}
     @include('invalidError', array('field'=>'nick'))
-    {!! Form::text('nick', $student['nick'], ['class' => 'form-control']) !!}
+    <div class="{{ $errors->has('nick') ? 'has-error' : '' }}">{!! Form::text('nick', $student['nick'], ['class' => 'form-control']) !!}</div>
   </div>
   <div class="form-group"> {{-- Group related form components together --}}
     {!! Form::label('fullnamelabel', 'Full Name:', ['class' => 'control-label']) !!}
     @include('invalidError', array('field'=>'name'))
-    {!! Form::text('name', $student['name'], ['class' => 'form-control']) !!}
+    <div class="{{ $errors->has('name') ? 'has-error' : '' }}">{!! Form::text('name', $student['name'], ['class' => 'form-control']) !!}</div>
   </div>
   <div class="form-group"> {{-- Group related form components together --}}
     {!! Form::label('kattislabel', 'Kattis account:', ['class' => 'control-label']) !!}
     @include('invalidError', array('field'=>'kattis'))
-    {!! Form::text('kattis', $student['kattis'], ['class' => 'form-control']) !!}
+    <div class="{{ $errors->has('kattis') ? 'has-error' : '' }}">{!! Form::text('kattis', $student['kattis'], ['class' => 'form-control']) !!}</div>
   </div>
   <div class="form-group">
     {!! Form::label('MC', 'Mini contest scores:', ['class' => 'control-label']) !!}<br>
@@ -110,8 +110,8 @@
   </div>
   <div class="form-group">
     {!! Form::label('comments', 'Specific comments:', ['class' => 'control-label']) !!}
-    {!! Form::text('comments', $comment, ['class' => 'form-control']) !!}
-  </div>
+    {!! Form::textarea('comments', $comment, ['class' => 'form-control', 'rows' => 4]) !!}
+  </div><br>
   <div class="form-group"> {{-- Don't forget to create a submit button --}}
     {!! Form::submit('Update', ['class' => 'form-control btn btn-primary']) !!}
   </div>
