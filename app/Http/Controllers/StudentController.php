@@ -220,12 +220,17 @@ class StudentController extends Controller {
   public function edit($id) {
     $student = $this->getStudent($id);
     $scores_arr = $this->storeScoresIntoArray(\App\Student::with('scores')->where('id', $id)->first());
+    $sum = array_sum($scores_arr['MC']) + array_sum($scores_arr['TC']) + array_sum($scores_arr['HW'])
+             + array_sum($scores_arr['BS']) + array_sum($scores_arr['KS'])  + array_sum($scores_arr['AC']);
+    $comment = \App\Comment::where('student_id', $id)->first()->comment;
 
     if ($student == -1) {
       return view('error')->with('message', "The selected student does not exist!");
     } else {
       return view('edit')->with('student', \App\Student::where('id', $id)->first())
-                         ->with('scores_arr', $scores_arr);
+                         ->with('scores_arr', $scores_arr)
+                         ->with('sum', $sum)
+                         ->with('comment', $comment);
     }
   }
 
