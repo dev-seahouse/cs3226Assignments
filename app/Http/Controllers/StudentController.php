@@ -47,15 +47,11 @@ class StudentController extends Controller {
 
   // show detail view
   public function detail($id) {
-    $student = \App\Student::where('id', $id)->first();
+    $student = \App\Student::where('id', $id)->firstOrFail();
     $scores_arr = $this->storeScoresIntoArray(\App\Student::with('scores')->where('id', $id)->first());
 
-    if ($student == null) {
-      return view('error')->with('message', "The selected student does not exist!");
-    } else {
-      return view('detail')->with('student', $student)
-                           ->with('scores_arr', $scores_arr);
-    }
+    return view('detail')->with('student', $student)
+                         ->with('scores_arr', $scores_arr);
   }
 
   // process all the scores of 1 student and store in array
@@ -188,20 +184,16 @@ class StudentController extends Controller {
 
   // show edit view
   public function edit($id) {
-    $student = \App\Student::where('id', $id)->first();
+    $student = \App\Student::where('id', $id)->firstOrFail();
     $scores_arr = $this->storeScoresIntoArray(\App\Student::with('scores')->where('id', $id)->first());
     $sum = array_sum($scores_arr['MC']) + array_sum($scores_arr['TC']) + array_sum($scores_arr['HW'])
              + array_sum($scores_arr['BS']) + array_sum($scores_arr['KS'])  + array_sum($scores_arr['AC']);
     $comment = \App\Comment::where('student_id', $id)->first()->comment;
 
-    if ($student == null) {
-      return view('error')->with('message', "The selected student does not exist!");
-    } else {
-      return view('edit')->with('student', \App\Student::where('id', $id)->first())
-                         ->with('scores_arr', $scores_arr)
-                         ->with('sum', $sum)
-                         ->with('comment', $comment);
-    }
+    return view('edit')->with('student', $student)
+                       ->with('scores_arr', $scores_arr)
+                       ->with('sum', $sum)
+                       ->with('comment', $comment);
   }
 
   public function editStudent(Request $request) {
