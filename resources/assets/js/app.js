@@ -26,15 +26,13 @@ $(function () {
 function setAutoSum () {
   $('.autosum').change(function () {
     var sum = 0.0
-
+    console.log('in setAutoSum')
     $('.autosum').each(function () {
-      var values = $(this).val().split(',')
-      values.forEach(function (item, index) {
-        var val = parseFloat(item)
+        var val = parseFloat($(this).val())
+        console.log(val);
         if (!(val !== val)) {
-          sum += parseFloat(item)
+          sum += parseFloat($(this).val())
         }
-      })
     })
 
     $('#sum').val(sum)
