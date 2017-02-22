@@ -28,7 +28,9 @@ class StudentController extends Controller {
               ->get();*/
 
     //return \App\Student::all();
-    return \App\Component::where('student_id', 25)->firstOrFail();
+    return $records = \App\Record::where('student_id', 25)
+                  ->leftJoin('achievements', 'records.achievement_id', '=', 'achievements.id')
+                  ->select(\DB::raw('records.id, points, title, max_points'))->get();
   }
 
   // show index view
@@ -51,13 +53,15 @@ class StudentController extends Controller {
     $components = \App\Component::where('student_id', $id)->firstOrFail();
     $scores_arr = $this->storeScoresIntoArray(\App\Student::with('scores')->where('id', $id)->first());
     $comments = \App\Comment::where('student_id', $id)->firstOrFail();
-    $achievements = \App\Achievement::all();
+    $records = \App\Record::where('student_id', $id)
+                  ->leftJoin('achievements', 'records.achievement_id', '=', 'achievements.id')
+                  ->select(\DB::raw('records.id, points, title, max_points'))->get();
 
     return view('detail')->with('student', $student)
                          ->with('components', $components)
                          ->with('scores_arr', $scores_arr)
                          ->with('comment', $comments->comment)
-                         ->with('achievements', $achievements);
+                         ->with('records', $records);
   }
 
   // process all the scores of 1 student and store in array
