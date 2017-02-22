@@ -48,9 +48,11 @@ class StudentController extends Controller {
   // show detail view
   public function detail($id) {
     $student = \App\Student::where('id', $id)->firstOrFail();
+    $components = \App\Component::where('student_id', $id)->firstOrFail();
     $scores_arr = $this->storeScoresIntoArray(\App\Student::with('scores')->where('id', $id)->first());
 
     return view('detail')->with('student', $student)
+                         ->with('components', $components)
                          ->with('scores_arr', $scores_arr);
   }
 
