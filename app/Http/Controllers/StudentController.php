@@ -307,7 +307,8 @@ class StudentController extends Controller {
       'name' => 'required|between:5,30|regex:/^[A-Za-z ]+$/',
       'nick' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
       'kattis' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
-      'profile_pic' => 'required|mimes:png|max:1000',
+      'profile_pic' => 'required|mimes:png,jpeg|max:1000',
+	  'nationality'=>'required|in:CHN, SGP, IDN, VNM, OTH'
     );
 
     return $rules;
@@ -325,8 +326,11 @@ class StudentController extends Controller {
       'kattis.required' => 'Kattis account cannot be blank',
       'kattis.between' => 'Kattis account should be between :min - :max characters',
       'profile_pic.required' => 'Profile picture is required',
-      'profile_pic.mimes' => 'Profile picture should be a PNG file',
+      'profile_pic.mimes' => 'Profile picture should be a PNG or JPG file',
       'profile_pic.max' => 'Profile picture should be smaller than 1000 KB',
+	  'nationality.required' => 'Nationality cannot be blank',
+	  'nationality.in' => 'Nationality should be of either Singaporean, Indonesian, Chinese, Vietnamese or Others',
+	  
     );
 
     return $messages;

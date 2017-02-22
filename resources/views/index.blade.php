@@ -59,7 +59,7 @@
                 <img src="{{ URL::asset('img/flags/'.$student['nationality'].'.png') }}" class="rank-flag-img"> {{ $student['nationality'] }}
               </td>
               <td class="hidden-xs">
-                <img src="{{ URL::asset('img/student/'.$student['nick'].'.png') }}" class="rank-person-img">
+                <img src="{{ URL::asset('img/student/'.$student['profile_pic']) }}" class="rank-person-img">
                 <img src="img/kattis.png" class="rank-kattis-img">
                 <a href="{{ route('student', ['id' => $student['id']]) }}">{{ $student['name'] }}</a>
               </td>
