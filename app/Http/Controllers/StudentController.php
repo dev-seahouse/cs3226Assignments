@@ -301,7 +301,11 @@ class StudentController extends Controller {
   public function login() {
     return view('login');
   }
-
+  
+  private function getStudentData($id) {
+    return \App\Component::where('student_id', $id)->firstOrFail();
+  }
+  
   private function getCreateFormRules() {
     $rules = array(
       'name' => 'required|between:5,30|regex:/^[A-Za-z ]+$/',
