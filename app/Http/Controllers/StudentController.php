@@ -333,7 +333,7 @@ class StudentController extends Controller {
       'profile_pic.mimes' => 'Profile picture should be a PNG or JPG file',
       'profile_pic.max' => 'Profile picture should be smaller than 1000 KB',
 	  'nationality.required' => 'Nationality cannot be blank',
-	  'nationality.in' => 'Nationality should be of either Singaporean, Indonesian, Chinese, Vietnamese or Others',
+	  'nationality.in' => 'Nationality should be of either Singaporean, Indonesian, Chinese, Vietnamese, Japanese, Australian, German or Others',
 	  
     );
 
