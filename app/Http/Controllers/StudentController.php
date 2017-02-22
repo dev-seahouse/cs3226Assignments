@@ -28,21 +28,24 @@ class StudentController extends Controller {
               ->get();*/
 
     //return \App\Student::all();
-    return \App\Component::where('student_id', 25)->firstOrFail();
+    return $records = \App\Record::where('student_id', 25)
+      ->leftJoin('achievements', 'records.achievement_id', '=', 'achievements.id')
+      ->select(\DB::raw('records.id as rId, achievements.id as aId, points, title, max_points'))
+      ->orderBy('aId')->get();
   }
 
   // show index view
   public function index() {
     $students = \App\Student::with('components')
-                  ->join('components', 'students.id', '=', 'components.student_id')
-                  ->select(\DB::raw('students.*, mc + tc + hw + bs + ks + ac as total'))
-                  ->orderBy('total', 'DESC')
-                  ->get();
+      ->join('components', 'students.id', '=', 'components.student_id')
+      ->select(\DB::raw('students.*, mc + tc + hw + bs + ks + ac as total'))
+      ->orderBy('total', 'DESC')
+      ->get();
     $last_updated = \App\DatabaseUtil::get_last_updated();
     $friendly_last_updated = Carbon::createFromTimestamp(strtotime($last_updated))->diffForHumans();
 
     return view('index')->with('students', $students)
-                        ->with('last_updated',$friendly_last_updated);;
+      ->with('last_updated',$friendly_last_updated);;
   }
 
   // show detail view
@@ -51,13 +54,16 @@ class StudentController extends Controller {
     $components = \App\Component::where('student_id', $id)->firstOrFail();
     $scores_arr = $this->storeScoresIntoArray(\App\Student::with('scores')->where('id', $id)->first());
     $comments = \App\Comment::where('student_id', $id)->firstOrFail();
-    $achievements = \App\Achievement::all();
+    $records = \App\Record::where('student_id', $id)
+      ->leftJoin('achievements', 'records.achievement_id', '=', 'achievements.id')
+      ->select(\DB::raw('records.id as rId, achievements.id as aId, points, title, max_points'))
+      ->orderBy('aId')->get();
 
     return view('detail')->with('student', $student)
-                         ->with('components', $components)
-                         ->with('scores_arr', $scores_arr)
-                         ->with('comment', $comments->comment)
-                         ->with('achievements', $achievements);
+      ->with('components', $components)
+      ->with('scores_arr', $scores_arr)
+      ->with('comment', $comments->comment)
+      ->with('records', $records);
   }
 
   // process all the scores of 1 student and store in array
@@ -106,8 +112,8 @@ class StudentController extends Controller {
 
     if ($validator->fails()) {
       return back()
-             ->withErrors($validator)
-             ->withInput();
+        ->withErrors($validator)
+        ->withInput();
     }
 
     //------ Extra Challenge B: Add Image --------------
@@ -151,7 +157,6 @@ class StudentController extends Controller {
     return redirect()->route('index');
   }
 
-
   private function create_scores($component_name, $num_scores_in_component, $student){
     for ($i = 1; $i <= $num_scores_in_component; $i++) {
       $score = new \App\Score;
@@ -168,13 +173,13 @@ class StudentController extends Controller {
     $student = \App\Student::where('id', $id)->firstOrFail();
     $scores_arr = $this->storeScoresIntoArray(\App\Student::with('scores')->where('id', $id)->first());
     $sum = array_sum($scores_arr['MC']) + array_sum($scores_arr['TC']) + array_sum($scores_arr['HW'])
-             + array_sum($scores_arr['BS']) + array_sum($scores_arr['KS'])  + array_sum($scores_arr['AC']);
+      + array_sum($scores_arr['BS']) + array_sum($scores_arr['KS'])  + array_sum($scores_arr['AC']);
     $comment = \App\Comment::where('student_id', $id)->first()->comment;
 
     return view('edit')->with('student', $student)
-                       ->with('scores_arr', $scores_arr)
-                       ->with('sum', $sum)
-                       ->with('comment', $comment);
+      ->with('scores_arr', $scores_arr)
+      ->with('sum', $sum)
+      ->with('comment', $comment);
   }
 
   public function editStudent(Request $request) {
@@ -183,58 +188,79 @@ class StudentController extends Controller {
 
     if ($validator->fails()) {
       return back()
-             ->withErrors($validator)
-             ->withInput();
+        ->withErrors($validator)
+        ->withInput();
     }
-    
-    // retrieve all inputs from form request
-    $id = $request->input('id');
-    $nick = $request->input('nick');
-    $name = $request->input('name');
-    $kattis = $request->input('kattis');
-    $mc_scores = $this->putFormValuesInArray('MC', 9, $request);
-    $tc_scores = $this->putFormValuesInArray('TC', 2, $request);
-    $hw_scores = $this->putFormValuesInArray('HW', 10, $request);
-    $bs_scores = $this->putFormValuesInArray('BS', 9, $request);
-    $ks_scores = $this->putFormValuesInArray('KS', 12, $request);
-    $ac_scores = $this->putFormValuesInArray('AC', 8, $request);
-    $comments = $request->input('comments');
-    
-    // update student
-    $student = \App\Student::find($id);
-    $student->nick = $nick;
-    // rename old profile pic
-    $oldProPic = $student->profile_pic;
-    $newProPic = $nick.'.png';
-    \File::move(base_path().'/public/img/student/'.$oldProPic, base_path().'/public/img/student/'.$newProPic);
-    $student->profile_pic = $newProPic;
-    $student->name = $name;
-    $student->kattis = $kattis;
-    $student->save();
-    // update individual scores
-    $this->updateCompScoresOfStudent($id, 'MC', $mc_scores, 'x.y');
-    $this->updateCompScoresOfStudent($id, 'TC', $tc_scores, 'xy.z');
-    $this->updateCompScoresOfStudent($id, 'HW', $hw_scores, 'x.y');
-    $this->updateCompScoresOfStudent($id, 'BS', $bs_scores, 'x');
-    $this->updateCompScoresOfStudent($id, 'KS', $ks_scores, 'x');
-    $this->updateCompScoresOfStudent($id, 'AC', $ac_scores, 'x');
-    // update components sum
-    $components = \App\Component::where('student_id', $id)->firstOrFail();
-    $components->mc = array_sum($mc_scores);
-    $components->tc = array_sum($tc_scores);
-    $components->hw = array_sum($hw_scores);
-    $components->bs = array_sum($bs_scores);
-    $components->ks = array_sum($ks_scores);
-    $components->ac = array_sum($ac_scores);
-    $components->save();
-    // update comment
-    $comment = \App\Comment::where('student_id', $id)->firstOrFail();
-    $comment->comment = $comments;
-    $comment->save();
-    
+
+    \DB::transaction(function () use ($request) {
+      // retrieve all inputs from form request
+      $id = $request->input('id');
+      $nick = $request->input('nick');
+      $name = $request->input('name');
+      $kattis = $request->input('kattis');
+      $mc_scores = $this->putFormValuesInArray('MC', 9, $request);
+      $tc_scores = $this->putFormValuesInArray('TC', 2, $request);
+      $hw_scores = $this->putFormValuesInArray('HW', 10, $request);
+      $bs_scores = $this->putFormValuesInArray('BS', 9, $request);
+      $ks_scores = $this->putFormValuesInArray('KS', 12, $request);
+      $ac_scores = $this->putFormValuesInArray('AC', 8, $request);
+      $comments = $request->input('comments');
+
+      // update student
+      $student = \App\Student::find($id);
+      $student->nick = $nick;
+      // rename old profile pic
+      $oldProPic = $student->profile_pic;
+      $newProPic = $nick.'.png';
+      \File::move(base_path().'/public/img/student/'.$oldProPic, base_path().'/public/img/student/'.$newProPic);
+      $student->profile_pic = $newProPic;
+      $student->name = $name;
+      $student->kattis = $kattis;
+      $student->save();
+      // update individual scores
+      $this->updateCompScoresOfStudent($id, 'MC', $mc_scores, 'x.y');
+      $this->updateCompScoresOfStudent($id, 'TC', $tc_scores, 'xy.z');
+      $this->updateCompScoresOfStudent($id, 'HW', $hw_scores, 'x.y');
+      $this->updateCompScoresOfStudent($id, 'BS', $bs_scores, 'x');
+      $this->updateCompScoresOfStudent($id, 'KS', $ks_scores, 'x');
+      $this->updateCompScoresOfStudent($id, 'AC', $ac_scores, 'x');
+      // update components sum
+      $components = \App\Component::where('student_id', $id)->firstOrFail();
+      $components->mc = array_sum($mc_scores);
+      $components->tc = array_sum($tc_scores);
+      $components->hw = array_sum($hw_scores);
+      $components->bs = array_sum($bs_scores);
+      $components->ks = array_sum($ks_scores);
+      $components->ac = array_sum($ac_scores);
+      $components->save();
+      // update comment
+      $comment = \App\Comment::where('student_id', $id)->firstOrFail();
+      $comment->comment = $comments;
+      $comment->save();
+      // update records table
+      $this->updateRecordsOfStudent($id, $ac_scores, $student);
+    });
+
     return redirect()->route('index');
   }
-  
+
+  // Helper method for editStudent
+  private function updateRecordsOfStudent($id, $ac_scores, $student) {
+    $records = \App\Record::where('student_id', $id);
+    $records->delete();
+    for ($i = 1; $i <= 8; $i++) {
+      if ($ac_scores[$i] != 'x') {
+        $newRecord = new \App\Record;
+        $achievement = \App\Achievement::find($i);
+        $newRecord->student()->associate($student);
+        $newRecord->achievement()->associate($achievement);
+        $newRecord->points = $ac_scores[$i];
+        $newRecord->save();
+      }
+    }
+
+  }
+
   // Helper method for editStudent
   private function updateCompScoresOfStudent($id, $comp, $compScores, $xyz) {
     $scores = \App\Score::where('student_id', $id)->where('component', $comp)->orderBy('week')->get();
@@ -248,14 +274,14 @@ class StudentController extends Controller {
       $singleScore->save();
     }
   }
-  
+
   // Helper method for editStudent
   private function putFormValuesInArray($comp, $numOfComp, $request) {
     $arr = array();
     for($i=1; $i<=$numOfComp; $i++) {
       $arr[$i] = $request->input($comp.$i);
     }
-    
+
     return $arr;
   }
 
@@ -275,7 +301,7 @@ class StudentController extends Controller {
   public function login() {
     return view('login');
   }
-  
+
   private function getCreateFormRules() {
     $rules = array(
       'name' => 'required|between:5,30|regex:/^[A-Za-z ]+$/',
@@ -283,10 +309,10 @@ class StudentController extends Controller {
       'kattis' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
       'profile_pic' => 'required|mimes:png|max:1000',
     );
-    
+
     return $rules;
   }
-  
+
   private function getCreateFormMessages() {
     $messages = array(
       'name.regex' => 'Full name should only contain letters and space',
@@ -302,10 +328,10 @@ class StudentController extends Controller {
       'profile_pic.mimes' => 'Profile picture should be a PNG file',
       'profile_pic.max' => 'Profile picture should be smaller than 1000 KB',
     );
-    
+
     return $messages;
   }
-  
+
   private function getEditFormRules() {
     $mcRule = 'regex:/^([0-3](\.(0|5))?)$|(4(\.0)?)$|(x\.y)$/';
     $hwRule = 'regex:/^([0-1](\.(0|5))?)$|(x.y)$/';
@@ -342,10 +368,10 @@ class StudentController extends Controller {
       'AC5' => ['required', 'regex:/^(0|1|x)$/'], 'AC6' => ['required', 'regex:/^(0|1|x)$/'],
       'AC7' => ['required', 'regex:/^([0-6]|x)$/'], 'AC8' => ['required', 'regex:/^(0|1|x)$/'],
     );
-    
+
     return $rules;
   }
-  
+
   private function getEditFormMessages() {
     $messages = array(
       'name.regex' => 'Full name should only contain letters and space',
@@ -362,7 +388,7 @@ class StudentController extends Controller {
       'TC2.required' => 'Final Team Contest score is required, or set as "xy.z"',
       'TC2.regex' => 'Final Team Contest score should be between 0 to 13.5',
     );
-    
+
     return $messages;
   }
 

@@ -111,12 +111,10 @@
       <p>Achievement details:</p>
       <ol>
         <?php
-        $ac_scores = $scores_arr['AC'];
-        for ($i = 0; $i < sizeof($ac_scores); $i++) {
-          if ($ac_scores[$i] == 'x') continue;
-          echo '<li>'.$achievements[$i]->title;
-          if ($achievements[$i]->max_points != 1) {
-            echo ' '.$ac_scores[$i].'/'.$achievements[$i]->max_points;
+        foreach ($records as $record) {
+          echo '<li>'.$record->title;
+          if ($record->max_points != 1) {
+            echo ' '.$record->points.'/'.$record->max_points;
           }
           echo '</li>';
         }
