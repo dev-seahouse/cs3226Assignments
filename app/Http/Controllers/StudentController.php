@@ -28,10 +28,11 @@ class StudentController extends Controller {
               ->get();*/
 
     //return \App\Student::all();
-    return $records = \App\Record::where('student_id', 25)
-      ->leftJoin('achievements', 'records.achievement_id', '=', 'achievements.id')
-      ->select(\DB::raw('records.id as rId, achievements.id as aId, points, title, max_points'))
-      ->orderBy('aId')->get();
+    return $records = \App\Record::leftJoin('achievements', 'records.achievement_id', '=', 'achievements.id')
+      ->rightJoin('students', 'records.student_id', '=', 'students.id')
+      ->select(\DB::raw('records.id as rId, achievements.id as aId, students.id as sId, students.name, title, points'))
+      ->orderBy('aId')
+      ->orderBy('students.name')->get();
   }
 
   // show index view
@@ -304,7 +305,13 @@ class StudentController extends Controller {
   
   // show achievement view
   public function achievement() {
-    return view('achievement');
+    $records = \App\Record::leftJoin('achievements', 'records.achievement_id', '=', 'achievements.id')
+      ->rightJoin('students', 'records.student_id', '=', 'students.id')
+      ->select(\DB::raw('records.id as rId, achievements.id as aId, students.id as sId, students.name, title, points, max_points'))
+      ->orderBy('aId')
+      ->orderBy('students.name')->get();
+    
+    return view('achievement')->with('records', $records);
   }
 
   private function getCreateFormRules() {
