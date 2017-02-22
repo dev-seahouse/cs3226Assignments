@@ -314,7 +314,9 @@ class StudentController extends Controller {
   }
 
   public function getStudentData($id) {
-    $currentStudent = \App\Component::where('student_id', $id)->firstOrFail();
+    $currentStudent = \App\Student::with('components')
+      ->join('components', 'students.id', '=', 'components.student_id')
+      ->where('student_id', $id)->firstOrFail();
     $topStudent = \App\Student::with('components')
       ->join('components', 'students.id', '=', 'components.student_id')
       ->select(\DB::raw('students.*, mc + tc + hw + bs + ks + ac as total'))
