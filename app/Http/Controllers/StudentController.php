@@ -50,10 +50,14 @@ class StudentController extends Controller {
     $student = \App\Student::where('id', $id)->firstOrFail();
     $components = \App\Component::where('student_id', $id)->firstOrFail();
     $scores_arr = $this->storeScoresIntoArray(\App\Student::with('scores')->where('id', $id)->first());
+    $comments = \App\Comment::where('student_id', $id)->firstOrFail();
+    $achievements = \App\Achievement::all();
 
     return view('detail')->with('student', $student)
                          ->with('components', $components)
-                         ->with('scores_arr', $scores_arr);
+                         ->with('scores_arr', $scores_arr)
+                         ->with('comment', $comments->comment)
+                         ->with('achievements', $achievements);
   }
 
   // process all the scores of 1 student and store in array

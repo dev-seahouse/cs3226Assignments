@@ -108,9 +108,17 @@
     <!--Achievement section -->
     <div class="row">
         <div class="col-xs-12">
-        
+        <p>Achievement details:</p>
         </div>
     </div>
+    <hr>
+    <!--Comment section -->
+    <div class="row">
+        <div class="col-xs-12">
+          <p>Specific comments about this student:</p>
+          <p><b>{{$comment}}</b></p>
+        </div>
+    </div><br>
 
     @if (Auth::guest())
     @else

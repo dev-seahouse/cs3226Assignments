@@ -36,5 +36,3 @@ Route::group( ['middleware' => 'auth' ], function()
 
 // Use this test route to view your object retrieved from the database. Testing purposes
 Route::get('test', array('as' => 'test', 'uses' => 'StudentController@testget'));
-
-Route::get('student/edit/{id}', array('as' => 'edit', 'uses' => 'StudentController@edit'));
