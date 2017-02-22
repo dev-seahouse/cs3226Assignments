@@ -39,6 +39,7 @@ $uri = $_SERVER['REQUEST_URI'];
 		 @else
         <li><a href="{{route('create')}}">Create New Student</a></li>
 		@endif
+        <li><a href="{{route('achievement')}}">Achievement</a></li>
         <li><a href="{{route('help')}}">Help</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">

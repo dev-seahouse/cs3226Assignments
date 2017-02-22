@@ -301,6 +301,11 @@ class StudentController extends Controller {
   public function login() {
     return view('login');
   }
+  
+  // show achievement view
+  public function achievement() {
+    return view('achievement');
+  }
 
   private function getCreateFormRules() {
     $rules = array(
