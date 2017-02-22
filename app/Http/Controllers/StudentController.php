@@ -28,10 +28,7 @@ class StudentController extends Controller {
               ->get();*/
 
     //return \App\Student::all();
-    return $records = \App\Record::where('student_id', 25)
-      ->leftJoin('achievements', 'records.achievement_id', '=', 'achievements.id')
-      ->select(\DB::raw('records.id as rId, achievements.id as aId, points, title, max_points'))
-      ->orderBy('aId')->get();
+    return \App\Component::where('student_id', 50)->first();
   }
 
   // show index view
@@ -302,7 +299,7 @@ class StudentController extends Controller {
     return view('login');
   }
   
-  private function getStudentData($id) {
+  public function getStudentData($id) {
     return \App\Component::where('student_id', $id)->firstOrFail();
   }
   
