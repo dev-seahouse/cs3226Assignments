@@ -64,7 +64,7 @@ In the root folder of the project C:\xampp\htdocs\rankteam1
 # copy .env.example .env
 # php artisan key:generate
 ```
-### Use the server's database for the project
+#### Use the server's database for the project
 Modify the following settings in C:\xampp\htdocs\rankteam1\\.env
 ```sh
 DB_CONNECTION=mysql
@@ -74,7 +74,7 @@ DB_DATABASE=ranklist
 DB_USERNAME=developer
 DB_PASSWORD=developerP@ssw0rd1
 ```
-### Access the server's database through the web browser
+#### Access the server's database through the web browser
 Update the following variables in C:\xampp\phpMyAdmin\config.inc.php
 ```sh
 $cfg['Servers'][$i]['auth_type'] = 'config';
@@ -88,6 +88,23 @@ To access http://128.199.205.219/phpmyadmin/<br>
 <b>User:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;developer<br>
 <b>Password:</b>&nbsp;&nbsp;developerP@ssw0rd1<br>
 
+#### Setup mailgun
+In the root folder of the project C:\xampp\htdocs\rankteam1
+open command prompt and run the following command:
+```sh
+# composer require guzzlehttp/guzzle
+```
+
+Modify the following settings in C:\xampp\htdocs\rankteam1\\.env
+```sh
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.mailgun.org
+MAIL_PORT=2525
+MAIL_USERNAME=postmaster@sandboxd482171b2b614f8dae7b1427c5c5a319.mailgun.org
+MAIL_PASSWORD=a0c542a3057fc62deff7e1e10016f18b
+MAIL_ENCRYPTION=null
+```
+
 ### Install NodeJS
 1. Download and install Nodejs at https://nodejs.org/en/
 2. open command prompt and run the following commands:
@@ -95,7 +112,7 @@ To access http://128.199.205.219/phpmyadmin/<br>
 # npm install
 ```
 
-### Launch local development server
+#### Launch local development server
 If you are using windows, open command prompt and type the following command
 ```sh
 # .\run
@@ -105,7 +122,7 @@ If you are using linux/Mac, open terminal and type the following command
 # php artisan serve & npm run watch
 ```
 
-### Compile front end assets manually (css and javascript)
+#### Compile front end assets manually (css and javascript)
 Open terminal and type the following command:
 ```sh
 npm run production
