@@ -24,7 +24,7 @@
         </div>
         <div class="form-group">
           {!! Form::label('nationality', 'Nationality:', ['class' => 'control-label']) !!}
-          {!! Form::select('nationality', array('SGP' => 'SGP - Singaporean', 'CHN' => 'CHN - Chinese', 'VNM' => 'VNM - Vietnamese', 'IDN' => 'IDN - Indonesian', 'OTH' => 'Other Nationality')) !!}
+          {!! Form::select('nationality', array('SGP' => 'SGP - Singaporean', 'CHN' => 'CHN - Chinese', 'VNM' => 'VNM - Vietnamese', 'IDN' => 'IDN - Indonesian', 'JPN' => 'JPN - Japanese', 'AUS' => 'AUS - Australian', 'GER' => 'GER - German', 'OTH' => 'Other Nationality')) !!}
         </div>
         <div class="form-group">
           {!! Form::label('profile_pic', 'Profile picture:', ['class' => 'control-label']) !!}
