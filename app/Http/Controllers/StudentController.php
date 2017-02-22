@@ -96,32 +96,7 @@ class StudentController extends Controller {
   }
 
   public function createStudent(Request $request) {
-
-    //--------- Extra Challenge C: Use Regex/Better Validation -------------------------
-    // validation rules and messages, put here first
-    $rules = array(
-      'name' => 'required|between:5,30|regex:/^[A-Za-z ]+$/',
-      'nick' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
-      'kattis' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
-      'profile_pic' => 'required|mimes:png|max:1000',
-    );
-    $messages = array(
-      'name.regex' => 'Full name should only contain letters and space.',
-      'name.required' => 'Full name cannot be blank.',
-      'name.between' => 'Full name should be between :min - :max characters.',
-      'nick.regex' => 'Nick name should only contain alphanumeric characters and no space.',
-      'nick.required' => 'Nick name cannot be blank.',
-      'nick.between' => 'Nick name should be between :min - :max characters.',
-      'kattis.regex' => 'Kattis account should only contain alphanumeric characters and no space.',
-      'kattis.required' => 'Kattis account cannot be blank.',
-      'kattis.between' => 'Kattis account should be between :min - :max characters.',
-      'profile_pic.required' => 'Profile picture is required.',
-      'profile_pic.mimes' => 'Profile picture should be a PNG file.',
-      'profile_pic.max' => 'Profile picture should be smaller than 1000 KB.',
-    );
-    //---------------- END Extra Challenge C --------------------------------------------------------
-
-    $validator = Validator::make($request->all(), $rules, $messages);
+    $validator = Validator::make($request->all(), $this->getCreateFormRules(), $this->getCreateFormMessages());
 
     if ($validator->fails()) {
       return back()
@@ -293,6 +268,36 @@ class StudentController extends Controller {
   // show login view
   public function login() {
     return view('login');
+  }
+  
+  private function getCreateFormRules() {
+    $rules = array(
+      'name' => 'required|between:5,30|regex:/^[A-Za-z ]+$/',
+      'nick' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
+      'kattis' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
+      'profile_pic' => 'required|mimes:png|max:1000',
+    );
+    
+    return $rules;
+  }
+  
+  private function getCreateFormMessages() {
+    $messages = array(
+      'name.regex' => 'Full name should only contain letters and space',
+      'name.required' => 'Full name cannot be blank',
+      'name.between' => 'Full name should be between :min - :max characters',
+      'nick.regex' => 'Nick name should only contain alphanumeric characters and no space',
+      'nick.required' => 'Nick name cannot be blank',
+      'nick.between' => 'Nick name should be between :min - :max characters',
+      'kattis.regex' => 'Kattis account should only contain alphanumeric characters and no space',
+      'kattis.required' => 'Kattis account cannot be blank',
+      'kattis.between' => 'Kattis account should be between :min - :max characters',
+      'profile_pic.required' => 'Profile picture is required',
+      'profile_pic.mimes' => 'Profile picture should be a PNG file',
+      'profile_pic.max' => 'Profile picture should be smaller than 1000 KB',
+    );
+    
+    return $messages;
   }
   
   private function getEditFormRules() {
