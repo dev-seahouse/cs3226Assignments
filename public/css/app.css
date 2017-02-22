@@ -9489,12 +9489,18 @@ table.dataTable tbody td {
   vertical-align: bottom;
 }
 
-/*----------  chart ----------*/
+/*---------- chart ----------*/
 
 @media screen and (max-width: 954px) {
   #studentRadarChart {
     display: none !important;
   }
+}
+
+/*---------- achievement-board-item ----------*/
+
+.board-item {
+  border: 0px;
 }
 
 /*=============================
