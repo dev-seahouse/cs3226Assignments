@@ -128,20 +128,25 @@ function drawRadarChart ($selector) {
 }
 
 function formartChartData (data) {
-  let keys = ['AC', 'BS', 'HW', 'MC', 'TC', 'MC']
+  let keys = ['ac', 'bs', 'hw', 'mc', 'ks', 'tc']
   let formattedCurrStudentData = []
   let formattedTopStudentData = []
   let currentStudentData = data['currentStudent']
   let topStudentData = data['topStudent']
+  let currentStudentDataName = currentStudentData['name']
+  let topStudentDataName = topStudentData['name']
   keys.forEach(function (key) {
     formattedCurrStudentData.push(currentStudentData[key])
     formattedTopStudentData.push(topStudentData[key])
   })
 
+
   return {
     keys: keys,
     currentStudent: formattedCurrStudentData,
-    topStudent: formattedTopStudentData
+    topStudent: formattedTopStudentData,
+	topStudentDataName: topStudentDataName,
+	currentStudentDataName: currentStudentDataName
   }
 }
 
@@ -163,7 +168,7 @@ function makeRadarChart ($selector, dataset) {
     labels: dataset['keys'],
     datasets: [
       {
-        label: 'You',
+        label: dataset['currentStudentDataName'],
         backgroundColor: 'rgba(179,181,198,0.2)',
         borderColor: 'rgba(179,181,198,1)',
         pointBackgroundColor: 'rgba(179,181,198,1)',
@@ -173,7 +178,7 @@ function makeRadarChart ($selector, dataset) {
         data: dataset['currentStudent']
       },
       {
-        label: 'The champion',
+        label: dataset['topStudentDataName'],
         backgroundColor: 'rgba(255,99,132,0.2)',
         borderColor: 'rgba(255,99,132,1)',
         pointBackgroundColor: 'rgba(255,99,132,1)',
