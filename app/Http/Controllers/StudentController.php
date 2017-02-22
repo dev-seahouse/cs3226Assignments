@@ -308,7 +308,7 @@ class StudentController extends Controller {
       'nick' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
       'kattis' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
       'profile_pic' => 'required|mimes:png,jpeg|max:1000',
-	  'nationality'=>'required|in:CHN, SGP, IDN, VNM, OTH'
+	  'nationality'=>'required|in:CHN,SGP,IDN,VNM,OTH'
     );
 
     return $rules;
