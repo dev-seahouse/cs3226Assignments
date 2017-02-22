@@ -314,7 +314,16 @@ class StudentController extends Controller {
   }
 
   public function getStudentData($id) {
-    return \App\Component::where('student_id', $id)->firstOrFail();
+    $currentStudent = \App\Component::where('student_id', $id)->firstOrFail();
+    $topStudent = \App\Student::with('components')
+      ->join('components', 'students.id', '=', 'components.student_id')
+      ->select(\DB::raw('students.*, mc + tc + hw + bs + ks + ac as total'))
+      ->orderBy('total', 'DESC')
+      ->first();
+    
+    $data = array("currentStudent" => $currentStudent, "topStudent" => $topStudent);
+    
+    return response()->json($data);
   }
   
   private function getCreateFormRules() {
