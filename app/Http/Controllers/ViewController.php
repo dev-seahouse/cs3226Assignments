@@ -94,7 +94,7 @@ class ViewController extends Controller {
   public function achievement() {
     $records = \App\Record::leftJoin('achievements', 'records.achievement_id', '=', 'achievements.id')
       ->rightJoin('students', 'records.student_id', '=', 'students.id')
-      ->select(\DB::raw('records.id as rId, achievements.id as aId, students.id as sId, students.name, title, points'))
+      ->select(\DB::raw('records.id as rId, achievements.id as aId, students.id as sId, students.name, students.profile_pic, title, points'))
       ->orderBy('aId')
       ->orderBy('students.name')->get();
     $achievements = \App\Achievement::select(\DB::raw('id, title, max_points'))->get();
