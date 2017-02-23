@@ -82,6 +82,10 @@ class ViewController extends Controller {
       ->with('records', $records)
       ->with('achievements', $achievements);
   }
+  
+  public function progress() {
+    return view('progress');
+  }
 
   // process all the scores of 1 student and store in array
   private function putScoresIntoArray($student) {

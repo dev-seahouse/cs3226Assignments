@@ -17,6 +17,7 @@ $(function () {
   highlightTableCellsMarkedX()
   scaleRowHeights()
   drawRadarChart($('#studentRadarChart'))
+  drawProgressChart($('#progressChart'))
   setActive()
   setAutoSum()
   highlightRows()
@@ -132,22 +133,23 @@ function formartChartData (data) {
   let keys = ['ac', 'bs', 'hw', 'mc', 'ks', 'tc']
   let formattedCurrStudentData = []
   let formattedTopStudentData = []
+  let formattedKeys = []
   let currentStudentData = data['currentStudent']
   let topStudentData = data['topStudent']
   let currentStudentDataName = currentStudentData['name']
   let topStudentDataName = topStudentData['name']
   keys.forEach(function (key) {
+    formattedKeys.push(key.toUpperCase());
     formattedCurrStudentData.push(currentStudentData[key])
     formattedTopStudentData.push(topStudentData[key])
   })
-
-
+  
   return {
-    keys: keys,
+    keys: formattedKeys,
     currentStudent: formattedCurrStudentData,
     topStudent: formattedTopStudentData,
-	topStudentDataName: topStudentDataName,
-	currentStudentDataName: currentStudentDataName
+	  currentStudentDataName: currentStudentDataName,
+    topStudentDataName: topStudentDataName
   }
 }
 
@@ -202,6 +204,119 @@ function makeRadarChart ($selector, dataset) {
           beginAtZero: true,
           stepSize: 5
         }
+      }
+    }
+  })
+}
+
+//progress chart
+function drawProgressChart ($selector) {
+  if (!$selector.length) return
+  getProgressData().then(function (data) {
+    return formartProgressChartData(data)
+  }).done(function (formattedData) {
+    makeProgressChart($selector, formattedData)
+  }).fail(function (data) {
+  })
+}
+
+function formartProgressChartData (data) {
+  let nicks = data['nicks']
+  let progressData = data['progressData']
+  let dataStore = {}
+  var maxWeeks = 0;
+  
+  progressData.forEach(function (scoreRow) {
+    dataStore[scoreRow['nick']] = [0]
+  })
+  
+  progressData.forEach(function (scoreRow) {
+    maxWeeks = Math.max(maxWeeks, scoreRow['week'])
+    let currentWeek = scoreRow['week'] - 1;
+    let previousWeek = currentWeek - 1;
+    
+    if (previousWeek >= 0) {
+      dataStore[scoreRow['nick']][currentWeek] = dataStore[scoreRow['nick']][previousWeek] + scoreRow['progress']
+    } else {
+      dataStore[scoreRow['nick']][currentWeek] = scoreRow['progress']
+    }
+  })
+  
+  let chartData = []
+  nicks.forEach(function(nick) {
+    let color = getRandomColor()
+    chartData.push({
+      label: nick,
+      backgroundColor: color,
+      borderColor: color,
+      data: dataStore[nick],
+      fill: false
+    })
+  })
+  
+  let weeks = []
+  for (let i = 0; i < maxWeeks; i++) {
+    weeks.push(i + 1);
+  }
+  
+  return {
+    weeks: weeks,
+    chartData: chartData
+  }
+}
+
+function getProgressData () {
+  let apitUrl = '/api' + window.location.pathname
+  return makeAjaxCall(apitUrl, 'GET')
+}
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF'.split('');
+  var color = '#';
+  for (var i = 0; i < 6; i++ ) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+function makeProgressChart ($selector, dataset) {
+  data = {
+    labels: dataset['weeks'],
+    datasets: dataset['chartData']
+  }
+
+  new Chart($selector, {
+    type: 'line',
+    data: data,
+    options: {
+      responsive: true,
+      title:{
+        display: false,
+        text: 'Progress Chart'
+      },
+      tooltips: {
+        mode: 'index',
+        intersect: false
+      },
+      hover: {
+        mode: 'nearest',
+        intersect: true
+      },
+      scales: {
+        xAxes: [{
+          display: true,
+          scaleLabel: {
+            display: true,
+            labelString: 'Week'
+          }
+        }],
+        yAxes: [{
+          display: true,
+          scaleLabel: {
+            display: true,
+            labelString: 'Score'
+          }
+        }]
       }
     }
   })

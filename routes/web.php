@@ -18,11 +18,12 @@ Route::get('student/{id}', array('as' => 'student', 'uses' => 'ViewController@de
 Route::get('help', array('as' => 'help', 'uses' => 'ViewController@help'));
 Route::get('login', array('as' => 'login', 'uses' => 'HomeController@index'));
 Route::get('achievement', array('as' => 'achievement', 'uses' => 'ViewController@achievement'));
+Route::get('progress', array('as' => 'progress', 'uses' => 'ViewController@progress'));
 
 //API
-Route::get('api/student/{id}', array('as' => 'student', 'uses' => 'StudentController@getStudentData'));
-Route::get('api/progress', array('as' => 'student', 'uses' => 'StudentController@getProgressData'));
-Route::get('api/progress/{id}', array('as' => 'student', 'uses' => 'StudentController@getProgressDataById'));
+Route::get('api/student/{id}', 'StudentController@getStudentData');
+Route::get('api/progress', 'StudentController@getProgressData');
+Route::get('api/progress/{id}', 'StudentController@getProgressDataById');
 
 //Routes in this group requires the user to be authenticated
 Route::group( ['middleware' => 'auth' ], function()
@@ -31,9 +32,15 @@ Route::group( ['middleware' => 'auth' ], function()
   // Create
   Route::get('create', array('as' => 'create', 'uses' => 'ViewController@createStudent'));
   Route::put('createStudent', 'CreateStudentController@create');
-  // Edit
+
+  //Edit all students
+  Route::get('student/edit/all/{section}', array('as' => 'editSection', 'uses' => 'StudentController@editSection'));
+  Route::post('editAllStudent/{section}',  'StudentController@editAllStudent');
+
+  //Edit single student
   Route::get('student/edit/{id}', array('as' => 'edit', 'uses' => 'ViewController@editStudent'));
   Route::post('editStudent', 'EditStudentController@edit');
+
   // Delete
   Route::delete('delete/{id}', array('as' => 'delete', 'uses' => 'StudentController@deleteStudent'));
   
