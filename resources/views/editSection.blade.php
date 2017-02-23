@@ -21,8 +21,15 @@
         }
       }
     }
+    
+    if ($component == 'TC') {
+      $comp = $section;
+    } else {
+      $comp = $component;
+    }
+    
     ?>
-    @include('invalidErrorGroup', array('comp' => $section, 'fields' => $fields))
+    @include('invalidErrorGroup', array('comp' => $comp, 'fields' => $fields))
     <?php $i = 0; ?>
     @foreach ($students as $student)
     <br>

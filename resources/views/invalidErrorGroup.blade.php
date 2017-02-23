@@ -22,7 +22,7 @@ foreach ($fields as $field) {
         break;
       case 'TC1':
       case 'TC2':
-        echo '<li>Team Contest scores are required, or set as "x.y"</li>';
+        echo '<li>Team Contest scores are required, or set as "xy.z"</li>';
         break;
       case 'HW':
         echo '<li>Homework scores are required, or set as "x.y"</li>';
