@@ -112,7 +112,25 @@ class ScoreSeeder extends Seeder
               'created_at' => date('Y-m-d H:m:s'),
               'updated_at' => date('Y-m-d H:m:s')
             ));
-        }
+          
+          //record seed
+          $values = array();
+          $faker2 = \Faker\Factory::create();
+          for ($z = 0; $z < $ac; $z++) {
+            $values []= $faker2->unique()->numberBetween(1, 8);
+          }
+          
+          for ($j = 0; $j < $ac; $j++) {
+            DB::table('records')->insert(
+              array( 
+                'student_id' => $i,
+                'achievement_id' => $values[$j], 
+                'points' => 1, 
+                'created_at' => date('Y-m-d H:m:s'),
+                'updated_at' => date('Y-m-d H:m:s')
+              ));
+          }
+       }
     }
     
     private function generateComponents() {
@@ -136,7 +154,7 @@ class ScoreSeeder extends Seeder
       }
       
       $hw = array();
-      for ($i = 0; $i < 9; $i++) {
+      for ($i = 0; $i < 10; $i++) {
         array_push($hw, $faker->randomElement(
           $array = array('0.0','0.5','1.0','1.5',null)
         ));
@@ -150,7 +168,7 @@ class ScoreSeeder extends Seeder
       }
       
       $ks = array();
-      for ($i = 0; $i < 9; $i++) {
+      for ($i = 0; $i < 12; $i++) {
         array_push($ks, $faker->randomElement(
           $array = array('0','1',null)
         ));

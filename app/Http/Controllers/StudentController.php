@@ -316,6 +316,10 @@ class StudentController extends Controller {
       ->with('records', $records)
       ->with('achievements', $achievements);
   }
+  
+  public function progress() {
+    return view('progress');
+  }
 
   public function getStudentData($id) {
     $currentStudent = \App\Student::with('components')
@@ -328,16 +332,19 @@ class StudentController extends Controller {
       ->first();
     
     $data = array("currentStudent" => $currentStudent, "topStudent" => $topStudent);
-    
     return $data;
   }
   
   public function getProgressData() {
-    return \App\Score::with('student')
+    $nicks = \App\Student::all()->pluck('nick');
+    $progressData = \App\Score::with('student')
       ->join('students', 'students.id', '=', 'scores.student_id')
-      ->select(\DB::raw('students.name, week, SUM(score) as progress'))
+      ->select(\DB::raw('students.nick, week, SUM(score) as progress'))
       ->groupBy('student_id', 'week')
       ->get();
+    
+    $data = array("nicks" => $nicks, "progressData" => $progressData);
+    return $data;
   }
   
   public function getProgressDataById($id) {

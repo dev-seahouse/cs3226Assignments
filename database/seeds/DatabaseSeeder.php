@@ -14,10 +14,10 @@ class DatabaseSeeder extends Seeder
         $this->call(StudentSeeder::class);
         $this->call(CommentSeeder::class);
         $this->call(AchievementSeeder::class);
-        $this->call(RecordSeeder::class);
         $this->call(ScoreSeeder::class);
         
-        //Unused. Component seeds are inserted in ScoreSeeder
+        //Unused. These seeds are inserted in ScoreSeeder
+        //$this->call(RecordSeeder::class);
         //$this->call(ComponentSeeder::class); 
     }
 }
