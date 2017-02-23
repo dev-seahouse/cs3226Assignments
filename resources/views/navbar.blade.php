@@ -153,4 +153,4 @@ $(document).ready(function(){
     e.preventDefault();
   });
 });
-</script> 。
+</script>
