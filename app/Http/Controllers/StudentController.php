@@ -309,7 +309,7 @@ class StudentController extends Controller {
             $sectionRule=$mcRule;
             break;
         case "HW":
-            $sectionRule=$tcRule;
+            $sectionRule=$hwRule;
             break;
         case "BS":
             $sectionRule=$bsRule;
@@ -321,6 +321,8 @@ class StudentController extends Controller {
             $sectionRule="error";
     }    
     $rules=array();
+
+
 
     for($i=1;$i<=$studentCount;$i++){
 
