@@ -23,6 +23,7 @@ Route::get('achievement', array('as' => 'achievement', 'uses' => 'StudentControl
 //API
 Route::get('api/student/{id}', array('as' => 'student', 'uses' => 'StudentController@getStudentData'));
 Route::get('api/progress', array('as' => 'student', 'uses' => 'StudentController@getProgressData'));
+Route::get('api/progress/{id}', array('as' => 'student', 'uses' => 'StudentController@getProgressDataById'));
 
 //Routes in this group requires the user to be authenticated
 Route::group( ['middleware' => 'auth' ], function()

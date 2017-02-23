@@ -329,7 +329,7 @@ class StudentController extends Controller {
     
     $data = array("currentStudent" => $currentStudent, "topStudent" => $topStudent);
     
-    return response()->json($data);
+    return $data;
   }
   
   public function getProgressData() {
@@ -340,13 +340,39 @@ class StudentController extends Controller {
       ->get();
   }
   
+  public function getProgressDataById($id) {
+    $currentStudent = \App\Score::with('student')
+      ->where('student_id', $id)
+      ->join('students', 'students.id', '=', 'scores.student_id')
+      ->select(\DB::raw('students.name, week, SUM(score) as progress'))
+      ->groupBy('student_id', 'week')
+      ->get();
+    
+    $topStudentId = \App\Student::with('components')
+      ->join('components', 'students.id', '=', 'components.student_id')
+      ->select(\DB::raw('students.*, mc + tc + hw + bs + ks + ac as total'))
+      ->orderBy('total', 'DESC')
+      ->first()->id;
+    
+    $topStudent = \App\Score::with('student')
+      ->where('student_id', $topStudentId)
+      ->join('students', 'students.id', '=', 'scores.student_id')
+      ->select(\DB::raw('students.name, week, SUM(score) as progress'))
+      ->groupBy('student_id', 'week')
+      ->get();
+    
+    $data = array("currentStudent" => $currentStudent, "topStudent" => $topStudent);
+    
+    return $data;
+  }
+  
   private function getCreateFormRules() {
     $rules = array(
       'name' => 'required|between:5,30|regex:/^[A-Za-z ]+$/',
       'nick' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
       'kattis' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
       'profile_pic' => 'required|mimes:png,jpeg|max:1000',
-	  'nationality'=>'required|in:CHN,SGP,IDN,VNM,JPN,AUS,GER,OTH'
+	    'nationality'=>'required|in:CHN,SGP,IDN,VNM,JPN,AUS,GER,OTH'
     );
 
     return $rules;
@@ -366,9 +392,8 @@ class StudentController extends Controller {
       'profile_pic.required' => 'Profile picture is required',
       'profile_pic.mimes' => 'Profile picture should be a PNG or JPG file',
       'profile_pic.max' => 'Profile picture should be smaller than 1000 KB',
-	  'nationality.required' => 'Nationality cannot be blank',
-	  'nationality.in' => 'Nationality should be of either Singaporean, Indonesian, Chinese, Vietnamese, Japanese, Australian, German or Others',
-	  
+      'nationality.required' => 'Nationality cannot be blank',
+      'nationality.in' => 'Nationality should be of either Singaporean, Indonesian, Chinese, Vietnamese, Japanese, Australian, German or Others',
     );
 
     return $messages;
