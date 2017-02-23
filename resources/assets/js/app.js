@@ -213,14 +213,14 @@ function makeRadarChart ($selector, dataset) {
 function drawProgressChart ($selector) {
   if (!$selector.length) return
   getProgressData().then(function (data) {
-    return formartChartData(data)
+    return formartProgressChartData(data)
   }).done(function (formattedData) {
     makeProgressChart($selector, formattedData)
   }).fail(function (data) {
   })
 }
 
-function formartChartData (data) {
+function formartProgressChartData (data) {
   let nicks = data['nicks']
   let progressData = data['progressData']
   let dataStore = {}
