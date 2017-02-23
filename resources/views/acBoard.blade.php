@@ -23,7 +23,7 @@ else {
       <div class="panel-body">
         <ul class="list-group row">
           @foreach ($subRecords as $record)
-          <li class="list-group-item board-item col-xs-12 col-sm-6 col-md-3">
+          <li class="list-group-item col-xs-12 col-sm-6 col-md-3" style="border:0px;">
             <a href="{{ route('student', ['id' => $record->sId]) }}">{{ $record->name }}</a>
           </li>
           @endforeach
