@@ -13,13 +13,12 @@
 
 Auth::routes(); // includes routes for login, register, forget password
 
-Route::get('/', array('as' => 'index', 'uses' => 'StudentController@index'));
-
-Route::get('student/{id}', array('as' => 'student', 'uses' => 'StudentController@detail'));
-Route::get('help', array('as' => 'help', 'uses' => 'StudentController@help'));
+Route::get('/', array('as' => 'index', 'uses' => 'ViewController@index'));
+Route::get('student/{id}', array('as' => 'student', 'uses' => 'ViewController@detail'));
+Route::get('help', array('as' => 'help', 'uses' => 'ViewController@help'));
 Route::get('login', array('as' => 'login', 'uses' => 'HomeController@index'));
-Route::get('achievement', array('as' => 'achievement', 'uses' => 'StudentController@achievement'));
-Route::get('progress', array('as' => 'progress', 'uses' => 'StudentController@progress'));
+Route::get('achievement', array('as' => 'achievement', 'uses' => 'ViewController@achievement'));
+Route::get('progress', array('as' => 'progress', 'uses' => 'ViewController@progress'));
 
 //API
 Route::get('api/student/{id}', 'StudentController@getStudentData');
@@ -31,22 +30,22 @@ Route::group( ['middleware' => 'auth' ], function()
 {
 
   // Create
-  Route::get('create', array('as' => 'create', 'uses' => 'StudentController@create'));
-  Route::put('createStudent', 'StudentController@createStudent');
-  // Edit
+  Route::get('create', array('as' => 'create', 'uses' => 'ViewController@createStudent'));
+  Route::put('createStudent', 'CreateStudentController@create');
 
   //Edit all students
   Route::get('student/edit/all/{section}', array('as' => 'editSection', 'uses' => 'StudentController@editSection'));
   Route::post('editAllStudent/{section}',  'StudentController@editAllStudent');
 
   //Edit single student
-  Route::get('student/edit/{id}', array('as' => 'edit', 'uses' => 'StudentController@edit'));
-  Route::post('editStudent', 'StudentController@editStudent');
+  Route::get('student/edit/{id}', array('as' => 'edit', 'uses' => 'ViewController@editStudent'));
+  Route::post('editStudent', 'EditStudentController@edit');
+
   // Delete
   Route::delete('delete/{id}', array('as' => 'delete', 'uses' => 'StudentController@deleteStudent'));
   
 });
 
 // Use this test route to view your object retrieved from the database. Testing purposes
-Route::get('test', array('as' => 'test', 'uses' => 'StudentController@testget'));
-Route::get('{any}', 'StudentController@index');
+Route::get('test', array('as' => 'test', 'uses' => 'ViewController@testget'));
+Route::get('{any}', 'ViewController@index');
