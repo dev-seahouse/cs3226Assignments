@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CS3233 Ranklist 2017</title>
     <link rel="icon" type="image/png" href="{{ URL::asset('img/omega.png') }}">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans|Open+Sans" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}" />
   </head>

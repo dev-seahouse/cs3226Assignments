@@ -132,7 +132,8 @@ class StudentController extends Controller {
       $test= $currentStudentSectionScore;
       array_push($sectionScore,$currentStudentSectionScore);
     }
-    return view('editSection')->with('section',$section)->with('students',$students)->with('sectionScore',$sectionScore)->with('studentCount',$studentCount)->with('component',$component)->with('week',$week)->with('test',$test);
+    return view('editSection')->with('section',$section)->with('students',$students)->with('sectionScore',$sectionScore)
+      ->with('studentCount',$studentCount)->with('component',$component)->with('week',$week);
 
   }
 

@@ -135,22 +135,3 @@ $uri = $_SERVER['REQUEST_URI'];
     </div>
   </div>
 </nav>
-<script>
-// $(document).ready(function(){
-//   $('.dropdown-submenu a.test').on("click", function(e){
-//     $(this).next('ul').toggle();
-//     e.stopPropagation();
-//     e.preventDefault();
-//   });
-// });
-var previous=null;
-$(document).ready(function(){
-  $('.dropdown-submenu a.test').on("click", function(e){
-    if(previous!=null)previous.toggle();
-    previous=$(this).next('ul');
-    $(this).next('ul').toggle();
-    e.stopPropagation();
-    e.preventDefault();
-  });
-});
-</script> 。
