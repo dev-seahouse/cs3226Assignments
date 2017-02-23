@@ -8,56 +8,6 @@ class EditStudentController extends Controller {
   function __construct() {
     // constructor
   }
- 
-  // show edit student view
-  public function view($id) {
-    $student = \App\Student::where('id', $id)->firstOrFail();
-    $scores_arr = $this->storeScoresIntoArray(\App\Student::with('scores')->where('id', $id)->first());
-    $sum = array_sum($scores_arr['MC']) + array_sum($scores_arr['TC']) + array_sum($scores_arr['HW'])
-      + array_sum($scores_arr['BS']) + array_sum($scores_arr['KS'])  + array_sum($scores_arr['AC']);
-    $comment = \App\Comment::where('student_id', $id)->first()->comment;
-
-    return view('edit')->with('student', $student)
-      ->with('scores_arr', $scores_arr)
-      ->with('sum', $sum)
-      ->with('comment', $comment);
-  }
-  
-  // process all the scores of 1 student and store in array
-  private function storeScoresIntoArray($student) {
-    $scores_arr = array(
-      'MC' => array(0,0,0,0,0,0,0,0,0),
-      'TC' => array(0,0),
-      'HW' => array(0,0,0,0,0,0,0,0,0,0),
-      'BS' => array(0,0,0,0,0,0,0,0,0),
-      'KS' => array(0,0,0,0,0,0,0,0,0,0,0,0),
-      'AC' => array(0,0,0,0,0,0,0,0)
-    );
-
-    foreach ($student->scores as $scores) {
-      $comp = $scores->component;
-      $index = $scores->week - 1;
-      $score = $scores->score;
-
-      if ($score != NULL) {
-        $scores_arr[$comp][$index] = (string) $score;
-      } else {
-        switch($comp) {
-          case 'MC':
-          case 'HW':
-            $display = 'x.y';
-            break;
-          case 'TC':
-            $display = 'xy.z';
-            break;
-          default:
-            $display = 'x';
-        }
-        $scores_arr[$comp][$index] = $display;
-      }
-    }
-    return $scores_arr;
-  }
   
   // update student
   public function edit(Request $request) {

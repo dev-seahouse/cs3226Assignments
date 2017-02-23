@@ -8,11 +8,6 @@ class CreateStudentController extends Controller {
   function __construct() {
     // constructor
   }
- 
-  // show create student view
-  public function view() {
-    return view('create');
-  }
   
   public function create(Request $request) {
     $validator = Validator::make($request->all(), $this->getRules(), $this->getMessages());
