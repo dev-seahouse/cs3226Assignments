@@ -99,9 +99,8 @@ class StudentController extends Controller {
         ->withErrors($validator)
         ->withInput();
     }
-    $validator = Validator::make($request->all(), $this->getCreateFormRules(), $this->getCreateFormMessages());
 
-
+    // update scores
     for ($i = 1; $i <= $studentCount; $i++) {
       $student_id = $request->input($i);
 
@@ -111,6 +110,8 @@ class StudentController extends Controller {
       $score->score = $inputScore;
       $score->save();
     }
+    
+    // need to update components
 
     return redirect()->route('index');
   }
