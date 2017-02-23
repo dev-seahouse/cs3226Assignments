@@ -25,8 +25,8 @@ Route::group( ['middleware' => 'auth' ], function()
 {
 
   // Create
-  Route::get('create', array('as' => 'create', 'uses' => 'StudentController@create'));
-  Route::put('createStudent', 'StudentController@createStudent');
+  Route::get('create', array('as' => 'create', 'uses' => 'CreateStudentController@view'));
+  Route::put('createStudent', 'CreateStudentController@create');
   // Edit
   Route::get('student/edit/{id}', array('as' => 'edit', 'uses' => 'EditStudentController@view'));
   Route::post('editStudent', 'EditStudentController@edit');

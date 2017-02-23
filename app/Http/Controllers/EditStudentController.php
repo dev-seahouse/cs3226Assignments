@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Validator;
 class EditStudentController extends Controller {
 
   function __construct() {
-    $this->filePath = '../database/students.txt';
+    // constructor
   }
  
   // show edit student view
