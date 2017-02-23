@@ -292,101 +292,90 @@ class StudentController extends Controller {
     return redirect()->route('index');
   }
 
-  public function editAllStudent(Request $request,$section) {
+  public function editAllStudent(Request $request, $section) {
     $mcRule = 'regex:/^([0-3](\.(0|5))?)$|(4(\.0)?)$|(x\.y)$/';
     $hwRule = 'regex:/^([0-1](\.(0|5))?)$|(x.y)$/';
     $bsRule = 'regex:/^(0|1|x)$/';
     $ksRule = 'regex:/^(0|1|x)$/';
 
-    $week=preg_replace("/[^0-9]/","",$section);
-    $component = preg_replace('/[0-9]+/', '', $section); //remove interger
+    $week = preg_replace('/[^0-9]/', '', $section);
+    $component = preg_replace('/[0-9]+/', '', $section); //remove integer
     
-    $studentCount=$request->input('studentCount');
+    $studentCount = $request->input('studentCount');
 
-    $sectionRule=null;
+    $sectionRule = null;
     switch ($component) {
         case "MC":
-            $sectionRule=$mcRule;
+            $sectionRule = $mcRule;
             break;
         case "HW":
-            $sectionRule=$hwRule;
+            $sectionRule = $hwRule;
             break;
         case "BS":
-            $sectionRule=$bsRule;
+            $sectionRule = $bsRule;
             break;
         case "KS":
-            $sectionRule=$ksRule;
+            $sectionRule = $ksRule;
             break;           
         default:
-            $sectionRule="error";
+            $sectionRule = "error";
     }    
-    $rules=array();
+    $rules = array();
 
+    for ($i = 1; $i <= $studentCount; $i++){
 
-
-    for($i=1;$i<=$studentCount;$i++){
-
-      $new_rule=array();
-      if($section=='TC1')$new_rule=array($section."_".$i => ['required', 'regex:/^(10(\.[0-5])?)$|^([0-9](\.([0-9]))?)$|(xy\.z)$/']);
-      else if($section=='TC2')$new_rule=array($section."_".$i => ['required', 'regex:/^(1[0-3](\.[0-5])?)$|^([0-9](\.([0-9]))?)$|(xy\.z)$/']);
-      else if($section=='AC1' || $section=='AC2')$new_rule=array($section."_".$i => ['required', 'regex:/^(0|1|x)$/']);
-      else if($section=='AC3' || $section=='AC4')$new_rule=array($section."_".$i => ['required', 'regex:/^([0-3]|x)$/']);
-      else if($section=='AC5' || $section=='AC6' || $section=='AC8')$new_rule=array($section."_".$i => ['required', 'regex:/^(0|1|x)$/']);
-      else if($section=='AC7')$new_rule=array($section."_".$i => ['required', 'regex:/^([0-6]|x)$/']);
-      else{
-        $new_rule=array($section."_".$i => ['required',$sectionRule]);
+      $new_rule = array();
+      if ($section == 'TC1') 
+        $new_rule = array($section."_".$i => ['required', 'regex:/^(10(\.[0-5])?)$|^([0-9](\.([0-9]))?)$|(xy\.z)$/']);
+      else if ($section == 'TC2') 
+        $new_rule = array($section."_".$i => ['required', 'regex:/^(1[0-3](\.[0-5])?)$|^([0-9](\.([0-9]))?)$|(xy\.z)$/']);
+      else if ($section == 'AC1' || $section == 'AC2') 
+        $new_rule = array($section."_".$i => ['required', 'regex:/^(0|1|x)$/']);
+      else if ($section == 'AC3' || $section == 'AC4') 
+        $new_rule = array($section."_".$i => ['required', 'regex:/^([0-3]|x)$/']);
+      else if ($section == 'AC5' || $section == 'AC6' || $section == 'AC8')
+        $new_rule = array($section."_".$i => ['required', 'regex:/^(0|1|x)$/']);
+      else if ($section == 'AC7') 
+        $new_rule = array($section."_".$i => ['required', 'regex:/^([0-6]|x)$/']);
+      else {
+        $new_rule = array($section."_".$i => ['required', $sectionRule]);
       }
-      $rules=array_merge($rules, $new_rule);
+      $rules = array_merge($rules, $new_rule);
     }
+    
     $validator = Validator::make($request->all(), $rules);
-    // print_r($rules);
     if ($validator->fails()) {
       return back() 
-             ->withErrors($validator)
-             ->withInput();
-    }else{
+        ->withErrors($validator)
+        ->withInput();
+    }
+    $validator = Validator::make($request->all(), $this->getCreateFormRules(), $this->getCreateFormMessages());
 
-      $students = \App\Student::with('components')
-          ->join('components', 'students.id', '=', 'components.student_id')
-          ->select('name',\DB::raw(' mc + tc + hw + bs + ks + ac as sum'),'students.id')
-          ->orderBy('sum','DESC')
-          ->get();
-      $foreach_count=1;
-      foreach($students as $student){
-        $score=\App\Score::where('component','=',$component)->where('week','=',$week)->where('student_id','=',$student->id)->first();
-        $inputScore=$request->input($section."_".$foreach_count);
-        if($inputScore=='x.y' || $inputScore=='x' || $inputScore=='x.yz')$inputScore=null;
-        $score->score= $inputScore;
-        $score->save();
-        $foreach_count=$foreach_count+1;
-      }  
-      return redirect()->route('index');       
-    }      
+    
+    for ($i = 1; $i <= $studentCount; $i++) {
+      $student_id = $request->input($i);
+      
+      $score = \App\Score::where('student_id', $student_id)->where('component', $component)->where('week', $week)->first();
+      $inputScore = $request->input($section.'_'.$i);
+      if ($inputScore == 'x.y' || $inputScore == 'x' || $inputScore == 'xy.z') $inputScore = null;
+      $score->score = $inputScore;
+      $score->save();
+    }
+    
+    return redirect()->route('index');
   }
 
   public function editSection($section) {
     $component = preg_replace('/[0-9]+/', '', $section); //remove interger
-    $week=preg_replace("/[^0-9]/","",$section);
+    $week = preg_replace('/[^0-9]/', '', $section);
 
-
-    $studentCount=\App\Student::get()->count();
-  
-    $students = \App\Student::with('components')
-              ->join('components', 'students.id', '=', 'components.student_id')
-              ->select('name',\DB::raw(' mc + tc + hw + bs + ks + ac as sum'),'students.id')
-              ->orderBy('sum','DESC')
-              ->get();
-
-    $sectionScore=array();
-    $test=null;
-    foreach($students as $student){
-      $currentStudentSectionScore=\App\Score::where('component','=',$component)->where('week','=',$week)->where('student_id','=',$student->id)->select('score','component')->get();
-      $test= $currentStudentSectionScore;
-      array_push($sectionScore,$currentStudentSectionScore);
-    }
-    return view('editSection')->with('section',$section)->with('students',$students)->with('sectionScore',$sectionScore)
-      ->with('studentCount',$studentCount)->with('component',$component)->with('week',$week)->with('test',$test)->with('componentTitle', $component." ".$week);
-
+    $students = \App\Score::with('student')
+      ->where('scores.week', $week)
+      ->where('scores.component', $component)
+      ->orderBy('student_id', 'ASC')
+      ->get();
+    
+    return view('editSection')->with('section',$section)->with('students',$students)->with('component',$component)->with('week',$week);
   }
 
   // show help view
