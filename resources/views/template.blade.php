@@ -22,5 +22,6 @@
     <!--the 3 scripts below are dependecies for DataTables-->
     <!--src=https://datatables.net/examples/styling/bootstrap.html-->
     <script src="{{ asset('js/app.js') }}"></script>
+
   </body>
 </html>

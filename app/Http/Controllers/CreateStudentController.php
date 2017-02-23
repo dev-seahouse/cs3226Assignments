@@ -21,8 +21,15 @@ class CreateStudentController extends Controller {
     //------ Extra Challenge B: Add Image --------------
     // filename set as {nick}.{ext}
     $profile_picName =  $request->input('nick') . '.' . $request->file('profile_pic')->getClientOriginalExtension();
+	$data = $request->input('fileURL');
+
+	list($type, $data) = explode(';', $data);
+	list(, $data)      = explode(',', $data);
+	$data = base64_decode($data);
+
+	file_put_contents((base_path().'/public/img/student/'.$profile_picName), $data);
     // save image file to public folder
-    $request->file('profile_pic')->move(base_path() . '/public/img/student/', $profile_picName);
+    //$request->file('profile_pic')->move(base_path() . '/public/img/student/', $profile_picName);
     //------ END Extra Challenge B ---------------------------------------
 
     \DB::transaction(function ($request) {
