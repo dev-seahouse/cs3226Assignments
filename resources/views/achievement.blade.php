@@ -1,7 +1,7 @@
 @extends('template') <!-- use the SAME template -->
 @section('main') <!-- also a section called main but different content -->
 <div class="container-fluid">
-  <h1 class="text-center no-margin">Achievement Board</h1>
+  <h1 class="text-center no-margin">Achievements Board</h1>
   <br>
   <div class="row">
     <div class="col-xs-1 col-sm-1 col-md-2"></div>

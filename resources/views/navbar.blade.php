@@ -85,7 +85,7 @@ $uri = $_SERVER['REQUEST_URI'];
               </li>            
               <li class="dropdown-submenu">
                 <a class="test" >KS <b class="right-caret"></b></a>
-                <ul class="dropdown-menu" style="width:200px;float:left;left:160px;top:75px;">
+                <ul class="dropdown-menu" style="width:200px;float:left;left:160px;top:100px;">
                   @for ($i = 1; $i <= 12; $i++)
                     <li><a href="{{URL::route('editSection', array('section' => "KS".$i))}}">KS{{$i}}</a></li>
                   @endfor
@@ -93,7 +93,7 @@ $uri = $_SERVER['REQUEST_URI'];
               </li>   
               <li class="dropdown-submenu">
                 <a class="test" >AC <b class="right-caret"></b></a>
-                <ul class="dropdown-menu" style="width:200px;float:left;left:160px;top:75px;">
+                <ul class="dropdown-menu" style="width:200px;float:left;left:160px;top:125px;">
                   @for ($i = 1; $i <= 8; $i++)
                     <li><a href="{{URL::route('editSection', array('section' => "AC".$i))}}">AC{{$i}}</a></li>
                   @endfor
@@ -102,7 +102,8 @@ $uri = $_SERVER['REQUEST_URI'];
             </ul>
 
 		@endif
-        <li><a href="{{route('achievement')}}">Achievement</a></li>
+        <li><a href="{{route('achievement')}}">Achievements</a></li>
+        <li><a href="{{route('progress')}}">Progress Chart</a></li>
         <li><a href="{{route('help')}}">Help</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
