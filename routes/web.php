@@ -27,6 +27,12 @@ Route::group( ['middleware' => 'auth' ], function()
   Route::get('create', array('as' => 'create', 'uses' => 'StudentController@create'));
   Route::put('createStudent', 'StudentController@createStudent');
   // Edit
+
+  //Edit all students
+  Route::get('student/edit/all/{section}', array('as' => 'editSection', 'uses' => 'StudentController@editSection'));
+  Route::post('editAllStudent/{section}',  'StudentController@editAllStudent');
+
+  //Edit single student
   Route::get('student/edit/{id}', array('as' => 'edit', 'uses' => 'StudentController@edit'));
   Route::post('editStudent', 'StudentController@editStudent');
   // Delete
