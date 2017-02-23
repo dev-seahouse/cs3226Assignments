@@ -300,6 +300,7 @@ class StudentController extends Controller {
     }    
     $rules=array();
 
+
     for($i=1;$i<=$studentCount;$i++){
 
       $new_rule=array();
