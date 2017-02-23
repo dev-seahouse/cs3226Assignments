@@ -25,7 +25,7 @@ $(function () {
   highlightHighestValue()
 })
 
-function setupNavBarDropDown() {
+function setupNavbarDropdown() {
   var previous = null;
   $('.dropdown-submenu a.test').on("click", function(e){
     if (previous != null) previous.toggle()
