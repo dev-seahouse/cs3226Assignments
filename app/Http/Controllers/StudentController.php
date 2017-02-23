@@ -28,7 +28,11 @@ class StudentController extends Controller {
               ->get();*/
 
     //return \App\Student::all();
-    return \App\Component::where('student_id', 50)->first();
+    return \App\Score::with('student')
+      ->join('students', 'students.id', '=', 'scores.student_id')
+      ->select(\DB::raw('students.name, week, SUM(score) as progress'))
+      ->groupBy('student_id', 'week')
+      ->get();
   }
 
   // show index view
@@ -326,6 +330,14 @@ class StudentController extends Controller {
     $data = array("currentStudent" => $currentStudent, "topStudent" => $topStudent);
     
     return response()->json($data);
+  }
+  
+  public function getProgressData() {
+    return \App\Score::with('student')
+      ->join('students', 'students.id', '=', 'scores.student_id')
+      ->select(\DB::raw('students.name, week, SUM(score) as progress'))
+      ->groupBy('student_id', 'week')
+      ->get();
   }
   
   private function getCreateFormRules() {
