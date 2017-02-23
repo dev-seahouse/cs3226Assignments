@@ -34,8 +34,8 @@ Route::group( ['middleware' => 'auth' ], function()
   Route::put('createStudent', 'CreateStudentController@create');
 
   //Edit all students
-  Route::get('student/edit/all/{section}', array('as' => 'editSection', 'uses' => 'StudentController@editSection'));
-  Route::post('editAllStudent/{section}',  'StudentController@editAllStudent');
+  Route::get('student/edit/all/{section}', array('as' => 'editSection', 'uses' => 'ViewController@editComponent'));
+  Route::post('editAllStudent/{section}',  'EditComponentController@edit');
 
   //Edit single student
   Route::get('student/edit/{id}', array('as' => 'edit', 'uses' => 'ViewController@editStudent'));

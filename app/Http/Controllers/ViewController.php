@@ -18,7 +18,8 @@ class ViewController extends Controller {
     $last_updated = \App\DatabaseUtil::get_last_updated();
     $friendly_last_updated = Carbon::createFromTimestamp(strtotime($last_updated))->diffForHumans();
 
-    return view('index')->with('students', $students)
+    return view('index')
+      ->with('students', $students)
       ->with('last_updated',$friendly_last_updated);;
   }
 
@@ -33,7 +34,8 @@ class ViewController extends Controller {
       ->select(\DB::raw('records.id as rId, achievements.id as aId, points, title, max_points'))
       ->orderBy('aId')->get();
 
-    return view('detail')->with('student', $student)
+    return view('detail')
+      ->with('student', $student)
       ->with('components', $components)
       ->with('scores_arr', $scores_arr)
       ->with('comment', $comments->comment)
@@ -48,10 +50,29 @@ class ViewController extends Controller {
       + array_sum($scores_arr['BS']) + array_sum($scores_arr['KS'])  + array_sum($scores_arr['AC']);
     $comment = \App\Comment::where('student_id', $id)->first()->comment;
 
-    return view('edit')->with('student', $student)
+    return view('edit')
+      ->with('student', $student)
       ->with('scores_arr', $scores_arr)
       ->with('sum', $sum)
       ->with('comment', $comment);
+  }
+  
+  // show edit component view
+  public function editComponent($section) {
+    $component = preg_replace('/[0-9]+/', '', $section); //remove integer
+    $week = preg_replace('/[^0-9]/', '', $section);
+
+    $students = \App\Score::with('student')
+      ->where('scores.week', $week)
+      ->where('scores.component', $component)
+      ->orderBy('student_id', 'ASC')
+      ->get();
+
+    return view('editSection')
+      ->with('section',$section)
+      ->with('students',$students)
+      ->with('component',$component)
+      ->with('week',$week);
   }
 
   // show create student view
