@@ -102,7 +102,8 @@ $uri = $_SERVER['REQUEST_URI'];
             </ul>
 
 		@endif
-        <li><a href="{{route('achievement')}}">Achievement</a></li>
+        <li><a href="{{route('achievement')}}">Achievements</a></li>
+        <li><a href="{{route('progress')}}">Progress Chart</a></li>
         <li><a href="{{route('help')}}">Help</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
