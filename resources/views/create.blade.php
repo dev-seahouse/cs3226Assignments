@@ -32,11 +32,7 @@
           {!! Form::file('profile_pic', null, ['class' => 'form-control']) !!}
         </div><br>
         <div class="form-group">
-          <div class="col-xs-3"></div>
-          <div class="col-xs-6">
-            {!! Form::submit('Submit', ['class' => 'form-control btn btn-primary']) !!}
-          </div>
-          <div class="col-xs-3"></div>
+          {!! Form::submit('Submit', ['class' => 'form-control btn btn-primary btn-fixed-width center-block']) !!}
         </div>
       </div>
     </div>
