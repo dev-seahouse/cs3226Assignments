@@ -85,7 +85,7 @@ $uri = $_SERVER['REQUEST_URI'];
               </li>            
               <li class="dropdown-submenu">
                 <a class="test" >KS <b class="right-caret"></b></a>
-                <ul class="dropdown-menu" style="width:200px;float:left;left:160px;top:75px;">
+                <ul class="dropdown-menu" style="width:200px;float:left;left:160px;top:100px;">
                   @for ($i = 1; $i <= 12; $i++)
                     <li><a href="{{URL::route('editSection', array('section' => "KS".$i))}}">KS{{$i}}</a></li>
                   @endfor
@@ -93,7 +93,7 @@ $uri = $_SERVER['REQUEST_URI'];
               </li>   
               <li class="dropdown-submenu">
                 <a class="test" >AC <b class="right-caret"></b></a>
-                <ul class="dropdown-menu" style="width:200px;float:left;left:160px;top:75px;">
+                <ul class="dropdown-menu" style="width:200px;float:left;left:160px;top:125px;">
                   @for ($i = 1; $i <= 8; $i++)
                     <li><a href="{{URL::route('editSection', array('section' => "AC".$i))}}">AC{{$i}}</a></li>
                   @endfor
@@ -135,22 +135,3 @@ $uri = $_SERVER['REQUEST_URI'];
     </div>
   </div>
 </nav>
-<script>
-// $(document).ready(function(){
-//   $('.dropdown-submenu a.test').on("click", function(e){
-//     $(this).next('ul').toggle();
-//     e.stopPropagation();
-//     e.preventDefault();
-//   });
-// });
-var previous=null;
-$(document).ready(function(){
-  $('.dropdown-submenu a.test').on("click", function(e){
-    if(previous!=null)previous.toggle();
-    previous=$(this).next('ul');
-    $(this).next('ul').toggle();
-    e.stopPropagation();
-    e.preventDefault();
-  });
-});
-</script>

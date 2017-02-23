@@ -13,6 +13,7 @@ require('./bootstrap')
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 $(function () {
+  setupNavBarDropDown()
   setupDataTable()
   highlightTableCellsMarkedX()
   scaleRowHeights()
@@ -23,6 +24,17 @@ $(function () {
   highlightRows()
   highlightHighestValue()
 })
+
+function setupNavBarDropDown() {
+  var previous = null;
+  $('.dropdown-submenu a.test').on("click", function(e){
+    if (previous != null) previous.toggle()
+    previous = $(this).next('ul')
+    $(this).next('ul').toggle()
+    e.stopPropagation()
+    e.preventDefault()
+  })
+}
 
 function setAutoSum () {
   $('.autosum').change(function () {

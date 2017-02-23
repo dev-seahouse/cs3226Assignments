@@ -5,7 +5,7 @@
   {!! Form::open(['url' => 'editAllStudent/'.$section, 'method' => 'post']) !!}
   <!-- http://stackoverflow.com/questions/28028996/laravel-passing-variable-from-forms 參考-->
   	{!! Form::hidden('studentCount', $studentCount) !!}
-    {!! Form::label($section, $component.' scores:', ['class' => 'control-label']) !!}<br>
+    {!! Form::label($section, $componentTitle.' scores:', ['class' => 'control-label']) !!}<br>
     <?php
     	$fields=array();
     	for($i=1; $i <= $studentCount; $i++){
