@@ -323,7 +323,7 @@ class StudentController extends Controller {
       ->where('student_id', $id)->firstOrFail();
     $topStudent = \App\Student::with('components')
       ->join('components', 'students.id', '=', 'components.student_id')
-      ->select(\DB::raw('students.*, mc + tc + hw + bs + ks + ac as total'))
+      ->select(\DB::raw('students.*, components.*, mc + tc + hw + bs + ks + ac as total'))
       ->orderBy('total', 'DESC')
       ->first();
     

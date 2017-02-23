@@ -132,22 +132,23 @@ function formartChartData (data) {
   let keys = ['ac', 'bs', 'hw', 'mc', 'ks', 'tc']
   let formattedCurrStudentData = []
   let formattedTopStudentData = []
+  let formattedKeys = []
   let currentStudentData = data['currentStudent']
   let topStudentData = data['topStudent']
   let currentStudentDataName = currentStudentData['name']
   let topStudentDataName = topStudentData['name']
   keys.forEach(function (key) {
+    formattedKeys.push(key.toUpperCase());
     formattedCurrStudentData.push(currentStudentData[key])
     formattedTopStudentData.push(topStudentData[key])
   })
-
-
+  
   return {
-    keys: keys,
+    keys: formattedKeys,
     currentStudent: formattedCurrStudentData,
     topStudent: formattedTopStudentData,
-	topStudentDataName: topStudentDataName,
-	currentStudentDataName: currentStudentDataName
+	  currentStudentDataName: currentStudentDataName,
+    topStudentDataName: topStudentDataName
   }
 }
 
