@@ -8,28 +8,6 @@ class ViewController extends Controller {
     // constructor
   }
 
-  public function testget() {
-    // For each student, retrieve comments AND records AND scores
-    // return \App\Student::with('comment')->with('records')->with('scores')->get();
-
-    // For each student, retrieve all achievements with description
-    // return \App\Record::with(['student','achievement'])->get();
-
-    // For each achievement, get the records. Able to list which student has the highest points
-    // return \App\Achievement::with('records')->get();
-
-    // For each student, retrieve all achievements with description
-    // return \App\Record::with(['student','achievement'])->get();
-
-    // For each student, retrieve all scores
-    /*return \App\Score::with('component')
-              ->join('components', 'components.id', '=', 'scores.component_id')
-              ->get();*/
-
-    //return \App\Student::all();
-    return \App\Component::where('student_id', 50)->first();
-  }
-
   // show index view
   public function index() {
     $students = \App\Student::with('components')
