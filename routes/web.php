@@ -19,11 +19,12 @@ Route::get('student/{id}', array('as' => 'student', 'uses' => 'StudentController
 Route::get('help', array('as' => 'help', 'uses' => 'StudentController@help'));
 Route::get('login', array('as' => 'login', 'uses' => 'HomeController@index'));
 Route::get('achievement', array('as' => 'achievement', 'uses' => 'StudentController@achievement'));
+Route::get('progress', array('as' => 'progress', 'uses' => 'StudentController@progress'));
 
 //API
-Route::get('api/student/{id}', array('as' => 'student', 'uses' => 'StudentController@getStudentData'));
-Route::get('api/progress', array('as' => 'student', 'uses' => 'StudentController@getProgressData'));
-Route::get('api/progress/{id}', array('as' => 'student', 'uses' => 'StudentController@getProgressDataById'));
+Route::get('api/student/{id}', 'StudentController@getStudentData');
+Route::get('api/progress', 'StudentController@getProgressData');
+Route::get('api/progress/{id}', 'StudentController@getProgressDataById');
 
 //Routes in this group requires the user to be authenticated
 Route::group( ['middleware' => 'auth' ], function()
