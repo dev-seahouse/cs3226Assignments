@@ -13,22 +13,22 @@
 
 Auth::routes(); // includes routes for login, register, forget password
 
-Route::get('/', array('as' => 'index', 'uses' => 'StudentController@index'));
+Route::get('/', array('as' => 'index', 'uses' => 'ViewController@index'));
 Route::get('api/student/{id}', array('as' => 'student', 'uses' => 'StudentController@getStudentData'));
-Route::get('student/{id}', array('as' => 'student', 'uses' => 'StudentController@detail'));
-Route::get('help', array('as' => 'help', 'uses' => 'StudentController@help'));
+Route::get('student/{id}', array('as' => 'student', 'uses' => 'ViewController@detail'));
+Route::get('help', array('as' => 'help', 'uses' => 'ViewController@help'));
 Route::get('login', array('as' => 'login', 'uses' => 'HomeController@index'));
-Route::get('achievement', array('as' => 'achievement', 'uses' => 'AchievementController@view'));
+Route::get('achievement', array('as' => 'achievement', 'uses' => 'ViewController@achievement'));
 
 //Routes in this group requires the user to be authenticated
 Route::group( ['middleware' => 'auth' ], function()
 {
 
   // Create
-  Route::get('create', array('as' => 'create', 'uses' => 'CreateStudentController@view'));
+  Route::get('create', array('as' => 'create', 'uses' => 'ViewController@createStudent'));
   Route::put('createStudent', 'CreateStudentController@create');
   // Edit
-  Route::get('student/edit/{id}', array('as' => 'edit', 'uses' => 'EditStudentController@view'));
+  Route::get('student/edit/{id}', array('as' => 'edit', 'uses' => 'ViewController@editStudent'));
   Route::post('editStudent', 'EditStudentController@edit');
   // Delete
   Route::delete('delete/{id}', array('as' => 'delete', 'uses' => 'StudentController@deleteStudent'));
@@ -36,5 +36,5 @@ Route::group( ['middleware' => 'auth' ], function()
 });
 
 // Use this test route to view your object retrieved from the database. Testing purposes
-Route::get('test', array('as' => 'test', 'uses' => 'StudentController@testget'));
-Route::get('{any}', 'StudentController@index');
+Route::get('test', array('as' => 'test', 'uses' => 'ViewController@testget'));
+Route::get('{any}', 'ViewController@index');
