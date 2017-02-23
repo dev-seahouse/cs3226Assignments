@@ -18,7 +18,7 @@ Route::get('api/student/{id}', array('as' => 'student', 'uses' => 'StudentContro
 Route::get('student/{id}', array('as' => 'student', 'uses' => 'StudentController@detail'));
 Route::get('help', array('as' => 'help', 'uses' => 'StudentController@help'));
 Route::get('login', array('as' => 'login', 'uses' => 'HomeController@index'));
-Route::get('achievement', array('as' => 'achievement', 'uses' => 'StudentController@achievement'));
+Route::get('achievement', array('as' => 'achievement', 'uses' => 'AchievementController@view'));
 
 //Routes in this group requires the user to be authenticated
 Route::group( ['middleware' => 'auth' ], function()
@@ -28,8 +28,8 @@ Route::group( ['middleware' => 'auth' ], function()
   Route::get('create', array('as' => 'create', 'uses' => 'StudentController@create'));
   Route::put('createStudent', 'StudentController@createStudent');
   // Edit
-  Route::get('student/edit/{id}', array('as' => 'edit', 'uses' => 'StudentController@edit'));
-  Route::post('editStudent', 'StudentController@editStudent');
+  Route::get('student/edit/{id}', array('as' => 'edit', 'uses' => 'EditStudentController@view'));
+  Route::post('editStudent', 'EditStudentController@edit');
   // Delete
   Route::delete('delete/{id}', array('as' => 'delete', 'uses' => 'StudentController@deleteStudent'));
   
