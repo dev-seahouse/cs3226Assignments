@@ -155,7 +155,8 @@ table.dataTable tbody td {
 }
 
 .rank-person-img {
-    width: 15px;
+    max-width: 15px;
+    max-height: 15px;
 }
 
 .rank-kattis-img {

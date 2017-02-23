@@ -15,7 +15,7 @@ require('./bootstrap')
 $(function () {
   setupDataTable()
   highlightTableCellsMarkedX()
-  scaleRowHeights($('#ranktable').find('tbody > tr'))
+  scaleRowHeights()
   drawRadarChart($('#studentRadarChart'))
   setActive()
   setAutoSum()
@@ -71,41 +71,42 @@ function highlightTableCellsMarkedX () {
   })
 }
 
-function scaleRowHeights (rows) {
+function scaleRowHeights() {
+  var rows = $('#ranktable').find('tbody > tr')
   if (!rows.length) return
-  const totalNumOfDataRows = rows.length
   const baseRowHeight = rows[0].offsetHeight
-
-  setRowHeights()
-  restoreDefaultRowHeightsIfTheadClicked()
-
-  function setRowHeights () {
+  const totalNumOfDataRows = rows.length
+  const delta = 15
+  
+  setRowHeights($('#ranktable th').length - 1)
+  
+  $('#ranktable th').on('click', function () {
+    var colIndex = $(this)[0].cellIndex
+    if (colIndex <= 2) {
+      resetRowHeights()
+    } else {
+      setRowHeights(colIndex)
+    }
+  })
+  
+  function setRowHeights(colIndex) {
+    var rows = $('#ranktable').find('tbody > tr')
+    rows.eq(0).css('height', baseRowHeight)
+    
     rows.each((rowIndex, currRow) => {
-      setRowHeight(rowIndex, currRow)
+      if (rowIndex !== totalNumOfDataRows - 1) {
+        var currColScore = $(currRow).find('td').eq(colIndex).text()
+        var nextColScore = $(currRow).next('tr').find('td').eq(colIndex).text()
+        var spacing = Math.abs(currColScore - nextColScore) * delta + baseRowHeight
+        $(currRow).next('tr').css('height', spacing + 'px')
+      }
     })
   }
-
-  function setRowHeight (rowIndex, currRow) {
-    if (rowIndex !== totalNumOfDataRows - 1) {
-      $(currRow).next('tr').css('height', calculateRowHeightBasedOnRankScoreDiff(currRow) + 'px')
-    }
-  }
-
-  function calculateRowHeightBasedOnRankScoreDiff (currRow) {
-    const delta = 40
-    let $currTotlRankScoreCol = $(currRow).find('.js-rankTotl'),
-      currTotlRankScore = $currTotlRankScoreCol.text(),
-      $nextTotlRankScoreCol = $(currRow).next('tr').find('.js-rankTotl'),
-      nextTotlRankScore = $nextTotlRankScoreCol.text()
-
-    return (currTotlRankScore - nextTotlRankScore) * delta + baseRowHeight
-  }
-
-  function restoreDefaultRowHeightsIfTheadClicked () {
-    $('#ranktable thead').one('click', function () {
-      rows.each((index, currRow) => {
-        $(currRow).css('height', baseRowHeight)
-      })
+  
+  function resetRowHeights() {
+    var rows = $('#ranktable').find('tbody > tr')
+    rows.each((index, curr) => {
+      $(curr).css('height', baseRowHeight)
     })
   }
 }
