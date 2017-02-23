@@ -38,7 +38,7 @@
       <ul class="list-group row">
         @foreach ($students as $student)
         <?php $i++; ?>
-        <li class="list-group-item col-xs-12 col-sm-6 col-md-3" style="border:0px;">
+        <li class="list-group-item col-xs-12 col-sm-6 col-md-3 col-lg-2" style="border:0px;">
           <div>{{ $i.'. '.$student['student']['name'] }}</div>
           <div class='{{ $errors->has($section."_".$student["student_id"]) ? "has-error" : "" }}'>{!! Form::hidden($i, $student['student_id']) !!}
             {!! Form::text($section.'_'.$i,
