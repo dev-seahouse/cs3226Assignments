@@ -35,6 +35,39 @@ class EditComponentController extends Controller {
     }
 
     // need to update components
+    // for each student, update the sum of the component
+    $students = \App\Student::all();
+    
+    foreach ($students as $student) {
+      $id = $student->id;
+      $compSum = \App\Score::where('student_id', $id)->where('component', $component)
+        ->groupBy('component')
+        ->sum('score');
+      $studComp = \App\Component::where('student_id', $id)->firstOrFail();
+      switch ($component) {
+        case 'MC':
+          $studComp->mc = $compSum;
+          break;
+        case 'TC':
+          $studComp->tc = $compSum;
+          break;
+        case 'HW':
+          $studComp->hw = $compSum;
+          break;
+        case 'BS':
+          $studComp->bs = $compSum;
+          break;
+        case 'KS':
+          $studComp->ks = $compSum;
+          break;
+        case 'AC':
+          $studComp->ac = $compSum;
+          break;
+        default:
+          // should not happen
+      }
+      $studComp->save();
+    }
 
     return redirect()->route('index');
   }
