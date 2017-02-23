@@ -309,7 +309,7 @@ class StudentController extends Controller {
             $sectionRule=$mcRule;
             break;
         case "HW":
-            $sectionRule=$tcRule;
+            $sectionRule=$hwRule;
             break;
         case "BS":
             $sectionRule=$bsRule;
