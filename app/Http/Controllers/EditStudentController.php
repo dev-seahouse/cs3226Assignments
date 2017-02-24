@@ -12,7 +12,7 @@ class EditStudentController extends Controller {
   // update student
   public function edit(Request $request) {
     // validate user input
-    $validator = Validator::make($request->all(), $this->getRules(), $this->getMessages());
+    $validator = Validator::make($request->all(), $this->getRules($request->input('id')), $this->getMessages());
 
     if ($validator->fails()) {
       return back()
@@ -110,14 +110,14 @@ class EditStudentController extends Controller {
     return $arr;
   }
 
-  private function getRules() {
+  private function getRules($id) {
     $mcRule = 'regex:/^([0-3](\.(0|5))?)$|(4(\.0)?)$|(x\.y)$/';
     $hwRule = 'regex:/^([0-1](\.(0|5))?)$|(x.y)$/';
     $bsRule = 'regex:/^(0|1|x)$/';
     $ksRule = 'regex:/^(0|1|x)$/';
     $rules = array(
       'name' => 'required|between:5,30|regex:/^[A-Za-z ]+$/',
-      'nick' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/|unique:students',
+      'nick' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/|unique:students'.($id ? ',id,'.$id : ''),
       'kattis' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
       // MC rules
       'MC1' => ['required', $mcRule], 'MC2' => ['required', $mcRule], 'MC3' => ['required', $mcRule], 
