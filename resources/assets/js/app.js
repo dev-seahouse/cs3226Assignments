@@ -297,11 +297,16 @@ function makeProgressChart ($selector, dataset) {
     datasets: dataset['chartData']
   }
 
-  new Chart($selector, {
+  var chart = new Chart($selector, {
     type: 'line',
     data: data,
     options: {
       responsive: true,
+      elements: {
+        line: {
+          tension: 0
+        }
+      },
       title:{
         display: false,
         text: 'Progress Chart'
@@ -331,6 +336,13 @@ function makeProgressChart ($selector, dataset) {
         }]
       }
     }
+  })
+  
+  $('#progressChartHideButton').click(function() {
+    chart.data.datasets.forEach(function(ds) {
+      ds.hidden = !ds.hidden;
+    });
+    chart.update();
   })
 }
 
