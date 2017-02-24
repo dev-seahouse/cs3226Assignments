@@ -79,7 +79,7 @@ class CreateStudentController extends Controller {
   private function getRules() {
     $rules = array(
       'name' => 'required|between:5,30|regex:/^[A-Za-z ]+$/',
-      'nick' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
+      'nick' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/|unique:students',
       'kattis' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
       'profile_pic' => 'required|mimes:png,jpeg|max:1000',
       'fileURL' => 'required',

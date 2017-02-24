@@ -117,7 +117,7 @@ class EditStudentController extends Controller {
     $ksRule = 'regex:/^(0|1|x)$/';
     $rules = array(
       'name' => 'required|between:5,30|regex:/^[A-Za-z ]+$/',
-      'nick' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
+      'nick' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/|unique:students',
       'kattis' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
       // MC rules
       'MC1' => ['required', $mcRule], 'MC2' => ['required', $mcRule], 'MC3' => ['required', $mcRule], 

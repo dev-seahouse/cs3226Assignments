@@ -19,7 +19,7 @@ class CreateStudentTable extends Migration
             $table->string('gender');
             $table->string('profile_pic');
             $table->string('name');
-            $table->string('nick');
+            $table->string('nick')->unique();
             $table->string('kattis');
             $table->timestamps();
         });
