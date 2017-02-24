@@ -21,13 +21,12 @@ class CreateStudentController extends Controller {
     //------ Extra Challenge B: Add Image --------------
     // filename set as {nick}.{ext}
     $profile_picName =  $request->input('nick') . '.' . $request->file('profile_pic')->getClientOriginalExtension();
-	$data = $request->input('fileURL');
+	  $data = $request->input('fileURL');
+	  list($type, $data) = explode(';', $data);
+	  list(, $data)      = explode(',', $data);
+	  $data = base64_decode($data);
 
-	list($type, $data) = explode(';', $data);
-	list(, $data)      = explode(',', $data);
-	$data = base64_decode($data);
-
-	file_put_contents((base_path().'/public/img/student/'.$profile_picName), $data);
+	  file_put_contents((base_path().'/public/img/student/'.$profile_picName), $data);
     // save image file to public folder
     //$request->file('profile_pic')->move(base_path() . '/public/img/student/', $profile_picName);
     //------ END Extra Challenge B ---------------------------------------
@@ -83,7 +82,8 @@ class CreateStudentController extends Controller {
       'nick' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
       'kattis' => 'required|between:5,30|regex:/^[0-9A-Za-z]+$/',
       'profile_pic' => 'required|mimes:png,jpeg|max:1000',
-	  'nationality'=>'required|in:CHN,SGP,IDN,VNM,JPN,AUS,GER,OTH'
+      'fileURL' => 'required',
+	    'nationality'=>'required|in:CHN,SGP,IDN,VNM,JPN,AUS,GER,OTH'
     );
 
     return $rules;
@@ -103,9 +103,9 @@ class CreateStudentController extends Controller {
       'profile_pic.required' => 'Profile picture is required',
       'profile_pic.mimes' => 'Profile picture should be a PNG or JPG file',
       'profile_pic.max' => 'Profile picture should be smaller than 1000 KB',
-	  'nationality.required' => 'Nationality cannot be blank',
-	  'nationality.in' => 'Nationality should be of either Singaporean, Indonesian, Chinese, Vietnamese, Japanese, Australian, German or Others',
-	  
+      'fileURL.required' => 'Please click save to confirm',
+	    'nationality.required' => 'Nationality cannot be blank',
+	    'nationality.in' => 'Nationality should be of either Singaporean, Indonesian, Chinese, Vietnamese, Japanese, Australian, German or Others',
     );
 
     return $messages;
