@@ -2,7 +2,7 @@
 @section('main') <!-- also a section called main but different content -->
 <div class="container-fluid">
   <h2>STUDENT DETAILS</h2>
-
+  
   <div class="row">
     <div class="col-xs-12 col-sm-6">
       <h4><b>{{ $student['name'] }}</b> in CS3233 S2 AY 2016/2017</h4>
@@ -26,18 +26,41 @@
         <img class="detailsImage" src="{{ URL::asset('img/student/'.$student['profile_pic']) }}">
       </div>
     </div>
-
-    <div class="hidden-xs col-sm-3 col-md3 pull-right" style="max-width: 300px;">
-      <canvas id="studentRadarChart" class='radarChart' width="150" height="150" style="display: block; height: 165px; width: 165px;"></canvas>
-    </div>
   </div>
-
-  <hr>
+  <br>
+  
+  <div class="panel-group hidden-xs" id="accordion" role="tablist" aria-multiselectable="true">
+    <section class="overview">
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+          <h4 class="panel-title">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+              <h4>Progress comparison</h4>
+            </a>
+          </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            <div class="col-sm-1 col-md-2"></div>
+            <div class="col-sm-6 col-md-4">
+              <canvas id="studentProgressChart" style="max-height: 300px;"></canvas>
+            </div>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-2 col-md-4" style="max-width: 300px;">
+              <canvas id="studentRadarChart"></canvas>
+            </div>
+            <div class="col-sm-1 col-md-2"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  
 
   <div class="row">
     <div class="col-xs-12">
       <table id="statstable" class="table table-striped">
-        <caption>Detailed scores:</caption>
+        <h4>Detailed scores:</h4>
         <thead>
           <tr>
             <th>Component</th>
