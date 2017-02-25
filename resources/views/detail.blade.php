@@ -135,11 +135,13 @@
       <ol>
         <?php
         foreach ($records as $record) {
-          echo '<li>'.$record->title;
-          if ($record->max_points != 1) {
-            echo ' '.$record->points.'/'.$record->max_points;
+          if ($record->points != 0) {
+            echo '<li>'.$record->title;
+            if ($record->max_points != 1) {
+              echo ' '.$record->points.'/'.$record->max_points;
+            }
+            echo '</li>';
           }
-          echo '</li>';
         }
         ?>
       </ol>

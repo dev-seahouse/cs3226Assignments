@@ -113,22 +113,18 @@ class ScoreSeeder extends Seeder
               'updated_at' => date('Y-m-d H:m:s')
             ));
           
-          //record seed
-          $values = array();
-          $faker2 = \Faker\Factory::create();
-          for ($z = 0; $z < $ac; $z++) {
-            $values []= $faker2->unique()->numberBetween(1, 8);
-          }
-          
-          for ($j = 0; $j < $ac; $j++) {
-            DB::table('records')->insert(
-              array( 
-                'student_id' => $i,
-                'achievement_id' => $values[$j], 
-                'points' => 1, 
-                'created_at' => date('Y-m-d H:m:s'),
-                'updated_at' => date('Y-m-d H:m:s')
-              ));
+          //record seed for student achievements
+          for ($j = 0; $j < count($components['AC']); $j++) {
+            if ($components['AC'][$j] != null) {
+              DB::table('records')->insert(
+                array( 
+                  'student_id' => $i,
+                  'achievement_id' => $j + 1, 
+                  'points' => $components['AC'][$j], 
+                  'created_at' => date('Y-m-d H:m:s'),
+                  'updated_at' => date('Y-m-d H:m:s')
+                ));
+            }
           }
        }
     }
