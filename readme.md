@@ -96,14 +96,18 @@ open command prompt and run the following command:
 ```
 
 Modify the following settings in C:\xampp\htdocs\rankteam1\\.env
+Verified Mailgun domain settings
 ```sh
 MAIL_DRIVER=smtp
 MAIL_HOST=smtp.mailgun.org
 MAIL_PORT=2525
-MAIL_USERNAME=postmaster@sandboxd482171b2b614f8dae7b1427c5c5a319.mailgun.org
-MAIL_PASSWORD=a0c542a3057fc62deff7e1e10016f18b
+MAIL_USERNAME=postmaster@cs3226officialranklist.tk
+MAIL_PASSWORD=89655d866e35092485fe34b412474103
 MAIL_ENCRYPTION=null
 ```
+Sandbox credentials:
+MAIL_USERNAME=postmaster@sandboxd482171b2b614f8dae7b1427c5c5a319.mailgun.org
+MAIL_PASSWORD=a0c542a3057fc62deff7e1e10016f18b
 
 ### Install NodeJS
 1. Download and install Nodejs at https://nodejs.org/en/
