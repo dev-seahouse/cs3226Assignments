@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col-xs-12">
 
-        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
           <section class="overview">
             <div class="panel panel-default">
@@ -170,7 +170,7 @@
             </div> <!-- end of panel -->
           </section>
 
-        <div> <!-- end of multi panel -->
+      </div> <!-- end of multi panel -->
 
       </hr>
 
@@ -204,6 +204,6 @@
           <!-- end to be genereted -->
 
       </div> <!-- end col-xs-12 -->
-    </div> <!-- end row -->
-  </div> <!-- end text-container -->
+  </div> <!-- end row -->
+</div> <!-- end text-container -->
 @stop
