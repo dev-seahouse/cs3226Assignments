@@ -22,11 +22,16 @@
     border-radius: 0;
 }
 
-.navbar-inverse .navbar-nav>li>a:hover {
+.navbar-inverse .navbar-nav>li>a:hover{
     color: #ddd;
     -webkit-transition: color .1;
     -o-transition: color .1;
     transition: color .1;
+}
+
+.navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
+    background-color: transparent;
+    color: #ddd;
 }
 
 #brandImage {
