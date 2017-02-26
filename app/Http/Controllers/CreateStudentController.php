@@ -61,7 +61,8 @@ class CreateStudentController extends Controller {
       $this->create_scores("KS", 12, $student);
       $this->create_scores("AC", 8, $student);
     });
-
+    
+    \Session::flash('message', 'You have successfully added <strong>'.$request->input('name').'</strong> to the rank list.');
     return redirect()->route('index');
   }
 

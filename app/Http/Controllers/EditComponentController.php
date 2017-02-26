@@ -68,7 +68,8 @@ class EditComponentController extends Controller {
       }
       $studComp->save();
     }
-
+    
+    \Session::flash('message', 'You have successfully updated the '.$component.' scores for week '.$week.'.');
     return redirect()->route('index');
   }
 

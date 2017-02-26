@@ -545,10 +545,9 @@ $('.delete-btn').click(function (e) {
     confirmButtonText: 'Yes, delete it!'
   }).then(function () {
     $('.delete-btn').closest('form').submit()
-  }).then(function () {
-    swal(
-    'Deleted!',
-    'success'
-  )
   })
 })
+
+$("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+    $("#success-alert").slideUp(500);
+});

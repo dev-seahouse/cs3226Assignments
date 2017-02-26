@@ -20,7 +20,7 @@ class ViewController extends Controller {
 
     return view('index')
       ->with('students', $students)
-      ->with('last_updated',$friendly_last_updated);;
+      ->with('last_updated',$friendly_last_updated);
   }
 
   // show detail view

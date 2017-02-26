@@ -68,7 +68,8 @@ class EditStudentController extends Controller {
       // update records table
       $this->updateRecords($id, $ac_scores, $student);
     });
-
+    
+    \Session::flash('message', 'You have successfully updated <strong>'.$request->input('name').'\'s</strong> details.');
     return redirect()->route('index');
   }
 

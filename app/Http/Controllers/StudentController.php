@@ -35,8 +35,10 @@ class StudentController extends Controller {
 
   public function deleteStudent($id) {
     $student = \App\Student::where('id', $id)->firstOrFail();
+    $name = $student->name;
     \File::delete(base_path() . '/public/img/student/' . $student->profile_pic);
     $student->delete();
+    \Session::flash('message', 'You have successfully deleted <strong>'.$name.'</strong> from the rank list.');
     return redirect()->route('index');
   }
 

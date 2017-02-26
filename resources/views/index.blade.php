@@ -1,18 +1,15 @@
 @extends('template') <!-- use template from previous slide -->
 @section('main') <!-- define a section called main -->
 <div class="container-fluid">
-  <?php
-    //echo var_dump($data[0]->scores);
-
-    //try to retrieve summed data and display using blade format.
-    //if too hard then do the sum in php and echo the result into cells.
-
-    //for profile_pic use /img/student/{nick}.png
-    //for flags use /img/flags/{nationality}.png
-
-    //use /test route to test your query results
-  ?>
-
+  @if (Session::has('message'))
+    <div id="success-alert" class="alert alert-success alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {!! session('message') !!}
+    </div>
+  @endif
+  
   <h1 class="text-center no-margin">Rankings</h1>
   <h5 class="text-center">Last updated at {{ $last_updated }}</h5>
   <div class="row">
