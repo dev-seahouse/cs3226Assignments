@@ -1,5 +1,13 @@
 @extends('template') <!-- use template from previous slide -->
 @section('main') <!-- define a section called main -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <div class="container-fluid">
   @if (Session::has('message'))
     <div id="success-alert" class="alert alert-success alert-dismissible" role="alert">
@@ -10,7 +18,8 @@
     </div>
   @endif
   
-  <h1 class="text-center no-margin">Rankings</h1>
+  <h1 class="text-center no-margin">Rankings <div class="fb-like" data-href="http://cs3226officialranklist.tk/" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="false"</div></h1>
+  
   <h5 class="text-center">Last updated at {{ $last_updated }}</h5>
   <div class="row">
     <div class="col-xs-12">
