@@ -18,8 +18,13 @@
     </div>
   @endif
   
-  <h1 class="text-center no-margin">Rankings <div class="fb-like" data-href="http://cs3226officialranklist.tk/" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="false"</div></h1>
-  
+  <h1 class="text-center no-margin">Rankings</h1>
+  <div class="text-center no-margin" style="padding-top:10px">
+ <div class="fb-like" data-href="http://cs3226officialranklist.tk/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+   </div>
+   <div class="text-center no-margin" style="padding-top:10px">
+    <a href="https://twitter.com/CS3226_Official" class="twitter-follow-button" data-size="normal" style="vertical-align: text-bottom;">Follow @CS3226_Official</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </div>
   <h5 class="text-center">Last updated at {{ $last_updated }}</h5>
   <div class="row">
     <div class="col-xs-12">
