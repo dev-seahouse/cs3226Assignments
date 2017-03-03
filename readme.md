@@ -1,7 +1,20 @@
-Ranklist - Lab 5
+Ranklist - Lab 6
 ================
 Hello, if you thought of something that need to done, but busy at the moment, create an issue! So that somebody who might find the problem doable/easy can get that job done instead!
-Remember to describe the poblem and the definition of done as clearly as possible, just suggesting~ 
+Remember to describe the problem and the definition of done as clearly as possible, just suggesting~ 
+
+User accounts
+=============
+bevinseetoh@hotmail.com (admin)<br>
+sayhi.kenan@gmail.com (admin)<br>
+vivian198912@gmail.com (admin)<br>
+larry1285@gmail.com (admin)<br>
+shawnlimjq@hotmail.com (admin)<br>
+tanmunaw@u.nus.edu (admin)<br>
+student1@officialranklist.tk (student Husky)<br>
+student2@officialtanklist.tk (student Chopper)<br><br>
+
+DEFAULT PASSWORDS: qwerty123
 
 Database Structure
 ==================
