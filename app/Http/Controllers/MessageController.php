@@ -18,7 +18,10 @@ class MessageController extends Controller {
   }
 
   public function adminView() {
-    $messages = \App\Message::all();
+    $messages = \App\Student::with('messages')
+      ->join('messages', 'students.id', '=', 'messages.student_id')
+      ->select(\DB::raw('students.name, messages.*'))
+      ->get();
 
     return view('message')
       ->with('messages', $messages);
@@ -26,7 +29,16 @@ class MessageController extends Controller {
 
   public function editMessage(Request $request) {
     // validate user input
-    $validator = Validator::make($request->all(), $this->getRules(), $this->getMessages());
+    $rules = array(
+      'message' => 'required|max:255'
+    );
+
+    $messages = array(
+      'message.required' => 'Message cannot be blank',
+      'message.max' => 'Message can only have max :max characters'
+    );
+
+    $validator = Validator::make($request->all(), $rules, $messages);
 
     if ($validator->fails()) {
       return back()
@@ -40,7 +52,7 @@ class MessageController extends Controller {
       $message = $request->input('message');
       $msgCount = $request->input('messageCount');
       $student = \App\Student::where('id', $stud_id)->firstOrFail();
-      
+
       // if msgCount == 0, create new Message
       if ($msgCount == 0) {
         $msg = new \App\Message;
@@ -56,7 +68,7 @@ class MessageController extends Controller {
         $msg->save();
       }
     });
-    
+
     $feedback = 'You have successfully submitted your message.';
     \Session::flash('message', $feedback);
     return redirect()->route('studentMessages', ['id' => \Auth::user()->student_id]);
@@ -64,22 +76,45 @@ class MessageController extends Controller {
   }
 
   public function editReplies(Request $request) {
+    // validate user input
+    $msgCount = $request->input('messageCount');
+    $validator = Validator::make($request->all(), $this->getRules($msgCount), $this->getMessages($msgCount));
+
+    if ($validator->fails()) {
+      return back()
+        ->withErrors($validator)
+        ->withInput();
+    }
+
+    \DB::transaction(function () use ($request) {
+      $msgCount = $request->input('messageCount');
+      for ($i = 1; $i <= $msgCount; $i++) {
+        $message = \App\Message::where('id', $request->input('id'.$i))->firstOrFail();
+        $message->reply = $request->input('reply'.$i);
+        $message->save();
+      }
+    });
+
+    $feedback = 'You have successfully submitted your replies.';
+    \Session::flash('message', $feedback);
+    return redirect()->route('adminMessages');
 
   }
 
-  public function getRules() {
-    $rules = array(
-      'message' => 'required|between:5,500'
-    );
+  private function getRules($msgCount) {
+    $rules = array();
+    for ($i=1; $i<=$msgCount; $i++) {
+      $rules['reply'.$i] = 'max:255';
+    }
 
     return $rules;
   }
 
-  public function getMessages() {
-    $messages = array(
-      'message.required' => 'Message cannot be blank',
-      'message.between' => 'Message should be between :min - :max characters'
-    );
+  private function getMessages($msgCount) {
+    $messages = array();
+    for ($i=1; $i<=$msgCount; $i++) {
+      $messages['reply'.$i.'.max'] = 'Replies can only have max :max characters';
+    }
 
     return $messages;
   }
