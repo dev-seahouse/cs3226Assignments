@@ -39,7 +39,8 @@ class EditStudentController extends Controller {
       $student->nick = $nick;
       // rename old profile pic
       $oldProPic = $student->profile_pic;
-      $newProPic = $nick.'.png';
+	  $ext = pathinfo($oldProPic, PATHINFO_EXTENSION);
+      $newProPic = $nick.'.'.$ext;
       \File::move(base_path().'/public/img/student/'.$oldProPic, base_path().'/public/img/student/'.$newProPic);
       $student->profile_pic = $newProPic;
       $student->name = $name;
