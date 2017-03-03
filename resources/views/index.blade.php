@@ -49,21 +49,7 @@
         <tbody>
           <?php $i = 1; ?>
           @foreach($students as $student)
-            <?php
-              /* moved calculation into student api
-              $compScores = $student->getCompScores();
-              $scores = array(
-                  'MC' => $compScores[0]->total,
-                  'TC' => $compScores[1]->total,
-                  'HW' => $compScores[2]->total,
-                  'BS' => $compScores[3]->total,
-                  'KS' => $compScores[4]->total,
-                  'AC' => $compScores[5]->total
-                );
-              $spe = $scores['MC'] + $scores['TC'];
-              $dil = $scores['HW'] + $scores['BS'] + $scores['KS'] + $scores['AC'];
-              $sum = $spe + $dil;*/
-            ?>
+          <?php if (Auth::guest() && $i > 7) break; ?>
             <tr>
               <td class=""><?php echo $i;?></td>
               <td class="hidden-xs">
