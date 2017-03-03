@@ -30,9 +30,11 @@ $uri = $_SERVER['REQUEST_URI'];
         if (strpos($uri, '/student/edit/') !== false) {
           echo '<li class="active"><a>Edit Mode</a></li>';
         } 
-        // add detail mode to navbar if current uri is student details page
-        else if (strpos($uri, '/student/') !== false) {
-          echo '<li class="active"><a>Detail Mode</a></li>';
+        // add detail mode to navbar if current uri is student details page AND not student messages page
+        else if (!strpos($uri, '/student/')) {
+          if (strpos($uri, '/student/messages/')) {
+            echo '<li class="active"><a>Detail Mode</a></li>';
+          }
         }
         ?>
 		@if (Auth::guest())
@@ -94,6 +96,10 @@ $uri = $_SERVER['REQUEST_URI'];
           </ul>
         </li>  
         <li><a href="{{route('create')}}">Create New Student</a></li>
+        <li><a href="{{route('adminMessages')}}">Messages</a></li>
+        @endif
+        @if (Auth::user()->role == 'student')
+        <li><a href="{{route('studentMessages', ['id' => Auth::user()['student_id']])}}">Messages</a></li>
         @endif
 		@endif
         <li><a href="{{route('achievement')}}">Achievements</a></li>

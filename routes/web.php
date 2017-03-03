@@ -44,10 +44,18 @@ Route::group( ['middleware' => 'auth' ], function()
   // Delete
   Route::delete('delete/{id}', array('as' => 'delete', 'uses' => 'StudentController@deleteStudent'));
   
+  // Student Messages
+  Route::get('student/messages/{id}', array('as' => 'studentMessages', 'uses' => 'MessageController@studentView'));
+  Route::post('editMessage', 'MessageController@editMessage');
+  
+  // Admin Messages
+  Route::get('admin/messages', array('as' => 'adminMessages', 'uses' => 'MessageController@adminView'));
+  Route::post('editReplies', 'MessageController@editReplies');
+  
 });
 
 // Use this test route to view your object retrieved from the database. Testing purposes
-Route::get('test', array('as' => 'test', 'uses' => 'StudentController@testget'));
+//Route::get('test', array('as' => 'test', 'uses' => 'StudentController@testget'));
 
 // Catched undefined routes and redirect to index
 Route::get('{any}', 'ViewController@index');
