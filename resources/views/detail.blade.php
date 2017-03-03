@@ -46,7 +46,7 @@
               <canvas id="studentProgressChart" style="max-height: 300px;"></canvas>
             </div>
             <div class="col-sm-2"></div>
-            <div class="col-sm-2 col-md-4" style="max-width: 300px;">
+            <div class="col-sm-2 col-md-4 hidden-sm" style="max-width: 300px;">
               <canvas id="studentRadarChart"></canvas>
             </div>
             <div class="col-sm-1 col-md-2"></div>

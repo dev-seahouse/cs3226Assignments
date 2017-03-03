@@ -5,6 +5,7 @@
     <h2 align="center">EDIT COMPONENT</h2>
     <h3 align="center">{{$section}}</h3>
     {!! Form::open(['url' => 'editAllStudent/'.$section, 'method' => 'post']) !!}
+    {{ csrf_field() }}
     <!-- http://stackoverflow.com/questions/28028996/laravel-passing-variable-from-forms 參考-->
     {!! Form::hidden('studentCount', count($students)) !!}
     <br>

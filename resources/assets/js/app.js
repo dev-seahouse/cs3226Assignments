@@ -135,14 +135,14 @@ function removeDuplicates (arr) {
 function drawRadarChart ($selector) {
   if (!$selector.length) return
   getStudentData().then(function (data) {
-    return formartChartData(data)
+    return formatChartData(data)
   }).done(function (formattedData) {
     makeRadarChart($selector, formattedData)
   }).fail(function (data) {
   })
 }
 
-function formartChartData (data) {
+function formatChartData (data) {
   let keys = ['ac', 'bs', 'hw', 'mc', 'ks', 'tc']
   let formattedCurrStudentData = []
   let formattedTopStudentData = []
@@ -226,14 +226,14 @@ function makeRadarChart ($selector, dataset) {
 function drawProgressChart ($selector) {
   if (!$selector.length) return
   getProgressData().then(function (data) {
-    return formartProgressChartData(data)
+    return formatProgressChartData(data)
   }).done(function (formattedData) {
     makeProgressChart($selector, formattedData)
   }).fail(function (data) {
   })
 }
 
-function formartProgressChartData (data) {
+function formatProgressChartData (data) {
   let nicks = data['nicks']
   let progressData = data['progressData']
   let dataStore = {}
@@ -259,12 +259,19 @@ function formartProgressChartData (data) {
   nicks.forEach(function(nick) {
     let color = getRandomColor()
     chartData.push({
-      label: nick,
+      label: nick + ' (' + dataStore[nick][dataStore[nick].length - 1] + ')',
       backgroundColor: color,
       borderColor: color,
       data: dataStore[nick],
       fill: false
     })
+  })
+  
+  //sort chart
+  chartData.sort(function(a, b) {
+    let sumA = a.data[a.data.length - 1];
+    let sumB = b.data[b.data.length - 1];
+    return sumB - sumA;
   })
   
   let weeks = []
@@ -335,6 +342,10 @@ function makeProgressChart ($selector, dataset) {
             labelString: 'Score'
           }
         }]
+      },
+      legend: {
+        display: true,
+        position: 'left',
       }
     }
   })
@@ -351,14 +362,14 @@ function makeProgressChart ($selector, dataset) {
 function drawStudentProgressChart ($selector) {
   if (!$selector.length) return
   getStudentProgressData().then(function (data) {
-    return formartStudentProgressChartData(data)
+    return formatStudentProgressChartData(data)
   }).done(function (formattedData) {
     makeStudentProgressChart($selector, formattedData)
   }).fail(function (data) {
   })
 }
 
-function formartStudentProgressChartData (data) {
+function formatStudentProgressChartData (data) {
   let nicks = [data['currentStudent'][0]['nick'], data['topStudent'][0]['nick']]
   let currentStudentData = data['currentStudent']
   let topStudentData = data['topStudent']

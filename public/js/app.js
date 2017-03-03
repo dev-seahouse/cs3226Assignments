@@ -25968,13 +25968,13 @@ function removeDuplicates(arr) {
 function drawRadarChart($selector) {
   if (!$selector.length) return;
   getStudentData().then(function (data) {
-    return formartChartData(data);
+    return formatChartData(data);
   }).done(function (formattedData) {
     makeRadarChart($selector, formattedData);
   }).fail(function (data) {});
 }
 
-function formartChartData(data) {
+function formatChartData(data) {
   var keys = ['ac', 'bs', 'hw', 'mc', 'ks', 'tc'];
   var formattedCurrStudentData = [];
   var formattedTopStudentData = [];
@@ -26055,13 +26055,13 @@ function makeRadarChart($selector, dataset) {
 function drawProgressChart($selector) {
   if (!$selector.length) return;
   getProgressData().then(function (data) {
-    return formartProgressChartData(data);
+    return formatProgressChartData(data);
   }).done(function (formattedData) {
     makeProgressChart($selector, formattedData);
   }).fail(function (data) {});
 }
 
-function formartProgressChartData(data) {
+function formatProgressChartData(data) {
   var nicks = data['nicks'];
   var progressData = data['progressData'];
   var dataStore = {};
@@ -26087,12 +26087,19 @@ function formartProgressChartData(data) {
   nicks.forEach(function (nick) {
     var color = getRandomColor();
     chartData.push({
-      label: nick,
+      label: nick + ' (' + dataStore[nick][dataStore[nick].length - 1] + ')',
       backgroundColor: color,
       borderColor: color,
       data: dataStore[nick],
       fill: false
     });
+  });
+
+  //sort chart
+  chartData.sort(function (a, b) {
+    var sumA = a.data[a.data.length - 1];
+    var sumB = b.data[b.data.length - 1];
+    return sumB - sumA;
   });
 
   var weeks = [];
@@ -26163,6 +26170,10 @@ function makeProgressChart($selector, dataset) {
             labelString: 'Score'
           }
         }]
+      },
+      legend: {
+        display: true,
+        position: 'left'
       }
     }
   });
@@ -26179,13 +26190,13 @@ function makeProgressChart($selector, dataset) {
 function drawStudentProgressChart($selector) {
   if (!$selector.length) return;
   getStudentProgressData().then(function (data) {
-    return formartStudentProgressChartData(data);
+    return formatStudentProgressChartData(data);
   }).done(function (formattedData) {
     makeStudentProgressChart($selector, formattedData);
   }).fail(function (data) {});
 }
 
-function formartStudentProgressChartData(data) {
+function formatStudentProgressChartData(data) {
   var nicks = [data['currentStudent'][0]['nick'], data['topStudent'][0]['nick']];
   var currentStudentData = data['currentStudent'];
   var topStudentData = data['topStudent'];

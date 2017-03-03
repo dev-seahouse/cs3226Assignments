@@ -3,6 +3,7 @@
 <div class="container-fluid">
   <h2 align="center">EDIT STUDENT</h2>
   {!! Form::open(['url' => 'editStudent', 'method' => 'post']) !!}
+  {{ csrf_field() }}
   <div class="row">
     <div class="col-sm-1"></div>
     <div class="col-sm-10">
