@@ -21,6 +21,7 @@ class MessageController extends Controller {
     $messages = \App\Student::with('messages')
       ->join('messages', 'students.id', '=', 'messages.student_id')
       ->select(\DB::raw('students.name, messages.*'))
+      ->orderBy('reply')
       ->get();
 
     return view('message')
