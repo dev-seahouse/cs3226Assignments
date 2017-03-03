@@ -37,6 +37,7 @@ $uri = $_SERVER['REQUEST_URI'];
         ?>
 		@if (Auth::guest())
 		@else
+        @if (Auth::user()->role == 'admin')
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
             Edit Students' data <span class="caret"></span>
@@ -93,6 +94,7 @@ $uri = $_SERVER['REQUEST_URI'];
           </ul>
         </li>  
         <li><a href="{{route('create')}}">Create New Student</a></li>
+        @endif
 		@endif
         <li><a href="{{route('achievement')}}">Achievements</a></li>
         <li class="hidden-xs hidden-sm"><a href="{{route('progress')}}">Progress Chart</a></li>

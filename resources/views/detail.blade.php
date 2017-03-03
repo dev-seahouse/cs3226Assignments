@@ -2,7 +2,7 @@
 @section('main') <!-- also a section called main but different content -->
 <div class="container-fluid">
   <h2>STUDENT DETAILS</h2>
-  
+
   <div class="row">
     <div class="col-xs-12 col-sm-6">
       <h4><b>{{ $student['name'] }}</b> in CS3233 S2 AY 2016/2017</h4>
@@ -28,7 +28,7 @@
     </div>
   </div>
   <br>
-  
+
   <div class="panel-group hidden-xs" id="accordion" role="tablist" aria-multiselectable="true">
     <section class="overview">
       <div class="panel panel-default">
@@ -55,7 +55,7 @@
       </div>
     </section>
   </div>
-  
+
 
   <div class="row">
     <div class="col-xs-12">
@@ -159,6 +159,7 @@
 
   @if (Auth::guest())
   @else
+  @if (Auth::user()->role == 'admin')
   <div class="row">
     <div class="col-xs-12">
       <a href="{{ route('edit', ['id' => $student['id']]) }}" class="btn btn-primary btn-fixed-width center-block">Edit</a>
@@ -169,6 +170,7 @@
       {!! Form::close() !!}
     </div>
   </div>
+  @endif
   @endif
 </div>
 @stop
