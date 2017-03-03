@@ -20,10 +20,11 @@
   
   <h1 class="text-center no-margin">Rankings</h1>
   <div class="text-center no-margin sharing">
- <div class="fb-like" data-href="http://cs3226officialranklist.tk/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+ <div class="fb-like" data-href="http://cs3226officialranklist.tk/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
    </div>
    <div class="text-center no-margin sharing">
     <a href="https://twitter.com/CS3226_Official" class="twitter-follow-button" data-size="normal" style="vertical-align: text-bottom;">Follow @CS3226_Official</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+	<a href="https://twitter.com/intent/tweet?screen_name=CS3226_Official" class="twitter-mention-button" data-show-count="false">Tweet to @CS3226_Official</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
   </div>
   <h5 class="text-center">Last updated at {{ $last_updated }}</h5>
   <div class="row">
