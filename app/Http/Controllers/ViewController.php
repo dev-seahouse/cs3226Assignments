@@ -17,10 +17,13 @@ class ViewController extends Controller {
       ->get();
     $last_updated = \App\DatabaseUtil::get_last_updated();
     $friendly_last_updated = Carbon::createFromTimestamp(strtotime($last_updated))->diffForHumans();
-
+    
+    $user_pos = $this->getStudentUserPosition($students);
+    
     return view('index')
       ->with('students', $students)
-      ->with('last_updated',$friendly_last_updated);
+      ->with('last_updated', $friendly_last_updated)
+      ->with('user_pos', $user_pos);
   }
 
   // show detail view
@@ -142,6 +145,29 @@ class ViewController extends Controller {
       }
     }
     return $scores_arr;
+  }
+  
+  private function getStudentUserPosition($students) {
+    $pos = 0;
+    $user_pos = 0;
+    // no user, is guest
+    if (\Auth::guest()) {
+      // $user_pos should remain 0
+    } 
+    // user is student, find $user_pos
+    else if (\Auth::user()->role == 'student') {
+      foreach ($students as $student) {
+        $pos++;
+        if ($student->id == \Auth::user()->student_id) {
+          $user_pos = $pos;
+          break; 
+        }
+      }
+    } else {
+      // user is admin, $user_pos remain 0
+    }
+    
+    return $user_pos;
   }
 
 }

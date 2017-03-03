@@ -48,8 +48,23 @@
         </thead>
         <tbody>
           <?php $i = 1; ?>
+          <?php 
+          if(Auth::guest()) $role = 'guest';
+          else if (Auth::user()->role == 'student') $role = 'student';
+          else if (Auth::user()->role == 'admin') $role = 'admin';
+          else $role = 'guest';
+          ?>
           @foreach($students as $student)
-          <?php if (Auth::guest() && $i > 7) break; ?>
+          <?php if ($role == 'guest' && $i > 7) break; ?>
+          <?php 
+            if ($role == 'student') {
+              if ($i > 7 && $i != $user_pos && $i != ($user_pos+1) && $i != ($user_pos-1)) {
+                $i++;
+                continue;
+              }
+            }
+          
+          ?>
             <tr>
               <td class=""><?php echo $i;?></td>
               <td class="hidden-xs">
