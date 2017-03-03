@@ -46,10 +46,11 @@ Route::group( ['middleware' => 'auth' ], function()
   
   // Student Messages
   Route::get('student/messages/{id}', array('as' => 'studentMessages', 'uses' => 'MessageController@studentView'));
-  Route::put('addMessage', 'MessageController@addMessage');
+  Route::post('editMessage', 'MessageController@editMessage');
   
   // Admin Messages
   Route::get('admin/messages', array('as' => 'adminMessages', 'uses' => 'MessageController@adminView'));
+  Route::post('editReplies', 'MessageController@editReplies');
   
 });
 
