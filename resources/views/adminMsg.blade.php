@@ -13,6 +13,7 @@
       </div>
       @endif
       <?php $i = 1; $msgCount = sizeof($messages); ?>
+      @if ($msgCount > 0)
       {!! Form::hidden('messageCount', $msgCount) !!}
       @foreach ($messages as $message)
       {!! Form::hidden('id'.$i, $message->id) !!}
@@ -26,10 +27,15 @@
       </div>
       <?php $i++; ?>
       @endforeach
+      @else
+      <h4 align="center">You have no messages.</h4>
+      @endif
     </div> <!-- outer div -->
   </div>
 </div>
 <br>
+@if ($msgCount > 0)
 <div class="form-group">
   {!! Form::submit('Submit', ['class' => 'form-control btn btn-primary btn-fixed-width center-block']) !!}
 </div>
+@endif
