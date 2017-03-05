@@ -10,7 +10,7 @@
     </div>
   @endif
   
-  <h1 class="text-center no-margin">Message Board</h1>
+  <h1 class="text-center no-margin">{{__('messages.messageBoard')}}</h1>
   <br>
   <div class="row">
     @if (Auth::user()->role == 'student')
