@@ -28,7 +28,7 @@ $uri = $_SERVER['REQUEST_URI'];
         <?php
         // add edit mode to navbar if current uri is edit student page
         if (strpos($uri, '/student/edit/') !== false) {
-          echo '<li class="active"><a>Edit Mode</a></li>';
+          echo '<li class="active"><a>'. __('messages.editMode').'</a></li>';
         } 
         // add detail mode to navbar if current uri is student details page AND not student messages page
         else if (!strpos($uri, '/student/')) {
@@ -42,7 +42,7 @@ $uri = $_SERVER['REQUEST_URI'];
         @if (Auth::user()->role == 'admin')
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            Edit Students' data <span class="caret"></span>
+            {{ __('messages.editStudentData') }} <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
             <li class="dropdown-submenu">
@@ -103,8 +103,27 @@ $uri = $_SERVER['REQUEST_URI'];
         @endif
 		@endif
         <li><a href="{{route('achievement')}}">{{ __('messages.achievements') }}</a></li>
-        <li class="hidden-xs hidden-sm"><a href="{{route('progress')}}">Progress Chart</a></li>
+        <li class="hidden-xs hidden-sm"><a href="{{route('progress')}}">{{ __('messages.progressChart') }}</a></li>
         <li><a href="{{route('help')}}">{{ __('messages.help') }}</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+              {{ __('messages.language') }} <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li> 
+                <a href="{{ route('setLocale',['locale'=>'en']) }}">
+                  en
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('setLocale',['locale'=>'zh']) }}">
+                  zh
+                </a>
+              </li>
+            </ul>
+        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <!-- Authentication Links -->
