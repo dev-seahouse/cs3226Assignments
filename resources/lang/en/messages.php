@@ -1,30 +1,30 @@
 <?php
-   return [
+return [
 
-      'submit' => 'submit',
+  'submit' => 'submit',
 
-      'mainTitle' => 'CS3233 Ranklist 2017',
-      'editStudentData'=> 'edit Student\'s Data',
-      'messages' => 'Messages',
-      'achievements' => 'Achievements',
-      'progressChart' => 'Progress Chart',
-      'editComponent' => 'edit Component',
-      'help' => 'Help',
-      'login' => 'login',
-      'register' => 'register',
-      'language'=> 'language',
+  'mainTitle' => 'CS3233 Ranklist 2017',
+  'editStudentData'=> 'edit Student\'s Data',
+  'messages' => 'Messages',
+  'achievements' => 'Achievements',
+  'progressChart' => 'Progress Chart',
+  'editComponent' => 'edit Component',
+  'help' => 'Help',
+  'login' => 'login',
+  'register' => 'register',
+  'language'=> 'language',
 
-      'createNewStudent'=>'Create New Student',
+  'createNewStudent'=>'Create New Student',
+  'editStudentsData' => 'Edit Students\'s Data',
+  'rankings' => 'Rankings',
+  'updateDesc' => 'Last updated at ',
+  
+  'nickName' => 'nick Name ',
+  'fullName' => 'Full name ',
+  'kattisAccount' => 'kattos Account ',
+  'nationality' => 'nationality ',
+  'uploadPicDesc' => 'Profile picture: (Click save to confirm)',
 
-      'rankings' => 'Rankings',
-      'updateDesc' => 'Last updated at ',
-
-      'nickName' => 'nick Name ',
-      'fullName' => 'Full name ',
-      'kattisAccount' => 'kattos Account ',
-      'nationality' => 'nationality ',
-      'uploadPicDesc' => 'Profile picture: (Click save to confirm)',
-
-      'messageBoard' => 'Message Board',
-   ];
+  'messageBoard' => 'Message Board',
+];
 ?>

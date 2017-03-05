@@ -42,7 +42,7 @@ $uri = $_SERVER['REQUEST_URI'];
         @if (Auth::user()->role == 'admin')
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            Edit Students' data <span class="caret"></span>
+            {{ __('messages.editStudentsData') }}<span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
             <li class="dropdown-submenu">
