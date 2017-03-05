@@ -1,7 +1,7 @@
 @extends('template') <!-- use the SAME template -->
 @section('main') <!-- also a section called main but different content -->
 <div class="container-fluid text-container">
-  <h2>Scoring Scheme</h2>
+  <h2>{{ __('messages.ScoringScheme') }}</h2>
   <div class="row">
     <div class="col-xs-12">
 
@@ -12,7 +12,7 @@
               <div class="panel-heading" role="tab" id="headingOne">
                 <h4 class="panel-title">
                   <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                    Overview
+                    {{ __('messages.Overview') }}
                   </a>
                 </h4>
               </div>
@@ -33,7 +33,7 @@
               <div class="panel-heading" role="tab" id="headingTwo">
                 <h4 class="panel-title">
                   <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    MC = Weekly Mini Contest (36%)
+                    {{ __('messages.MC_desc') }}
                   </a>
                 </h4>
               </div>
@@ -63,7 +63,7 @@
               <div class="panel-heading" role="tab" id="headingThree">
                 <h4 class="panel-title">
                   <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    Two Team Contests (24%)
+                    {{ __('messages.TC_desc') }}
                   </a>
                 </h4>
               </div>
@@ -88,7 +88,7 @@
               <div class="panel-heading" role="tab" id="headingFour">
                 <h4 class="panel-title">
                   <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
-                    Weekly Homework (15%)
+                    {{ __('messages.HW_desc') }}
                   </a>
                 </h4>
               </div>
@@ -111,7 +111,7 @@
               <div class="panel-heading" role="tab" id="headingFive">
                 <h4 class="panel-title">
                   <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                    Problem Bs (9%)
+                    {{ __('messages.PB_desc') }}
                   </a>
                 </h4>
               </div>
@@ -136,7 +136,7 @@
               <div class="panel-heading" role="tab" id="headingSix">
                 <h4 class="panel-title">
                   <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                    Kattis Set (12%)
+                    {{ __('messages.KS_desc') }}
                   </a>
                 </h4>
               </div>
@@ -176,7 +176,7 @@
 
         <!-- to be generated -->
         <section class="ac">
-          <h3>Achievement System of CS3233 (17%)</h3>
+          <h3>{{ __('messages.AC_desc') }}</h3>
           <ol>
             <li>* <b>Let it begins</b>: Solve any 1st Kattis problem (thus having non zero point on Kattis) by Wed, 11 January 2017, 23:59 (this is after the introduction lecture).</li>
 
