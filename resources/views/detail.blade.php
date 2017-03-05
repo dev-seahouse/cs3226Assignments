@@ -6,16 +6,16 @@
   <div class="row">
     <div class="col-xs-12 col-sm-6">
       <h4><b>{{ $student['name'] }}</b> in CS3233 S2 AY 2016/2017</h4>
-      <p>Kattis account: {{ $student['kattis'] }}</p>
+      <p>{{__('messages.kattisAccount')}}: {{ $student['kattis'] }}</p>
       <?php
       $spe = $components['mc'] + $components['tc'];
       $dil = $components['hw'] + $components['bs'] + $components['ks'] + $components['ac'];
       $sum = $spe + $dil;
       ?>
       <p>
-        <b>SPE</b>(ed) component: <b>{{$components['mc'].' + '.$components['tc'].' = '.$spe}}</b><br>
-        <b>DIL</b>(igence) component: <b>{{$components['hw'].' + '.$components['bs'].' + '.$components['ks'].' + '.$components['ac'].' = '.$dil}}</b><br>
-        <b>SUM = {{$spe.' + '.$dil.' = '.$sum}}</b>
+        <b>{{__('messages.SPE')}}</b>{{__('messages.ed')}} {{__('messages.component')}}: <b>{{$components['mc'].' + '.$components['tc'].' = '.$spe}}</b><br>
+        <b>{{__('messages.DIL')}}</b>{{__('messages.igence')}}{{__('messages.component')}}: <b>{{$components['hw'].' + '.$components['bs'].' + '.$components['ks'].' + '.$components['ac'].' = '.$dil}}</b><br>
+        <b>{{__('messages.SUM')}}= {{$spe.' + '.$dil.' = '.$sum}}</b>
       </p>
     </div>
     <div class="col-sm-3 pull-right">
@@ -35,7 +35,7 @@
         <div class="panel-heading" role="tab" id="headingOne">
           <h4 class="panel-title">
             <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-              <h4>Progress comparison</h4>
+              <h4>{{__('messages.Progress-comparison')}}</h4>
             </a>
           </h4>
         </div>
@@ -60,11 +60,11 @@
   <div class="row">
     <div class="col-xs-12">
       <table id="statstable" class="table table-striped">
-        <h4>Detailed scores:</h4>
+        <h4>{{__('messages.Detailed-scores')}}:</h4>
         <thead>
           <tr>
-            <th>Component</th>
-            <th>Sum</th>
+            <th>{{__('messages.component')}}</th>
+            <th>{{__('messages.SUM')}}</th>
             <th class="hidden-xs">01</th>
             <th class="hidden-xs">02</th>
             <th class="hidden-xs">03</th>
@@ -81,42 +81,42 @@
         </thead>
         <tbody>
           <tr>
-            <td>Mini Contests</td>
+            <td>{{__('messages.Mini-Contests')}}</td>
             <td>{{ $components['mc'] }}</td>
             @foreach ($scores_arr['MC'] as $MC)
             <td class="hidden-xs">{{ $MC }}</td>
             @endforeach
           </tr>
           <tr>
-            <td>Team Contests</td>
+            <td>{{__('messages.Team-Contests')}}</td>
             <td>{{ $components['tc'] }}</td>
             @foreach ($scores_arr['TC'] as $TC)
             <td class="hidden-xs">{{ $TC }}</td>
             @endforeach
           </tr>
           <tr>
-            <td>Homework</td>
+            <td>{{__('messages.Homework')}}</td>
             <td>{{ $components['hw'] }}</td>
             @foreach ($scores_arr['HW'] as $HW)
             <td class="hidden-xs">{{ $HW }}</td>
             @endforeach
           </tr>
           <tr>
-            <td>Problem Bs</td>
+            <td>{{__('messages.Problem-Bs')}}</td>
             <td>{{ $components['bs'] }}</td>
             @foreach ($scores_arr['BS'] as $BS)
             <td class="hidden-xs">{{ $BS }}</td>
             @endforeach
           </tr>
           <tr>
-            <td>Kattis Sets</td>
+            <td>{{__('messages.Kattis-Sets')}}</td>
             <td>{{ $components['ks'] }}</td>
             @foreach ($scores_arr['KS'] as $KS)
             <td class="hidden-xs">{{ $KS }}</td>
             @endforeach
           </tr>
           <tr>
-            <td>Achievements</td>
+            <td>{{__('messages.Achievements')}}</td>
             <td>{{ $components['ac'] }}</td>
             @foreach ($scores_arr['AC'] as $AC)
             <td class="hidden-xs">{{ $AC }}</td>
@@ -131,7 +131,7 @@
   <!--Achievement section -->
   <div class="row">
     <div class="col-xs-12">
-      <p>Achievement details:</p>
+      <p>{{__('messages.Achievements')}} {{__('messages.details')}}:</p>
       <ol>
         <?php
         foreach ($records as $record) {
@@ -152,7 +152,7 @@
   <!--Comment section -->
   <div class="row">
     <div class="col-xs-12">
-      <p>Specific comments about this student:</p>
+      <p>{{__('messages.Achievements')}}:</p>
       <p><b>{{$comment}}</b></p>
     </div>
   </div><br>
@@ -162,10 +162,10 @@
   @if (Auth::user()->role == 'admin')
   <div class="row">
     <div class="col-xs-12">
-      <a href="{{ route('edit', ['id' => $student['id']]) }}" class="btn btn-primary btn-fixed-width center-block">Edit</a>
+      <a href="{{ route('edit', ['id' => $student['id']]) }}" class="btn btn-primary btn-fixed-width center-block">{{__('messages.edit')}}</a>
       {!! Form::open(['route' => ['delete', $student['id']], 'method' => 'delete']) !!}
       <div class="form-group">
-        {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-fixed-width center-block delete-btn']) !!}
+        {!! Form::submit(__('messages.delete'), ['class' => 'btn btn-danger btn-fixed-width center-block delete-btn']) !!}
       </div>
       {!! Form::close() !!}
     </div>

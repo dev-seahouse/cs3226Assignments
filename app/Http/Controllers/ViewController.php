@@ -110,7 +110,22 @@ class ViewController extends Controller {
   public function progress() {
     return view('progress');
   }
-
+  
+  public function setLocale($locale) {
+    //update curr user's lang_pref in database
+    if ($locale == 'en' || $locale == 'zh') {
+      if (\Auth::guest()) {
+        session(['locale' => $locale]);
+      } else {
+        $user = \App\User::find(\Auth::user()->id);
+        $user->lang_pref = $locale;
+        $user->save();
+      }
+    }
+    
+    return \Redirect::back();
+  }
+  
   // process all the scores of 1 student and store in array
   private function putScoresIntoArray($student) {
     $scores_arr = array(

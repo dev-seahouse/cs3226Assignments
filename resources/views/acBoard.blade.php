@@ -15,7 +15,25 @@ else {
     <div class="panel-heading" role="tab" id="{{ $headingId }}">
       <h4 class="panel-title">
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#{{ $collapseId }}" aria-expanded="false" aria-controls="{{ $collapseId }}">
-          <h4><b>{{ $title }}</b></h4>
+          <h4><b><?php 
+            if($title=="Let it begins")echo __('messages.let-it-begin');
+            else if($title=="Quick starter")echo __('messages.Quick-starter');
+            else if($title=="Active in class 1/3")echo __('messages.Active-in-class-1/3');
+            else if($title=="Active in class 2/3")echo __('messages.Active-in-class-2/3');
+            else if($title=="Active in class 3/3")echo __('messages.Active-in-class-3/3');
+            else if($title=="Surprise us 1/3")echo __('messages.Surprise-us-1/3');
+            else if($title=="Surprise us 2/3")echo __('messages.Surprise-us-2/3');
+            else if($title=="Surprise us 3/3")echo __('messages.Surprise-us-3/3');
+            else if($title=="High determination")echo __('messages.High-determination');
+            else if($title=="Bookworm")echo __('messages.Bookworm');
+            else if($title=="Kattis apprentice 1/6")echo __('messages.Kattis-apprentice-1/6');
+            else if($title=="Kattis apprentice 2/6")echo __('messages.Kattis-apprentice-2/6');
+            else if($title=="Kattis apprentice 3/6")echo __('messages.Kattis-apprentice-3/6');
+            else if($title=="Kattis apprentice 4/6")echo __('messages.Kattis-apprentice-4/6');
+            else if($title=="Kattis apprentice 5/6")echo __('messages.Kattis-apprentice-5/6');
+            else if($title=="Kattis apprentice 6/6")echo __('messages.Kattis-apprentice-6/6');
+            else if($title=="CodeForces Specialist")echo __('messages.CodeForces-Specialist');
+          ?></b></h4>
         </a>
       </h4>
     </div>
