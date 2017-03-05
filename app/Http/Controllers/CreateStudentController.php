@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\CreateStudentRequest;
 
 class CreateStudentController extends Controller {
 
@@ -9,7 +10,7 @@ class CreateStudentController extends Controller {
     // constructor
   }
 
-  public function create(Requests\CreateStudentRequest $request) {
+  public function create(CreateStudentRequest $request) {
 
     //------ Extra Challenge B: Add Image --------------
     // filename set as {nick}.{ext}

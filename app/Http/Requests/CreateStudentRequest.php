@@ -21,6 +21,25 @@ class CreateStudentRequest extends FormRequest
      *
      * @return array
      */
+
+    public function sanitize()
+    {
+        $input = $this->all();
+
+        $sanitizer_args = array (
+            'name' => FILTER_SANITIZE_STRING,
+            'nick' => FILTER_SANITIZE_STRING,
+            'kattis' => FILTER_SANITIZE_STRING,
+            'nationality' => FILTER_SANITIZE_STRING,
+            'fileURL' => FILTER_SANITIZE_URL
+        );
+
+        $input = filter_var_array($input, $sanitizer_args);
+
+        $this->replace($input);
+    }
+
+
     public function rules()
     {
         $this->sanitize();
@@ -35,20 +54,6 @@ class CreateStudentRequest extends FormRequest
         ];
     }
 
-    public function sanitize()
-    {
-        $input = $this->all();
-
-        if (preg_match("#https?://#", $input['url']) === 0) {
-            $input['url'] = 'http://' . $input['url'];
-        }
-
-        $input['name']        = filter_var($input['name'], FILTER_SANITIZE_STRING);
-        $input['description'] = filter_var($input['description'],
-            FILTER_SANITIZE_STRING);
-
-        $this->replace($input);
-    }
 
     public function messages()
     {
@@ -70,17 +75,4 @@ class CreateStudentRequest extends FormRequest
             'nationality.in'       => 'Nationality should be of either Singaporean, Indonesian, Chinese, Vietnamese, Japanese, Australian, German or Others',
         ];
     }
-
-    public function sanitize()
-    {
-        $input = $this->all();
-        $input = array_map(array($this,'sanitize_strings'),$input);
-        $this->replace($input);
-    }
-
-    private function sanitize_strings($string)
-    {
-        return filter_var($string, FILTER_SANITIZE_STRING);
-    }
-
 }
