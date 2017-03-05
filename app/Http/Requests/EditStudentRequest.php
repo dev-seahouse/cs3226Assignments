@@ -86,14 +86,13 @@ class EditStudentRequest extends FormRequest
     public function sanitize()
     {
         $input = $this->all();
-
-
-        $input['name'] = filter_var($input['name'], FILTER_SANITIZE_STRING);
-        $input['nick'] = filter_var($input['nick'],
-            FILTER_SANITIZE_STRING);
-        $input['comments'] = filter_var($input['comments'],
-            FILTER_SANITIZE_STRING);
-
+        array_map('sanitize_strings', $input);
         $this->replace($input);
     }
+
+    private function sanitize_strings($string)
+    {
+        return filter_var($input['name'], FILTER_SANITIZE_STRING);
+    }
+
 }

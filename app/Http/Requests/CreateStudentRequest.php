@@ -70,4 +70,9 @@ class CreateStudentRequest extends FormRequest
             'nationality.in'       => 'Nationality should be of either Singaporean, Indonesian, Chinese, Vietnamese, Japanese, Australian, German or Others',
         ];
     }
+
+    private function sanitize_strings($string)
+    {
+        return filter_var($input['name'], FILTER_SANITIZE_STRING);
+    }
 }
