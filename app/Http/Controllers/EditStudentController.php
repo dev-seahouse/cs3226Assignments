@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Requests\EditStudentRequest;
+use App\Http\Requests\EditStudentRequest;
 
 class EditStudentController extends Controller {
 
@@ -11,7 +11,7 @@ class EditStudentController extends Controller {
   }
 
   // update student
-  public function edit(Requests\EditStudentRequest $request) {
+  public function edit(EditStudentRequest $request) {
     // validate user input
 
     \DB::transaction(function () use ($request) {

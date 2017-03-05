@@ -87,12 +87,11 @@ class EditStudentRequest extends FormRequest
     {
         $input = $this->all();
 
-        if (preg_match("#https?://#", $input['url']) === 0) {
-            $input['url'] = 'http://' . $input['url'];
-        }
 
-        $input['name']        = filter_var($input['name'], FILTER_SANITIZE_STRING);
-        $input['description'] = filter_var($input['description'],
+        $input['name'] = filter_var($input['name'], FILTER_SANITIZE_STRING);
+        $input['nick'] = filter_var($input['nick'],
+            FILTER_SANITIZE_STRING);
+        $input['comments'] = filter_var($input['comments'],
             FILTER_SANITIZE_STRING);
 
         $this->replace($input);
