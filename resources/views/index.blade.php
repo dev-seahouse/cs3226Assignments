@@ -1,6 +1,7 @@
 @extends('template') <!-- use template from previous slide -->
 @section('main') <!-- define a section called main -->
 <div id="fb-root"></div>
+
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
@@ -8,6 +9,7 @@
   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
+
 <div class="container-fluid">
   @if (Session::has('message'))
     <div id="success-alert" class="alert alert-success alert-dismissible" role="alert">
@@ -18,15 +20,15 @@
     </div>
   @endif
   
-  <h1 class="text-center no-margin">Rankings</h1>
+  <h1 class="text-center no-margin">{{ __('messages.rankings') }}</h1>
   <div class="text-center no-margin sharing">
- <div class="fb-like" data-href="http://cs3226officialranklist.tk/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
-   </div>
-   <div class="text-center no-margin sharing">
-    <a href="https://twitter.com/CS3226_Official" class="twitter-follow-button" data-size="normal" style="vertical-align: text-bottom;">Follow @CS3226_Official</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-	<a href="https://twitter.com/intent/tweet?screen_name=CS3226_Official" class="twitter-mention-button" data-show-count="false">Tweet to @CS3226_Official</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <div class="fb-like" data-href="http://cs3226officialranklist.tk/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
   </div>
-  <h5 class="text-center">Last updated at {{ $last_updated }}</h5>
+  <div class="text-center no-margin sharing">
+	 <a href="https://twitter.com/intent/tweet?screen_name=CS3226_Official" class="twitter-mention-button" data-show-count="false">Tweet to @CS3226_Official</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <a href="https://twitter.com/CS3226_Official" class="twitter-follow-button" data-size="normal" style="vertical-align: text-bottom;">Follow @CS3226_Official</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </div>
+  <h5 class="text-center">{{ __('messages.updateDesc') }} {{ $last_updated }}</h5>
   <div class="row">
     <div class="col-xs-12">
       <table id="ranktable" class="table table-hover">

@@ -16,7 +16,7 @@ $uri = $_SERVER['REQUEST_URI'];
                 if ($uri === '/') { 
                   echo ' navbar-brand-active'; 
                 } ?>" href="{{route('index')}}">
-        <span><img src="{{ URL::asset('img/omega-lightblue.png') }}" id="brandImage"></span> CS3233 Ranklist 2017
+        <span><img src="{{ URL::asset('img/omega-lightblue.png') }}" id="brandImage"></span> {{ __('messages.mainTitle') }}
       </a>
     </div>
 
@@ -95,21 +95,21 @@ $uri = $_SERVER['REQUEST_URI'];
             </li>   
           </ul>
         </li>  
-        <li><a href="{{route('create')}}">Create New Student</a></li>
-        <li><a href="{{route('adminMessages')}}">Messages</a></li>
+        <li><a href="{{route('create')}}">{{ __('messages.createNewStudent') }}</a></li>
+        <li><a href="{{route('adminMessages')}}">{{ __('messages.messages') }}</a></li>
         @endif
         @if (Auth::user()->role == 'student')
-        <li><a href="{{route('studentMessages', ['id' => Auth::user()['student_id']])}}">Messages</a></li>
+        <li><a href="{{route('studentMessages', ['id' => Auth::user()['student_id']])}}">{{ __('messages.messages') }}</a></li>
         @endif
 		@endif
-        <li><a href="{{route('achievement')}}">Achievements</a></li>
+        <li><a href="{{route('achievement')}}">{{ __('messages.achievement') }}</a></li>
         <li class="hidden-xs hidden-sm"><a href="{{route('progress')}}">Progress Chart</a></li>
-        <li><a href="{{route('help')}}">Help</a></li>
+        <li><a href="{{route('help')}}">{{ __('messages.help') }}</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <!-- Authentication Links -->
         @if (Auth::guest())
-          <li><a href="{{ route('login') }}">Login</a></li>
+          <li><a href="{{ route('login') }}">{{ __('messages.login') }}</a></li>
         @else
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
