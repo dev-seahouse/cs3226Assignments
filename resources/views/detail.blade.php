@@ -152,7 +152,7 @@
   <!--Comment section -->
   <div class="row">
     <div class="col-xs-12">
-      <p>{{__('messages.Achievements')}}:</p>
+      <p>{{__('messages.student-specific-comment')}}:</p>
       <p><b>{{$comment}}</b></p>
     </div>
   </div><br>

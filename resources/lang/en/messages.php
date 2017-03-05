@@ -1,41 +1,41 @@
 <?php
    return [
 
-      'submit' => 'submit',
-      'update' => 'update',
+      'submit' => 'Submit',
+      'update' => 'Update',
       'edit' => '編輯',
       'delete' => '刪除',
       //navbar
       'mainTitle' => 'CS3233 Ranklist 2017',
       'editMode'=> 'Edit Mode',
-      'language'=> 'language',
-      'editStudentData'=> "edit Student's Data",
+      'language'=> 'Language',
+      'editStudentData'=> "Edit Student's Data",
       'messages' => 'Messages',
-
-      'editComponent' => 'edit Component',
+      'achievements' => 'Achievements',
+      'editComponent' => 'Edit Component',
       'help' => 'Help',
-      'login' => 'login',
-      'register' => 'register',
-      'language'=> 'language',
+      'login' => 'Login',
+      'register' => 'Register',
+      'language'=> 'Language',
 
       //edit student data
-      'editComponent'=> 'edit Component',
+      'editComponent'=> 'Edit Component',
       'rankings' => 'Rankings',
       'updateDesc' => 'Last updated at ',
 
       //create new student
       'createNewStudent'=>'Create New Student',
       'createStudent'=>'Create Student',
-      'nickName' => 'nick Name ',
+      'nickName' => 'Nick Name ',
       'fullName' => 'Full name ',
-      'kattisAccount' => 'kattis Account ',
-      'nationality' => 'nationality ',
+      'kattisAccount' => 'Kattis Account ',
+      'nationality' => 'Nationality ',
       'uploadPicDesc' => 'Profile picture: (Click save to confirm)',
       //messages
       'messageBoard' => 'Message Board',
       //achievement
       'achievementBoard' => 'Achievement Board',
-      'let-it-begin'=>'let it begin',
+      'let-it-begin'=>'Let it begin',
       'Quick-starter'=>'Quick starter',
       'Active-in-class-1/3'=>'Active in class 1/3',
       'Active-in-class-2/3'=>'Active in class 1/3',
@@ -55,7 +55,7 @@
 
       //progress
       'progressChart' => 'Progress Chart',
-      'ToggleAllStudent' => 'Toggle All Student',
+      'ToggleAllStudent' => 'Toggle All Students',
 
       //help 
       'ScoringScheme' => 'Scoring Scheme',
@@ -74,7 +74,7 @@
       'DIL'=>'DIL',
       'ed'=>'ed',
       'igence'=>'igence',
-      'component'=>'component',
+      'component'=>'Component',
       'SUM'=>'SUM',
       'Progress-comparison'=>'Progress comparison',
       'Detailed-scores'=>'Detailed scores',
@@ -84,7 +84,7 @@
       'Problem-Bs'=>'Problem Bs',
       'Kattis-Sets'=>'Kattis Sets',
       'Achievements'=>'Achievements', 
-      'details'=>'details', 
+      'details'=>'Details', 
       'student-specific-comment'=>'Specific comments about this student',
 
    ];

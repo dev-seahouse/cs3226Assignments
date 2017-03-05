@@ -26,7 +26,7 @@
       'createStudent'=>'新增學生',
       'nickName' => '暱稱 ',
       'fullName' => '全名',
-      'kattisAccount' => 'kattis 帳戶',
+      'kattisAccount' => 'Kattis 帳戶',
       'nationality' => '國籍 ',
       'uploadPicDesc' => '大頭貼上傳: ',
 
