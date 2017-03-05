@@ -2,7 +2,7 @@
 @section('main') <!-- also a section called main but different content -->
 <div class="container-fluid">
   <div class="form-group">
-    <h2 align="center">EDIT COMPONENT</h2>
+    <h2 align="center">{{ __('messages.editComponent') }}</h2>
     <h3 align="center">{{$section}}</h3>
     {!! Form::open(['url' => 'editAllStudent/'.$section, 'method' => 'post']) !!}
     {{ csrf_field() }}
@@ -52,7 +52,7 @@
 
   </div><br><br>
   <div class="form-group"> {{-- Don't forget to create a submit button --}}
-    {!! Form::submit('Update', ['class' => 'form-control btn btn-primary btn-fixed-width center-block']) !!}
+    {!! Form::submit( __('messages.update') , ['class' => 'form-control btn btn-primary btn-fixed-width center-block']) !!}
   </div>
   {!! Form::close() !!}
 </div>
