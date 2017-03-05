@@ -1,0 +1,276 @@
+[33mcommit 2a602b38446939676182cf3e17bb38a57d4a1588[m
+Author: nuslarry <e0147977@u.nus.edu>
+Date:   Sun Mar 5 13:21:46 2017 +0800
+
+    adminMsg page localizaiotn
+
+[33mcommit 6ed6c94094f0bc701713a1351405cefa6da77207[m
+Author: nuslarry <e0147977@u.nus.edu>
+Date:   Sun Mar 5 13:21:38 2017 +0800
+
+    message page localizaiotn
+
+[33mcommit 3e2d8d7c794e2e2ab00af4bf57d21e6ac808f935[m
+Author: nuslarry <e0147977@u.nus.edu>
+Date:   Sun Mar 5 13:21:31 2017 +0800
+
+    indexpage localizaiotn
+
+[33mcommit 7eefacb1b5c9f5eaf1ee188a97eaddef2d11ca4a[m
+Author: nuslarry <e0147977@u.nus.edu>
+Date:   Sun Mar 5 13:21:24 2017 +0800
+
+    ediSection page localizaiotn
+
+[33mcommit 309efaa4b3e31a89fdcaf4e71b036d514dc79478[m
+Author: nuslarry <e0147977@u.nus.edu>
+Date:   Sun Mar 5 13:21:14 2017 +0800
+
+    create page localizaiotn
+
+[33mcommit 8840738b68f7cb1aecbc2641342682b87e41d7cf[m
+Author: nuslarry <e0147977@u.nus.edu>
+Date:   Sun Mar 5 13:21:06 2017 +0800
+
+    Navbar page localizaiotn
+
+[33mcommit 1fe8a85320509ca0feec40f2dda229a446897571[m
+Author: nuslarry <e0147977@u.nus.edu>
+Date:   Sun Mar 5 13:20:46 2017 +0800
+
+    edit HomeController for localization
+
+[33mcommit 027a45de2a67059fe22c4baace86d5bfc5f8186d[m
+Author: nuslarry <e0147977@u.nus.edu>
+Date:   Sun Mar 5 13:20:38 2017 +0800
+
+    edit MessageController for localization
+
+[33mcommit 58aa6370d463c590c690cf0a87efc304a539805b[m
+Author: nuslarry <e0147977@u.nus.edu>
+Date:   Sun Mar 5 13:20:31 2017 +0800
+
+    edit ViewController for localization
+
+[33mcommit 78ffa7d4e4c91ed3e0485a93e03b95ec35a54422[m
+Author: nuslarry <e0147977@u.nus.edu>
+Date:   Sun Mar 5 13:20:12 2017 +0800
+
+    routing for localization
+
+[33mcommit 452a0ae067dba8e7b36a3e42300442725731ebb7[m
+Author: nuslarry <e0147977@u.nus.edu>
+Date:   Sun Mar 5 13:20:01 2017 +0800
+
+    add en lang
+
+[33mcommit f85a60a56da336f9386d10379d2d0a3550ffdf65[m
+Merge: bfb3a20 f03c995
+Author: nuslarry <e0147977@u.nus.edu>
+Date:   Sun Mar 5 13:19:38 2017 +0800
+
+    add traditional chinese lang
+
+[33mcommit f03c9959d7478498aec62178728e8719c8087133[m
+Author: nuslarry <e0147977@u.nus.edu>
+Date:   Sun Mar 5 13:10:06 2017 +0800
+
+    adminMsg page localization
+
+[33mcommit f8e2b9da7f937307956b8be3b3a98038ee9eca0e[m
+Author: nuslarry <e0147977@u.nus.edu>
+Date:   Sun Mar 5 13:09:53 2017 +0800
+
+    create page localization
+
+[33mcommit 764e48312f84d96b50691db358c1a38a10a76286[m
+Author: nuslarry <e0147977@u.nus.edu>
+Date:   Sun Mar 5 13:09:46 2017 +0800
+
+    editsection page localization
+
+[33mcommit 949096c0874e49076d58524b1728cef45700864e[m
+Author: nuslarry <e0147977@u.nus.edu>
+Date:   Sun Mar 5 13:09:35 2017 +0800
+
+    index page localization
+
+[33mcommit 76c90ec14cca248409ef1f1df0c6dbd038d3943b[m
+Author: nuslarry <e0147977@u.nus.edu>
+Date:   Sun Mar 5 13:09:25 2017 +0800
+
+    message page localization
+
+[33mcommit 1f2b7d9de7c1553ca2281d65ffaaf29decbd97a8[m
+Author: nuslarry <e0147977@u.nus.edu>
+Date:   Sun Mar 5 13:09:09 2017 +0800
+
+    navbar localization
+
+[33mcommit ff182005a396faad5bdabb20405a149ff3131074[m
+Author: nuslarry <e0147977@u.nus.edu>
+Date:   Sun Mar 5 13:08:49 2017 +0800
+
+    update HomeController for localization
+
+[33mcommit d2ed0e994fdd7029eeca3371528ad38ca5bc9c71[m
+Author: nuslarry <e0147977@u.nus.edu>
+Date:   Sun Mar 5 13:08:39 2017 +0800
+
+    update MessageController for localization
+
+[33mcommit 60be4c43e04eedea60d7c8a8f643ba03bef397d4[m
+Author: nuslarry <e0147977@u.nus.edu>
+Date:   Sun Mar 5 13:08:24 2017 +0800
+
+    update ViewController for localization
+
+[33mcommit e088ffa05b42d614bffeffe500c6d0c251713f7a[m
+Author: nuslarry <e0147977@u.nus.edu>
+Date:   Sun Mar 5 13:07:43 2017 +0800
+
+    routing for localization
+
+[33mcommit 87499d5181afd50f2356ba21ca693b3f66691b6e[m
+Author: nuslarry <e0147977@u.nus.edu>
+Date:   Sun Mar 5 13:07:18 2017 +0800
+
+    create traditional chinese lang
+
+[33mcommit 1442a8508266fa29484d3c1ac2d096f265b5dc1c[m
+Author: nuslarry <e0147977@u.nus.edu>
+Date:   Sun Mar 5 13:07:02 2017 +0800
+
+    create en lang
+
+[33mcommit bfb3a20cfba1c27da6845cce57d58022f6e1c309[m
+Author: VivianLow <vivian198912@gmail.com>
+Date:   Sun Mar 5 02:47:38 2017 +0800
+
+    display feedback if there is no messages for admin view
+
+[33mcommit 9300fb203c24deab094786febf74c4b9192c252d[m
+Author: VivianLow <vivian198912@gmail.com>
+Date:   Sat Mar 4 01:53:42 2017 +0800
+
+    order messages by reply so that empty replies are displayed on top for admins
+
+[33mcommit 0d3968f1494beeb83ae035d2edf0fa312f09cba6[m
+Merge: 320c882 42262dc
+Author: Low Bao Ling Vivian <sunset1215@users.noreply.github.com>
+Date:   Sat Mar 4 01:43:11 2017 +0800
+
+    Merge pull request #45 from dev-seahouse/create-messages-view
+    
+    Create messages view
+
+[33mcommit 42262dcdb924d6ce65ff4e32bcaaafaf0f5c83eb[m
+Author: VivianLow <vivian198912@gmail.com>
+Date:   Sat Mar 4 01:31:24 2017 +0800
+
+    admins can now reply to messages from students
+
+[33mcommit 14bf0058eed2ba639ac2c0824a6dd1e2fb46adca[m
+Author: VivianLow <vivian198912@gmail.com>
+Date:   Fri Mar 3 23:47:45 2017 +0800
+
+    students can now add/edit message in Messages view
+
+[33mcommit 320c882a169a767a7636b1f9e46fb746276de807[m
+Author: shawnlimjq <shawnlimjq@hotmail.com>
+Date:   Fri Mar 3 22:09:53 2017 +0800
+
+    Changed App Name To Reflect On Email Header
+    
+    Changed App Name To Reflect On Email Header
+
+[33mcommit fe7e887b3d49ec5b81d51f2299c0f92bcd4ebdbb[m
+Author: VivianLow <vivian198912@gmail.com>
+Date:   Fri Mar 3 21:44:26 2017 +0800
+
+    create message view and controller and set up routes to it
+
+[33mcommit d8e6fe6a42bb73806bbc49c142d14577b81f54a0[m
+Author: shawnlimjq <shawnlimjq@hotmail.com>
+Date:   Fri Mar 3 20:29:21 2017 +0800
+
+    Added Extension Converter to Edit Student Page
+    
+    Added Extension Converter For Image to Edit Student Page
+
+[33mcommit b5c4fae77b263218d682a24cc0c69f04d7cd941e[m
+Author: shawnlimjq <shawnlimjq@hotmail.com>
+Date:   Fri Mar 3 19:46:05 2017 +0800
+
+    Added share button and twitter tweet
+    
+    Added share button for facebook and twitter tweet button
+
+[33mcommit b04787ffe30fcb6711d6560a1f02fc711f766f3e[m
+Author: shawnlimjq <shawnlimjq@hotmail.com>
+Date:   Fri Mar 3 19:38:05 2017 +0800
+
+    Extracted css from index page
+    
+    Extracted css from index page to app.scss
+
+[33mcommit cb89c5a76c7571906d9ec0a5e3a8ebff98de440d[m
+Author: Bevin Seetoh Jia Jin <a0134234@u.nus.edu>
+Date:   Fri Mar 3 19:13:16 2017 +0800
+
+    Edit nullable columns to reflect correctly
+
+[33mcommit 8667a32fcc4eabef23ecaa2c7c81d29794809c06[m
+Author: Bevin Seetoh Jia Jin <a0134234@u.nus.edu>
+Date:   Fri Mar 3 19:11:20 2017 +0800
+
+    Update database image
+
+[33mcommit 412b5c3210ab38e7beecce6de0229f694ee88209[m
+Author: Bevin <a0134234@u.nus.edu>
+Date:   Fri Mar 3 19:04:49 2017 +0800
+
+    Update readme.md
+
+[33mcommit 65b8898d62c7ba96706d88cc7395ae1c3c786159[m
+Author: VIVIAN-X250\Vivian <vivian198912@gmail.com>
+Date:   Fri Mar 3 17:54:18 2017 +0800
+
+    hide edit navbars and buttons if user is student
+
+[33mcommit 0b95f7c4f6fac59fab375b307f52e6ee2134b31a[m
+Author: VIVIAN-X250\Vivian <vivian198912@gmail.com>
+Date:   Fri Mar 3 17:40:37 2017 +0800
+
+    student users can view their own rank and 1 rank +/- himself, admin can view all
+
+[33mcommit 296e88da402b27347a754cc5ef441d6b27476e99[m
+Author: VIVIAN-X250\Vivian <vivian198912@gmail.com>
+Date:   Fri Mar 3 16:08:39 2017 +0800
+
+    index display top 7 students only if user not logged in
+
+[33mcommit e9340abc4326f830f8eb7fe1cbd7a5d6b6f046f9[m
+Author: Bevin Seetoh Jia Jin <a0134234@u.nus.edu>
+Date:   Fri Mar 3 11:42:42 2017 +0800
+
+    Add csrf token to forms for protection. sort progress chart students by desc order and add score beside name.
+
+[33mcommit da053fe069c6e181e16c2947d7768989e95290ae[m
+Author: shawnlimjq <shawnlimjq@hotmail.com>
+Date:   Fri Mar 3 01:27:12 2017 +0800
+
+    Added Twitter follow
+    
+    Temporarily added css on index page
+
+[33mcommit e0141cdf9e726e05fc9f43c05ba1183d025b437d[m
+Author: shawnlimjq <shawnlimjq@hotmail.com>
+Date:   Wed Mar 1 23:42:03 2017 +0800
+
+    Added Facebook Like
+    
+    Added Facebook like next to title. Test it
+
+[33mcommit 0bcb6139af7bf415d829a033fa07d7654b1a7e8e[m
+Author: Bevin Seetoh
