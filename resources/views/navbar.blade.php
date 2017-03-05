@@ -102,7 +102,7 @@ $uri = $_SERVER['REQUEST_URI'];
         <li><a href="{{route('studentMessages', ['id' => Auth::user()['student_id']])}}">{{ __('messages.messages') }}</a></li>
         @endif
 		@endif
-        <li><a href="{{route('achievement')}}">{{ __('messages.achievement') }}</a></li>
+        <li><a href="{{route('achievement')}}">{{ __('messages.achievements') }}</a></li>
         <li class="hidden-xs hidden-sm"><a href="{{route('progress')}}">Progress Chart</a></li>
         <li><a href="{{route('help')}}">{{ __('messages.help') }}</a></li>
       </ul>

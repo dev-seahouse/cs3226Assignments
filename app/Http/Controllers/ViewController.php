@@ -115,7 +115,7 @@ class ViewController extends Controller {
     //update curr user's lang_pref in database
     if ($locale == 'en' || $locale == 'zh') {
       if (\Auth::guest()) {
-        \Config::set('app.locale', $locale);
+        session(['locale' => $locale]);
       } else {
         $user = \App\User::find(\Auth::user()->id);
         $user->lang_pref = $locale;
