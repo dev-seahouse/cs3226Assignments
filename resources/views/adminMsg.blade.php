@@ -36,6 +36,6 @@
 <br>
 @if ($msgCount > 0)
 <div class="form-group">
-  {!! Form::submit('Submit', ['class' => 'form-control btn btn-primary btn-fixed-width center-block']) !!}
+  {!! Form::submit(__('messages.submit'), ['class' => 'form-control btn btn-primary btn-fixed-width center-block']) !!}
 </div>
 @endif
