@@ -25,6 +25,9 @@ Route::get('api/student/{id}', 'StudentController@getStudentData');
 Route::get('api/progress', 'StudentController@getProgressData');
 Route::get('api/progress/{id}', 'StudentController@getProgressDataById');
 
+//Set locale
+Route::get('lang/{locale}', 'ViewController@setLocale');
+
 //Routes in this group requires the user to be authenticated
 Route::group( ['middleware' => 'auth' ], function()
 {
