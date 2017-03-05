@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\EditComponentRequest;
 
 class EditComponentController extends Controller {
 
@@ -9,7 +10,7 @@ class EditComponentController extends Controller {
     // constructor
   }
 
-  public function edit(Request $request, $section) {
+  public function edit(EditComponentRequest $request, $section) {
     $week = preg_replace('/[^0-9]/', '', $section);
     $component = preg_replace('/[0-9]+/', '', $section); //remove integer
 
@@ -18,7 +19,7 @@ class EditComponentController extends Controller {
 
     $validator = Validator::make($request->all(), $this->getRules($studentCount, $section, $sectionRule));
     if ($validator->fails()) {
-      return back() 
+      return back()
         ->withErrors($validator)
         ->withInput();
     }
@@ -37,7 +38,7 @@ class EditComponentController extends Controller {
     // need to update components
     // for each student, update the sum of the component
     $students = \App\Student::all();
-    
+
     foreach ($students as $student) {
       $id = $student->id;
       $compSum = \App\Score::where('student_id', $id)->where('component', $component)
@@ -68,7 +69,7 @@ class EditComponentController extends Controller {
       }
       $studComp->save();
     }
-    
+
     \Session::flash('message', 'You have successfully updated the '.$component.' scores for week '.$week.'.');
     return redirect()->route('index');
   }
@@ -92,7 +93,7 @@ class EditComponentController extends Controller {
         break;
       case "KS":
         $sectionRule = $ksRule;
-        break;           
+        break;
       default:
         $sectionRule = "error";
     }
@@ -106,17 +107,17 @@ class EditComponentController extends Controller {
     for ($i = 1; $i <= $studentCount; $i++){
 
       $new_rule = array();
-      if ($section == 'TC1') 
+      if ($section == 'TC1')
         $new_rule = array($section."_".$i => ['required', 'regex:/^(10(\.[0-5])?)$|^([0-9](\.([0-9]))?)$|(xy\.z)$/']);
-      else if ($section == 'TC2') 
+      else if ($section == 'TC2')
         $new_rule = array($section."_".$i => ['required', 'regex:/^(1[0-3](\.[0-5])?)$|^([0-9](\.([0-9]))?)$|(xy\.z)$/']);
-      else if ($section == 'AC1' || $section == 'AC2') 
+      else if ($section == 'AC1' || $section == 'AC2')
         $new_rule = array($section."_".$i => ['required', 'regex:/^(0|1|x)$/']);
-      else if ($section == 'AC3' || $section == 'AC4') 
+      else if ($section == 'AC3' || $section == 'AC4')
         $new_rule = array($section."_".$i => ['required', 'regex:/^([0-3]|x)$/']);
       else if ($section == 'AC5' || $section == 'AC6' || $section == 'AC8')
         $new_rule = array($section."_".$i => ['required', 'regex:/^(0|1|x)$/']);
-      else if ($section == 'AC7') 
+      else if ($section == 'AC7')
         $new_rule = array($section."_".$i => ['required', 'regex:/^([0-6]|x)$/']);
       else {
         $new_rule = array($section."_".$i => ['required', $sectionRule]);
