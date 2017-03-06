@@ -84,5 +84,12 @@
       'Achievements'=>'成就',
       'details'=>'細節', 
       'student-specific-comment'=>'關於此學生的特別評論',   
+
+
+      //login 
+      'E-Mail-Address'=>'電子信箱位址',
+      'Password'=>'密碼',     
+      'Remember-Me'=>'記住我', 
+      'Forgot-Your-Password'=>'忘記密碼', 
    ];
 ?>
