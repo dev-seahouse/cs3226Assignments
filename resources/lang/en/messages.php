@@ -87,5 +87,12 @@
       'details'=>'Details', 
       'student-specific-comment'=>'Specific comments about this student',
 
+
+      //login 
+      'E-Mail-Address'=>'E Mail Address',
+      'Password'=>'Password',     
+      'Remember-Me'=>'Remember Me', 
+      'Forgot-Your-Password'=>'Forgot Your Password', 
+
    ];
 ?>
